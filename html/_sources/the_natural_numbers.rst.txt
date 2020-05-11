@@ -1132,10 +1132,9 @@ express the goal in a more convenient form.
     end
     -- END
 
-Finally, let us end this section with a sample
-proof that goes beyond the methods we have introduced
-so far.
-It will help motivate the methods that we will introduce in the next chapter.
+Finally, let us end this section with an example
+that uses the ``cases`` and ``contradiction`` tactics,
+which will be introduced properly in the next  chapter.
 
 .. code-block:: lean
 
@@ -1149,27 +1148,23 @@ It will help motivate the methods that we will introduce in the next chapter.
     -- BEGIN
     example (n i : ℕ) (h : i ≠ 0) (h' : i ≤ n) : i ∣ n! :=
     begin
-      revert h',
-      induction n with n ih,
-      { intros, simp at h', contradiction  },
-      intro ile,
-      cases ile with _ ile,
-      { apply dvd_mul_right },
-      apply dvd_mul_of_dvd_right,
-      apply ih ile,
+    induction n with n ih,
+    { intros, simp at h', contradiction  },
+    cases h' with _ h',
+    { apply dvd_mul_right },
+    apply dvd_mul_of_dvd_right,
+    apply ih h',
     end
     -- END
 
-In the first step, we use the ``revert`` command
-to change the goal to ``i ≤ n → i ∣ n!``,
-so we can prove the implication by induction on ``n``.
+Because the inductive hypothesis, ``h'``, depends on ``n`,
+the ``induction`` tactic includes it in the inductive hypothesis.
 In the base case, we have ``i ≠ 0`` and ``i ≤ 0``,
 and we use the simplifier and the ``contradiction`` tactic
 to show that these are contradictory.
 In the induction step, we have ``i ≤ n + 1``,
 which is equivalent to saying that either ``i = n + 1`` or ``i ≤ n``.
 We use the ``cases`` tactic,
-which we will discuss in the next chapter,
 to split on these two cases,
 and in the second case we use the inductive hypothesis.
 
