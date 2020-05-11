@@ -1,0 +1,1023 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="ascii" />
+    <title>3. The Natural Numbers &#8212; Mathematics in Lean 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="2. Basic Skills" href="basic_skills.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="the-natural-numbers">
+<span id="id1"></span><h1><span class="section-number">3. </span>The Natural Numbers<a class="headerlink" href="#the-natural-numbers" title="Permalink to this headline">&#182;</a></h1>
+<p>Mathematically speaking, the natural numbers are characterized up to isomorphism as
+a set with a zero element and an injective successor function
+such that zero is not a successor and the entire structure
+satisfies the <em>induction principle</em>:
+any property that holds of zero and is maintained
+by successors holds of every natural number.
+To introduce the natural numbers formally,
+Lean&#8217;s core library makes use of Lean&#8217;s foundational framework,
+which allows us to declare a new type as follows:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=namespace%20my_nat%0A%0A--%20BEGIN%0Ainductive%20nat%20:%20Type%0A%7C%20zero%20:%20nat%0A%7C%20succ%20:%20nat%20%E2%86%92%20nat%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_16.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">inductive</span> <span class="n">nat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">nat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">&#8594;</span> <span class="n">nat</span>
+</pre></div>
+</div>
+</div><p>This declares a type <code class="docutils literal notranslate"><span class="pre">nat</span></code> with constants
+<code class="docutils literal notranslate"><span class="pre">nat.zero</span> <span class="pre">:</span> <span class="pre">nat</span></code> and <code class="docutils literal notranslate"><span class="pre">nat.succ</span> <span class="pre">:</span> <span class="pre">nat</span> <span class="pre">&#8594;</span> <span class="pre">nat</span></code>,
+and provides the associated principles of induction and recursion.</p>
+<p>In this chapter, we will explain how the Lean library
+establishes the familiar properties of arithmetic on this foundation,
+and then we will show you how to use the natural numbers
+to prove some interesting theorems.</p>
+<div class="section" id="defining-arithmetic">
+<h2><span class="section-number">3.1. </span>Defining Arithmetic<a class="headerlink" href="#defining-arithmetic" title="Permalink to this headline">&#182;</a></h2>
+<p>The principle of recursive definition means that,
+once we introduce notation <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> for <code class="docutils literal notranslate"><span class="pre">nat</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code> for <code class="docutils literal notranslate"><span class="pre">nat.zero</span></code>,
+and once we open the <code class="docutils literal notranslate"><span class="pre">nat</span></code> namespace so that we can write <code class="docutils literal notranslate"><span class="pre">succ</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">nat.succ</span></code>,
+we can define addition recursively as follows:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Anamespace%20my_nat%0A%0A--%20BEGIN%0Adef%20add%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%7C%20m%200%20:=%20m%0A%7C%20m%20(succ%20n)%20:=%20succ%20(add%20m%20n)%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_47.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>Assuming we introduce the usual notation for addition,
+the definition means that we can use the associated
+defining equations:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0A#check%20(add_zero%20m%20%20%20:%20m%20+%200%20=%20m)%0A#check%20(add_succ%20m%20n%20:%20m%20+%20(succ%20n)%20=%20succ%20(m%20+%20n))%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_65.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="o">(</span><span class="n">add_zero</span> <span class="n">m</span>   <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">m</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">add_succ</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">))</span>
+</pre></div>
+</div>
+</div><p>But the computational nature of Lean&#8217;s foundation gives us more,
+namely, that Lean will carry out these reductions
+internally in order to make expressions match.
+As a result, the equations hold by the reflexivity axiom:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%20m%20+%200%20=%20m%20:=%20rfl%0Aexample%20:%20m%20+%20(succ%20n)%20=%20succ%20(m%20+%20n)%20:=%20rfl%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_81.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+</div><p>Here, <code class="docutils literal notranslate"><span class="pre">rfl</span></code> is a proof term that corresponds to the <code class="docutils literal notranslate"><span class="pre">refl</span></code> tactic.
+Numerals are also defined in a clever way in Lean so that,
+for example, <code class="docutils literal notranslate"><span class="pre">1</span></code> reduces to <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">0</span></code>.
+This means in many contexts we can use <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">n</span></code>
+interchangeably:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariable%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%20succ%20n%20=%20n%20+%201%20:=%20rfl%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_98.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+</div><p>Suppose we want to prove the commutativity of addition, <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">m</span></code>.
+We don&#8217;t have much to work with: we have the defining equations for
+addition, but no other facts about it.
+But we do have the principle of induction,
+which we can invoke with the <code class="docutils literal notranslate"><span class="pre">induction</span></code> tactic:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20m%20n%20:%20%E2%84%95%0A%0Anamespace%20my_nat%0A%0A--%20BEGIN%0Atheorem%20add_comm%20:%20m%20+%20n%20=%20n%20+%20m%20:=%0Abegin%0A%20%20induction%20n,%0A%20%20%7B%20sorry%20%7D,%0A%20%20sorry%0Aend%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_114.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">add_comm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>In this section, we will continue the strategy of
+stating theorems with the same names that are used in the library
+but hiding them in a namespace to avoid a naming conflict.
+If you move your cursor through the proof,
+you will see that the induction tactic leaves two goals:
+in the base case, we need to prove <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">0</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">+</span> <span class="pre">m</span></code>,
+and in the induction step,
+we need to prove <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">succ</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">succ</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">m</span></code>
+using the inductive hypothesis <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">m</span></code>.
+You will also see that Lean chose names automatically
+for the inductive hypothesis and the variable in the induction step.
+We can tell Lean to use <code class="docutils literal notranslate"><span class="pre">n</span></code> for the variable name and <code class="docutils literal notranslate"><span class="pre">ih</span></code>
+for the name of the inductive hypothesis by appending <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">n</span> <span class="pre">ih</span></code>
+to the induction command.</p>
+<p>How can we prove the base case?
+It turns out that this requires another instance of induction.
+We could call the induction tactic again in that subproof,
+but since the fact that we need, <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">m</span> <span class="pre">=</span> <span class="pre">m</span></code>,
+is independently useful, we may as well make it a separate theorem.
+Similarly, in the inductive hypothesis, we need <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">succ</span> <span class="pre">(m</span> <span class="pre">+</span> <span class="pre">n)</span></code>,
+so we break that out as a separate theorem as well.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20:%20%E2%84%95%0A%0Anamespace%20my_nat%0A%0A--%20BEGIN%0Atheorem%20zero_add%20:%200%20+%20m%20=%20m%20:=%0Abegin%0A%20%20induction%20m%20with%20m%20ih,%0A%20%20%7B%20refl%20%7D,%0A%20%20rw%20%5Badd_succ,%20ih%5D%0Aend%0A%0Atheorem%20succ_add%20:%20succ%20m%20+%20n%20=%20succ%20(m%20+%20n)%20:=%0Abegin%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20refl%20%7D,%0A%20%20rw%20%5Badd_succ,%20ih%5D%0Aend%0A%0Atheorem%20add_comm%20:%20m%20+%20n%20=%20n%20+%20m%20:=%0Abegin%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20rw%20zero_add,%20refl%20%7D,%0A%20%20rw%20%5Bsucc_add,%20%E2%86%90ih%5D%0Aend%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_154.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">zero_add</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">m</span> <span class="k">with</span> <span class="n">m</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_succ</span><span class="o">,</span> <span class="n">ih</span><span class="o">]</span>
+<span class="kd">end</span>
+
+<span class="kd">theorem</span> <span class="n">succ_add</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_succ</span><span class="o">,</span> <span class="n">ih</span><span class="o">]</span>
+<span class="kd">end</span>
+
+<span class="kd">theorem</span> <span class="n">add_comm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">zero_add</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">succ_add</span><span class="o">,</span> <span class="bp">&#8592;</span><span class="n">ih</span><span class="o">]</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>We can similarly make quick work of associativity:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20k%20:%20%E2%84%95%0A%0Anamespace%20my_nat%0A%0A--%20BEGIN%0Atheorem%20add_assoc%20:%20m%20+%20n%20+%20k%20=%20m%20+%20(n%20+%20k)%20:=%0Abegin%0A%20%20induction%20k%20with%20k%20ih,%0A%20%20%7B%20refl%20%7D,%0A%20%20rw%20%5Badd_succ,%20ih%5D,%0A%20%20refl%0Aend%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_189.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">add_assoc</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">k</span> <span class="k">with</span> <span class="n">k</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_succ</span><span class="o">,</span> <span class="n">ih</span><span class="o">],</span>
+  <span class="n">refl</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>Because addition is defined by recursion on the second argument,
+doing induction on <code class="docutils literal notranslate"><span class="pre">k</span></code> will allow us to use the defining equations
+for addition in the base case and induction step.
+This is a good heuristic when it comes to deciding which variable to use.
+We can do on to define multiplication in the expected way:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=namespace%20my_nat%0A%0A--%20BEGIN%0Adef%20mul%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%7C%20m%200%20%20%20%20%20:=%200%0A%7C%20m%20(n+1)%20:=%20mul%20m%20n%20+%20m%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_215.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">def</span> <span class="n">mul</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mul</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+</pre></div>
+</div>
+</div><p>This gives us the defining equations for multiplication:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0A#check%20(mul_zero%20m%20%20%20:%20m%20*%200%20=%200)%0A#check%20(mul_succ%20m%20n%20:%20m%20*%20(succ%20n)%20=%20m%20*%20n%20+%20m)%0A%0Aexample%20:%20m%20*%200%20=%200%20:=%20rfl%0Aexample%20:%20m%20*%20(n%20+%201)%20=%20m%20*%20n%20+%20m%20:=%20rfl%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_229.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="o">(</span><span class="n">mul_zero</span> <span class="n">m</span>   <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">mul_succ</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+</div><p>We now challenge you to use nothing more than these defining equations
+and the properties of addition we have already established
+to prove all of the following:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20k%20:%20%E2%84%95%0A%0Anamespace%20my_nat%0A%0A--%20BEGIN%0Atheorem%20mul_add%20:%20m%20*%20(n%20+%20k)%20=%20m%20*%20n%20+%20m%20*%20k%20:=%20sorry%0A%0Atheorem%20zero_mul%20:%200%20*%20n%20=%200%20:=%20sorry%0A%0Atheorem%20one_mul%20:%201%20*%20n%20=%20n%20:=%20sorry%0A%0Atheorem%20mul_assoc%20:%20m%20*%20n%20*%20k%20=%20m%20*%20(n%20*%20k)%20:=%20sorry%0A%0Atheorem%20mul_comm%20:%20m%20*%20n=%20n%20*%20m%20:=%20sorry%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_247.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">mul_add</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kd">theorem</span> <span class="n">zero_mul</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kd">theorem</span> <span class="n">one_mul</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kd">theorem</span> <span class="n">mul_assoc</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kd">theorem</span> <span class="n">mul_comm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>The library also defines a function for exponentiation, <code class="docutils literal notranslate"><span class="pre">nat.pow</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Anamespace%20my_nat%0A%0A--%20BEGIN%0Adef%20pow%20(b%20:%20%E2%84%95)%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%7C%200%20%20%20%20%20%20%20%20:=%201%0A%7C%20(succ%20n)%20:=%20pow%20n%20*%20b%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_271.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">def</span> <span class="n">pow</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+<span class="bp">|</span> <span class="mi">0</span>        <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">pow</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div><p>Note that because the argument <code class="docutils literal notranslate"><span class="pre">b</span></code> in this definition is presented
+before the colon,
+it is taken to be fixed in the recursive definition,
+and so the recursive call refers to <code class="docutils literal notranslate"><span class="pre">pow</span> <span class="pre">n</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pow</span> <span class="pre">b</span> <span class="pre">n</span></code>.
+We challenge you to state and prove some basic theorems about <code class="docutils literal notranslate"><span class="pre">nat.pow</span></code>
+from the associated defining equations, <code class="docutils literal notranslate"><span class="pre">nat.pow_zero</span></code> and <code class="docutils literal notranslate"><span class="pre">nat.pow_succ</span></code>.
+Beware: the <em>Lean</em> library also defines a version of <code class="docutils literal notranslate"><span class="pre">pow</span></code>
+that works for more general structures,
+and it uses <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">*</span> <span class="pre">pow</span> <span class="pre">n</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pow</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">b</span></code> in the recursive call.
+Hopefully, someone will take the initiative to eventually merge the two,
+but in the meanwhile,
+we are in the unfortunate situation that we are using different parts of the
+library depending on whether we are raising a <code class="docutils literal notranslate"><span class="pre">nat</span></code> or an element
+of some other structure to a power.</p>
+<p>In a moment, we will show formally that <code class="docutils literal notranslate"><span class="pre">succ</span></code> is injective.
+We can use this to prove the cancellation law for addition,
+namely, if <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">k</span> <span class="pre">+</span> <span class="pre">n</span></code> then <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">k</span></code>.
+The natural way to prove this is by induction on <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+But now something strange is happening: we are doing
+induction on a variable that occurs only in a hypothesis.
+Step through the proof below and see how Lean handles it.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20k%20:%20%E2%84%95%0A%0Anamespace%20my_nat%0A%0A--%20BEGIN%0Atheorem%20add_right_cancel%20(h%20:%20m%20+%20n%20=%20k%20+%20n)%20:%20m%20=%20k%20:=%0Abegin%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20apply%20h%20%7D,%0A%20%20apply%20ih,%0A%20%20apply%20succ.inj%20h%0Aend%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_308.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="n">apply</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">succ.inj</span> <span class="n">h</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>As expected, there is a zero case and an induction step,
+but the inductive hypothesis is now an <em>implication</em>:
+<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">k</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">&#8594;</span> <span class="pre">m</span> <span class="pre">=</span> <span class="pre">k</span></code>.
+In other words, the induction tactic uses the
+principle of induction to prove the general statement
+&#8220;for every <code class="docutils literal notranslate"><span class="pre">n</span></code>, if <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">k</span> <span class="pre">+</span> <span class="pre">n</span></code> then <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">k</span></code>&#8221;
+by induction on <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+It does this by <em>reverting</em> the hypothesis, <code class="docutils literal notranslate"><span class="pre">h</span></code>,
+applying the induction principle,
+and <em>reintroducing</em> it in the induction step.
+In the next chapter, you will learn how to do
+this manually, and also how to carry out induction
+on other compound statements.
+At this point, we only ask you to notice that
+induction is doing something interesting under the hood.
+As with all tactics, you can learn more about the
+induction step by reading the description that appears
+when you hover over it or looking it up in the
+<a class="reference external" href="https://leanprover-community.github.io/mathlib_docs/">mathlib documentation</a>.
+You can also learn more about the way Lean supports
+reasoning about inductively defined
+structures in <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>.</p>
+<p>We can avoid the need for a compound induction hypothesis
+by defining other functions first.
+The <em>predecessor</em> function on the natural numbers subtracts one,
+but clips at zero,
+so we have <code class="docutils literal notranslate"><span class="pre">pred</span> <span class="pre">0</span> <span class="pre">=</span> <span class="pre">0</span></code>.
+Similarly, <em>truncated subtraction</em> on the natural numbers,
+denoted <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">-</span> <span class="pre">n</span></code> in the library,
+subtracts <code class="docutils literal notranslate"><span class="pre">n</span></code> from <code class="docutils literal notranslate"><span class="pre">m</span></code> but returns zero
+if <code class="docutils literal notranslate"><span class="pre">n</span></code> is bigger.
+They are defined recursively as follows:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=namespace%20my_nat%0A%0A--%20BEGIN%0Adef%20pred%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%7C%200%20%20%20%20%20:=%200%0A%7C%20(n+1)%20:=%20n%0A%0Adef%20sub%20(m%20:%20%E2%84%95)%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%7C%200%20%20%20%20%20:=%20m%0A%7C%20(n+1)%20:=%20pred%20(sub%20n)%0A--%20END%0A%0Aend%20my_nat" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_362.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">def</span> <span class="n">pred</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+
+<span class="kd">def</span> <span class="n">sub</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">pred</span> <span class="o">(</span><span class="n">sub</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>The predecessor function can be used to prove the injectivity of <code class="docutils literal notranslate"><span class="pre">succ</span></code>.
+Here we use the <code class="docutils literal notranslate"><span class="pre">show</span></code> command to change
+the goal to one the is definitionally equal to the original one.
+Using <code class="docutils literal notranslate"><span class="pre">show</span></code> forces Lean to recognize that fact
+by unfolding the computational rule for <code class="docutils literal notranslate"><span class="pre">pred</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20(h%20:%20succ%20m%20=%20succ%20n)%20:%20m%20=%20n%20:=%0Abegin%0A%20%20show%20pred%20(succ%20m)%20=%20pred%20(succ%20n),%0A%20%20rw%20h%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_384.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="k">show</span> <span class="n">pred</span> <span class="o">(</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">pred</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="n">h</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>We challenge you to use the definitions of <code class="docutils literal notranslate"><span class="pre">pred</span></code> and <code class="docutils literal notranslate"><span class="pre">succ</span></code>
+to prove <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">-</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">m</span></code>,
+a fact known as <code class="docutils literal notranslate"><span class="pre">add_sub_cancel</span></code> in the library.
+The proof is easy if you find just the right
+auxiliary fact to prove first.
+Can you figure out what it is?
+If you succeed, you can go on to use <code class="docutils literal notranslate"><span class="pre">add_sub_cancel</span></code>
+to prove <code class="docutils literal notranslate"><span class="pre">add_right_cancel</span></code> if you wish.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=open%20nat%0A%0Avariables%20m%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%20m%20+%20n%20-%20n%20=%20n%20:=%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_409.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>There are a number of ways to define the less-than-or-equal relation
+on the natural numbers.
+Given the behavior of truncated subtraction,
+we could define <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&#8804;</span> <span class="pre">n</span></code> to be <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">-</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">0</span></code>.
+Or we can say that <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&#8804;</span> <span class="pre">n</span></code> if and only if there is a <code class="docutils literal notranslate"><span class="pre">k</span></code>
+such that <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">k</span> <span class="pre">=</span> <span class="pre">n</span></code>,
+which is expressed as <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">k,</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">k</span> <span class="pre">=</span> <span class="pre">n</span></code> in Lean.
+In fact, the core library uses an inductive definition to define <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code>,
+but the details aren&#8217;t important.
+The equivalence of <code class="docutils literal notranslate"><span class="pre">m</span></code> with <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">-</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">0</span></code> is given by
+the theorem <code class="docutils literal notranslate"><span class="pre">nat.sub_eq_zero_iff_le</span></code> in the library,
+and you will easily be able to establish the second
+equivalence once we show you how to use the existential quantifier.</p>
+</div>
+<div class="section" id="carrying-out-computations">
+<h2><span class="section-number">3.2. </span>Carrying out Computations<a class="headerlink" href="#carrying-out-computations" title="Permalink to this headline">&#182;</a></h2>
+<p>Defining the operations of arithmetic on the natural numbers
+and establishing their fundamental properties is interesting,
+but it does not feel like <em>real</em> mathematics.
+we have taken facts about the natural numbers for granted
+since we were schoolchildren,
+and we should expect any good formal library to make them readily available.
+What we really need to know is how to use the
+natural numbers to prove more interesting theorems.
+We will turn to that in the next section.
+First, we will say a bit more about proving statements
+that are &#8220;obvious&#8221; or &#8220;just calculation.&#8221;</p>
+<p>The computational side of Lean&#8217;s foundation means that
+we can not only reason about the natural numbers,
+but compute with them.
+The <code class="docutils literal notranslate"><span class="pre">#eval</span></code> command will evaluate any closed expression
+that Lean is capable of evaluating.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=#eval%2012345%20*%206789" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_456.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#eval</span> <span class="mi">12345</span> <span class="bp">*</span> <span class="mi">6789</span>
+</pre></div>
+</div>
+</div><p>It is appealing that, in Lean, we can define the factorial
+function, prove theorems above it, and then calculate:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=def%20factorial%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%7C%200%20%20%20%20%20:=%201%0A%7C%20(n+1)%20:=%20(n+1)%20*%20factorial%20n%0A%0Atheorem%20factorial_pos%20(n%20:%20%E2%84%95)%20:%200%20%3C%20factorial%20n%20:=%0Abegin%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20apply%20zero_lt_one%20%7D,%0A%20%20exact%20mul_pos%20(nat.succ_pos%20_)%20ih%0Aend%0A%0A#eval%20factorial%20100" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_463.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">def</span> <span class="n">factorial</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">factorial</span> <span class="n">n</span>
+
+<span class="kd">theorem</span> <span class="n">factorial_pos</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">factorial</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">zero_lt_one</span> <span class="o">},</span>
+  <span class="n">exact</span> <span class="n">mul_pos</span> <span class="o">(</span><span class="n">nat.succ_pos</span> <span class="n">_</span><span class="o">)</span> <span class="n">ih</span>
+<span class="kd">end</span>
+
+<span class="k">#eval</span> <span class="n">factorial</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div><p>The <code class="docutils literal notranslate"><span class="pre">#eval</span></code> command is also sometimes helpful
+for giving us a sense of what a function does.
+Of course, in mathematics we can define functions
+that cannot be computed.
+But Lean does a good job of keeping track of which ones
+are computable
+and evaluating them when it can.</p>
+<p>But the <code class="docutils literal notranslate"><span class="pre">#eval</span></code> command cannot be used to prove theorems.
+For evaluation, Lean extracts bytecode from the definitions and
+executes it efficiently,
+without justifying the computation axiomatically.
+If we insist on having formal proofs of all our claims,
+we cannot trust <code class="docutils literal notranslate"><span class="pre">#eval</span></code>.</p>
+<p>So how do we establish a simple computational claim like
+<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span></code>?
+This is where definitional equality,
+which <em>is</em> part of Lean&#8217;s trusted kernel,
+is helpful. In this case, Lean can unfold definitions and
+apply computational reductions to determine that
+both sides come out the same:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20:%202%20+%202%20=%204%20:=%0Arfl" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_501.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span>
+<span class="n">rfl</span>
+</pre></div>
+</div>
+</div><p>Be careful: unfolding definitions and computing is o.k. for
+small calculations, but it is inefficient.
+Unfolding the definitions of addition and multiplication
+amount to calculating with numbers in unary notation.
+For more substantial calculations, use <code class="docutils literal notranslate"><span class="pre">norm_num</span></code>:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0A%0Aexample%20:%2012345%20*%206789%20=%2083810205%20:=%0Aby%20norm_num" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_512.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">12345</span> <span class="bp">*</span> <span class="mi">6789</span> <span class="bp">=</span> <span class="mi">83810205</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">norm_num</span>
+</pre></div>
+</div>
+</div><p>Like <code class="docutils literal notranslate"><span class="pre">ring</span></code>, <code class="docutils literal notranslate"><span class="pre">norm_num</span></code> is a more substantial piece
+of automation. It constructs efficient proofs using
+binary representation.
+It works for equally well for the real numbers,
+and other structures that support numerals.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0Aimport%20data.real.basic%0A%0Aexample%20:%20(12345%20:%20%E2%84%9D)%20*%206789%20=%2083810205%20:=%0Aby%20norm_num" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_525.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">data.real.basic</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">12345</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">6789</span> <span class="bp">=</span> <span class="mi">83810205</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">norm_num</span>
+</pre></div>
+</div>
+</div><p>The <code class="docutils literal notranslate"><span class="pre">norm_num</span></code> tactic is designed specifically
+for numeric calculation.
+In contrast, definitional reduction is more general. For example, it can be used to confirm the result of concatenating two lists of numbers:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20:%20%5B1,%202,%203%5D%20++%20%5B4,%205%5D%20=%20%5B1,%202,%203,%204,%205%5D%20:=%0Arfl" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_537.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">]</span> <span class="bp">++</span> <span class="o">[</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span> <span class="o">:=</span>
+<span class="n">rfl</span>
+</pre></div>
+</div>
+</div><p>What about proving facts like <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">5</span></code>?
+For statements like this one
+that are built up from computable relations,
+the proof term <code class="docutils literal notranslate"><span class="pre">dec_trivial</span></code>
+finds the means to construct a proof:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20:%202%20+%202%20%3C%205%20:=%0Adec_trivial" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_548.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">&lt;</span> <span class="mi">5</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
+</div>
+</div><p>It also relies on definitional reduction,
+and so is fairly general.
+For example, in the next section,
+we will learn that <code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">10</span></code> denotes
+the finite set of natural numbers less than <code class="docutils literal notranslate"><span class="pre">10</span></code>,
+where the <code class="docutils literal notranslate"><span class="pre">range</span></code> function is in the
+<code class="docutils literal notranslate"><span class="pre">finset</span></code> namespace. The term <code class="docutils literal notranslate"><span class="pre">dec_trivial</span></code>
+show that <code class="docutils literal notranslate"><span class="pre">3</span></code> is in that set:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.finset%0A%0Aopen%20finset%0A%0Aexample%20:%203%20%E2%88%88%20range%2010%20:=%0Adec_trivial" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_562.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.finset</span>
+
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="mi">10</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
+</div>
+</div><p>It can even do bounded iteration to show that
+23 is not a product of two numbers that
+are less than or equal to 5.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.basic%0A%0Aexample%20:%20%E2%88%80%20x%20%E2%89%A4%205,%20%E2%88%80%20y%20%E2%89%A4%205,%20x%20*%20y%20%E2%89%A0%2023%20:=%0Adec_trivial" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_575.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.nat.basic</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="mi">5</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="mi">5</span><span class="o">,</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">23</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
+</div>
+</div><p>But once again, be careful: <code class="docutils literal notranslate"><span class="pre">dec_trivial</span></code>
+is inefficient, and not designed for long calculations.
+When it can be used, the <code class="docutils literal notranslate"><span class="pre">norm_num</span></code> tactic
+is more efficient:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0A%0Aexample%20:%2012345%20*%206789%20%3C%2083810206%20:=%0Aby%20norm_num" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_587.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">12345</span> <span class="bp">*</span> <span class="mi">6789</span> <span class="bp">&lt;</span> <span class="mi">83810206</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">norm_num</span>
+</pre></div>
+</div>
+</div><p>The tactic can also show that numbers are prime:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0A%0Aopen%20nat%0A%0Aexample%20:%20prime%20257%20:=%0Aby%20norm_num" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_596.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">prime</span> <span class="mi">257</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">norm_num</span>
+</pre></div>
+</div>
+</div><p>If you are running this tutorial in VS Code,
+try replacing <code class="docutils literal notranslate"><span class="pre">257</span></code> with <code class="docutils literal notranslate"><span class="pre">65537</span></code>.
+The tactic should still succeed in a few seconds.</p>
+<p>The general question as to how to efficiently verify
+computational results and use them in proofs in trusted ways
+falls under the heading <em>computational reflection</em>.
+This is a very important topic,
+and not one that we can fully address here.
+But tools like <code class="docutils literal notranslate"><span class="pre">ring</span></code> and <code class="docutils literal notranslate"><span class="pre">norm_num</span></code>
+cover some of the most basic instances.</p>
+<p>Another useful tool for carrying calculations is Lean&#8217;s
+term rewriting tactic, known as <code class="docutils literal notranslate"><span class="pre">simp</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">simp</span></code> tactic tries to simplify a goal using
+a collection of facts that have been marked as
+simplification rules, typically facts like <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span> <span class="pre">=</span> <span class="pre">x</span></code>
+and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">1</span> <span class="pre">=</span> <span class="pre">x</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20(m%20n%20:%20%E2%84%95)%20(f%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95)%20:%20f%20(m%20*%201%20+%200%20+%20n)%20=%20f%20(m%20+%20n)%20:=%0Aby%20simp" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_624.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+</div><p>This can save you the trouble of looking for facts in the library
+and applying them manually.
+It can also provide a learning experience.
+Mathlib offers a variant of <code class="docutils literal notranslate"><span class="pre">simp</span></code> called <code class="docutils literal notranslate"><span class="pre">squeeze_simp</span></code>
+which calls <code class="docutils literal notranslate"><span class="pre">simp</span></code>,
+determines the list of simplification rules that were used,
+and suggests calling <code class="docutils literal notranslate"><span class="pre">simp</span></code> more efficiently with this smaller list.
+If you <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">tactic</span></code> and replace <code class="docutils literal notranslate"><span class="pre">simp</span></code> by <code class="docutils literal notranslate"><span class="pre">squeeze_simp</span></code>
+in the previous example,
+the output in the Lean Goal window will suggest using the following:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20(m%20n%20:%20%E2%84%95)%20(f%20:%20%E2%84%95%20%E2%86%92%20%E2%84%95)%20:%20f%20(m%20*%201%20+%200%20+%20n)%20=%20f%20(m%20+%20n)%20:=%0Aby%20simp%20only%20%5Badd_zero,%20mul_one%5D" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_640.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span>
+</pre></div>
+</div>
+</div><p>The simplifier can also prove theorems by simplifying them to <code class="docutils literal notranslate"><span class="pre">true</span></code>:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20(m%20:%20%E2%84%95)%20:%201%20%E2%88%A3%20m%20:=%0Aby%20simp" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_647.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&#8739;</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+</div><p>It will perform <em>conditional rewriting</em>, which is to say,
+it will try to rewrite using an identity with hypotheses
+by rewriting the hypotheses themselves to <code class="docutils literal notranslate"><span class="pre">true</span></code>.
+In the next example, the line that beings <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">attribute</span></code> tells
+the simplifier that in the current section or file,
+it should use the rule <code class="docutils literal notranslate"><span class="pre">abs_of_nonneg</span></code>,
+which says <code class="docutils literal notranslate"><span class="pre">abs</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">a</span></code> when <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&#8805;</span> <span class="pre">0</span></code>.
+The command <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">*</span></code> tells the simplifier to use the
+facts in the local context as well as its battery of
+simplification rules.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Alocal%20attribute%20%5Bsimp%5D%20abs_of_nonneg%0A%0Aexample%20(a%20:%20%E2%84%9D)%20(f%20:%20%E2%84%9D%20%E2%86%92%20%E2%84%9D)%20(h:%20a%20%E2%89%A5%200)%20:%20f%20(abs%20a)%20=%20f%20a%20:=%0Aby%20simp%20*" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_663.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.real.basic</span>
+
+<span class="kn">local</span> <span class="kn">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">abs_of_nonneg</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">a</span> <span class="bp">&#8805;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">abs</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span> <span class="bp">*</span>
+</pre></div>
+</div>
+</div><p>The simplifier can also use <em>permutative conversions</em> like
+<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">=</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">a</span></code>.
+To avoid looping,
+the simplifier only applies the rule if it makes the
+term smaller under some arbitrary but fixed ordering of terms.
+This provides a useful trick for proving identities
+with expressions involving an operation that is associative
+and commutative. Simplifying using those two properties
+and a funny combination of the two,
+<em>left commutativity</em>, has the net effect of moving
+all parentheses to the left and
+put the terms in the canonical order.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20(a%20b%20c%20d%20e%20f%20:%20%E2%84%95)%20:%20a%20+%20b%20+%20(c%20+%20d)%20+%20(e%20+%20f)%20=%0A%20%20f%20+%20(d%20+%20(c%20+%20b))%20+%20e%20+%20a%20:=%0Aby%20simp%20%5Badd_assoc,%20add_comm,%20add_left_comm%5D%0A%0Aexample%20(a%20b%20c%20d%20e%20f%20:%20%E2%84%95)%20:%20min%20(min%20(min%20a%20b)%20(min%20c%20d))%20(min%20e%20f)%20=%0A%20%20min%20(min%20(min%20f%20(min%20d%20(min%20c%20b)))%20e)%20a%20:=%0Aby%20simp%20%5Bmin_assoc,%20min_comm,%20min_left_comm%5D" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_685.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">e</span> <span class="bp">+</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span>
+  <span class="n">f</span> <span class="bp">+</span> <span class="o">(</span><span class="n">d</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">))</span> <span class="bp">+</span> <span class="n">e</span> <span class="bp">+</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_assoc</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">add_left_comm</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">min</span> <span class="o">(</span><span class="n">min</span> <span class="o">(</span><span class="n">min</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">min</span> <span class="n">c</span> <span class="n">d</span><span class="o">))</span> <span class="o">(</span><span class="n">min</span> <span class="n">e</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span>
+  <span class="n">min</span> <span class="o">(</span><span class="n">min</span> <span class="o">(</span><span class="n">min</span> <span class="n">f</span> <span class="o">(</span><span class="n">min</span> <span class="n">d</span> <span class="o">(</span><span class="n">min</span> <span class="n">c</span> <span class="n">b</span><span class="o">)))</span> <span class="n">e</span><span class="o">)</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">min_assoc</span><span class="o">,</span> <span class="n">min_comm</span><span class="o">,</span> <span class="n">min_left_comm</span><span class="o">]</span>
+</pre></div>
+</div>
+</div><p>As usual, you can learn more about the simplifier
+and the various options in the mathlib documentation
+<a class="reference external" href="https://leanprover-community.github.io/mathlib_docs/">mathlib documentation</a>
+or <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>.
+We recommend using <code class="docutils literal notranslate"><span class="pre">simp</span></code> sparingly,
+since it can slow down complication of proofs and it is
+not a substitute for learning how to do things by hand.
+But with judicious use, it can be quite helpful.</p>
+<p>We close this section with a few small tricks
+that are often useful for reasoning about the natural numbers.
+First, it is convenient that <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&lt;</span> <span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">&#8804;</span> <span class="pre">n</span></code>
+are definitionally the same:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20m%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20(h%20:%20m%20%3C%20n)%20:%20m%20+%201%20%E2%89%A4%20n%20:=%20h%0A%0Aexample%20(h%20:%200%20%3C%20n)%20%20:%201%20%E2%89%A4%20n%20:=%20h%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_709.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span>  <span class="o">:</span> <span class="mi">1</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div><p>The hypotheses <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&#8800;</span> <span class="pre">0</span></code> are equivalent <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">n</span></code>,
+but mathlib favors the second.
+Fortunately it is easy to convert between the two:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variable%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20(h%20:%20n%20%E2%89%A0%200)%20:%200%20%3C%20n%20:=%0Anat.pos_of_ne_zero%20h%0A%0Aexample%20(h%20:%200%20%3C%20n)%20:%20n%20%E2%89%A0%200%20:=%0Ane_of_gt%20h%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_723.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">nat.pos_of_ne_zero</span> <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">ne_of_gt</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div><p>Reasoning with truncated subtraction is inconvenient,
+because most of the facts in the library that support calculation
+with subtraction have side conditions on the size of the arguments.
+To prove <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">-</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">k</span></code>, it is often easier to prove <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">k</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.basic%0A%0Avariables%20m%20n%20k%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20(h%20:%20m%20=%20k%20+%20n)%20:%20m%20-%20n%20=%20k%20:=%0Aby%20simp%20%5Bh%5D%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_740.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">-</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+</pre></div>
+</div>
+</div><p>In fact, it is often more useful to state theorems in terms of
+addition rather than subtraction.
+The same holds for multiplication and division.
+When <code class="docutils literal notranslate"><span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code> are natural numbers,
+<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">/</span> <span class="pre">n</span></code> denotes the natural number part of the quotient, and
+<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">%</span> <span class="pre">n</span></code> denotes the remainder.
+Often the best way to prove <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">k</span> <span class="pre">/</span> <span class="pre">n</span></code>
+is to prove <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">k</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20m%20n%20k%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20(h%20:%20m%20*%20n%20=%20k)%20(h'%20:%20n%20%3E%200)%20:%20m%20=%20k%20/%20n%20:=%0Abegin%0A%20%20symmetry,%0A%20%20apply%20nat.div_eq_of_eq_mul_left%20h'%20h.symm,%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_760.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">/</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">nat.div_eq_of_eq_mul_left</span> <span class="n">h&#39;</span> <span class="n">h.symm</span><span class="o">,</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>This snippet illustrates two ways of turning an equation <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code>
+to the equation <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">symmetry</span></code> tactic reverses the equation in the goal,
+and in this case that allows us to apply a theorem in which the identity
+goes the other way.
+Given <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code>, the expression <code class="docutils literal notranslate"><span class="pre">eq.symm</span> <span class="pre">h</span></code> is a proof of <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code>.
+Since <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code> is an abbreviation for <code class="docutils literal notranslate"><span class="pre">eq</span> <span class="pre">a</span> <span class="pre">b</span></code>,
+Lean&#8217;s <em>anonymous projection</em> notation allows us to write <code class="docutils literal notranslate"><span class="pre">h.symm</span></code>
+for <code class="docutils literal notranslate"><span class="pre">eq.symm</span> <span class="pre">h</span></code>.
+So the proof above reverses the direction of <code class="docutils literal notranslate"><span class="pre">h</span></code> so we can
+apply <code class="docutils literal notranslate"><span class="pre">nat.div_eq_of_eq_mul_left</span> <span class="pre">h'</span></code>,
+and then reverses the direction of the result to prove the goal.</p>
+<p>The example above gives us an opportunity to introduce another
+useful syntactic gadget that is available to us in Lean.
+If <code class="docutils literal notranslate"><span class="pre">e&#8321;</span></code> and <code class="docutils literal notranslate"><span class="pre">e&#8322;</span></code> are expressions,
+then <code class="docutils literal notranslate"><span class="pre">e&#8321;</span> <span class="pre">$</span> <span class="pre">e&#8322;</span></code> abbreviates <code class="docutils literal notranslate"><span class="pre">e&#8321;</span> <span class="pre">(e&#8322;)</span></code>.
+This allows us to apply an expression <code class="docutils literal notranslate"><span class="pre">e&#8321;</span></code> to
+another complex expression <code class="docutils literal notranslate"><span class="pre">e&#8322;</span></code>
+without having to remember to close a parenthesis at the end.
+With this notation,
+we can replace the tactic proof above with a one-line proof term:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20m%20n%20k%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20(h%20:%20m%20*%20n%20=%20k)%20(h'%20:%20n%20%3E%200)%20:%20m%20=%20k%20/%20n%20:=%0Aeq.symm%20$%20nat.div_eq_of_eq_mul_left%20h'%20h.symm%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_795.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">/</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">eq.symm</span> <span class="bp">$</span> <span class="n">nat.div_eq_of_eq_mul_left</span> <span class="n">h&#39;</span> <span class="n">h.symm</span>
+</pre></div>
+</div>
+</div></div>
+<div class="section" id="sums-and-products">
+<h2><span class="section-number">3.3. </span>Sums and Products<a class="headerlink" href="#sums-and-products" title="Permalink to this headline">&#182;</a></h2>
+<p>For every type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
+Lean offers us a datatype, <code class="docutils literal notranslate"><span class="pre">finset</span> <span class="pre">&#945;</span></code>,
+that consists of finite sets of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+In a later chapter, we will learn more about <code class="docutils literal notranslate"><span class="pre">finset</span> <span class="pre">&#945;</span></code>
+and how to use it.
+What is of interest to us here is that Lean
+will also allow us to write down finite sums and products
+indexed by elements of any such set.
+Two particular constructions of finite sets are
+especially useful in this respect.
+For every natural number <code class="docutils literal notranslate"><span class="pre">n</span></code>,
+<code class="docutils literal notranslate"><span class="pre">finset.range</span> <span class="pre">n</span></code> is the finite set of numbers less than <code class="docutils literal notranslate"><span class="pre">n</span></code>,
+and for every pair of natural numbers <code class="docutils literal notranslate"><span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code>,
+<code class="docutils literal notranslate"><span class="pre">finset.Ico</span> <span class="pre">m</span> <span class="pre">n</span></code> is the finite set of natural numbers that are greater
+than or equal to <code class="docutils literal notranslate"><span class="pre">m</span></code> and less than <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.finset%0A%0Aopen%20finset%0A%0A#eval%20range%205%0A#eval%20Ico%203%207%0A%0Aexample%20:%20range%205%20=%20%7B0,%201,%202,%203,%204%7D%20:=%0Adec_trivial%0A%0Aexample%20:%20range%205%20=%20%7B4,%201,%202,%200,%200,%203%7D%20:=%0Adec_trivial%0A%0Aexample%20:%20Ico%203%207%20=%20%7B3,%204,%205,%206%7D%20:=%0Adec_trivial%0A%0Aexample%20:%20Ico%203%207%20=%20%7B6,%203,%203,%205,%204%7D%20:=%0Adec_trivial" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_825.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.finset</span>
+
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="k">#eval</span> <span class="n">range</span> <span class="mi">5</span>
+<span class="k">#eval</span> <span class="n">Ico</span> <span class="mi">3</span> <span class="mi">7</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">range</span> <span class="mi">5</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">range</span> <span class="mi">5</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Ico</span> <span class="mi">3</span> <span class="mi">7</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Ico</span> <span class="mi">3</span> <span class="mi">7</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">6</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">4</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
+</div>
+</div><p>In <code class="docutils literal notranslate"><span class="pre">Ico</span></code>, the letter <code class="docutils literal notranslate"><span class="pre">I</span></code> suggests an interval, <code class="docutils literal notranslate"><span class="pre">c</span></code> stands for &#8220;closed&#8221;, and <code class="docutils literal notranslate"><span class="pre">o</span></code> stands for &#8220;open.&#8221;</p>
+<p>In Lean, the expression <code class="docutils literal notranslate"><span class="pre">&#955;</span> <span class="pre">x,</span> <span class="pre">x^2</span></code> denotes the function which maps
+any <code class="docutils literal notranslate"><span class="pre">x</span></code> to <code class="docutils literal notranslate"><span class="pre">x^2</span></code>.
+This is known as <em>lambda notation</em>,
+and the Greek letter lambda can be entered with <code class="docutils literal notranslate"><span class="pre">\lam</span></code> in VS Code.
+Often the type of <code class="docutils literal notranslate"><span class="pre">x</span></code> can be inferred from context,
+but you can also write, for example,
+<code class="docutils literal notranslate"><span class="pre">&#955;</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">&#8469;,</span> <span class="pre">x^2</span></code> to mean the squaring function on the natural numbers.
+The two expressions below therefore represent the sum of the
+square function over the sets <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4}</span></code> and <code class="docutils literal notranslate"><span class="pre">{3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6}</span></code>
+respectively.
+Compute these yourself before checking Lean&#8217;s answer.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0A%0A#eval%20finset.sum%20(range%205)%20(%CE%BB%20x,%20x%5E2)%0A#eval%20finset.sum%20(Ico%203%207)%20(%CE%BB%20x,%20x%5E2)" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_860.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">algebra.big_operators</span>
+
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="k">#eval</span> <span class="n">finset.sum</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span>
+<span class="k">#eval</span> <span class="n">finset.sum</span> <span class="o">(</span><span class="n">Ico</span> <span class="mi">3</span> <span class="mi">7</span><span class="o">)</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>In the <code class="docutils literal notranslate"><span class="pre">import</span></code> line, the phrase &#8220;big operators&#8221; refers to the extension of binary operations like
+sums, product, min, and max to finite sets.
+We have opened the <code class="docutils literal notranslate"><span class="pre">finset</span></code> namespace to use the names <code class="docutils literal notranslate"><span class="pre">range</span></code> and <code class="docutils literal notranslate"><span class="pre">Ico</span></code>,
+but we still have to qualify the name <code class="docutils literal notranslate"><span class="pre">sum</span></code>.
+Lean&#8217;s anonymous projection notation provides a slight improvement:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0A%0A--%20BEGIN%0A#eval%20(range%205).sum%20(%CE%BB%20x,%20x%5E2)%0A#eval%20(Ico%203%207).sum%20(%CE%BB%20x,%20x%5E2)%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_875.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#eval</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span>
+<span class="k">#eval</span> <span class="o">(</span><span class="n">Ico</span> <span class="mi">3</span> <span class="mi">7</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>In the next snippet, the command <code class="docutils literal notranslate"><span class="pre">open_locale</span> <span class="pre">big_operators</span></code>
+tells Lean that we want to use notation
+defined for big operators.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0A--%20BEGIN%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0A#eval%20%E2%88%91%20x%20in%20range%205,%20x%5E2%0A#eval%20%E2%88%91%20x%20in%20Ico%203%207,%20x%5E2%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_890.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">open</span> <span class="n">finset</span>
+<span class="n">open_locale</span> <span class="n">big_operators</span>
+
+<span class="k">#eval</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="mi">5</span><span class="o">,</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span>
+<span class="k">#eval</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">Ico</span> <span class="mi">3</span> <span class="mi">7</span><span class="o">,</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div><p>The summation symbol is entered as <code class="docutils literal notranslate"><span class="pre">\sum</span></code>.
+Try using this notation to calculate the sum of the natural numbers from
+1 to 100. The summation operation is quite general;
+it can be used to sum values in any structure that has a
+commutative, associative addition operation and a zero.
+The two theorems indicated below make summation with
+the <code class="docutils literal notranslate"><span class="pre">range</span></code> function a prime candidate for proof by induction.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0A--%20BEGIN%0Avariables%20%7B%CE%B1%20:%20Type*%7D%20%5Badd_comm_monoid%20%CE%B1%5D%0Avariables%20(n%20:%20%E2%84%95)%20(f%20:%20%E2%84%95%20%E2%86%92%20%CE%B1)%0A%0A#check%20(sum_range_zero%20f%20:%20%E2%88%91%20x%20in%20range%200,%20f%20x%20=%200)%0A#check%20(sum_range_succ%20f%20n%20:%0A%20%20%E2%88%91%20i%20in%20range%20(n%20+%201),%20f%20i%20=%20f%20n%20+%20(%E2%88%91%20i%20in%20range%20n,%20f%20i))%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_910.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">&#945;</span><span class="o">]</span>
+<span class="kd">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">sum_range_zero</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">sum_range_succ</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:</span>
+  <span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">f</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">))</span>
+</pre></div>
+</div>
+</div><p>We can use these, for example, to derive the usual formula
+for the sum of the natural numbers from 1 to <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Avariable%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%202%20*%20%E2%88%91%20i%20in%20range%20(n%20+%201),%20i%20=%20n%20*%20(n%20+%201)%20:=%0Abegin%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20simp%20%7D,%0A%20%20rw%20%5Bsum_range_succ,%20mul_add,%20ih%5D,%0A%20%20simp%20only%20%5Bnat.succ_eq_add_one%5D,%0A%20%20ring%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_929.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">sum_range_succ</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">ih</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat.succ_eq_add_one</span><span class="o">],</span>
+  <span class="n">ring</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>If you step through this proof,
+there should be nothing surprising.
+In the inductive step, we use <code class="docutils literal notranslate"><span class="pre">sum_range_succ</span></code> to
+expand the sum, and then we use the inductive hypothesis.
+We use the simplifier to rewrite <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">n</span></code> everywhere to <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code>,
+at which point,
+the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic finishes off the calculation.</p>
+<p>See if you can use the methods introduced in the last section
+to express this result in its more familiar form:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Avariable%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%20%E2%88%91%20i%20in%20range%20(n%20+%201),%20i%20=%20n%20*%20(n%20+%201)%20/%202%20:=%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_960.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>Also show that almost exactly the same proof works for sums of squares.
+The only difference is that at one point you need to use
+the theorem <code class="docutils literal notranslate"><span class="pre">nat.pow_two</span></code> to expand <code class="docutils literal notranslate"><span class="pre">n^2</span></code> into a product.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Avariable%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%206%20*%20%E2%88%91%20i%20in%20range%20(n%20+%201),%20i%5E2%20=%20n%20*%20(n%20+%201)%20*%20(2*n%20+%201)%20:=%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_978.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="mi">6</span> <span class="bp">*</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>It also works for sums of cubes.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Avariable%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%204%20*%20%E2%88%91%20i%20in%20range%20(n%20+%201),%20i%5E3%20=%20n%5E2%20*%20(n%20+%201)%5E2%20:=%0Abegin%0A%20%20have%20pow_three%20:%20%E2%88%80%20n%20:%20nat,%20n%5E3%20=%20n%20*%20n%20*%20n,%0A%20%20%7B%20intro%20n,%20simp%20%5Bnat.pow_succ%5D%20%7D,%0A%20%20sorry%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_994.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="mi">4</span> <span class="bp">*</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span><span class="bp">^</span><span class="mi">3</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="k">have</span> <span class="n">pow_three</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">n</span><span class="bp">^</span><span class="mi">3</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">n</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">nat.pow_succ</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>In fact, the same approach can be used to derive the formula
+for geometric sums.
+At an opportune moment,
+you can use <code class="docutils literal notranslate"><span class="pre">pow_succ</span></code> to replace <code class="docutils literal notranslate"><span class="pre">r^(n+1)</span></code> by <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">*</span> <span class="pre">r^n</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0Aimport%20data.real.basic%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0A--%20BEGIN%0Avariables%20(n%20:%20%E2%84%95)%20(r%20:%20%E2%84%9D)%0A%0Aexample%20:%20(r%20-%201)%20*%20(%E2%88%91%20i%20in%20range%20n,%20r%5Ei)%20=%20r%5En%20-%201%20:=%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1017.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">r</span><span class="bp">^</span><span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span><span class="bp">^</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>In fact, the same proof should work if you replace the real numbers
+by any commutative ring.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0Aimport%20data.real.basic%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0A--%20BEGIN%0Avariables%20%7BR%20:%20Type*%7D%20%5Bcomm_ring%20R%5D%20(n%20:%20%E2%84%95)%20(r%20:%20R)%0A%0Aexample%20:%20(r%20-%201)%20*%20(%E2%88%91%20i%20in%20range%20n,%20r%5Ei)%20=%20r%5En%20-%201%20:=%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1035.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">r</span><span class="bp">^</span><span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span><span class="bp">^</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>In Lean, finite products work much the same way as finite sums.
+To illustrate, let&#8217;s relate the factorial function with the
+corresponding product.
+In Lean, the factorial function on the natural numbers
+is called <code class="docutils literal notranslate"><span class="pre">nat.fact</span></code>,
+and the two expected computation rules are
+<code class="docutils literal notranslate"><span class="pre">nat.fact_zero</span></code> and <code class="docutils literal notranslate"><span class="pre">nat.fact_succ</span></code>.
+The following snippet declares convenient notation:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.basic%0A%0Alocal%20postfix%20!:90%20:=%20nat.fact" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1059.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.nat.basic</span>
+
+<span class="kn">local</span> <span class="kd">postfix</span> <span class="bp">!</span><span class="o">:</span><span class="mi">90</span> <span class="o">:=</span> <span class="n">nat.fact</span>
+</pre></div>
+</div>
+</div><p>Here is a useful fact: when you call the <code class="docutils literal notranslate"><span class="pre">rw</span></code> tactic
+with the name of a recursively defined function instead of
+a theorem,
+it uses the associated defining equations. So you can
+use <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[nat.fact]</span></code> instead of <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[nat.fact_zero]</span></code> and <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[nat.fact_succ]</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.basic%0A%0Alocal%20postfix%20!:90%20:=%20nat.fact%0A%0A--%20BEGIN%0Aexample%20:%200!%20=%201%20:=%0Aby%20rw%20%5Bnat.fact%5D%0A%0Aexample%20(n%20:%20%E2%84%95)%20:%20(n+1)!%20=%20(n+1)%20*%20n!%20:=%0Aby%20rw%20%5Bnat.fact%5D%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1071.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="mi">0</span><span class="bp">!</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat.fact</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="bp">!</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span><span class="bp">!</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat.fact</span><span class="o">]</span>
+</pre></div>
+</div>
+</div><p>The same trick works with <code class="docutils literal notranslate"><span class="pre">simp</span></code>: use <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">[nat.fact]</span></code>
+when you want to simply <code class="docutils literal notranslate"><span class="pre">nat.fact</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">nat.fact</span> <span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>
+everywhere in an expression.</p>
+<p>Use induction to show that the factorial function
+is equal to the corresponding product:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Alocal%20postfix%20!:90%20:=%20nat.fact%0A%0A--%20BEGIN%0Aexample%20(n%20:%20%E2%84%95)%20:%20n!%20=%20%E2%88%8F%20i%20in%20range%20n,%20(i%20+%201)%20:=%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1092.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span><span class="bp">!</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>The next example illustrates three things:
+first, the use of <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[nat.fact]</span></code>.
+second, the fact that <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&#8804;</span> <span class="pre">n!</span></code>
+is definitionally equal to <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">n!</span></code>.
+and, third, the use of <code class="docutils literal notranslate"><span class="pre">show</span></code> to
+express the goal in a more convenient form.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Alocal%20postfix%20!:90%20:=%20nat.fact%0A%0A--%20BEGIN%0Aexample%20(n%20:%20%E2%84%95)%20:%201%20%E2%89%A4%20n!%20:=%0Abegin%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20rw%20%5Bnat.fact%5D%20%7D,%0A%20%20rw%20nat.fact,%0A%20%20show%200%20%3C%20(n%20+%201)%20*%20n!,%0A%20%20apply%20mul_pos,%0A%20%20apply%20nat.succ_pos,%0A%20%20apply%20ih%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1113.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&#8804;</span> <span class="n">n</span><span class="bp">!</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat.fact</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="n">nat.fact</span><span class="o">,</span>
+  <span class="k">show</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span><span class="bp">!</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">mul_pos</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">nat.succ_pos</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">ih</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>Finally, let us end this section with a sample
+proof that goes beyond the methods we have introduced
+so far.
+It will help motivate the methods that we will introduce in the next chapter.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Alocal%20postfix%20!:90%20:=%20nat.fact%0A%0A--%20BEGIN%0Aexample%20(n%20i%20:%20%E2%84%95)%20(h%20:%20i%20%E2%89%A0%200)%20(h'%20:%20i%20%E2%89%A4%20n)%20:%20i%20%E2%88%A3%20n!%20:=%0Abegin%0A%20%20revert%20h',%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20intros,%20simp%20at%20h',%20contradiction%20%20%7D,%0A%20%20intro%20ile,%0A%20%20cases%20ile%20with%20_%20ile,%0A%20%20%7B%20apply%20dvd_mul_right%20%7D,%0A%20%20apply%20dvd_mul_of_dvd_right,%0A%20%20apply%20ih%20ile,%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1140.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">i</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&#8804;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&#8739;</span> <span class="n">n</span><span class="bp">!</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">revert</span> <span class="n">h&#39;</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">contradiction</span>  <span class="o">},</span>
+  <span class="n">intro</span> <span class="n">ile</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">ile</span> <span class="k">with</span> <span class="n">_</span> <span class="n">ile</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">dvd_mul_right</span> <span class="o">},</span>
+  <span class="n">apply</span> <span class="n">dvd_mul_of_dvd_right</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">ih</span> <span class="n">ile</span><span class="o">,</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>In the first step, we use the <code class="docutils literal notranslate"><span class="pre">revert</span></code> command
+to change the goal to <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">n</span> <span class="pre">&#8594;</span> <span class="pre">i</span> <span class="pre">&#8739;</span> <span class="pre">n!</span></code>,
+so we can prove the implication by induction on <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+In the base case, we have <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8800;</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">0</span></code>,
+and we use the simplifier and the <code class="docutils literal notranslate"><span class="pre">contradiction</span></code> tactic
+to show that these are contradictory.
+In the induction step, we have <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code>,
+which is equivalent to saying that either <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">n</span></code>.
+We use the <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic,
+which we will discuss in the next chapter,
+to split on these two cases,
+and in the second case we use the inductive hypothesis.</p>
+</div>
+<div class="section" id="fibonacci-numbers">
+<h2><span class="section-number">3.4. </span>Fibonacci Numbers<a class="headerlink" href="#fibonacci-numbers" title="Permalink to this headline">&#182;</a></h2>
+<p>[Watch this space.]</p>
+</div>
+<div class="section" id="the-am-gm-inequality">
+<h2><span class="section-number">3.5. </span>The AM-GM Inequality<a class="headerlink" href="#the-am-gm-inequality" title="Permalink to this headline">&#182;</a></h2>
+<p>[Watch this space.]</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Mathematics in Lean</a></h1>
+
+
+
+
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_skills.html">2. Basic Skills</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. The Natural Numbers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#defining-arithmetic">3.1. Defining Arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#carrying-out-computations">3.2. Carrying out Computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sums-and-products">3.3. Sums and Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fibonacci-numbers">3.4. Fibonacci Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-am-gm-inequality">3.5. The AM-GM Inequality</a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="mathematics_in_lean.pdf">PDF version</a></li>
+    
+    <li class="toctree-l1"><a href="https://leanprover.github.io/">Lean Home</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jeremy Avigad, Kevin Buzzard, Robert Y. Lewis, Patrick Massot.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/the_natural_numbers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
