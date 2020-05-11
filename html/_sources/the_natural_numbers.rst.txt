@@ -1009,7 +1009,7 @@ It also works for sums of cubes.
     end
     -- END
 
-In fact, the same approach can be used to derive the formula
+The same approach can be used to derive the formula
 for geometric sums.
 At an opportune moment,
 you can use ``pow_succ`` to replace ``r^(n+1)`` by ``r * r^n``.
