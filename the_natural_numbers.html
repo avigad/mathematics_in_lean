@@ -908,35 +908,30 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 <span class="kd">end</span>
 </pre></div>
 </div>
-</div><p>Finally, let us end this section with a sample
-proof that goes beyond the methods we have introduced
-so far.
-It will help motivate the methods that we will introduce in the next chapter.</p>
+</div><p>Finally, let us end this section with an example
+that uses the <code class="docutils literal notranslate"><span class="pre">cases</span></code> and <code class="docutils literal notranslate"><span class="pre">contradiction</span></code> tactics,
+which will be introduced properly in the next  chapter.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Alocal%20postfix%20!:90%20:=%20nat.fact%0A%0A--%20BEGIN%0Aexample%20(n%20i%20:%20%E2%84%95)%20(h%20:%20i%20%E2%89%A0%200)%20(h'%20:%20i%20%E2%89%A4%20n)%20:%20i%20%E2%88%A3%20n!%20:=%0Abegin%0A%20%20revert%20h',%0A%20%20induction%20n%20with%20n%20ih,%0A%20%20%7B%20intros,%20simp%20at%20h',%20contradiction%20%20%7D,%0A%20%20intro%20ile,%0A%20%20cases%20ile%20with%20_%20ile,%0A%20%20%7B%20apply%20dvd_mul_right%20%7D,%0A%20%20apply%20dvd_mul_of_dvd_right,%0A%20%20apply%20ih%20ile,%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1140.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Alocal%20postfix%20!:90%20:=%20nat.fact%0A%0A--%20BEGIN%0Aexample%20(n%20i%20:%20%E2%84%95)%20(h%20:%20i%20%E2%89%A0%200)%20(h'%20:%20i%20%E2%89%A4%20n)%20:%20i%20%E2%88%A3%20n!%20:=%0Abegin%0Ainduction%20n%20with%20n%20ih,%0A%7B%20intros,%20simp%20at%20h',%20contradiction%20%20%7D,%0Acases%20h'%20with%20_%20h',%0A%7B%20apply%20dvd_mul_right%20%7D,%0Aapply%20dvd_mul_of_dvd_right,%0Aapply%20ih%20h',%0Aend%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1139.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">i</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&#8804;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&#8739;</span> <span class="n">n</span><span class="bp">!</span> <span class="o">:=</span>
 <span class="kd">begin</span>
-  <span class="n">revert</span> <span class="n">h&#39;</span><span class="o">,</span>
-  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
-  <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">contradiction</span>  <span class="o">},</span>
-  <span class="n">intro</span> <span class="n">ile</span><span class="o">,</span>
-  <span class="n">cases</span> <span class="n">ile</span> <span class="k">with</span> <span class="n">_</span> <span class="n">ile</span><span class="o">,</span>
-  <span class="o">{</span> <span class="n">apply</span> <span class="n">dvd_mul_right</span> <span class="o">},</span>
-  <span class="n">apply</span> <span class="n">dvd_mul_of_dvd_right</span><span class="o">,</span>
-  <span class="n">apply</span> <span class="n">ih</span> <span class="n">ile</span><span class="o">,</span>
+<span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">contradiction</span>  <span class="o">},</span>
+<span class="n">cases</span> <span class="n">h&#39;</span> <span class="k">with</span> <span class="n">_</span> <span class="n">h&#39;</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">apply</span> <span class="n">dvd_mul_right</span> <span class="o">},</span>
+<span class="n">apply</span> <span class="n">dvd_mul_of_dvd_right</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">ih</span> <span class="n">h&#39;</span><span class="o">,</span>
 <span class="kd">end</span>
 </pre></div>
 </div>
-</div><p>In the first step, we use the <code class="docutils literal notranslate"><span class="pre">revert</span></code> command
-to change the goal to <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">n</span> <span class="pre">&#8594;</span> <span class="pre">i</span> <span class="pre">&#8739;</span> <span class="pre">n!</span></code>,
-so we can prove the implication by induction on <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+</div><p>Because the inductive hypothesis, <code class="docutils literal notranslate"><span class="pre">h'</span></code>, depends on <code class="docutils literal notranslate"><span class="pre">n`,</span>
+<span class="pre">the</span> <span class="pre">``induction</span></code> tactic includes it in the inductive hypothesis.
 In the base case, we have <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8800;</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">0</span></code>,
 and we use the simplifier and the <code class="docutils literal notranslate"><span class="pre">contradiction</span></code> tactic
 to show that these are contradictory.
 In the induction step, we have <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code>,
 which is equivalent to saying that either <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&#8804;</span> <span class="pre">n</span></code>.
 We use the <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic,
-which we will discuss in the next chapter,
 to split on these two cases,
 and in the second case we use the inductive hypothesis.</p>
 </div>
