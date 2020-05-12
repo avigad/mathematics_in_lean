@@ -4,11 +4,16 @@ The Natural Numbers
 ===================
 
 Mathematically speaking, the natural numbers are characterized up to isomorphism as
-a set with a zero element and an injective successor function
-such that zero is not a successor and the entire structure
-satisfies the *induction principle*:
-any property that holds of zero and is maintained
-by successors holds of every natural number.
+a set with a zero element and an successor function satisfying the following:
+
+* The zero element is not the successor of any number.
+
+* The successor function is injective.
+
+* The entire structure satisfies the *induction principle*:
+  any property that holds of zero and is maintained
+  by successors holds of every natural number.
+
 To introduce the natural numbers formally,
 Lean's core library makes use of Lean's foundational framework,
 which allows us to declare a new type as follows:
@@ -50,13 +55,16 @@ we can define addition recursively as follows:
 
     namespace my_nat
 
-    -- BEGIN
     def add : ℕ → ℕ → ℕ
-    | m 0 := m
+    | m 0        := m
     | m (succ n) := succ (add m n)
-    -- END
 
     end my_nat
+
+In this section, we will continue the strategy of
+defining functions and stating theorems with the same names
+that are used in the library
+but hiding them in a namespace to avoid a naming conflict.
 
 Assuming we introduce the usual notation for addition,
 the definition means that we can use the associated
@@ -129,9 +137,6 @@ To see how it works, consider the following proof template:
 
     end my_nat
 
-In this section, we will continue the strategy of
-stating theorems with the same names that are used in the library
-but hiding them in a namespace to avoid a naming conflict.
 If you move your cursor through the proof,
 you will see that the induction tactic leaves two goals:
 in the base case, we need to prove ``m + 0 = 0 + m``,
@@ -211,7 +216,7 @@ Because addition is defined by recursion on the second argument,
 doing induction on ``k`` will allow us to use the defining equations
 for addition in the base case and induction step.
 This is a good heuristic when it comes to deciding which variable to use.
-We can do on to define multiplication in the expected way:
+We can go on to define multiplication in the expected way:
 
 .. code-block:: lean
 
@@ -262,7 +267,7 @@ to prove all of the following:
 
     theorem mul_assoc : m * n * k = m * (n * k) := sorry
 
-    theorem mul_comm : m * n= n * m := sorry
+    theorem mul_comm : m * n = n * m := sorry
     -- END
 
     end my_nat
@@ -283,16 +288,16 @@ The library also defines a function for exponentiation, ``nat.pow``.
 
     end my_nat
 
-Note that because the argument ``b`` in this definition is presented
+Because the argument ``b`` in this definition is presented
 before the colon,
 it is taken to be fixed in the recursive definition,
 and so the recursive call refers to ``pow n`` instead of ``pow b n``.
 We challenge you to state and prove some basic theorems about ``nat.pow``
 from the associated defining equations, ``nat.pow_zero`` and ``nat.pow_succ``.
-Beware: the *Lean* library also defines a version of ``pow``
+Beware: Lean's library also defines a version of ``pow``
 that works for more general structures,
 and it uses ``b * pow n`` instead of ``pow n * b`` in the recursive call.
-Hopefully, someone will take the initiative to eventually merge the two,
+Hopefully, someone will eventually take the initiative to merge the two,
 but in the meanwhile,
 we are in the unfortunate situation that we are using different parts of the
 library depending on whether we are raising a ``nat`` or an element
@@ -302,8 +307,9 @@ In a moment, we will show formally that ``succ`` is injective.
 We can use this to prove the cancellation law for addition,
 namely, if ``m + n = k + n`` then ``m = k``.
 The natural way to prove this is by induction on ``n``.
-But now something strange is happening: we are doing
-induction on a variable that occurs only in a hypothesis.
+But calling the induction tactic on the goal ``m = k``
+is strange,
+since the goal does not even mention ``n``.
 Step through the proof below and see how Lean handles it.
 
 .. code-block:: lean
@@ -342,8 +348,8 @@ on other compound statements.
 At this point, we only ask you to notice that
 induction is doing something interesting under the hood.
 As with all tactics, you can learn more about the
-induction step by reading the description that appears
-when you hover over it or looking it up in the
+induction tactic by reading the description that appears
+when you hover over it, or by looking it up in the
 `mathlib documentation <https://leanprover-community.github.io/mathlib_docs/>`_.
 You can also learn more about the way Lean supports
 reasoning about inductively defined
@@ -380,7 +386,7 @@ The predecessor function can be used to prove the injectivity of ``succ``.
 Here we use the ``show`` command to change
 the goal to one the is definitionally equal to the original one.
 Using ``show`` forces Lean to recognize that fact
-by unfolding the computational rule for ``pred``.
+by simplifying according to the defining equations for ``pred``.
 
 .. code-block:: lean
 
@@ -439,7 +445,7 @@ Carrying out Computations
 Defining the operations of arithmetic on the natural numbers
 and establishing their fundamental properties is interesting,
 but it does not feel like *real* mathematics.
-we have taken facts about the natural numbers for granted
+We have taken facts about the natural numbers for granted
 since we were schoolchildren,
 and we should expect any good formal library to make them readily available.
 What we really need to know is how to use the
@@ -463,18 +469,24 @@ function, prove theorems above it, and then calculate:
 
 .. code-block:: lean
 
-    def factorial : ℕ → ℕ
-    | 0     := 1
-    | (n+1) := (n+1) * factorial n
+    namespace my_nat
 
-    theorem factorial_pos (n : ℕ) : 0 < factorial n :=
+    -- BEGIN
+    def fact : ℕ → ℕ
+    | 0     := 1
+    | (n+1) := (n+1) * fact n
+
+    theorem fact_pos (n : ℕ) : 0 < fact n :=
     begin
       induction n with n ih,
       { apply zero_lt_one },
       exact mul_pos (nat.succ_pos _) ih
     end
 
-    #eval factorial 100
+    #eval fact 100
+    -- END
+
+    end my_nat
 
 The ``#eval`` command is also sometimes helpful
 for giving us a sense of what a function does.
@@ -524,7 +536,7 @@ For more substantial calculations, use ``norm_num``:
 Like ``ring``, ``norm_num`` is a more substantial piece
 of automation. It constructs efficient proofs using
 binary representation.
-It works for equally well for the real numbers,
+It works for equally well for the real numbers
 and other structures that support numerals.
 
 .. code-block:: lean
@@ -657,7 +669,8 @@ The simplifier can also prove theorems by simplifying them to ``true``:
 It will perform *conditional rewriting*, which is to say,
 it will try to rewrite using an identity with hypotheses
 by rewriting the hypotheses themselves to ``true``.
-In the next example, the line that beings ``local attribute`` tells
+In the next example, the line that begins with the
+words ``local attribute`` tells
 the simplifier that in the current section or file,
 it should use the rule ``abs_of_nonneg``,
 which says ``abs a = a`` when ``a ≥ 0``.
@@ -718,7 +731,7 @@ are definitionally the same:
     -- BEGIN
     example (h : m < n) : m + 1 ≤ n := h
 
-    example (h : 0 < n)  : 1 ≤ n := h
+    example (h : 0 < n) : 1 ≤ n := h
     -- END
 
 The hypotheses ``n ≠ 0`` are equivalent ``0 < n``,
@@ -1162,7 +1175,7 @@ which will be introduced properly in the next  chapter.
     end
     -- END
 
-Because the inductive hypothesis, ``h'``, depends on ``n`,
+Because the inductive hypothesis, ``h'``, depends on ``n``,
 the ``induction`` tactic includes it in the inductive hypothesis.
 In the base case, we have ``i ≠ 0`` and ``i ≤ 0``,
 and we use the simplifier and the ``contradiction`` tactic

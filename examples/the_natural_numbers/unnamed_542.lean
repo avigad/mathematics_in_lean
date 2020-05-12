@@ -1,2 +1,5 @@
-example : [1, 2, 3] ++ [4, 5] = [1, 2, 3, 4, 5] :=
-rfl
+import tactic
+import data.real.basic
+
+example : (12345 : ℝ) * 6789 = 83810205 :=
+by norm_num

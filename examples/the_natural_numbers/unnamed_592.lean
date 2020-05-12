@@ -1,4 +1,4 @@
-import tactic
+import data.nat.basic
 
-example : 12345 * 6789 < 83810206 :=
-by norm_num
+example : ∀ x ≤ 5, ∀ y ≤ 5, x * y ≠ 23 :=
+dec_trivial

@@ -1,4 +1,2 @@
-import tactic
-
-example : 12345 * 6789 = 83810205 :=
-by norm_num
+example : 2 + 2 = 4 :=
+rfl
