@@ -405,15 +405,6 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 <span class="kd">by</span> <span class="n">norm_num</span>
 </pre></div>
 </div>
-</div><p>The <code class="docutils literal notranslate"><span class="pre">norm_num</span></code> tactic is designed specifically
-for numeric calculation.
-In contrast, definitional reduction is more general. For example, it can be used to confirm the result of concatenating two lists of numbers:</p>
-<div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20%3A%20%5B1%2C%202%2C%203%5D%20%2B%2B%20%5B4%2C%205%5D%20%3D%20%5B1%2C%202%2C%203%2C%204%2C%205%5D%20%3A%3D%0Arfl" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_554.lean">
-try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">]</span> <span class="bp">++</span> <span class="o">[</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span> <span class="o">:=</span>
-<span class="n">rfl</span>
-</pre></div>
-</div>
 </div><p>What about proving facts like <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">5</span></code>?
 For statements like this one
 that are built up from computable relations,
@@ -759,10 +750,7 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat.fact</span><span class="o">]</span>
 </pre></div>
 </div>
-</div><p>The same trick works with <code class="docutils literal notranslate"><span class="pre">simp</span></code>: use <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">[nat.fact]</span></code>
-when you want to simply <code class="docutils literal notranslate"><span class="pre">nat.fact</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">nat.fact</span> <span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>
-everywhere in an expression.</p>
-<p>Use induction to show that the factorial function
+</div><p>Use induction to show that the factorial function
 is equal to the corresponding product:</p>
 <div style="position: relative">
 <div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.big_operators%0A%0Aopen%20finset%0Aopen_locale%20big_operators%0A%0Alocal%20postfix%20!%3A90%20%3A%3D%20nat.fact%0A%0A--%20BEGIN%0Aexample%20(n%20%3A%20%E2%84%95)%20%3A%20n!%20%3D%20%E2%88%8F%20i%20in%20range%20n%2C%20(i%20%2B%201)%20%3A%3D%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/the_natural_numbers/unnamed_1196.lean">

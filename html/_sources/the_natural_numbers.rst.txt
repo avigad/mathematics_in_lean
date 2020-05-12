@@ -547,14 +547,14 @@ and other structures that support numerals.
     example : (12345 : ℝ) * 6789 = 83810205 :=
     by norm_num
 
-The ``norm_num`` tactic is designed specifically
-for numeric calculation.
-In contrast, definitional reduction is more general. For example, it can be used to confirm the result of concatenating two lists of numbers:
+.. The ``norm_num`` tactic is designed specifically
+.. for numeric calculation.
+.. In contrast, definitional reduction is more general. For example, it can be used to confirm the result of concatenating two lists of numbers:
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    example : [1, 2, 3] ++ [4, 5] = [1, 2, 3, 4, 5] :=
-    rfl
+..     example : [1, 2, 3] ++ [4, 5] = [1, 2, 3, 4, 5] :=
+..     rfl
 
 What about proving facts like ``2 + 2 < 5``?
 For statements like this one
@@ -1186,9 +1186,9 @@ use ``rw [nat.fact]`` instead of ``rw [nat.fact_zero]`` and ``rw [nat.fact_succ]
     by rw [nat.fact]
     -- END
 
-The same trick works with ``simp``: use ``simp [nat.fact]``
-when you want to simply ``nat.fact 0`` and ``nat.fact (n + 1)``
-everywhere in an expression.
+.. The same trick works with ``simp``: use ``simp [nat.fact]``
+.. when you want to simply ``nat.fact 0`` and ``nat.fact (n + 1)``
+.. everywhere in an expression.
 
 Use induction to show that the factorial function
 is equal to the corresponding product:
