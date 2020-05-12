@@ -9,7 +9,7 @@ variable n : ℕ
 example : 4 * ∑ i in range (n + 1), i^3 = n^2 * (n + 1)^2 :=
 begin
   have pow_three : ∀ n : nat, n^3 = n * n * n,
-  { intro n, simp [nat.pow_succ] },
+  { intro n, rw [nat.pow_succ, nat.pow_two] },
   sorry
 end
 -- END

@@ -9,9 +9,10 @@ variable n : ℕ
 example : 2 * ∑ i in range (n + 1), i = n * (n + 1) :=
 begin
   induction n with n ih,
-  { simp },
+  { rw [sum_range_succ, sum_range_zero],
+    refl },
   rw [sum_range_succ, mul_add, ih],
-  simp only [nat.succ_eq_add_one],
+  rw [nat.succ_eq_add_one],
   ring
 end
 -- END
