@@ -109,7 +109,8 @@ Suppose we want to prove the commutativity of addition, ``m + n = n + m``.
 We don't have much to work with: we have the defining equations for
 addition, but no other facts about it.
 But we do have the principle of induction,
-which we can invoke with the ``induction`` tactic:
+which we can invoke with the ``induction`` tactic.
+To see how it works, consider the following proof template:
 
 .. code-block:: lean
 
@@ -494,16 +495,20 @@ So how do we establish a simple computational claim like
 ``2 + 2 = 4``?
 This is where definitional equality,
 which *is* part of Lean's trusted kernel,
-is helpful. In this case, Lean can unfold definitions and
-apply computational reductions to determine that
-both sides come out the same:
+is helpful.
+When it is required to do so,
+Lean can unfold the definition of the
+numerals and use the defining equations for
+addition to simplify both sides of the equation until they
+come out the same.
 
 .. code-block:: lean
 
     example : 2 + 2 = 4 :=
     rfl
 
-Be careful: unfolding definitions and computing is o.k. for
+Be careful: making Lean unfolding definitions and compute
+in this way is o.k. for
 small calculations, but it is inefficient.
 Unfolding the definitions of addition and multiplication
 amount to calculating with numbers in unary notation.
