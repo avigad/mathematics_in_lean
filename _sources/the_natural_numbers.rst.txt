@@ -454,56 +454,56 @@ We will turn to that in the next section.
 First, we will say a bit more about proving statements
 that are "obvious" or "just calculation."
 
-The computational side of Lean's foundation means that
-we can not only reason about the natural numbers,
-but compute with them.
-The ``#eval`` command will evaluate any closed expression
-that Lean is capable of evaluating.
+.. The computational side of Lean's foundation means that
+.. we can not only reason about the natural numbers,
+.. but compute with them.
+.. The ``#eval`` command will evaluate any closed expression
+.. that Lean is capable of evaluating.
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    #eval 12345 * 6789
+..     #eval 12345 * 6789
 
-It is appealing that, in Lean, we can define the factorial
-function, prove theorems above it, and then calculate:
+.. It is appealing that, in Lean, we can define the factorial
+.. function, prove theorems above it, and then calculate:
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    namespace my_nat
+..     namespace my_nat
 
-    -- BEGIN
-    def fact : ℕ → ℕ
-    | 0     := 1
-    | (n+1) := (n+1) * fact n
+..     -- BEGIN
+..     def fact : ℕ → ℕ
+..     | 0     := 1
+..     | (n+1) := (n+1) * fact n
 
-    theorem fact_pos (n : ℕ) : 0 < fact n :=
-    begin
-      induction n with n ih,
-      { apply zero_lt_one },
-      exact mul_pos (nat.succ_pos _) ih
-    end
+..     theorem fact_pos (n : ℕ) : 0 < fact n :=
+..     begin
+..       induction n with n ih,
+..       { apply zero_lt_one },
+..       exact mul_pos (nat.succ_pos _) ih
+..     end
 
-    #eval fact 100
-    -- END
+..     #eval fact 100
+..     -- END
 
-    end my_nat
+..     end my_nat
 
-The ``#eval`` command is also sometimes helpful
-for giving us a sense of what a function does.
-Of course, in mathematics we can define functions
-that cannot be computed.
-But Lean does a good job of keeping track of which ones
-are computable
-and evaluating them when it can.
+.. The ``#eval`` command is also sometimes helpful
+.. for giving us a sense of what a function does.
+.. Of course, in mathematics we can define functions
+.. that cannot be computed.
+.. But Lean does a good job of keeping track of which ones
+.. are computable
+.. and evaluating them when it can.
 
-But the ``#eval`` command cannot be used to prove theorems.
-For evaluation, Lean extracts bytecode from the definitions and
-executes it efficiently,
-without justifying the computation axiomatically.
-If we insist on having formal proofs of all our claims,
-we cannot trust ``#eval``.
+.. But the ``#eval`` command cannot be used to prove theorems.
+.. For evaluation, Lean extracts bytecode from the definitions and
+.. executes it efficiently,
+.. without justifying the computation axiomatically.
+.. If we insist on having formal proofs of all our claims,
+.. we cannot trust ``#eval``.
 
-So how do we establish a simple computational claim like
+How do we establish a simple computational claim like
 ``2 + 2 = 4``?
 This is where definitional equality,
 which *is* part of Lean's trusted kernel,
@@ -623,101 +623,101 @@ If you are running this tutorial in VS Code,
 try replacing ``257`` with ``65537``.
 The tactic should still succeed in a few seconds.
 
-The general question as to how to efficiently verify
-computational results and use them in proofs in trusted ways
-falls under the heading *computational reflection*.
-This is a very important topic,
-and not one that we can fully address here.
-But tools like ``ring`` and ``norm_num``
-cover some of the most basic instances.
+.. The general question as to how to efficiently verify
+.. computational results and use them in proofs in trusted ways
+.. falls under the heading *computational reflection*.
+.. This is a very important topic,
+.. and not one that we can fully address here.
+.. But tools like ``ring`` and ``norm_num``
+.. cover some of the most basic instances.
 
-Another useful tool for carrying calculations is Lean's
-term rewriting tactic, known as ``simp``.
-The ``simp`` tactic tries to simplify a goal using
-a collection of facts that have been marked as
-simplification rules, typically facts like ``x + 0 = x``
-and ``x * 1 = x``.
+.. Another useful tool for carrying calculations is Lean's
+.. term rewriting tactic, known as ``simp``.
+.. The ``simp`` tactic tries to simplify a goal using
+.. a collection of facts that have been marked as
+.. simplification rules, typically facts like ``x + 0 = x``
+.. and ``x * 1 = x``.
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    example (m n : ℕ) (f : ℕ → ℕ) : f (m * 1 + 0 + n) = f (m + n) :=
-    by simp
+..     example (m n : ℕ) (f : ℕ → ℕ) : f (m * 1 + 0 + n) = f (m + n) :=
+..     by simp
 
-This can save you the trouble of looking for facts in the library
-and applying them manually.
-It can also provide a learning experience.
-Mathlib offers a variant of ``simp`` called ``squeeze_simp``
-which calls ``simp``,
-determines the list of simplification rules that were used,
-and suggests calling ``simp`` more efficiently with this smaller list.
-If you ``import tactic`` and replace ``simp`` by ``squeeze_simp``
-in the previous example,
-the output in the Lean Goal window will suggest using the following:
+.. This can save you the trouble of looking for facts in the library
+.. and applying them manually.
+.. It can also provide a learning experience.
+.. Mathlib offers a variant of ``simp`` called ``squeeze_simp``
+.. which calls ``simp``,
+.. determines the list of simplification rules that were used,
+.. and suggests calling ``simp`` more efficiently with this smaller list.
+.. If you ``import tactic`` and replace ``simp`` by ``squeeze_simp``
+.. in the previous example,
+.. the output in the Lean Goal window will suggest using the following:
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    example (m n : ℕ) (f : ℕ → ℕ) : f (m * 1 + 0 + n) = f (m + n) :=
-    by simp only [add_zero, mul_one]
+..     example (m n : ℕ) (f : ℕ → ℕ) : f (m * 1 + 0 + n) = f (m + n) :=
+..     by simp only [add_zero, mul_one]
 
-The simplifier can also prove theorems by simplifying them to ``true``:
+.. The simplifier can also prove theorems by simplifying them to ``true``:
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    example (m : ℕ) : 1 ∣ m :=
-    by simp
+..     example (m : ℕ) : 1 ∣ m :=
+..     by simp
 
-It will perform *conditional rewriting*, which is to say,
-it will try to rewrite using an identity with hypotheses
-by rewriting the hypotheses themselves to ``true``.
-In the next example, the line that begins with the
-words ``local attribute`` tells
-the simplifier that in the current section or file,
-it should use the rule ``abs_of_nonneg``,
-which says ``abs a = a`` when ``a ≥ 0``.
-The command ``simp *`` tells the simplifier to use the
-facts in the local context as well as its battery of
-simplification rules.
+.. It will perform *conditional rewriting*, which is to say,
+.. it will try to rewrite using an identity with hypotheses
+.. by rewriting the hypotheses themselves to ``true``.
+.. In the next example, the line that begins with the
+.. words ``local attribute`` tells
+.. the simplifier that in the current section or file,
+.. it should use the rule ``abs_of_nonneg``,
+.. which says ``abs a = a`` when ``a ≥ 0``.
+.. The command ``simp *`` tells the simplifier to use the
+.. facts in the local context as well as its battery of
+.. simplification rules.
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    import data.real.basic
+..     import data.real.basic
 
-    local attribute [simp] abs_of_nonneg
+..     local attribute [simp] abs_of_nonneg
 
-    example (a : ℝ) (f : ℝ → ℝ) (h: a ≥ 0) : f (abs a) = f a :=
-    by simp *
+..     example (a : ℝ) (f : ℝ → ℝ) (h: a ≥ 0) : f (abs a) = f a :=
+..     by simp *
 
-The simplifier can also use *permutative conversions* like
-``a + b = b + a``.
-To avoid looping,
-the simplifier only applies the rule if it makes the
-term smaller under some arbitrary but fixed ordering of terms.
-This provides a useful trick for proving identities
-with expressions involving an operation that is associative
-and commutative. Simplifying using those two properties
-and a funny combination of the two,
-*left commutativity*, has the net effect of moving
-all parentheses to the left and
-put the terms in the canonical order.
+.. The simplifier can also use *permutative conversions* like
+.. ``a + b = b + a``.
+.. To avoid looping,
+.. the simplifier only applies the rule if it makes the
+.. term smaller under some arbitrary but fixed ordering of terms.
+.. This provides a useful trick for proving identities
+.. with expressions involving an operation that is associative
+.. and commutative. Simplifying using those two properties
+.. and a funny combination of the two,
+.. *left commutativity*, has the net effect of moving
+.. all parentheses to the left and
+.. put the terms in the canonical order.
 
-.. code-block:: lean
+.. .. code-block:: lean
 
-    example (a b c d e f : ℕ) : a + b + (c + d) + (e + f) =
-      f + (d + (c + b)) + e + a :=
-    by simp [add_assoc, add_comm, add_left_comm]
+..     example (a b c d e f : ℕ) : a + b + (c + d) + (e + f) =
+..       f + (d + (c + b)) + e + a :=
+..     by simp [add_assoc, add_comm, add_left_comm]
 
-    example (a b c d e f : ℕ) : min (min (min a b) (min c d)) (min e f) =
-      min (min (min f (min d (min c b))) e) a :=
-    by simp [min_assoc, min_comm, min_left_comm]
+..     example (a b c d e f : ℕ) : min (min (min a b) (min c d)) (min e f) =
+..       min (min (min f (min d (min c b))) e) a :=
+..     by simp [min_assoc, min_comm, min_left_comm]
 
-As usual, you can learn more about the simplifier
-and the various options in the mathlib documentation
-`mathlib documentation <https://leanprover-community.github.io/mathlib_docs/>`_
-or `Theorem Proving in Lean`_.
-We recommend using ``simp`` sparingly,
-since it can slow down complication of proofs and it is
-not a substitute for learning how to do things by hand.
-But with judicious use, it can be quite helpful.
+.. As usual, you can learn more about the simplifier
+.. and the various options in the mathlib documentation
+.. `mathlib documentation <https://leanprover-community.github.io/mathlib_docs/>`_
+.. or `Theorem Proving in Lean`_.
+.. We recommend using ``simp`` sparingly,
+.. since it can slow down complication of proofs and it is
+.. not a substitute for learning how to do things by hand.
+.. But with judicious use, it can be quite helpful.
 
 We close this section with a few small tricks
 that are often useful for reasoning about the natural numbers.
@@ -763,7 +763,7 @@ To prove ``m - n + k``, it is often easier to prove ``m + n = k``.
 
     -- BEGIN
     example (h : m = k + n) : m - n = k :=
-    by simp [h]
+    by rw [h, nat.add_sub_cancel]
     -- END
 
 In fact, it is often more useful to state theorems in terms of
@@ -870,10 +870,10 @@ and the Greek letter lambda can be entered with ``\lam`` in VS Code.
 Often the type of ``x`` can be inferred from context,
 but you can also write, for example,
 ``λ x : ℕ, x^2`` to mean the squaring function on the natural numbers.
+
 The two expressions below therefore represent the sum of the
 square function over the sets ``{0, 1, 2, 3, 4}`` and ``{3, 4, 5, 6}``
 respectively.
-Compute these yourself before checking Lean's answer.
 
 .. code-block:: lean
 
@@ -881,8 +881,8 @@ Compute these yourself before checking Lean's answer.
 
     open finset
 
-    #eval finset.sum (range 5) (λ x, x^2)
-    #eval finset.sum (Ico 3 7) (λ x, x^2)
+    #check finset.sum (range 5) (λ x, x^2)
+    #check finset.sum (Ico 3 7) (λ x, x^2)
 
 In the ``import`` line, the phrase "big operators" refers to the extension of binary operations like
 sums, product, min, and max to finite sets.
@@ -897,8 +897,8 @@ Lean's anonymous projection notation provides a slight improvement:
     open finset
 
     -- BEGIN
-    #eval (range 5).sum (λ x, x^2)
-    #eval (Ico 3 7).sum (λ x, x^2)
+    #check (range 5).sum (λ x, x^2)
+    #check (Ico 3 7).sum (λ x, x^2)
     -- END
 
 In the next snippet, the command ``open_locale big_operators``
@@ -913,9 +913,56 @@ defined for big operators.
     open finset
     open_locale big_operators
 
-    #eval ∑ x in range 5, x^2
-    #eval ∑ x in Ico 3 7, x^2
+    #check ∑ x in range 5, x^2
+    #check ∑ x in Ico 3 7, x^2
     -- END
+
+.. The two expressions below therefore represent the sum of the
+.. square function over the sets ``{0, 1, 2, 3, 4}`` and ``{3, 4, 5, 6}``
+.. respectively.
+.. Compute these yourself before checking Lean's answer.
+
+.. .. code-block:: lean
+
+..     import algebra.big_operators
+
+..     open finset
+
+..     #eval finset.sum (range 5) (λ x, x^2)
+..     #eval finset.sum (Ico 3 7) (λ x, x^2)
+
+.. In the ``import`` line, the phrase "big operators" refers to the extension of binary operations like
+.. sums, product, min, and max to finite sets.
+.. We have opened the ``finset`` namespace to use the names ``range`` and ``Ico``,
+.. but we still have to qualify the name ``sum``.
+.. Lean's anonymous projection notation provides a slight improvement:
+
+.. .. code-block:: lean
+
+..     import algebra.big_operators
+
+..     open finset
+
+..     -- BEGIN
+..     #eval (range 5).sum (λ x, x^2)
+..     #eval (Ico 3 7).sum (λ x, x^2)
+..     -- END
+
+.. In the next snippet, the command ``open_locale big_operators``
+.. tells Lean that we want to use notation
+.. defined for big operators.
+
+.. .. code-block:: lean
+
+..     import algebra.big_operators
+
+..     -- BEGIN
+..     open finset
+..     open_locale big_operators
+
+..     #eval ∑ x in range 5, x^2
+..     #eval ∑ x in Ico 3 7, x^2
+..     -- END
 
 The summation symbol is entered as ``\sum``.
 Try using this notation to calculate the sum of the natural numbers from
@@ -944,7 +991,27 @@ the ``range`` function a prime candidate for proof by induction.
 We can use these, for example, to derive the usual formula
 for the sum of the natural numbers from 1 to ``n``:
 
-.. code-block:: lean
+.. .. code-block:: lean
+
+..     import algebra.big_operators
+
+..     open finset
+..     open_locale big_operators
+
+..     variable n : ℕ
+
+..     -- BEGIN
+..     example : 2 * ∑ i in range (n + 1), i = n * (n + 1) :=
+..     begin
+..       induction n with n ih,
+..       { simp },
+..       rw [sum_range_succ, mul_add, ih],
+..       simp only [nat.succ_eq_add_one],
+..       ring
+..     end
+..     -- END
+
+..  code-block:: lean
 
     import algebra.big_operators
 
@@ -957,9 +1024,10 @@ for the sum of the natural numbers from 1 to ``n``:
     example : 2 * ∑ i in range (n + 1), i = n * (n + 1) :=
     begin
       induction n with n ih,
-      { simp },
+      { rw [sum_range_succ, sum_range_zero],
+        refl },
       rw [sum_range_succ, mul_add, ih],
-      simp only [nat.succ_eq_add_one],
+      rw [nat.succ_eq_add_one],
       ring
     end
     -- END
@@ -968,7 +1036,7 @@ If you step through this proof,
 there should be nothing surprising.
 In the inductive step, we use ``sum_range_succ`` to
 expand the sum, and then we use the inductive hypothesis.
-We use the simplifier to rewrite ``succ n`` everywhere to ``n + 1``,
+We use ``rw`` to rewrite ``succ n`` everywhere to ``n + 1``,
 at which point,
 the ``ring`` tactic finishes off the calculation.
 
@@ -1009,6 +1077,24 @@ the theorem ``nat.pow_two`` to expand ``n^2`` into a product.
 
 It also works for sums of cubes.
 
+.. .. code-block:: lean
+
+..     import algebra.big_operators
+
+..     open finset
+..     open_locale big_operators
+
+..     variable n : ℕ
+
+..     -- BEGIN
+..     example : 4 * ∑ i in range (n + 1), i^3 = n^2 * (n + 1)^2 :=
+..     begin
+..       have pow_three : ∀ n : nat, n^3 = n * n * n,
+..       { intro n, simp [nat.pow_succ] },
+..       sorry
+..     end
+..     -- END
+
 .. code-block:: lean
 
     import algebra.big_operators
@@ -1022,7 +1108,7 @@ It also works for sums of cubes.
     example : 4 * ∑ i in range (n + 1), i^3 = n^2 * (n + 1)^2 :=
     begin
       have pow_three : ∀ n : nat, n^3 = n * n * n,
-      { intro n, simp [nat.pow_succ] },
+      { intro n, rw [nat.pow_succ, nat.pow_two] },
       sorry
     end
     -- END
@@ -1154,6 +1240,27 @@ Finally, let us end this section with an example
 that uses the ``cases`` and ``contradiction`` tactics,
 which will be introduced properly in the next  chapter.
 
+.. .. code-block:: lean
+
+..     import algebra.big_operators
+
+..     open finset
+..     open_locale big_operators
+
+..     local postfix !:90 := nat.fact
+
+..     -- BEGIN
+..     example (n i : ℕ) (h : i ≠ 0) (h' : i ≤ n) : i ∣ n! :=
+..     begin
+..       induction n with n ih,
+..       { intros, simp at h', contradiction  },
+..       cases h' with _ h',
+..       { apply dvd_mul_right },
+..       apply dvd_mul_of_dvd_right,
+..       apply ih h',
+..     end
+..     -- END
+
 .. code-block:: lean
 
     import algebra.big_operators
@@ -1166,19 +1273,22 @@ which will be introduced properly in the next  chapter.
     -- BEGIN
     example (n i : ℕ) (h : i ≠ 0) (h' : i ≤ n) : i ∣ n! :=
     begin
-    induction n with n ih,
-    { intros, simp at h', contradiction  },
-    cases h' with _ h',
-    { apply dvd_mul_right },
-    apply dvd_mul_of_dvd_right,
-    apply ih h',
+      induction n with n ih,
+      { intros,
+        have h'' : i = 0,
+        { exact nat.eq_zero_of_le_zero h'},
+        contradiction  },
+      cases h' with _ h',
+      { apply dvd_mul_right },
+      apply dvd_mul_of_dvd_right,
+      apply ih h',
     end
     -- END
 
 Because the inductive hypothesis, ``h'``, depends on ``n``,
 the ``induction`` tactic includes it in the inductive hypothesis.
 In the base case, we have ``i ≠ 0`` and ``i ≤ 0``,
-and we use the simplifier and the ``contradiction`` tactic
+and we use the ``contradiction`` tactic
 to show that these are contradictory.
 In the induction step, we have ``i ≤ n + 1``,
 which is equivalent to saying that either ``i = n + 1`` or ``i ≤ n``.
