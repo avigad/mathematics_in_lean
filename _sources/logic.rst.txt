@@ -26,7 +26,8 @@ Consider the statement after the ``#check``:
     import data.real.basic
 
     -- BEGIN
-    #check ∀ x y ε : ℝ, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε
+    #check ∀ x y ε : ℝ,
+      0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε
     -- END
 
 In words, we would say "for every ``x``, ``y``, and ``ε``,
@@ -48,13 +49,14 @@ you can apply it to objects and hypotheses in the same way:
     import data.real.basic
 
     -- BEGIN
-    lemma my_lemma :
-      ∀ x y ε : ℝ, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
+    lemma my_lemma : ∀ x y ε : ℝ,
+      0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
     sorry
 
     section
       variables a b δ : ℝ
-      variables (h₀ : 0 < δ) (h₁ : δ ≤ 1) (ha : abs a < δ) (hb : abs b < δ)
+      variables (h₀ : 0 < δ) (h₁ : δ ≤ 1)
+      variables (ha : abs a < δ) (hb : abs b < δ)
 
       #check my_lemma a b δ
       #check my_lemma a b δ h₀ h₁
@@ -73,13 +75,14 @@ mentioning the objects.
     import data.real.basic
 
     -- BEGIN
-    lemma my_lemma :
-      ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
+    lemma my_lemma : ∀ {x y ε : ℝ},
+      0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
     sorry
 
     section
       variables a b δ : ℝ
-      variables (h₀ : 0 < δ) (h₁ : δ ≤ 1) (ha : abs a < δ) (hb : abs b < δ)
+      variables (h₀ : 0 < δ) (h₁ : δ ≤ 1)
+      variables (ha : abs a < δ) (hb : abs b < δ)
 
       #check my_lemma h₀ h₁ ha hb
     end
@@ -99,8 +102,8 @@ Take a look at what it does in this example:
     import data.real.basic
 
     -- BEGIN
-    lemma my_lemma :
-      ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
+    lemma my_lemma : ∀ {x y ε : ℝ},
+      0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
     begin
       intros x y ε epos ele1 xlt ylt,
       sorry
@@ -125,8 +128,8 @@ To help you prove the lemma, we will start you off:
     import data.real.basic
 
     -- BEGIN
-    lemma my_lemma :
-      ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
+    lemma my_lemma : ∀ {x y ε : ℝ},
+      0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
     begin
       intros x y ε epos ele1 xlt ylt,
       suffices h : abs x * abs y < 1 * ε,
@@ -181,8 +184,10 @@ function that maps ``x`` to ``f x + g x``.
     def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
     def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
 
+    variables (f g : ℝ → ℝ) (a b : ℝ)
+
     -- BEGIN
-    example {f g : ℝ → ℝ} {a b : ℝ} (hfa : fn_ub f a) (hgb : fn_ub g b) :
+    example (hfa : fn_ub f a) (hgb : fn_ub g b) :
       fn_ub (λ x, f x + g x) (a + b) :=
     begin
       intro x,
@@ -220,13 +225,16 @@ Try carrying out similar proofs of these:
     variables (f g : ℝ → ℝ) (a b : ℝ)
 
     -- BEGIN
-    example (hfa : fn_lb f a) (hgb : fn_lb g b) : fn_lb (λ x, f x + g x) (a + b) :=
+    example (hfa : fn_lb f a) (hgb : fn_lb g b) :
+      fn_lb (λ x, f x + g x) (a + b) :=
     sorry
 
-    example (nnf : fn_lb f 0) (nng : fn_lb g 0) : fn_lb (λ x, f x * g x) 0 :=
+    example (nnf : fn_lb f 0) (nng : fn_lb g 0) :
+      fn_lb (λ x, f x * g x) 0 :=
     sorry
 
-    example (hfa : fn_ub f a) (hfb : fn_ub g b) (nng : fn_lb g 0) (nna : 0 ≤ a) :
+    example (hfa : fn_ub f a) (hfb : fn_ub g b)
+        (nng : fn_lb g 0) (nna : 0 ≤ a) :
       fn_ub (λ x, f x * g x) (a * b) :=
     sorry
     -- END
@@ -253,7 +261,8 @@ it will apply in all these instances.
 
     def fn_ub (f : α → R) (a : R) : Prop := ∀ x, f x ≤ a
 
-    theorem fn_ub_add (f g : α → R) (a b : R) (hfa : fn_ub f a) (hgb : fn_ub g b) :
+    theorem fn_ub_add {f g : α → R} {a b : R}
+        (hfa : fn_ub f a) (hgb : fn_ub g b) :
       fn_ub (λ x, f x + g x) (a + b) :=
     λ x, add_le_add (hfa x) (hgb x)
 
@@ -271,7 +280,8 @@ which says that a function is nondecreasing in its arguments:
     import data.real.basic
 
     -- BEGIN
-    example (f : ℝ → ℝ) (h : monotone f) : ∀ {a b}, a ≤ b → f a ≤ f b := h
+    example (f : ℝ → ℝ) (h : monotone f) :
+      ∀ {a b}, a ≤ b → f a ≤ f b := h
     -- END
 
 Proving statements about monotonicity
@@ -291,7 +301,8 @@ as new subgoals.
     variables (f g : ℝ → ℝ)
 
     -- BEGIN
-    example (mf : monotone f) (mg : monotone g) : monotone (λ x, f x + g x) :=
+    example (mf : monotone f) (mg : monotone g) :
+      monotone (λ x, f x + g x) :=
     begin
       intros a b aleb,
       apply add_le_add,
@@ -312,7 +323,8 @@ and the remaining term consists of applications.
     variables (f g : ℝ → ℝ)
 
     -- BEGIN
-    example (mf : monotone f) (mg : monotone g) : monotone (λ x, f x + g x) :=
+    example (mf : monotone f) (mg : monotone g) :
+      monotone (λ x, f x + g x) :=
     λ a b aleb, add_le_add (mf aleb) (mg aleb)
     -- END
 
@@ -336,10 +348,12 @@ Try proving these, with either tactics or proof terms:
     variables (f g : ℝ → ℝ)
 
     -- BEGIN
-    example {c : ℝ} (mf : monotone f) (nnc : 0 ≤ c) : monotone (λ x, c * f x) :=
+    example {c : ℝ} (mf : monotone f) (nnc : 0 ≤ c) :
+      monotone (λ x, c * f x) :=
     sorry
 
-    example (mf : monotone f) (mg : monotone g) : monotone (λ x, f (g x)) :=
+    example (mf : monotone f) (mg : monotone g) :
+      monotone (λ x, f (g x)) :=
     sorry
     -- END
 
@@ -463,13 +477,16 @@ Finally, show that the composition of two injective functions is injective:
 
     open function
 
+    -- BEGIN
     variables {α : Type*} {β : Type*} {γ : Type*}
     variables {g : β → γ} {f : α → β}
 
-    example (injg : injective g) (injf : injective f) : injective (λ x, g (f x)) :=
+    example (injg : injective g) (injf : injective f) :
+      injective (λ x, g (f x)) :=
     begin
       intros x₁ x₂ h,
       apply injf,
       apply injg,
       apply h
     end
+    -- END
