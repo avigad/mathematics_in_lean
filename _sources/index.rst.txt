@@ -9,6 +9,7 @@ Mathematics in Lean
 
    introduction
    basic_skills
+   logic
 
 
 .. Indices and tables

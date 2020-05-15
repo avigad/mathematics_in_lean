@@ -974,7 +974,8 @@ In the first example, applying ``le_trans``
 creates two goals,
 and we use the curly braces to enclose the proof
 of the first one.
-In the fourth example and in the last example, we avoid going into tactic mode entirely:
+In the fourth example and in the last example,
+we avoid going into tactic mode entirely:
 ``le_trans h₀ h₁`` and ``le_refl x`` are the proof terms we need.
 
 Here are a few more library theorems:
