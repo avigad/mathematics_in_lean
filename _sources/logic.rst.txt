@@ -239,7 +239,7 @@ Try carrying out similar proofs of these:
     sorry
     -- END
 
-Even though we have defined ``fn_lb`` and ``gn_lb`` for functions
+Even though we have defined ``fn_ub`` and ``fn_lb`` for functions
 from the reals to the reals,
 you should recognize that the definitions and proofs are much
 more general.
