@@ -490,3 +490,389 @@ Finally, show that the composition of two injective functions is injective:
       apply h
     end
     -- END
+
+
+.. _the_existential_quantifier:
+
+The Existential Quantifier
+--------------------------
+
+.. TODO: add section reference for "and"
+
+The existential quantifier, which can be entered as ``\ex`` in VS Code,
+is used to represent the phrase "there exists."
+The formal expression ``∃ x : ℝ, 2 < x ∧ x < 3`` in Lean says
+that there is a real number between 2 and 3.
+(We will discuss the conjunction symbol, ``∧``, below.)
+The canonical way to prove such a statement is to exhibit a real number
+and show that it has the stated property.
+The number 2.5, which we can enter as ``5 / 2``
+or ``(5 : ℝ) / 2`` when Lean cannot infer from context that we have
+the real numbers in mind, has the required property,
+and the ``norm_num`` tactic can prove that it meets the description.
+
+There are a few ways we can put the information together.
+Given a goal that begins with an existential quantifier,
+the ``use`` tactic is used to provide the object,
+leaving the goal of proving the property.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
+    begin
+      use 5 / 2,
+      norm_num
+    end
+
+Alternatively, we can use Lean's *anonyomous constructor* notation
+to construct the proof.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
+    begin
+      have h : 2 < (5 : ℝ) / 2 ∧ (5 : ℝ) / 2 < 3,
+        by norm_num,
+      exact ⟨5 / 2, h⟩
+    end
+
+The left and right brackets,
+which can be entered as ``\<`` and ``\>`` respectively,
+tell Lean to put together the given data using
+whatever construction is appropriate
+for the current goal.
+We can use the notation without going into tactic mode:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
+    ⟨5 / 2, by norm_num⟩
+
+So now we know how to *prove* an exists statement.
+But how do we *use* one?
+If we know that there exists an object with a certain property,
+we should be able to give a name to an arbitrary one
+and reason about it.
+For example, remember the predicates ``fn_ub f a`` and ``fn_lb f a``
+from the last section,
+which say that ``a`` is an upper bound or lower bound on ``f``,
+respectively.
+We can use the existential quantifier to say that "``f`` if bounded"
+without specifying the bound:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
+    def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
+
+    def fn_has_ub (f : ℝ → ℝ) := ∃ a, fn_ub f a
+    def fn_has_lb (f : ℝ → ℝ) := ∃ a, fn_lb f a
+
+We can use the theorem ``fn_ub_add`` from the last section
+to prove that if ``f`` and ``g`` have upper bounds,
+then so does ``λ x, f x + g x``.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
+    def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
+
+    def fn_has_ub (f : ℝ → ℝ) := ∃ a, fn_ub f a
+    def fn_has_lb (f : ℝ → ℝ) := ∃ a, fn_lb f a
+
+    theorem fn_ub_add {f g : ℝ → ℝ} {a b : ℝ}
+        (hfa : fn_ub f a) (hgb : fn_ub g b) :
+      fn_ub (λ x, f x + g x) (a + b) :=
+    λ x, add_le_add (hfa x) (hgb x)
+
+    variables {f g : ℝ → ℝ}
+
+    -- BEGIN
+    example (ubf : fn_has_ub f) (ubg : fn_has_ub g) :
+      fn_has_ub (λ x, f x + g x) :=
+    begin
+      cases ubf with a ubfa,
+      cases ubg with b ubfb,
+      use a + b,
+      apply fn_ub_add ubfa ubfb
+    end
+    -- END
+
+The ``cases`` tactic unpacks the information
+in the existential quantifier.
+Given the hypothesis ``ubf`` that there is an upper bound
+for ``f``,
+``cases`` adds a new variable for an upper
+bound to the context,
+together with the hypothesis that it has the given property.
+The ``with`` clause allows us to specify the names
+we want Lean to use.
+The goal is left unchanged;
+what *has* changed is that we can now use
+the new object and the new hypothesis
+to prove the goal.
+This is a common pattern in mathematics:
+we unpack objects whose existence is asserted or implied
+by some hypothesis, and then use it to establish the existence
+of something else.
+
+Try using this pattern to establish the following.
+You might find it useful to turn some of the examples
+from the last section into named theorems,
+as we did with ``fn_ub_add``,
+or you can insert the arguments directly
+into the proofs.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
+    def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
+
+    def fn_has_ub (f : ℝ → ℝ) := ∃ a, fn_ub f a
+    def fn_has_lb (f : ℝ → ℝ) := ∃ a, fn_lb f a
+
+    variables {f g : ℝ → ℝ}
+
+    -- BEGIN
+    example (lbf : fn_has_lb f) (lbg : fn_has_lb g) :
+      fn_has_lb (λ x, f x + g x) :=
+    sorry
+
+    example {c : ℝ} (ubf : fn_has_ub f) (h : c ≥ 0):
+      fn_has_ub (λ x, c * f x) :=
+    sorry
+    -- END
+
+The task of unpacking information in a hypothesis is
+so important that Lean and mathlib provide a number of
+ways to do it.
+A cousin of the ``cases`` tactic, ``rcases``, is more
+flexible in that it allows us to unpack nested data.
+(The "r" stands for "recursive.")
+In the ``with`` clause for unpacking an existential quantifier,
+we name the object and the hypothesis by presenting
+them as a pattern ``⟨a, h⟩`` that ``rcases`` then tries to match.
+The ``rintro`` tactic (which can also be written ``rintros``)
+is a combination of ``intros`` and ``rcases``.
+These examples illustrate their use:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
+    def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
+
+    def fn_has_ub (f : ℝ → ℝ) := ∃ a, fn_ub f a
+    def fn_has_lb (f : ℝ → ℝ) := ∃ a, fn_lb f a
+
+    variables {f g : ℝ → ℝ}
+
+    theorem fn_ub_add {f g : ℝ → ℝ} {a b : ℝ}
+        (hfa : fn_ub f a) (hgb : fn_ub g b) :
+        fn_ub (λ x, f x + g x) (a + b) :=
+    λ x, add_le_add (hfa x) (hgb x)
+
+    -- BEGIN
+    example (ubf : fn_has_ub f) (ubg : fn_has_ub g) :
+      fn_has_ub (λ x, f x + g x) :=
+    begin
+      rcases ubf with ⟨a, ubfa⟩,
+      rcases ubg with ⟨b, ubfb⟩,
+      exact ⟨a + b, fn_ub_add ubfa ubfb⟩
+    end
+
+    example : fn_has_ub f → fn_has_ub g →
+      fn_has_ub (λ x, f x + g x) :=
+    begin
+      rintros ⟨a, ubfa⟩ ⟨b, ubfb⟩,
+      exact ⟨a + b, fn_ub_add ubfa ubfb⟩
+    end
+    -- END
+
+In fact, Lean also supports a pattern-matching lambda
+in expressions and proof terms:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
+    def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
+
+    def fn_has_ub (f : ℝ → ℝ) := ∃ a, fn_ub f a
+    def fn_has_lb (f : ℝ → ℝ) := ∃ a, fn_lb f a
+
+    variables {f g : ℝ → ℝ}
+
+    theorem fn_ub_add {f g : ℝ → ℝ} {a b : ℝ}
+        (hfa : fn_ub f a) (hgb : fn_ub g b) :
+        fn_ub (λ x, f x + g x) (a + b) :=
+    λ x, add_le_add (hfa x) (hgb x)
+
+    -- BEGIN
+    example : fn_has_ub f → fn_has_ub g →
+      fn_has_ub (λ x, f x + g x) :=
+    λ ⟨a, ubfa⟩ ⟨b, ubfb⟩, ⟨a + b, fn_ub_add ubfa ubfb⟩
+    -- END
+
+These are power-user moves, and there is no harm
+in favoring the use of ``cases`` until you are more comfortable
+with the existential quantifier.
+But we will come to learn that all of these tools,
+including ``cases``, use, and the anonymous constructors,
+are like Swiss army knives when it comes to theorem proving.
+They can be used for a wide range of purposes,
+not just for unpacking exists statements.
+
+To illustrate one way that ``rcases`` can be used,
+we prove an old mathematical chestnut:
+if two integers ``x`` and ``y`` can each be written as
+a sum of two squares,
+then so can their product, ``x * y``.
+In fact, the statement is true for any commutative
+ring, not just the integers.
+In the next example, ``rcases`` unpacks two existential
+quantifiers at once.
+We then provide the magic values needed to express ``x * y``
+as a sum of squares as a list to the ``use`` statement,
+and we use ``ring`` to verify that they work.
+
+.. code-block:: lean
+
+    import tactic
+
+    variables {α : Type*} [comm_ring α]
+
+    def sos (x : α) := ∃ a b, x = a^2 + b^2
+
+    theorem sos_mul {x y : α} (sosx : sos x) (sosy : sos y) : sos (x * y) :=
+    begin
+      rcases sosx with ⟨a, b, xeq⟩,
+      rcases sosy with ⟨c, d, yeq⟩,
+      use [a*c - b*d, a*d + b*c],
+      rw [xeq, yeq], ring
+    end
+
+As with the universal quantifier,
+you can find existential quantifiers hidden all over
+if you know how to spot them.
+For example, divisibility is implicitly an "exists" statement.
+
+.. code-block:: lean
+
+    import tactic
+
+    variables {a b c : ℕ}
+
+    -- BEGIN
+    example (divab : a ∣ b) (divbc : b ∣ c) : a ∣ c :=
+    begin
+      cases divab with d beq,
+      cases divbc with e ceq,
+      rw [ceq, beq],
+      use (d * e), ring
+    end
+    -- END
+
+Try proving the following:
+
+.. code-block:: lean
+
+    import tactic
+
+    variables {a b c : ℕ}
+
+    -- BEGIN
+    example (divab : a ∣ b) (divac : a ∣ c) : a ∣ (b + c) :=
+    sorry
+    -- END
+
+For another important example, a function :math:`f : \alpha \to \beta`
+is said to be *surjective* if for every :math:`y` in the
+codomain, :math:`\beta`,
+there is an :math:`x` in the domain, :math:`\alpha`,
+such that :math:`f(x) = y`.
+Notice that this statement includes both a universal
+and an existential quantifier, which explains
+why the next example makes use of both ``intro`` and ``use``.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    open function
+
+    -- BEGIN
+    example {c : ℝ} : surjective (λ x, x + c) :=
+    begin
+      intro x,
+      use x - c,
+      dsimp, ring
+    end
+    -- END
+
+Try this example yourself:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    open function
+
+    -- BEGIN
+    example {c : ℝ} (h : c ≠ 0) : surjective (λ x, c * x) :=
+    sorry
+    -- END
+
+You can use the theorem ``div_mul_cancel``.
+The next example uses a surjectivity hypothesis
+by applying it to a suitable value.
+Note that you can use ``cases`` with any expression,
+not just a hypothesis.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    open function
+
+    -- BEGIN
+    example {f : ℝ → ℝ} (h : surjective f) : ∃ x, (f x)^2 = 4 :=
+    begin
+      cases h 2 with x hx,
+      use x,
+      rw hx,
+      norm_num
+    end
+    -- END
+
+See if you can use these methods to show that
+the composition of surjective functions is surjective.
+
+.. code-block:: lean
+
+    import tactic
+
+    open function
+
+    variables {α : Type*} {β : Type*} {γ : Type*}
+    variables {g : β → γ} {f : α → β}
+
+    -- BEGIN
+    example (surjg : surjective g) (surjf : surjective f) :
+      surjective (λ x, g (f x)) :=
+    sorry
+    -- END
