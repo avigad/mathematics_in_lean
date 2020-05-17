@@ -744,8 +744,8 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 allows us to prove an equation between two expressions
 by reconciling the parts that are different:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0A--%20BEGIN%0Aexample%20(a%20b%20%3A%20%E2%84%9D)%20%3A%20abs%20a%20%3D%20abs%20(a%20%2B%20b%20-%20b)%20%3A%3D%0Aby%20%20%7B%20congr%2C%20ring%20%7D%0A--%20END" target="_blank" tryitfile="../examples/logic/unnamed_938.lean">
-try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">abs</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0A--%20BEGIN%0Aexample%20(a%20b%20%3A%20%E2%84%9D)%20%3A%20abs%20a%20%3D%20abs%20(a%20-%20b%20%2B%20b)%20%3A%3D%0Aby%20%20%7B%20congr%2C%20ring%20%7D%0A--%20END" target="_blank" tryitfile="../examples/logic/unnamed_938.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">abs</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">by</span>  <span class="o">{</span> <span class="n">congr</span><span class="o">,</span> <span class="n">ring</span> <span class="o">}</span>
 </pre></div>
 </div>
@@ -842,7 +842,7 @@ then <code class="docutils literal notranslate"><span class="pre">&#955;</span> 
 It is helpful to split into cases depending on whether <code class="docutils literal notranslate"><span class="pre">c</span></code>
 is equal to zero or not.
 Since we have not shown you how to do that yet,
-we have taken care of that case first,
+we have taken care of the zero case first,
 and we have left you to prove the result with
 the extra assumption that <code class="docutils literal notranslate"><span class="pre">c</span></code> is nonzero.</p>
 <div style="position: relative">

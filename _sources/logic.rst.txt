@@ -940,7 +940,7 @@ by reconciling the parts that are different:
     import data.real.basic
 
     -- BEGIN
-    example (a b : ℝ) : abs a = abs (a + b - b) :=
+    example (a b : ℝ) : abs a = abs (a - b + b) :=
     by  { congr, ring }
     -- END
 
@@ -1060,7 +1060,7 @@ then ``λ n, c * s n`` converges to ``c * a``.
 It is helpful to split into cases depending on whether ``c``
 is equal to zero or not.
 Since we have not shown you how to do that yet,
-we have taken care of that case first,
+we have taken care of the zero case first,
 and we have left you to prove the result with
 the extra assumption that ``c`` is nonzero.
 
