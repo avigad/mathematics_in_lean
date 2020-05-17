@@ -533,12 +533,14 @@ to construct the proof.
 
     import data.real.basic
 
+    -- BEGIN
     example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
     begin
       have h : 2 < (5 : ℝ) / 2 ∧ (5 : ℝ) / 2 < 3,
         by norm_num,
       exact ⟨5 / 2, h⟩
     end
+    -- END
 
 The left and right brackets,
 which can be entered as ``\<`` and ``\>`` respectively,
@@ -551,8 +553,10 @@ We can use the notation without going into tactic mode:
 
     import data.real.basic
 
+    -- BEGIN
     example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
     ⟨5 / 2, by norm_num⟩
+    -- END
 
 So now we know how to *prove* an exists statement.
 But how do we *use* one?
@@ -570,11 +574,13 @@ without specifying the bound:
 
     import data.real.basic
 
+    -- BEGIN
     def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
     def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
 
     def fn_has_ub (f : ℝ → ℝ) := ∃ a, fn_ub f a
     def fn_has_lb (f : ℝ → ℝ) := ∃ a, fn_lb f a
+    -- END
 
 We can use the theorem ``fn_ub_add`` from the last section
 to prove that if ``f`` and ``g`` have upper bounds,
@@ -1192,7 +1198,8 @@ The following proof finishes it off.
 
 We close the section with the observation that our proofs can be generalized.
 For example, the only properties that we have used of the
-natural numbers is that it carries a partial order with ``min`` and ``max``.
+natural numbers is that their structure carries a partial order
+with ``min`` and ``max``.
 You can check that everything still works if you replace ``ℕ``
 everywhere by any linear order ``α``:
 
