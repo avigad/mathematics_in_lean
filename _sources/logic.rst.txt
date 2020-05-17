@@ -876,3 +876,341 @@ the composition of surjective functions is surjective.
       surjective (λ x, g (f x)) :=
     sorry
     -- END
+
+
+.. _sequences_and_convergence:
+
+Sequences and Convergence
+-------------------------
+
+We now have enough skills at our disposal to do some real mathematics.
+In Lean, we can represent a sequence :math:`s_0, s_1, s_2, \ldots` of
+real numbers as a function ``s : ℕ → ℝ``.
+Such a sequence is said to *converge* to a number :math:`a` if for every
+:math:`\varepsilon > 0` there is a point beyond which the sequence
+remains within :math:`\varepsilon` of :math:`a`,
+that is, there is a number :math:`N` such that for every
+:math:`n \ge N`, :math:`| s_n - a | < \varepsilon`.
+In Lean, we can render this as follows:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    def converges_to (s : ℕ → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    -- END
+
+In this section, we'll establish some properties of convergence.
+
+But first, we will discuss three tactics for working equality
+that will prove useful.
+The first, the ``ext`` tactic,
+gives us a way of proving that two functions are equal.
+Let :math:`f(x) = x + 1` and :math:`g(x) = 1 + x`
+be functions from reals to reals.
+Then, of course, :math:`f = g`, because they return the same
+value for every :math:`x`.
+The ``ext`` tactic enables us to prove an equation between functions
+by proving that their values are the same
+at all the values of their arguments.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    example : (λ x y : ℝ, (x + y)^2) = (λ x y : ℝ, x^2 + 2*x*y + y^2) :=
+    by { ext, ring }
+    -- END
+
+The second tactic, the ``congr`` tactic,
+allows us to prove an equation between two expressions
+by reconciling the parts that are different:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    example (a b : ℝ) : abs a = abs (a + b - b) :=
+    by  { congr, ring }
+    -- END
+
+Here the ``congr`` tactic peels off the ``abs`` on each side,
+leaving us to prove ``a = a - b + b``.
+
+Finally, the ``convert`` tactic is used to apply a theorem
+to a goal when the conclusion of the theorem doesn't quite match.
+For example, suppose we want to prove ``a < a * a`` from ``1 < a``.
+A theorem in the library, ``mul_lt_mul_right``,
+will let us prove ``1 * a < a * a``.
+One possibility is to work backwards and rewrite the goal
+so that it has that form.
+Instead, the ``convert`` tactic lets us apply the theorem
+as it is,
+and leaves us with the task of proving the equations that
+are needed to make the goal match.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    example {a : ℝ} (h : 1 < a) : a < a * a :=
+    begin
+      convert (mul_lt_mul_right _).2 h,
+      { rw [one_mul] },
+      exact lt_trans zero_lt_one h
+    end
+    -- END
+
+This example illustrates another useful trick: when we apply an
+expression with an underscore
+and Lean can't fill it in for us automatically,
+it simply leaves it for us as another goal.
+
+The following shows that any constant sequence :math:`a, a, a, \ldots`
+converges.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def converges_to (s : ℕ → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+
+    variable (a : ℝ)
+
+    -- BEGIN
+    theorem converges_to_const : converges_to (λ x : ℕ, a) a :=
+    begin
+      intros ε εpos,
+      use 0,
+      intros n nge, dsimp,
+      rw [sub_self, abs_zero],
+      apply εpos
+    end
+    -- END
+
+For a more interesting theorem, let's show that if ``s``
+converges to ``a`` and ``t`` converges to ``b``, then
+``λ n, s n + t n`` converges to ``a + b``.
+It is helpful to have a clear pen-and-paper
+proof in mind before you start writing a formal one.
+Given ``ε`` greater than ``0``,
+the idea is to use the hypotheses to obtain an ``Ns``
+such that beyond that point, ``s`` is within ``ε / 2``
+of ``a``,
+and an ``Nt`` such that beyond that point, ``t`` is within
+``ε / 2`` of ``b``.
+Then, whenever ``n`` is greater than or equal to the
+maximum of ``Ns`` and ``Nt``,
+the sequence ``λ n, s n + t n`` should be within ``ε``
+of ``a + b``.
+The following example begins to implement this strategy.
+See if you can finish it off.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def converges_to (s : ℕ → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+
+    -- BEGIN
+    variables {s t : ℕ → ℝ} {a b : ℝ}
+
+    theorem converges_to_add
+      (cs : converges_to s a) (ct : converges_to t b):
+    converges_to (λ n, s n + t n) (a + b) :=
+    begin
+      intros ε εpos, dsimp,
+      have ε2pos : 0 < ε / 2,
+      { linarith },
+      cases cs (ε / 2) ε2pos with Ns hs,
+      cases ct (ε / 2) ε2pos with Nt ht,
+      use max Ns Nt,
+      sorry
+    end
+    -- END
+
+For hints, you can use ``le_of_max_le_left`` and ``le_of_max_le_right``,
+and ``norm_num`` can prove ``ε / 2 + ε / 2 = ε``.
+Also, it is helpful to use the ``congr`` tactic to
+show that ``abs (s n + t n - (a + b))`` is equal to
+``abs ((s n - a) + (t n - b)),``
+since then you can use the triangle inequality.
+Notice that we marked all the variables ``s``, ``t``, ``a``, and ``b``
+implicit because they can be inferred from the hypotheses.
+
+Proving the same theorem with multiplication in place
+of addition is tricky.
+We will get there by proving some auxiliary statements first.
+See if you can also finish off the next proof,
+which shows that if ``s`` converges to ``a``,
+then ``λ n, c * s n`` converges to ``c * a``.
+It is helpful to split into cases depending on whether ``c``
+is equal to zero or not.
+Since we have not shown you how to do that yet,
+we have taken care of that case first,
+and we have left you to prove the result with
+the extra assumption that ``c`` is nonzero.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def converges_to (s : ℕ → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+
+    theorem converges_to_const (a : ℝ) : converges_to (λ x : ℕ, a) a :=
+    sorry
+
+    variables {s : ℕ → ℝ} {a : ℝ}
+
+    -- BEGIN
+    theorem converges_to_mul_const
+      {c : ℝ} (cs : converges_to s a) :
+    converges_to (λ n, c * s n) (c * a) :=
+    begin
+      by_cases h : c = 0,
+      { convert converges_to_const 0,
+        { ext, rw [h, zero_mul] },
+        rw [h, zero_mul] },
+      have acpos : 0 < abs c,
+        from abs_pos_of_ne_zero h,
+      sorry
+    end
+    -- END
+
+The next theorem is also independently interesting:
+it shows that a convergent sequence is eventually bounded
+in absolute value.
+We have started you off; see if you can finish it.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def converges_to (s : ℕ → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+
+    variables {s : ℕ → ℝ} {a : ℝ}
+
+    -- BEGIN
+    theorem exists_abs_le_of_converges_to (cs : converges_to s a) :
+      ∃ N b, ∀ n, N ≤ n → abs (s n) < b :=
+    begin
+      cases cs 1 zero_lt_one with N h,
+      use [N, abs a + 1],
+      sorry
+    end
+    -- END
+
+The next lemma is auxiliary: we prove that if
+``s`` converges to ``a`` and ``t`` converges to ``0``,
+then ``λ n, s n * t n`` converges to ``0``.
+To do so, we use the previous theorem to find a ``B``
+on ``s`` beyond some point ``N₀``.
+See if you can understand the strategy we have outlined
+and finish the proof.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def converges_to (s : ℕ → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+
+    variables {s t : ℕ → ℝ} {a : ℝ}
+
+    theorem exists_abs_le_of_converges_to (cs : converges_to s a) :
+      ∃ N b, ∀ n, N ≤ n → abs (s n) < b :=
+    sorry
+
+    -- BEGIN
+    lemma aux (cs : converges_to s a) (ct : converges_to t 0) :
+      converges_to (λ n, s n * t n) 0 :=
+    begin
+      intros ε εpos, dsimp,
+      rcases exists_abs_le_of_converges_to cs with ⟨N₀, B, h₀⟩,
+      have Bpos : 0 < B,
+        from lt_of_le_of_lt (abs_nonneg _) (h₀ N₀ (le_refl _)),
+      have pos₀ : ε / B > 0,
+        from div_pos εpos Bpos,
+      cases ct _ pos₀ with N₁ h₁,
+      sorry
+    end
+    -- END
+
+If you have made it this far, congratulations!
+We are now within striking distance of our theorem.
+The following proof finishes it off.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    def converges_to (s : ℕ → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+
+    theorem converges_to_const (a : ℝ) : converges_to (λ x : ℕ, a) a :=
+    sorry
+
+    variables {s t : ℕ → ℝ} {a b : ℝ}
+
+    theorem converges_to_add
+      (cs : converges_to s a) (ct : converges_to t b):
+    converges_to (λ n, s n + t n) (a + b) :=
+    sorry
+
+    theorem converges_to_mul_const
+      (c : ℝ) (cs : converges_to s a) :
+    converges_to (λ n, c * s n) (c * a) :=
+    sorry
+
+    lemma aux (cs : converges_to s a) (ct : converges_to t 0) :
+      converges_to (λ n, s n * t n) 0 :=
+    sorry
+
+    -- BEGIN
+    theorem converges_to_mul
+      (cs : converges_to s a) (ct : converges_to t b):
+    converges_to (λ n, s n * t n) (a * b) :=
+    begin
+      have h₁ : converges_to (λ n, s n * (t n - b)) 0,
+      { apply aux cs,
+        convert converges_to_add ct (converges_to_const (-b)),
+        ring },
+      convert (converges_to_add h₁ (converges_to_mul_const b cs)),
+      { ext, ring },
+      ring
+    end
+    -- END
+
+We close the section with the observation that our proofs can be generalized.
+For example, the only properties that we have used of the
+natural numbers is that it carries a partial order with ``min`` and ``max``.
+You can check that everything still works if you replace ``ℕ``
+everywhere by any linear order ``α``:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    variables {α : Type*} [linear_order α]
+
+    def converges_to (s : α → ℝ) (a : ℝ) :=
+    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    -- END
+
+.. TODO: reference to later chapter
+
+In a later chapter, we will see that mathlib has mechanisms
+for dealing with convergence in vastly more general terms,
+not only abstracting away particular features of the domain
+and codomain,
+but also abstracting over different *modes* of convergence.
