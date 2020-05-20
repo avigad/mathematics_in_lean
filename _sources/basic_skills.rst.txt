@@ -270,7 +270,7 @@ to determine the type of an expression:
 The ``#check`` command works for both objects and facts.
 In response to the command ``#check a``, Lean reports that ``a`` has type ``ℝ``.
 In response to the command ``#check mul_comm a b``,
-Lean reports that ``mul_comm a b`` is a proof of the fact ``a + b = b + a``.
+Lean reports that ``mul_comm a b`` is a proof of the fact ``a * b = b * a``.
 The command ``#check (a : ℝ)`` states our expectation that the
 type of ``a`` is ``ℝ``,
 and Lean will raise an error if that is not the case.
