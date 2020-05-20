@@ -1,7 +1,7 @@
 import data.real.basic
 
 def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 
 -- BEGIN
 variables {s t : ℕ → ℝ} {a b : ℝ}

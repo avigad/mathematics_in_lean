@@ -14,7 +14,7 @@ In this chapter, we show you how to work with statements
 that are built up in this way.
 
 
-.. _using_implication_and_the_universal_quantifier:
+.. _implication_and_the_universal_quantifier:
 
 Implication and the Universal Quantifier
 ----------------------------------------
@@ -34,8 +34,12 @@ In words, we would say "for every ``x``, ``y``, and ``ε``,
 if ``0 < ε ≤ 1``, the absolute value of ``x`` is less than ``ε``,
 and the absolute value of ``y`` is less than ``ε``,
 then the absolute value of ``x * y`` is less than ``ε``."
-In Lean, the implication arrows associate to the right,
-making it easy to chain implications in this way.
+In Lean, in a sequence of implications there are
+implicit parentheses grouped to the right.
+So the expression above means
+"if ``0 < ε`` then if ε ≤ 1 then if ``abs x < ε`` ..."
+As a result, the expression says that all the
+assumptions together imply the conclusion.
 
 You have already seen that even though the universal quantifier
 in this statement
@@ -112,8 +116,12 @@ Take a look at what it does in this example:
 
 We can use any names we want for the universally quantified variables;
 they do not have to be ``x``, ``y``, and ``ε``.
-(If there is only one variable, you can use the singular ``intro``
-instead of ``intros``.)
+Notice that we have to introduce the variables
+even though they are marked implicit:
+making them implicit means that we leave them out when
+we write an expression,
+but they are still an essential part of the statement
+that we are proving.
 After the ``intros`` command,
 the goal is what it would have been at the start if we
 listed all the variables and hypotheses *before* the colon,
@@ -132,22 +140,26 @@ To help you prove the lemma, we will start you off:
       0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
     begin
       intros x y ε epos ele1 xlt ylt,
-      suffices h : abs x * abs y < 1 * ε,
-      { rw [←abs_mul, one_mul] at h,
-        apply h },
       calc
-        abs x * abs y ≤ abs x * ε : sorry
-        ... < 1 * ε               : sorry
+        abs (x * y) = abs x * abs y : sorry
+        ... ≤ abs x * ε             : sorry
+        ... < 1 * ε                 : sorry
+        ... = ε                     : sorry
     end
     -- END
 
-We have introduced another new tactic here:
-``suffices`` works like ``have`` in reverse,
-asking you to prove the goal using the
-stated fact,
-and then leaving you the new goal of proving that fact.
-Finish the proof using the theorems ``mul_le_mul``,
-``abs_nonneg``, and ``mul_lt_mul_right``.
+.. TODO: delete this eventually, but remember to
+   introduce ``suffices`` eventually
+
+.. We have introduced another new tactic here:
+   ``suffices`` works like ``have`` in reverse,
+   asking you to prove the goal using the
+   stated fact,
+   and then leaving you the new goal of proving that fact.
+
+Finish the proof using the theorems
+``abs_mul``, ``mul_le_mul``, ``abs_nonneg``,
+``mul_lt_mul_right``, and ``one_mul``.
 Remember that you can find theorems like these using
 tab completion.
 Remember also that you can use ``.mp`` and ``.mpr``
@@ -210,6 +222,11 @@ Lean would have to perform that contraction anyhow to make
 sense of the next ``apply``.
 The ``dsimp`` command simply makes the goal more readable
 and helps us figure out what to do next.
+Another option is to use the ``change`` tactic
+by writing ``change f x + g x ≤ a + b``.
+This helps make the proof more readable,
+and gives you more control over how the goal is transformed.
+
 The rest of the proof is routine.
 The last two ``apply`` commands force Lean to unfold the definitions
 of ``fn_ub`` in the hypotheses.
@@ -266,6 +283,9 @@ it will apply in all these instances.
       fn_ub (λ x, f x + g x) (a + b) :=
     λ x, add_le_add (hfa x) (hgb x)
 
+You have already seen square brackets like these in
+Section :numref:`proving_identities_in_algebraic_structures`,
+though we still haven't explained what they mean.
 For concreteness, we will stick to the real numbers
 for most of our examples,
 but it is worth knowing that mathlib contains definitions and theorems
@@ -377,7 +397,12 @@ You can complete the proofs of the others.
     def odd (f : ℝ → ℝ) : Prop := ∀ x, f x = - f (-x)
 
     example (ef : even f) (eg : even g) : even (λ x, f x + g x) :=
-    by { intro x, dsimp, rw [ef, eg] }
+    begin
+      intro x,
+      calc
+        (λ x, f x + g x) x = f x + g x       : rfl
+                       ... = f (-x) + g (-x) : by rw [ef, eg]
+    end
 
     example (of : odd f) (og : odd g) : even (λ x, f x * g x) :=
     sorry
@@ -389,7 +414,14 @@ You can complete the proofs of the others.
     sorry
     -- END
 
-You can find implicit universal quantifiers are all over the place,
+The first proof can be shortened using ``dsimp`` or ``change``
+to get rid of the lambda.
+But you can check that the subsequent ``rw`` won't work
+unless we get rid of the lambda explicitly,
+because otherwise it cannot find the patterns ``f x`` and ``g x``
+in the expression.
+
+You can find implicit universal quantifiers all over the place,
 once you know how to spot them.
 Mathlib includes a good library for rudimentary set theory.
 Lean's logical foundation imposes the restriction that when
@@ -762,15 +794,46 @@ and we use ``ring`` to verify that they work.
 
     variables {α : Type*} [comm_ring α]
 
-    def sos (x : α) := ∃ a b, x = a^2 + b^2
+    def sum_of_squares (x : α) := ∃ a b, x = a^2 + b^2
 
-    theorem sos_mul {x y : α} (sosx : sos x) (sosy : sos y) : sos (x * y) :=
+    theorem sum_of_squares_mul {x y : α}
+        (sosx : sum_of_squares x) (sosy : sum_of_squares y) :
+      sum_of_squares (x * y) :=
     begin
       rcases sosx with ⟨a, b, xeq⟩,
       rcases sosy with ⟨c, d, yeq⟩,
+      rw [xeq, yeq],
       use [a*c - b*d, a*d + b*c],
-      rw [xeq, yeq], ring
+      ring
     end
+
+This pattern of unpacking an equation inside a existential quantifier
+and then using it to rewrite an expression in the goal
+come up often,
+so much so that the ``rcases`` tactic provides
+an abbreviation:
+if you use the keyword ``rfl`` in place of a new identifier,
+``rcases`` does the rewriting automatically.
+
+.. code-block:: lean
+
+    import tactic
+
+    variables {α : Type*} [comm_ring α]
+
+    def sum_of_squares (x : α) := ∃ a b, x = a^2 + b^2
+
+    -- BEGIN
+    theorem sum_of_squares_mul {x y : α}
+        (sosx : sum_of_squares x) (sosy : sum_of_squares y) :
+      sum_of_squares (x * y) :=
+    begin
+      rcases sosx with ⟨a, b, rfl⟩,
+      rcases sosy with ⟨c, d, rfl⟩,
+      use [a*c - b*d, a*d + b*c],
+      ring
+    end
+    -- END
 
 As with the universal quantifier,
 you can find existential quantifiers hidden all over
@@ -793,7 +856,12 @@ For example, divisibility is implicitly an "exists" statement.
     end
     -- END
 
-Try proving the following:
+And once again, this provides a nice setting for using
+``rcases`` with ``rfl``.
+Try it out in the proof above.
+It feels pretty good!
+
+Then try proving the following:
 
 .. code-block:: lean
 
@@ -905,11 +973,16 @@ In Lean, we can render this as follows:
 
     -- BEGIN
     def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
     -- END
 
-In this section, we'll establish some properties of convergence.
+The notation ``∀ ε > 0, ...`` is a convenient abbreviation
+for ``∀ ε, ε > 0 → ...``, and, similarly,
+``∀ n ≥ N, ...`` abbreviates ``∀ n, n ≥ N →  ...``.
+And remember that ``ε > 0``, in turn, is defined as ``0 < ε``,
+and ``n ≥ N`` is defined as ``N ≤ n``.
 
+In this section, we'll establish some properties of convergence.
 But first, we will discuss three tactics for working equality
 that will prove useful.
 The first, the ``ext`` tactic,
@@ -985,7 +1058,7 @@ converges.
     import data.real.basic
 
     def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 
     variable (a : ℝ)
 
@@ -999,6 +1072,13 @@ converges.
       apply εpos
     end
     -- END
+
+.. TODO: reference to the simplifier
+
+Lean has a tactic, ``simp``, which can often save you the
+trouble of carrying out steps like ``rw [sub_self, abs_zero]``
+by hand.
+We will tell you more about it soon.
 
 For a more interesting theorem, let's show that if ``s``
 converges to ``a`` and ``t`` converges to ``b``, then
@@ -1023,7 +1103,7 @@ See if you can finish it off.
     import data.real.basic
 
     def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 
     -- BEGIN
     variables {s t : ℕ → ℝ} {a b : ℝ}
@@ -1042,7 +1122,7 @@ See if you can finish it off.
     end
     -- END
 
-For hints, you can use ``le_of_max_le_left`` and ``le_of_max_le_right``,
+As hints, you can use ``le_of_max_le_left`` and ``le_of_max_le_right``,
 and ``norm_num`` can prove ``ε / 2 + ε / 2 = ε``.
 Also, it is helpful to use the ``congr`` tactic to
 show that ``abs (s n + t n - (a + b))`` is equal to
@@ -1069,7 +1149,7 @@ the extra assumption that ``c`` is nonzero.
     import data.real.basic
 
     def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 
     theorem converges_to_const (a : ℝ) : converges_to (λ x : ℕ, a) a :=
     sorry
@@ -1101,7 +1181,7 @@ We have started you off; see if you can finish it.
     import data.real.basic
 
     def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 
     variables {s : ℕ → ℝ} {a : ℝ}
 
@@ -1114,6 +1194,12 @@ We have started you off; see if you can finish it.
       sorry
     end
     -- END
+
+In fact, the theorem could be strengthened to assert
+that there is a bound ``b`` that holds for all values of ``n``.
+But this version is strong enough for our purposes,
+and we will see at the end of this section that it
+holds more generally.
 
 The next lemma is auxiliary: we prove that if
 ``s`` converges to ``a`` and ``t`` converges to ``0``,
@@ -1128,7 +1214,7 @@ and finish the proof.
     import data.real.basic
 
     def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 
     variables {s t : ℕ → ℝ} {a : ℝ}
 
@@ -1160,7 +1246,7 @@ The following proof finishes it off.
     import data.real.basic
 
     def converges_to (s : ℕ → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 
     theorem converges_to_const (a : ℝ) : converges_to (λ x : ℕ, a) a :=
     sorry
@@ -1211,7 +1297,7 @@ everywhere by any linear order ``α``:
     variables {α : Type*} [linear_order α]
 
     def converges_to (s : α → ℝ) (a : ℝ) :=
-    ∀ ε, 0 < ε → ∃ N, ∀ n, N ≤ n → abs (s n - a) < ε
+    ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
     -- END
 
 .. TODO: reference to later chapter
@@ -1220,4 +1306,4 @@ In a later chapter, we will see that mathlib has mechanisms
 for dealing with convergence in vastly more general terms,
 not only abstracting away particular features of the domain
 and codomain,
-but also abstracting over different *modes* of convergence.
+but also abstracting over different types of convergence.
