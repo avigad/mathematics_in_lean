@@ -1,4 +1,4 @@
-variables (R : Type*) [comm_ring R]
+variables (R : Type*) [ring R]
 
 #check (add_assoc : ∀ a b c : R, a + b + c = a + (b + c))
 #check (add_comm : ∀ a b : R, a + b = b + a)

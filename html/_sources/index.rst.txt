@@ -8,7 +8,7 @@ Mathematics in Lean
    :maxdepth: 2
 
    introduction
-   basic_skills
+   basics
    logic
 
 

@@ -1,12 +1,12 @@
-.. _basic_skills:
+.. _basics:
 
-Basic Skills
-============
+Basics
+======
 
 This chapter is designed to introduce you to the nuts and
 bolts of mathematical reasoning in Lean: calculating,
-applying lemmas and theorems, and carrying out proof
-by induction.
+applying lemmas and theorems,
+and reasoning about generic structures.
 
 
 .. _calculating:
@@ -473,7 +473,7 @@ Modulo this difference, we can take the ring axioms to be as follows:
 
 .. code-block:: lean
 
-    variables (R : Type*) [comm_ring R]
+    variables (R : Type*) [ring R]
 
     #check (add_assoc : ∀ a b c : R, a + b + c = a + (b + c))
     #check (add_comm : ∀ a b : R, a + b = b + a)
