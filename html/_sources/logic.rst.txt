@@ -1756,36 +1756,6 @@ three times.
     -- END
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .. _disjunction:
 
 Disjunction
@@ -1999,8 +1969,8 @@ the extra assumption that ``c`` is nonzero.
 
     -- BEGIN
     theorem converges_to_mul_const
-      {c : ℝ} (cs : converges_to s a) :
-    converges_to (λ n, c * s n) (c * a) :=
+        {c : ℝ} (cs : converges_to s a) :
+      converges_to (λ n, c * s n) (c * a) :=
     begin
       by_cases h : c = 0,
       { convert converges_to_const 0,
@@ -2095,13 +2065,13 @@ The following proof finishes it off.
     variables {s t : ℕ → ℝ} {a b : ℝ}
 
     theorem converges_to_add
-      (cs : converges_to s a) (ct : converges_to t b):
-    converges_to (λ n, s n + t n) (a + b) :=
+        (cs : converges_to s a) (ct : converges_to t b):
+      converges_to (λ n, s n + t n) (a + b) :=
     sorry
 
     theorem converges_to_mul_const
-      (c : ℝ) (cs : converges_to s a) :
-    converges_to (λ n, c * s n) (c * a) :=
+        (c : ℝ) (cs : converges_to s a) :
+      converges_to (λ n, c * s n) (c * a) :=
     sorry
 
     lemma aux (cs : converges_to s a) (ct : converges_to t 0) :
@@ -2110,8 +2080,8 @@ The following proof finishes it off.
 
     -- BEGIN
     theorem converges_to_mul
-      (cs : converges_to s a) (ct : converges_to t b):
-    converges_to (λ n, s n * t n) (a * b) :=
+        (cs : converges_to s a) (ct : converges_to t b):
+      converges_to (λ n, s n * t n) (a * b) :=
     begin
       have h₁ : converges_to (λ n, s n * (t n - b)) 0,
       { apply aux cs,

@@ -10,8 +10,8 @@ variables {s : ℕ → ℝ} {a : ℝ}
 
 -- BEGIN
 theorem converges_to_mul_const
-  {c : ℝ} (cs : converges_to s a) :
-converges_to (λ n, c * s n) (c * a) :=
+    {c : ℝ} (cs : converges_to s a) :
+  converges_to (λ n, c * s n) (c * a) :=
 begin
   by_cases h : c = 0,
   { convert converges_to_const 0,

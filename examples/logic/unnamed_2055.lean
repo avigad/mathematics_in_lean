@@ -9,13 +9,13 @@ sorry
 variables {s t : ℕ → ℝ} {a b : ℝ}
 
 theorem converges_to_add
-  (cs : converges_to s a) (ct : converges_to t b):
-converges_to (λ n, s n + t n) (a + b) :=
+    (cs : converges_to s a) (ct : converges_to t b):
+  converges_to (λ n, s n + t n) (a + b) :=
 sorry
 
 theorem converges_to_mul_const
-  (c : ℝ) (cs : converges_to s a) :
-converges_to (λ n, c * s n) (c * a) :=
+    (c : ℝ) (cs : converges_to s a) :
+  converges_to (λ n, c * s n) (c * a) :=
 sorry
 
 lemma aux (cs : converges_to s a) (ct : converges_to t 0) :
@@ -24,8 +24,8 @@ sorry
 
 -- BEGIN
 theorem converges_to_mul
-  (cs : converges_to s a) (ct : converges_to t b):
-converges_to (λ n, s n * t n) (a * b) :=
+    (cs : converges_to s a) (ct : converges_to t b):
+  converges_to (λ n, s n * t n) (a * b) :=
 begin
   have h₁ : converges_to (λ n, s n * (t n - b)) 0,
   { apply aux cs,
