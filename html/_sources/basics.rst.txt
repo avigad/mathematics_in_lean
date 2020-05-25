@@ -1497,8 +1497,7 @@ as well.
 As a hint, you can use the theorem ``add_neg_cancel_right``
 and the ``linarith`` tactic.
 
-For another challenge,
-mathlib's manic naming convention is on proud display
+Lean's naming convention is made manifest
 in the library's name for the triangle inequality:
 
 .. code-block:: lean
@@ -1506,7 +1505,7 @@ in the library's name for the triangle inequality:
     import data.real.basic
 
     -- BEGIN
-    #check (abs_add_le_abs_add_abs : ∀ a b : ℝ, abs (a + b) ≤ abs a + abs b)
+    #check (abs_add : ∀ a b : ℝ, abs (a + b) ≤ abs a + abs b)
     -- END
 
 Use it to prove the following variant:

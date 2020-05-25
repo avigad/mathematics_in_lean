@@ -1761,6 +1761,247 @@ three times.
 Disjunction
 -----------
 
+The canonical way to prove a disjunction ``A ∨ B`` is to prove
+``A`` or to prove ``B``.
+The ``left`` tactic chooses ``A``,
+and the ``right`` tactic chooses ``B``.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    variables {x y : ℝ}
+
+    -- BEGIN
+    example (h : y > x^2) : y > 0 ∨ y < -1 :=
+    by { left, linarith [pow_two_nonneg x] }
+
+    example (h : -y > x^2 + 1) : y > 0 ∨ y < -1 :=
+    by { right, linarith [pow_two_nonneg x] }
+    -- END
+
+We cannot use an anonymous constructor to construct a proof
+of an "or" because Lean would have to guess
+which disjunct we are trying to prove.
+When we write a proof term we can use
+``or.inl`` and ``or.inr`` instead
+to make the choice explicitly.
+Here, ``inl`` is short for "insert left" and
+``inr`` is short for "insert right."
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    variable {y : ℝ}
+
+    -- BEGIN
+    example (h : y > 0) : y > 0 ∨ y < -1 :=
+    or.inl h
+
+    example (h : y < -1) : y > 0 ∨ y < -1 :=
+    or.inr h
+    -- END
+
+It may seem strange to prove a disjunction by proving one side
+or the other.
+In practice, which case holds usually depends a case distinction
+that is implicit or explicit in the assumptions and the data.
+The ``cases`` tactic allows us to make use of a hypothesis
+of the form ``A ∨ B``.
+In contrast to the use of ``cases`` with conjunction or an
+existential quantifier,
+here the ``cases`` tactic produces *two* goals.
+Both have the same conclusion, but in the first case,
+``A`` is assumed to be true,
+and in the second case,
+``B`` is assumed to be true.
+In other words, as the name suggests,
+the ``cases`` tactic carries out a proof by cases.
+As usual, we can tell Lean what names to use for the hypotheses.
+In the next example, we tell Lean
+to use the name ``h`` on each branch.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    variables {x y : ℝ}
+
+    -- BEGIN
+    example : x < abs y → x < y ∨ x < -y :=
+    begin
+      cases le_or_gt 0 y with h h,
+      { rw abs_of_nonneg h,
+        intro h, left, exact h },
+      rw abs_of_neg h,
+      intro h, right, exact h
+    end
+    -- END
+
+The absolute value function is defined in such a way
+that we can immediately prove that
+``x ≥ 0`` implies ``abs x = x``
+(this is the theorem ``abs_of_nonneg``)
+and ``x < 0`` implies ``abs x = -x`` (this is ``abs_of_neg``).
+The expression ``le_or_gt 0 x`` establishes ``0 ≤ x ∨ x < 0``,
+allowing us to split on those two cases.
+Try proving the triangle inequality using the two
+first two theorems in the next snippet.
+They are given the same names they have in mathlib.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    variables {x y : ℝ}
+
+    namespace my_abs
+
+    -- BEGIN
+    theorem le_abs_self : x ≤ abs x :=
+    sorry
+
+    theorem neg_le_abs_self : -x ≤ abs x :=
+    sorry
+
+    theorem abs_add : abs (x + y) ≤ abs x + abs y :=
+    sorry
+    -- END
+
+    end my_abs
+
+In case you enjoyed these (pun intended) and
+you want more practice with disjunction,
+try these.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    variables {x y : ℝ}
+
+    namespace my_abs
+
+    -- BEGIN
+    theorem lt_abs : x < abs y ↔ x < y ∨ x < -y :=
+    sorry
+
+    theorem abs_lt : abs x < y ↔ - y < x ∧ x < y :=
+    sorry
+    -- END
+
+    end my_abs
+
+You can also use ``rcases`` and ``rintros`` with disjunctions.
+When these result in a genuine case split with multiple goals,
+the patterns for each new goal are separated by a vertical bar.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    example {x : ℝ} (h : x ≠ 0) : x < 0 ∨ x > 0 :=
+    begin
+      rcases lt_trichotomy x 0 with xlt | xeq | xgt,
+      { left, exact xlt },
+      { contradiction },
+      right, exact xgt
+    end
+    -- END
+
+You can still nest patterns and use the ``rfl`` keyword
+to substitute equations:
+
+.. code-block:: lean
+
+    import tactic
+
+    -- BEGIN
+    example {m n k : ℕ} (h : m ∣ n ∨ m ∣ k) : m ∣ n * k :=
+    begin
+      rcases h with ⟨a, rfl⟩ | ⟨b, rfl⟩,
+      { rw [mul_assoc],
+        apply dvd_mul_right },
+      rw [mul_comm, mul_assoc],
+      apply dvd_mul_right
+    end
+    -- END
+
+See if you can prove the following with a single (long) line.
+Use ``rcases`` to unpack the hypotheses and split on cases,
+and use a semicolon and ``linarith`` to solve each branch.
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    example {z : ℝ} (h : ∃ x y, z = x^2 + y^2 ∨ z = x^2 + y^2 + 1) :
+      z ≥ 0 :=
+    sorry
+    -- END
+
+Sometimes in a proof we want to split on cases
+depending on whether some statement is true or not.
+For any proposition ``P``, we can use
+``classical.em P : P ∨ ¬ P``.
+The name ``em`` is short for "excluded middle."
+
+.. code-block:: lean
+
+    example (P : Prop) : ¬ ¬ P → P :=
+    begin
+      intro h,
+      cases classical.em P,
+      { assumption },
+      contradiction
+    end
+
+In this example, the ``assumption`` tactic
+tells Lean to find an assumption that will solve the goal.
+You can shorten ``classical.em`` to ``em``
+by opening the ``classical`` namespace with the command
+``open classical``.
+Alternatively, you can use the ``by_cases`` tactic.
+The ``open_locale classical`` command guarantees that Lean can
+make implicit use of the law of the excluded middle.
+
+.. code-block:: lean
+
+    import tactic
+
+    open_locale classical
+
+    example (P : Prop) : ¬ ¬ P → P :=
+    begin
+      intro h,
+      by_cases h' : P,
+      { assumption },
+      contradiction
+    end
+
+Notice that the ``by_cases`` tactic lets you
+specify a label for the hypothesis that is
+introduced in each branch,
+in this case, ``h' : P`` in one and ``h' : ¬ P``
+in the other.
+If you leave out the label,
+Lean uses ``h`` by default.
+Try proving the following equivalence,
+using ``by_cases`` to establish one direction.
+
+.. code-block:: lean
+
+    import tactic
+
+    open_locale classical
+
+    -- BEGIN
+    example (P Q : Prop) : (P → Q) ↔ ¬ P ∨ Q :=
+    sorry
+    -- END
 
 
 .. _sequences_and_convergence:
@@ -1950,8 +2191,7 @@ which shows that if ``s`` converges to ``a``,
 then ``λ n, c * s n`` converges to ``c * a``.
 It is helpful to split into cases depending on whether ``c``
 is equal to zero or not.
-Since we have not shown you how to do that yet,
-we have taken care of the zero case first,
+We have taken care of the zero case,
 and we have left you to prove the result with
 the extra assumption that ``c`` is nonzero.
 
@@ -2159,7 +2399,7 @@ you can delete the proof sketch and try proving it from scratch.)
           abs (a - b) = abs (- (s N - a) + (s N - b)) :
             by { congr, ring }
           ... ≤ abs (- (s N - a)) + abs (s N - b) :
-            abs_add_le_abs_add_abs _ _
+            abs_add _ _
           ... = abs (s N - a) + abs (s N - b) :
             by rw [abs_neg]
           ... < ε + ε : add_lt_add absa absb
