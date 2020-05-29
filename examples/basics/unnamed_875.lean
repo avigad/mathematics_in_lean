@@ -1,3 +1,5 @@
+import algebra.group
+
 variables (G : Type*) [group G]
 
 #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))

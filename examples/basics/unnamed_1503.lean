@@ -1,5 +1,15 @@
 import data.real.basic
 
+variables a b c : ℝ
+
 -- BEGIN
-#check (abs_add : ∀ a b : ℝ, abs (a + b) ≤ abs a + abs b)
+lemma aux : min a b + c ≤ min (a + c) (b + c) :=
+begin
+  sorry
+end
+
+example : min a b + c = min (a + c) (b + c) :=
+begin
+  sorry
+end
 -- END

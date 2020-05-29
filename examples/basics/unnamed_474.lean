@@ -1,3 +1,5 @@
+import algebra.ring
+
 variables (R : Type*) [ring R]
 
 #check (add_assoc : ∀ a b c : R, a + b + c = a + (b + c))

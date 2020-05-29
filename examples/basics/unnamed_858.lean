@@ -1,3 +1,5 @@
+import algebra.group
+
 variables (A : Type*) [add_group A]
 
 #check (add_assoc : ∀ a b c : A, a + b + c = a + (b + c))

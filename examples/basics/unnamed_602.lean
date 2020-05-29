@@ -1,3 +1,5 @@
+import algebra.ring
+
 namespace my_ring
 
 variables {R : Type*} [ring R]

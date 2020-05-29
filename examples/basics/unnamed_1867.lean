@@ -1,3 +1,5 @@
+import algebra.ordered_ring
+
 variables {R : Type*} [ordered_ring R]
 variables a b c : R
 

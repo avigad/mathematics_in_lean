@@ -11,7 +11,7 @@ Maybe you have heard that formalization is the future
 (say, from the article `The Mechanization of Mathematics`_,
 or the talk `The Future of Mathematics`_),
 and you want in.
-Or maybe you have played the `Natural Number Game`_ and you are hooked.
+Maybe you have played the `Natural Number Game`_ and you are hooked.
 Maybe you have heard about `Lean`_ and its library `mathlib`_
 through online chatter and you want to know what the fuss is about.
 Or maybe you like mathematics and you like computers,
