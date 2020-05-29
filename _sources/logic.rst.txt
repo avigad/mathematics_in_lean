@@ -37,7 +37,7 @@ then the absolute value of ``x * y`` is less than ``ε``."
 In Lean, in a sequence of implications there are
 implicit parentheses grouped to the right.
 So the expression above means
-"if ``0 < ε`` then if ε ≤ 1 then if ``abs x < ε`` ..."
+"if ``0 < ε`` then if ``ε ≤ 1`` then if ``abs x < ε`` ..."
 As a result, the expression says that all the
 assumptions together imply the conclusion.
 
@@ -809,9 +809,29 @@ and we use ``ring`` to verify that they work.
       ring
     end
 
-This pattern of unpacking an equation inside a existential quantifier
+This proof doesn't provide much insight,
+but here is one way to motivate it.
+A *Gaussian integer* is a number of the form :math:`a + bi`
+where :math:`a` and :math:`b` are integers and :math:`i = \sqrt{-1}`.
+The *norm* of the Gaussian integer :math:`a + bi` is, by definition,
+:math:`a^2 + b^2`.
+So the norm of a Gaussian integer is a sum of squares,
+and any sum of squares can be expressed in this way.
+The theorem above reflects the fact that norm of a product of
+Gaussian integers is the product of their norms:
+if :math:`x` is the norm of :math:`a + bi` and
+:math:`y` in the norm of :math:`c + di`,
+then :math:`xy` is the norm of :math:`(a + bi) (c + di)`.
+Our cryptic proof illustrates the fact that
+the proof that is easiest to formalize isn't always
+the most perspicuous one.
+In the chapters to come,
+we will provide you with the means to define the Gaussian
+integers and use them to provide an alternative proof.
+
+The pattern of unpacking an equation inside a existential quantifier
 and then using it to rewrite an expression in the goal
-come up often,
+comes up often,
 so much so that the ``rcases`` tactic provides
 an abbreviation:
 if you use the keyword ``rfl`` in place of a new identifier,
@@ -1378,16 +1398,16 @@ a goal once a contradiction has been reached.
     variable a : ℕ
 
     -- BEGIN
-    example (h : 0 < 0) : a > 12 :=
+    example (h : 0 < 0) : a > 37 :=
     begin
       exfalso,
       apply lt_irrefl 0 h
     end
 
-    example (h : 0 < 0) : a > 12 :=
+    example (h : 0 < 0) : a > 37 :=
     absurd h (lt_irrefl 0)
 
-    example (h : 0 < 0) : a > 12 :=
+    example (h : 0 < 0) : a > 37 :=
     begin
       have h' : ¬ 0 < 0,
         from lt_irrefl 0,
@@ -2314,7 +2334,7 @@ The next lemma is auxiliary: we prove that if
 ``s`` converges to ``a`` and ``t`` converges to ``0``,
 then ``λ n, s n * t n`` converges to ``0``.
 To do so, we use the previous theorem to find a ``B``
-on ``s`` beyond some point ``N₀``.
+that bounds ``s`` beyond some point ``N₀``.
 See if you can understand the strategy we have outlined
 and finish the proof.
 
