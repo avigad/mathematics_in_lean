@@ -272,6 +272,8 @@ it will apply in all these instances.
 
 .. code-block:: lean
 
+    import algebra.ordered_group
+
     variables {α : Type*} {R : Type*} [ordered_cancel_add_comm_monoid R]
 
     #check @add_le_add
@@ -574,7 +576,7 @@ to construct the proof.
     end
     -- END
 
-The left and right brackets,
+The left and right angle brackets,
 which can be entered as ``\<`` and ``\>`` respectively,
 tell Lean to put together the given data using
 whatever construction is appropriate
@@ -1429,11 +1431,13 @@ by proving ``A`` and then proving ``B``.
     end
     -- END
 
+In this example, the ``assumption`` tactic
+tells Lean to find an assumption that will solve the goal.
 Notice that the final ``rw`` finishes the goal by
 applying the reflexivity of ``≤``.
 The following are alternative ways of carrying out
 the previous examples using the anonymous constructor
-corner brackets.
+angle brackets.
 The first is a slick proof-term version of the
 previous proof,
 which drops into tactic mode at the keyword ``by``.
@@ -1581,7 +1585,7 @@ You have already seen that you can write ``h.mp`` and ``h.mpr``
 or ``h.1`` and ``h.2`` for the two directions of ``h : A ↔ B``.
 You can also use ``cases`` and friends.
 To prove an if-and-only-if statement,
-you can uses ``split`` or corner brackets,
+you can uses ``split`` or angle brackets,
 just as you would if you were proving a conjunction.
 
 .. code-block:: lean
@@ -1646,7 +1650,7 @@ You can treat it like a conjunction and use its two
 parts separately.
 But Lean also knows that it is a reflexive, symmetric,
 and transitive relation between propositions,
-so you can also use it with ``calc`` and ``rw``.
+and you can also use it with ``calc`` and ``rw``.
 It is often convenient to rewrite a statement to
 an equivalent one.
 In the next example, we use ``abs_lt`` to
@@ -1783,7 +1787,7 @@ and the ``right`` tactic chooses ``B``.
 We cannot use an anonymous constructor to construct a proof
 of an "or" because Lean would have to guess
 which disjunct we are trying to prove.
-When we write a proof term we can use
+When we write proof terms we can use
 ``or.inl`` and ``or.inr`` instead
 to make the choice explicitly.
 Here, ``inl`` is short for "insert left" and
@@ -1943,6 +1947,62 @@ and use a semicolon and ``linarith`` to solve each branch.
     sorry
     -- END
 
+On the real numbers, an equation ``x * y = 0``
+tells us that ``x = 0`` or ``y = 0``.
+In mathlib, this fact is known as ``eq_zero_or_eq_zero_of_mul_eq_zero``,
+and it is another nice example of how a disjunction can arise.
+See if you can use it to prove the following:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    variables (x y : ℝ)
+
+    -- BEGIN
+    example (h : x^2 = 1) : x = 1 ∨ x = -1 :=
+    sorry
+
+    example (h : x^2 = y^2) : x = y ∨ x = -y :=
+    sorry
+    -- END
+
+Remember that you can use the ``ring`` tactic to help
+with calculations.
+
+In an arbitrary ring :math:`R`, an element :math:`x` such
+that :math:`x y = 0` for some nonzero :math:`y` is called
+a *left zero divisor*,
+an element :math:`x` such
+that :math:`y x = 0` for some nonzero :math:`y` is called
+a *right zero divisor*,
+and an element that is either a left or right zero divisor
+is called simply a *zero divisor*.
+The theorem ``eq_zero_or_eq_zero_of_mul_eq_zero``
+says that the real numbers have no nontrivial zero divisors.
+A commutative ring with this property is called an *integral domain*.
+Your proofs of the two theorems above should work equally well
+in any integral domain:
+
+.. code-block:: lean
+
+    import algebra.group_power tactic
+
+    variables {R : Type*} [integral_domain R]
+
+    variables (x y : R)
+
+    example (h : x^2 = 1) : x = 1 ∨ x = -1 :=
+    sorry
+
+    example (h : x^2 = y^2) : x = y ∨ x = -y :=
+    sorry
+
+In fact, if you are careful, you can prove the first
+theorem without using commutativity of multiplication.
+In that case, it suffices to assume that ``R`` is
+a ``domain`` instead of an ``integral_domain``.
+
 Sometimes in a proof we want to split on cases
 depending on whether some statement is true or not.
 For any proposition ``P``, we can use
@@ -1959,8 +2019,6 @@ The name ``em`` is short for "excluded middle."
       contradiction
     end
 
-In this example, the ``assumption`` tactic
-tells Lean to find an assumption that will solve the goal.
 You can shorten ``classical.em`` to ``em``
 by opening the ``classical`` namespace with the command
 ``open classical``.

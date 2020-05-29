@@ -473,6 +473,8 @@ Modulo this difference, we can take the ring axioms to be as follows:
 
 .. code-block:: lean
 
+    import algebra.ring
+
     variables (R : Type*) [ring R]
 
     #check (add_assoc : ∀ a b c : R, a + b + c = a + (b + c))
@@ -565,6 +567,8 @@ as ring axioms, because they follow from the other axioms.
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -597,6 +601,8 @@ Here is a useful theorem:
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -612,6 +618,8 @@ Prove the companion version:
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -626,6 +634,8 @@ Prove the companion version:
 Use these to prove the following:
 
 .. code-block:: lean
+
+    import algebra.ring
 
     namespace my_ring
 
@@ -671,6 +681,8 @@ follows from the ring axioms.
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -710,6 +722,8 @@ so the following theorem also requires some work.
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -727,6 +741,8 @@ still using only facts about rings that we have
 established in this section.
 
 .. code-block:: lean
+
+    import algebra.ring
 
     namespace my_ring
 
@@ -760,6 +776,8 @@ addition of the additive inverse.
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -790,6 +808,8 @@ For example, you now have enough information to prove the theorem
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -813,6 +833,8 @@ the last section:
 
 .. code-block:: lean
 
+    import algebra.ring
+
     namespace my_ring
 
     variables {R : Type*} [ring R]
@@ -835,6 +857,8 @@ can be axiomatized as follows:
 
 .. code-block:: lean
 
+    import algebra.group
+
     variables (A : Type*) [add_group A]
 
     #check (add_assoc : ∀ a b c : A, a + b + c = a + (b + c))
@@ -850,6 +874,8 @@ additive version (and also their abelian variants,
 
 .. code-block:: lean
 
+    import algebra.group
+
     variables (G : Type*) [group G]
 
     #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
@@ -862,6 +888,8 @@ You will need to prove a number of helper lemmas along the way.
 The proofs we have carried out in this section provide some hints.
 
 .. code-block:: lean
+
+    import algebra.group
 
     variables {G : Type*} [group G]
 
@@ -1838,6 +1866,8 @@ are compatible with the order:
 
 .. code-block:: lean
 
+    import algebra.ordered_ring
+
     variables {R : Type*} [ordered_ring R]
     variables a b c : R
 
@@ -1851,6 +1881,8 @@ In a later chapter, we will see how to derive the following from ``mul_pos``
 and the definition of ``<``:
 
 .. code-block:: lean
+
+    import algebra.ordered_ring
 
     variables {R : Type*} [ordered_ring R]
     variables a b c : R
@@ -1867,6 +1899,8 @@ using only properties of rings, partial orders, and the facts
 enumerated in the last two examples:
 
 .. code-block:: lean
+
+    import algebra.ordered_ring
 
     variables {R : Type*} [ordered_ring R]
     variables a b c : R
