@@ -1,13 +1,13 @@
-import data.real.basic
-
-def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a
-def fn_has_ub (f : ℝ → ℝ) := ∃ a, fn_ub f a
+import tactic
 
 open_locale classical
 
-variable (f : ℝ → ℝ)
+variable (Q : Prop)
 
 -- BEGIN
-example (h : ¬ fn_has_ub f) : ∀ a, ∃ x, f x > a :=
+example (h : ¬ ¬ Q) : Q :=
+sorry
+
+example (h : Q) : ¬ ¬ Q :=
 sorry
 -- END

@@ -1,25 +1,15 @@
 import data.real.basic
-import data.nat.gcd
-
-open nat
 
 -- BEGIN
 example : ∃ x : ℝ, 2 < x ∧ x < 4 :=
+⟨5/2, by norm_num, by norm_num⟩
+
+example (x y : ℝ) : (∃ z : ℝ, x < z ∧ z < y) → x < y :=
 begin
-  use 5 / 2,
-  split; norm_num
+  rintros ⟨z, xltz, zlty⟩,
+  exact lt_trans xltz zlty
 end
 
-example : ∃ m n : ℕ,
-  4 < m ∧ m < n ∧ n < 10 ∧ prime m ∧ prime n :=
-begin
-  use [5, 7],
-  norm_num
-end
-
-example {x y : ℝ} : x ≤ y ∧ x ≠ y → x ≤ y ∧ ¬ y ≤ x :=
-begin
-  rintros ⟨h₀, h₁⟩,
-  use [h₀, λ h', h₁ (le_antisymm h₀ h')]
-end
+example (x y : ℝ) : (∃ z : ℝ, x < z ∧ z < y) → x < y :=
+λ ⟨z, xltz, zlty⟩, lt_trans xltz zlty
 -- END

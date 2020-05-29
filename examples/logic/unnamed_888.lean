@@ -1,12 +1,8 @@
-import data.real.basic
+import tactic
 
-open function
+variables {a b c : ℕ}
 
 -- BEGIN
-example {c : ℝ} : surjective (λ x, x + c) :=
-begin
-  intro x,
-  use x - c,
-  dsimp, ring
-end
+example (divab : a ∣ b) (divac : a ∣ c) : a ∣ (b + c) :=
+sorry
 -- END
