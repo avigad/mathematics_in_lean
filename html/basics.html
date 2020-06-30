@@ -348,16 +348,16 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 </pre></div>
 </div>
 </div><p>We can also perform rewriting in an assumption in the context.
-For example, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">mul_comm</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">at</span> <span class="pre">hyp</span></code> replaces <code class="docutils literal notranslate"><span class="pre">a*b</span></code> by <code class="docutils literal notranslate"><span class="pre">b*a</span></code>
+For example, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">mul_comm</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">at</span> <span class="pre">hyp</span></code> replaces <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span></code> by <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">*</span> <span class="pre">a</span></code>
 in the assumption <code class="docutils literal notranslate"><span class="pre">hyp</span></code>.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20c%20d%20%3A%20%E2%84%9D%0A%0A--%20BEGIN%0Aexample%20(a%20b%20c%20d%20%3A%20%E2%84%9D)%20(hyp%20%3A%20c%20%3D%20d%20*%20a%20%2B%20b)%20(hyp'%20%3A%20b%20%3D%20a%20*%20d)%20%3A%0A%20%20c%20%3D%202%20*%20a%20*%20d%20%3A%3D%0Abegin%0A%20%20rw%20hyp'%20at%20hyp%2C%0A%20%20rw%20mul_comm%20d%20a%20at%20hyp%2C%0A%20%20rw%20%E2%86%90%20two_mul%20(a*d)%20at%20hyp%2C%0A%20%20rw%20%E2%86%90%20mul_assoc%202%20a%20d%20at%20hyp%2C%0A%20%20exact%20hyp%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basics/unnamed_400.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20c%20d%20%3A%20%E2%84%9D%0A%0A--%20BEGIN%0Aexample%20(a%20b%20c%20d%20%3A%20%E2%84%9D)%20(hyp%20%3A%20c%20%3D%20d%20*%20a%20%2B%20b)%20(hyp'%20%3A%20b%20%3D%20a%20*%20d)%20%3A%0A%20%20c%20%3D%202%20*%20a%20*%20d%20%3A%3D%0Abegin%0A%20%20rw%20hyp'%20at%20hyp%2C%0A%20%20rw%20mul_comm%20d%20a%20at%20hyp%2C%0A%20%20rw%20%E2%86%90%20two_mul%20(a%20*%20d)%20at%20hyp%2C%0A%20%20rw%20%E2%86%90%20mul_assoc%202%20a%20d%20at%20hyp%2C%0A%20%20exact%20hyp%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basics/unnamed_400.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp&#39;</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span>
   <span class="n">c</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">d</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">rw</span> <span class="n">hyp&#39;</span> <span class="n">at</span> <span class="n">hyp</span><span class="o">,</span>
   <span class="n">rw</span> <span class="n">mul_comm</span> <span class="n">d</span> <span class="n">a</span> <span class="n">at</span> <span class="n">hyp</span><span class="o">,</span>
-  <span class="n">rw</span> <span class="bp">&#8592;</span> <span class="n">two_mul</span> <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">d</span><span class="o">)</span> <span class="n">at</span> <span class="n">hyp</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="bp">&#8592;</span> <span class="n">two_mul</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="n">at</span> <span class="n">hyp</span><span class="o">,</span>
   <span class="n">rw</span> <span class="bp">&#8592;</span> <span class="n">mul_assoc</span> <span class="mi">2</span> <span class="n">a</span> <span class="n">d</span> <span class="n">at</span> <span class="n">hyp</span><span class="o">,</span>
   <span class="n">exact</span> <span class="n">hyp</span>
 <span class="kd">end</span>
@@ -1585,6 +1585,7 @@ As you may have guessed, this theorem is called <code class="docutils literal no
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="logic.html">3. Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sets_functions_and_relations.html">4. Sets, Functions, and Relations</a></li>
 </ul>
 
 

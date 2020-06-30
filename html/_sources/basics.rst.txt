@@ -394,7 +394,7 @@ You can use the theorems listed underneath.
     -- END
 
 We can also perform rewriting in an assumption in the context.
-For example, ``rw mul_comm a b at hyp`` replaces ``a*b`` by ``b*a``
+For example, ``rw mul_comm a b at hyp`` replaces ``a * b`` by ``b * a``
 in the assumption ``hyp``.
 
 .. code-block:: lean
@@ -409,7 +409,7 @@ in the assumption ``hyp``.
     begin
       rw hyp' at hyp,
       rw mul_comm d a at hyp,
-      rw ← two_mul (a*d) at hyp,
+      rw ← two_mul (a * d) at hyp,
       rw ← mul_assoc 2 a d at hyp,
       exact hyp
     end

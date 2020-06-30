@@ -10,6 +10,7 @@ Mathematics in Lean
    introduction
    basics
    logic
+   sets_functions_and_relations
 
 
 .. Indices and tables
