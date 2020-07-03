@@ -13,4 +13,4 @@ Mathematics in Lean
    sets_functions_and_relations
 
 
-:ref:`genindex`
+.. :ref:`genindex`
