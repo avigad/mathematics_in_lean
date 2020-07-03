@@ -1,1 +1,0 @@
-def pnat : Type := { n : ℕ // n > 0 }
