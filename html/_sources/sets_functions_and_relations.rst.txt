@@ -43,6 +43,8 @@ but this chapter will take you through the essentials.
 Sets
 ----
 
+.. index:: set operations
+
 If ``α`` is any type, the type ``set α`` consists of sets
 of elements of ``α``.
 This type supports the usual set-theoretic operations and relations.
@@ -55,6 +57,8 @@ and union can be typed with ``\un`` or ``\cup``.
 The library also defines the set ``univ``,
 which consists of all the elements of type ``α``,
 and the empty set, ``∅``, which can be typed as ``\empty``.
+
+.. index:: simp, tactics ; simp
 
 One way to prove things about sets is to use ``rw``
 or the simplifier to expand the definitions.

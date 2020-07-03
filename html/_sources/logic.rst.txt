@@ -110,6 +110,8 @@ to a goal of the form ``abs (a * b) < δ``,
 you are left with new goals that require you to  prove
 each of the hypotheses.
 
+.. index:: intros, tactics ; intros
+
 To prove a statement like this, use the ``intros`` tactic.
 Take a look at what it does in this example:
 
@@ -222,6 +224,8 @@ function that maps ``x`` to ``f x + g x``.
     end
     -- END
 
+.. index:: dsimp, tactics ; dsimp, change, tactics ; change
+
 Applying ``intro`` to the goal ``fn_ub (λ x, f x + g x) (a + b)``
 forces Lean to unfold the definition of ``fn_ub``
 and introduce ``x`` for the universal quantifier.
@@ -304,6 +308,8 @@ For concreteness, we will stick to the real numbers
 for most of our examples,
 but it is worth knowing that mathlib contains definitions and theorems
 that work at a high level of generality.
+
+.. index:: monotone function
 
 For another example of a hidden universal quantifier,
 mathlib defines a predicate ``monotone``,
@@ -428,6 +434,8 @@ You can complete the proofs of the others.
     sorry
     -- END
 
+.. index:: erw, tactics ; erw
+
 The first proof can be shortened using ``dsimp`` or ``change``
 to get rid of the lambda.
 But you can check that the subsequent ``rw`` won't work
@@ -492,6 +500,8 @@ then ``b`` is a bound on ``s`` as well.
 
     example (h : set_ub s a) (h' : a ≤ b) : set_ub s b :=
     sorry
+
+.. index:: injective function
 
 We close this section with one last important example.
 A function :math:`f` is said to be *injective* if for
@@ -563,6 +573,8 @@ or ``(5 : ℝ) / 2`` when Lean cannot infer from context that we have
 the real numbers in mind, has the required property,
 and the ``norm_num`` tactic can prove that it meets the description.
 
+.. index:: use, tactics ; use
+
 There are a few ways we can put the information together.
 Given a goal that begins with an existential quantifier,
 the ``use`` tactic is used to provide the object,
@@ -577,6 +589,8 @@ leaving the goal of proving the property.
       use 5 / 2,
       norm_num
     end
+
+.. index:: anonyomous constructor
 
 Alternatively, we can use Lean's *anonyomous constructor* notation
 to construct the proof.
@@ -666,6 +680,8 @@ then so does ``λ x, f x + g x``.
     end
     -- END
 
+.. index:: cases, tactics ; cases
+
 The ``cases`` tactic unpacks the information
 in the existential quantifier.
 Given the hypothesis ``ubf`` that there is an upper bound
@@ -712,6 +728,8 @@ into the proofs.
       fn_has_ub (λ x, c * f x) :=
     sorry
     -- END
+
+.. index:: rintros, tactics ; rintros, rcases, tactics ; rcases
 
 The task of unpacking information in a hypothesis is
 so important that Lean and mathlib provide a number of
@@ -915,6 +933,8 @@ Then try proving the following:
     sorry
     -- END
 
+.. index:: surjective function
+
 For another important example, a function :math:`f : \alpha \to \beta`
 is said to be *surjective* if for every :math:`y` in the
 codomain, :math:`\beta`,
@@ -1034,6 +1054,8 @@ from ``lt_irrefl``.
       apply lt_irrefl a this
     end
     -- END
+
+.. index:: this, have, tactics ; have, from, tactics ; from
 
 This example introduces a couple of new tricks.
 First, when you use ``have`` without providing
@@ -1159,6 +1181,8 @@ Complete the proof.
     end
     -- END
 
+.. index:: let, tactics ; let
+
 This example introduces the ``let`` tactic,
 which adds a *local definition* to the context.
 If you put the cursor after the ``let`` command,
@@ -1237,6 +1261,8 @@ to prove the third implication as follows.
       exact h' ⟨x, h''⟩
     end
 
+.. index:: by_contradiction, by_contra, tactics ; by_contra and by_contradiction,
+
 Make sure you understand how this works.
 The ``by_contradiction`` tactic (also abbreviated to ``by_contra``)
 allows us to prove a goal ``Q`` by assuming ``¬ Q``
@@ -1283,6 +1309,8 @@ which is the converse of one of the implications we proved above.
     example (h : ¬ fn_has_ub f) : ∀ a, ∃ x, f x > a :=
     sorry
     -- END
+
+.. index:: push_neg, tactics ; push_neg
 
 It is often tedious to work with compound statements with
 a negation in front,
@@ -1348,6 +1376,8 @@ to prove the following:
     sorry
     -- END
 
+.. index:: contrapose, tactics ; contrapose
+
 Mathlib also has a tactic, ``contrapose``,
 which transforms a goal ``A → B`` to ``¬ B → ¬ A``.
 Similarly, given a goal of proving ``B`` from
@@ -1406,6 +1436,8 @@ establishes the goal so we can move on to the next one.
 (We will see instances of reasoning by cases in
 :numref:`disjunction`.)
 
+.. index:: exfalso, contradiction, absurd, tactics ; exfalso, tactics ; contradiction
+
 Lean provides a number of ways of closing
 a goal once a contradiction has been reached.
 
@@ -1446,6 +1478,8 @@ Of course, in this example, ``linarith`` also works.
 Conjunction and Bi-implication
 ------------------------------
 
+.. index:: split, tactics ; split
+
 You have already seen that the conjunction symbol, ``∧``,
 is used to express "and."
 The ``split`` tactic allows you to prove a statement of
@@ -1466,6 +1500,8 @@ by proving ``A`` and then proving ``B``.
       rw h
     end
     -- END
+
+.. index:: assumption, tactics ; assumption
 
 In this example, the ``assumption`` tactic
 tells Lean to find an assumption that will solve the goal.
@@ -1764,6 +1800,8 @@ then ``a < b`` is equivalent to ``a ≤ b ∧ a ≠ b``:
     end
     -- END
 
+.. index:: simp, tactics ; simp
+
 Beyond logical operations, you should not need
 anything more than ``le_refl`` and ``le_antisymm``.
 Then show that even in the case where ``≤``
@@ -1805,6 +1843,8 @@ to be instantiated to different values.
 
 Disjunction
 -----------
+
+.. index:: left, right, tactics ; left, tactics ; right
 
 The canonical way to prove a disjunction ``A ∨ B`` is to prove
 ``A`` or to prove ``B``.
@@ -2044,6 +2084,8 @@ theorem without using commutativity of multiplication.
 In that case, it suffices to assume that ``R`` is
 a ``domain`` instead of an ``integral_domain``.
 
+.. index:: excluded middle
+
 Sometimes in a proof we want to split on cases
 depending on whether some statement is true or not.
 For any proposition ``P``, we can use
@@ -2059,6 +2101,8 @@ The name ``em`` is short for "excluded middle."
       { assumption },
       contradiction
     end
+
+.. index:: by_cases, tactics ; by_cases
 
 You can shorten ``classical.em`` to ``em``
 by opening the ``classical`` namespace with the command
@@ -2133,8 +2177,10 @@ for ``∀ ε, ε > 0 → ...``, and, similarly,
 And remember that ``ε > 0``, in turn, is defined as ``0 < ε``,
 and ``n ≥ N`` is defined as ``N ≤ n``.
 
+.. index:: extentionality, ext, tactics ; ext
+
 In this section, we'll establish some properties of convergence.
-But first, we will discuss three tactics for working equality
+But first, we will discuss three tactics for working with equality
 that will prove useful.
 The first, the ``ext`` tactic,
 gives us a way of proving that two functions are equal.
@@ -2155,6 +2201,8 @@ at all the values of their arguments.
     by { ext, ring }
     -- END
 
+.. index:: congr, tactics ; congr
+
 We'll see later that ``ext`` is actually more general, and also one can
 specify the name of the variables that appear.
 For instance you can try to replace ``ext`` with ``ext u v`` in the
@@ -2174,6 +2222,8 @@ by reconciling the parts that are different:
 
 Here the ``congr`` tactic peels off the ``abs`` on each side,
 leaving us to prove ``a = a - b + b``.
+
+.. index:: convert, tactics ; convert
 
 Finally, the ``convert`` tactic is used to apply a theorem
 to a goal when the conclusion of the theorem doesn't quite match.
