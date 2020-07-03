@@ -26,6 +26,18 @@ Consider the statement after the ``#check``:
     import data.real.basic
 
     -- BEGIN
+    #check ∀ x : ℝ, 0 ≤ x → abs x = x
+    -- END
+
+In words, we would say "for every real number ``x``, if ``0 ≤ x`` then
+the absolute value of ``x`` equals ``x``".
+We can also have more complicated statements like:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
     #check ∀ x y ε : ℝ,
       0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε
     -- END
@@ -119,7 +131,7 @@ they do not have to be ``x``, ``y``, and ``ε``.
 Notice that we have to introduce the variables
 even though they are marked implicit:
 making them implicit means that we leave them out when
-we write an expression,
+we write an expression *using* ``my_lemma``,
 but they are still an essential part of the statement
 that we are proving.
 After the ``intros`` command,
@@ -210,7 +222,7 @@ function that maps ``x`` to ``f x + g x``.
     end
     -- END
 
-Applying ``intro`` to the predicate ``fn_ub (λ x, f x + g x) (a + b)``
+Applying ``intro`` to the goal ``fn_ub (λ x, f x + g x) (a + b)``
 forces Lean to unfold the definition of ``fn_ub``
 and introduce ``x`` for the universal quantifier.
 The goal is then ``(λ (x : ℝ), f x + g x) x ≤ a + b``.
@@ -422,6 +434,10 @@ But you can check that the subsequent ``rw`` won't work
 unless we get rid of the lambda explicitly,
 because otherwise it cannot find the patterns ``f x`` and ``g x``
 in the expression.
+Contrary to some other tactics, ``rw`` operates on the syntactic level,
+it won't unfold definitions or apply reductions for you
+(it has a variant called ``erw`` that tries a little harder in this
+direction, but not much harder).
 
 You can find implicit universal quantifiers all over the place,
 once you know how to spot them.
@@ -518,13 +534,15 @@ Finally, show that the composition of two injective functions is injective:
     example (injg : injective g) (injf : injective f) :
       injective (λ x, g (f x)) :=
     begin
-      intros x₁ x₂ h,
-      apply injf,
-      apply injg,
-      apply h
+      sorry
     end
     -- END
 
+.. solution:
+   intros x₁ x₂ h,
+   apply injf,
+   apply injg,
+   apply h
 
 .. _the_existential_quantifier:
 
@@ -581,7 +599,7 @@ which can be entered as ``\<`` and ``\>`` respectively,
 tell Lean to put together the given data using
 whatever construction is appropriate
 for the current goal.
-We can use the notation without going into tactic mode:
+We can use the notation without going first into tactic mode:
 
 .. code-block:: lean
 
@@ -835,7 +853,8 @@ comes up often,
 so much so that the ``rcases`` tactic provides
 an abbreviation:
 if you use the keyword ``rfl`` in place of a new identifier,
-``rcases`` does the rewriting automatically.
+``rcases`` does the rewriting automatically (this trick doesn't work
+with pattern-matching lambdas).
 
 .. code-block:: lean
 
@@ -1168,7 +1187,8 @@ property ``P``,
 and saying that not everything has property ``P``
 is equivalent to saying that something fails to have property ``P``.
 In other words, all four of the following implications
-are valid:
+are valid (but one of them cannot be proved with what we explained so
+far):
 
 .. code-block:: lean
 
@@ -1196,10 +1216,6 @@ This is an instance of *classical* mathematical reasoning,
 and, in general, you have to declare your intention
 of using such reasoning by adding the command
 ``open_locale classical`` to your file.
-(Due to an annoying quirk of Lean,
-this cannot appear right after the ``import``
-lines in your file,
-but it can appear later on.)
 With that command, we can use proof by contradiction
 to prove the third implication as follows.
 
@@ -1222,8 +1238,8 @@ to prove the third implication as follows.
     end
 
 Make sure you understand how this works.
-The ``by_contradiction`` tactic allows us to
-prove a goal ``Q`` by assuming ``¬ Q``
+The ``by_contradiction`` tactic (also abbreviated to ``by_contra``)
+allows us to prove a goal ``Q`` by assuming ``¬ Q``
 and deriving a contradiction.
 In fact, it is equivalent to using the
 equivalence ``not_not : ¬ ¬ Q ↔ Q``.
@@ -1275,7 +1291,7 @@ statements with equivalent forms in which the negation
 has been pushed inward.
 To facilitate this, mathlib offers a ``push_neg`` tactic,
 which restates the goal in this way.
-The command ``push_neg h`` restates the hypothesis ``h``.
+The command ``push_neg at h`` restates the hypothesis ``h``.
 
 .. code-block:: lean
 
@@ -1297,7 +1313,7 @@ The command ``push_neg h`` restates the hypothesis ``h``.
 
     example (h : ¬ fn_has_ub f) : ∀ a, ∃ x, f x > a :=
     begin
-      simp only [fn_has_ub, fn_ub] at h,
+      dsimp only [fn_has_ub, fn_ub] at h,
       push_neg at h,
       exact h
     end
@@ -1305,7 +1321,7 @@ The command ``push_neg h`` restates the hypothesis ``h``.
 
 In the second example, we use Lean's simplifier to
 expand the definitions of ``fn_has_ub`` and ``fn_ub``.
-(We need to use ``simp`` rather than ``rw``
+(We need to use ``dsimp`` rather than ``rw``
 to expand ``fn_ub``,
 because it appears in the scope of a quantifier.)
 You can verify that in the examples above
@@ -1703,7 +1719,9 @@ to replace an expression of the form ``m ∣ gcd n k`` by the equivalent express
 
 See if you can use ``rw`` with the theorem below
 to provide a short proof that negation is not a
-nondecreasing function.
+nondecreasing function. (Note that ``push_neg`` won't
+unfold definitions for you, so the ``rw monotone`` in
+the proof of the theorem is needed.)
 
 .. code-block:: lean
 
@@ -1712,7 +1730,7 @@ nondecreasing function.
     -- BEGIN
     theorem not_monotone_iff {f : ℝ → ℝ}:
       ¬ monotone f ↔ ∃ x y, x ≤ y ∧ f x > f y :=
-    by { rw [monotone], push_neg }
+    by { rw monotone, push_neg }
 
     example : ¬ monotone (λ x : ℝ, -x) :=
     sorry
@@ -1755,8 +1773,11 @@ and transitive.
 You do not need anything more than ``le_refl`` and ``le_trans``.
 In the second example,
 for convenience, we use the simplifier rather than ``rw``
-to express ``<`` in terms of ``≤`` and ``¬``
-three times.
+to express ``<`` in terms of ``≤`` and ``¬``.
+We will come back to the simplifier later,
+but here we are only relying on the fact that it will
+use the indicated lemma repeatedly, even if it needs
+to be instantiated to different values.
 
 .. code-block:: lean
 
@@ -1810,8 +1831,8 @@ which disjunct we are trying to prove.
 When we write proof terms we can use
 ``or.inl`` and ``or.inr`` instead
 to make the choice explicitly.
-Here, ``inl`` is short for "insert left" and
-``inr`` is short for "insert right."
+Here, ``inl`` is short for "introduction left" and
+``inr`` is short for "introduction right."
 
 .. code-block:: lean
 
@@ -2134,6 +2155,10 @@ at all the values of their arguments.
     by { ext, ring }
     -- END
 
+We'll see later that ``ext`` is actually more general, and also one can
+specify the name of the variables that appear.
+For instance you can try to replace ``ext`` with ``ext u v`` in the
+above proof.
 The second tactic, the ``congr`` tactic,
 allows us to prove an equation between two expressions
 by reconciling the parts that are different:

@@ -28,6 +28,9 @@ to replace the left-hand side of an identity by the right-hand side
 in the goal. If ``a``, ``b``, and ``c`` are real numbers,
 ``mul_assoc a b c``  is the identity ``a * b * c = a * (b * c)``
 and ``mul_comm a b`` is the identity ``a * b = b * a``.
+Lean provides automation that generally eliminates the need
+to refer the facts like these explicitly,
+but they are useful for the purposes of illustration.
 In Lean, multiplication associates to the left,
 so the left-hand side of ``mul_assoc`` could also be written ``(a * b) * c``.
 However, it is generally good style to be mindful of Lean's
@@ -61,7 +64,7 @@ in the VS Code editor.
 The symbol doesn't appear until you hit space or the tab key.
 If you hover over a symbol when reading a Lean file,
 VS Code will show you the syntax that can be used to enter it.
-If your keyboard does not have a backslash,
+If your keyboard does not have an easily accessible backslash,
 you can change the leading character by changing the
 ``lean.input.leader`` setting in VS Code.
 
@@ -212,19 +215,13 @@ we can replace the ``begin ... end`` block with a ``by``.
     -- BEGIN
     example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) :
       a * (b * e) = c * (d * f) :=
-    begin
-      rw [h', ←mul_assoc, h, mul_assoc]
-    end
-
-    example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) :
-      a * (b * e) = c * (d * f) :=
     by rw [h', ←mul_assoc, h, mul_assoc]
     -- END
 
 You still see the incremental progress by placing the cursor after
 a comma in any list of rewrites.
 
-Another trick is that we can declare variables once and forall outside
+Another trick is that we can declare variables once and for all outside
 an example or theorem.
 When Lean sees them mentioned in the statement of the theorem,
 it includes them automatically.
@@ -234,17 +231,20 @@ it includes them automatically.
     import data.real.basic
 
     -- BEGIN
-    variables a b c d e f : ℝ
+    variables a b c d e f g : ℝ
 
     example (h : a * b = c * d) (h' : e = f) :
       a * (b * e) = c * (d * f) :=
     by rw [h', ←mul_assoc, h, mul_assoc]
     -- END
 
+Inspection of the tactic state at the beginning of the above proof
+reveals that Lean indeed included the relevant variables, leaving out
+`g` that doesn't feature in the statement.
 We can delimit the scope of the declaration by putting it
 in a ``section ... end`` block.
-Finally, Lean provides us with a command
-to determine the type of an expression:
+Finally, recall from the introduction that Lean provides us with a
+command to determine the type of an expression:
 
 .. code-block:: lean
 
@@ -420,7 +420,7 @@ because at that point ``hyp`` matches the goal exactly.
 
 We close this section by noting that ``mathlib`` provides a
 useful bit of automation with a ``ring`` tactic,
-which is designed to prove identities in any ring.
+which is designed to prove identities in any commutative ring.
 
 .. code-block:: lean
 
@@ -452,6 +452,8 @@ but we will see in the next section that it can be used
 for calculations on structures other than the real numbers.
 It can be imported explicitly with the command
 ``import tactic``.
+We will see there are similar tactics for other common kind of algebraic
+structures.
 
 
 .. _proving_identities_in_algebraic_structures:
@@ -459,8 +461,8 @@ It can be imported explicitly with the command
 Proving Identities in Algebraic Structures
 ------------------------------------------
 
-Mathematically, a ring consists of a set, :math:`R`,
-operations :math:`+` :math:`\times`, and constants :math:`0`
+Mathematically, a ring consists of a collection of objects,
+:math:`R`, operations :math:`+` :math:`\times`, and constants :math:`0`
 and :math:`1`, and an operation :math:`x \mapsto -x` such that:
 
 * :math:`R` with :math:`+` is an *abelian group*, with :math:`0`
@@ -468,8 +470,8 @@ and :math:`1`, and an operation :math:`x \mapsto -x` such that:
 * Multiplication is associative with identity :math:`1`,
   and multiplication distributes over addition.
 
-In Lean, we base our algebraic structures on *types* rather than sets.
-Modulo this difference, we can take the ring axioms to be as follows:
+In Lean, the collection of objects is represented as a *type*, ``R``.
+The ring axioms are as follows:
 
 .. code-block:: lean
 
@@ -558,7 +560,7 @@ Most of the facts we prove are already in ``mathlib``.
 We will give the versions we prove the same names
 to help you learn the contents of the library
 as well as the naming conventions.
-To avoid error messages from Lean,
+To avoid errors due to name clashes,
 we will put our versions in a new *namespace*
 called ``my_ring.``
 
@@ -651,7 +653,7 @@ Use these to prove the following:
 
     end my_ring
 
-If you are clever, you can do each of them with three rewrites.
+With enough planning, you can do each of them with three rewrites.
 
 We can now explain the use of the curly braces.
 Imagine you are in a situation where you have ``a``, ``b``, and ``c``
@@ -769,7 +771,8 @@ established in this section.
 
 We had to use the annotation ``(-0 : R)`` instead of ``0`` in the third theorem
 because without specifying ``R``
-it is impossible for Lean to infer which ``0`` we have in mind.
+it is impossible for Lean to infer which ``0`` we have in mind,
+and by default it would be interpreted as a natural number.
 
 In Lean, subtraction in a ring is defined to be
 addition of the additive inverse.
@@ -827,7 +830,7 @@ and once using either ``apply`` or ``exact``.
 
 For another example of definitional equality,
 Lean knows that ``1 + 1 = 2`` holds in any ring.
-With a bit of cleverness,
+With a bit of effort,
 you can use that to prove the theorem ``two_mul`` from
 the last section:
 
@@ -910,6 +913,16 @@ The proofs we have carried out in this section provide some hints.
 
     end my_group
 
+Explicitly invoking those lemmas is tedious, so mathlib provides
+tactics similar to `ring` in order to cover most uses: `group`
+is for non-commutative multiplicative groups, `abel` for abelian
+additive groups, and `noncomm_ring` for non-commutative groups.
+It may seem odd that the algebraic structures are called
+`ring` and `comm_ring` while the tactics are named
+`noncomm_ring` and `ring`. This is partly for historical reasons,
+but also for the convenience of using a shorter name for the
+tactic that deals with commutative rings, since it is used more often.
+
 
 .. _using_theorems_and_lemmas:
 
@@ -936,7 +949,8 @@ Consider the library theorems ``le_refl`` and ``le_trans``:
     #check (le_trans : a ≤ b → b ≤ c → a ≤ c)
 
 The library designers have set the arguments to ``le_trans`` implicit,
-so that Lean will *not* let you provide them explicitly.
+so that Lean will *not* let you provide them explicitly (unless you
+really insist, as we will discuss later).
 Rather, it expects to infer them from the context in which they are used.
 For example, when hypotheses ``h : a ≤ b`` and  ``h' : b ≤ c``
 are in the context,
@@ -960,7 +974,8 @@ all the following work:
 The ``apply`` tactic takes a proof of a general statement or implication,
 tries to match the conclusion with the current goal,
 and leaves the hypotheses, if any, as new goals.
-If the given proof matches the goal exactly,
+If the given proof matches the goal exactly
+(modulo *definitional* equality),
 you can use the ``exact`` tactic instead of ``apply``.
 So, all of these work:
 
@@ -1068,6 +1083,8 @@ The ``linarith`` tactic is designed to handle *linear arithmetic*.
 
 In addition to equations and inequalities in the context,
 ``linarith`` will use additional inequalities that you pass as arguments.
+In the next example, `exp_le_exp.mpr h'` is a proof of
+`exp b ≤ exp c`, as we will explain very soon.
 
 .. code-block:: lean
 
@@ -1214,7 +1231,7 @@ There are a number of strategies you can use:
   start with ``add_le``.
   Typing ``add_le`` and hitting tab will give you some helpful choices.
 
-* If you right-click on an existing theorem in VS Code,
+* If you right-click on an existing theorem name in VS Code,
   the editor will show a menu with the option to
   jump to the file where the theorem is defined,
   and you can find similar theorems nearby.
