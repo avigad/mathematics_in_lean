@@ -93,6 +93,9 @@ Overview
 
 Put simply, Lean is a tool for building complex expressions in a formal language
 known as *dependent type theory*.
+
+.. index:: check, commands ; check
+
 Every expression has a *type*, and you can use the `#check` command to
 print it.
 Some expressions have types like `ℕ` or `ℕ → ℕ`.

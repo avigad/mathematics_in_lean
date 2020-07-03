@@ -13,8 +13,4 @@ Mathematics in Lean
    sets_functions_and_relations
 
 
-.. Indices and tables
-   ==================
-   * :ref:`genindex`
-   * :ref:`modindex`
-   * :ref:`search`
+:ref:`genindex`

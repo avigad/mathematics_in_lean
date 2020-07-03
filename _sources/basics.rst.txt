@@ -21,6 +21,8 @@ as Lean requires us to do,
 the net result is a proof that the left-hand side of the calculation
 is equal to the right-hand side.
 
+.. index:: rewrite, rw, tactics ; rw and rewrite
+
 In Lean, stating a theorem is tantamount to stating a goal,
 namely, the goal of proving the theorem.
 Lean provides the ``rewrite`` tactic, abbreviated ``rw``,
@@ -38,8 +40,9 @@ notational conventions and leave out parentheses when Lean does as well.
 
 Let's try out ``rw``.
 
+.. index:: real numbers
+
 .. code-block:: lean
-  :name: fourtytwo
 
     import data.real.basic
 
@@ -130,6 +133,8 @@ and the second with only one argument.
       sorry
     end
     -- END
+
+.. index:: proof state, local context, goal
 
 In the Lean editor mode,
 when a cursor is in the middle of a tactic proof,
@@ -299,6 +304,8 @@ Use the ``#check`` command to see the precise statements.
     end
     -- END
 
+.. index:: calc, tactics ; calc
+
 Whereas it is possible to figure out what it going on in this proof
 by stepping through it in the editor,
 it is hard to read on its own.
@@ -393,6 +400,8 @@ You can use the theorems listed underneath.
     #check add_zero a
     -- END
 
+.. index:: rw, tactics ; rw and rewrite
+
 We can also perform rewriting in an assumption in the context.
 For example, ``rw mul_comm a b at hyp`` replaces ``a * b`` by ``b * a``
 in the assumption ``hyp``.
@@ -415,8 +424,12 @@ in the assumption ``hyp``.
     end
     -- END
 
+.. index:: exact, tactics ; exact
+
 In the last step, the ``exact`` tactic can use ``hyp`` to solve the goal
 because at that point ``hyp`` matches the goal exactly.
+
+.. index:: ring (tactic), tactics ; ring
 
 We close this section by noting that ``mathlib`` provides a
 useful bit of automation with a ``ring`` tactic,
@@ -460,6 +473,8 @@ structures.
 
 Proving Identities in Algebraic Structures
 ------------------------------------------
+
+.. index:: ring (algebraic structure)
 
 Mathematically, a ring consists of a collection of objects,
 :math:`R`, operations :math:`+` :math:`\times`, and constants :math:`0`
@@ -512,6 +527,8 @@ and the complex numbers ``ℂ``.
 It can also be applied to any instance of an abstract
 structure that extends rings,
 such as any *ordered ring* or any *field*.
+
+.. index:: commutative ring
 
 Not all important properties of the real numbers hold in an
 arbitrary ring, however.
@@ -655,6 +672,8 @@ Use these to prove the following:
 
 With enough planning, you can do each of them with three rewrites.
 
+.. index:: implicit argument
+
 We can now explain the use of the curly braces.
 Imagine you are in a situation where you have ``a``, ``b``, and ``c``
 in your context,
@@ -699,6 +718,8 @@ follows from the ring axioms.
     -- END
 
     end my_ring
+
+.. index:: have, tactics ; have
 
 We have used a new trick!
 If you step through the proof,
@@ -795,6 +816,8 @@ addition of the additive inverse.
 
     end my_ring
 
+.. index:: rfl, reflexivity, tactics ; refl and reflexivity, definitional equality
+
 The proof term ``rfl`` is short for ``reflexivity``.
 Presenting it as a proof of ``a - b = a + -b`` forces Lean
 to unfold the definition and recognize both sides as being the same.
@@ -851,6 +874,8 @@ the last section:
     -- END
 
     end my_ring
+
+.. index:: group (algebraic structure)
 
 We close this section by noting that some of the facts about
 addition and negation that we established above do not
@@ -913,6 +938,8 @@ The proofs we have carried out in this section provide some hints.
 
     end my_group
 
+.. index:: group (tactic), tactics ; group, tactics ; noncomm_ring, tactics ; abel
+
 Explicitly invoking those lemmas is tedious, so mathlib provides
 tactics similar to `ring` in order to cover most uses: `group`
 is for non-commutative multiplicative groups, `abel` for abelian
@@ -928,6 +955,8 @@ tactic that deals with commutative rings, since it is used more often.
 
 Using Theorems and Lemmas
 -------------------------
+
+.. index:: inequalities
 
 Rewriting is great for proving equations,
 but what about other sorts of theorems?
@@ -970,6 +999,8 @@ all the following work:
     #check (le_trans h : b ≤ c → a ≤ c)
     #check (le_trans h h' : a ≤ c)
     -- END
+
+.. index:: apply, tactics ; apply
 
 The ``apply`` tactic takes a proof of a general statement or implication,
 tries to match the conclusion with the current goal,
@@ -1052,6 +1083,8 @@ Use them together with ``apply`` and ``exact`` to prove the following:
     sorry
     -- END
 
+.. index:: linarith, tactics ; linarith
+
 In fact, Lean has a tactic that does this sort of thing automatically:
 
 .. code-block:: lean
@@ -1099,6 +1132,8 @@ In the next example, `exp_le_exp.mpr h'` is a proof of
       2 + a + exp b ≤ 3 * a + exp c :=
     by linarith [exp_le_exp.mpr h']
     -- END
+
+.. index:: exponential, logarithm
 
 Here are some more theorems in the library that can be used to establish
 inequalities on the real numbers.
@@ -1177,6 +1212,8 @@ The first line, ``apply add_lt_add_of_lt_of_le``,
 creates two goals,
 and once again we use the curly brackets to separate the
 proof of the first from the proof of the second.
+
+.. index:: norm_num, tactics ; norm_num
 
 Try the following examples on your own.
 The example in the middle shows you that the ``norm_num``
@@ -1358,6 +1395,8 @@ You are well on your way to becoming a master formalizer.
 More on Order and Divisibility
 ------------------------------
 
+.. index:: min, max
+
 The ``min`` function on the real numbers is uniquely characterized
 by the following three facts:
 
@@ -1401,6 +1440,8 @@ we can show that ``min`` is commutative:
         apply min_le_left }
     end
     -- END
+
+.. index:: show, tactics ; show
 
 Here we have used curly brackets to separate proofs of
 different goals.
@@ -1450,6 +1491,8 @@ and the ``intros`` tactic introduces an arbitrary
 ``x`` and ``y`` to establish the conclusion.
 The first ``apply`` after ``le_antisymm`` implicitly
 uses ``h a b``, whereas the second one uses ``h b a``.
+
+.. index:: repeat, tactics ; repeat
 
 Another solution is to use the ``repeat`` tactic,
 which applies a tactic (or a block) as many times
@@ -1542,6 +1585,8 @@ as well.
 As a hint, you can use the theorem ``add_neg_cancel_right``
 and the ``linarith`` tactic.
 
+.. index:: absolute value
+
 Lean's naming convention is made manifest
 in the library's name for the triangle inequality:
 
@@ -1570,6 +1615,8 @@ Use it to prove the following variant:
 
 See if you can do this in three lines or less.
 You can use the theorem ``sub_add_cancel``.
+
+.. index:: divisibility
 
 Another important relation that we will make use of
 in the sections to come is the divisibility relation
@@ -1622,6 +1669,8 @@ you need to prove the following:
       sorry
     end
 
+.. index:: gcd, lcm
+
 With respect to divisibility, the *greatest common divisor*,
 ``gcd``, and least common multiple, ``lcm``,
 are analogous to ``min`` and ``max``.
@@ -1671,6 +1720,8 @@ prove the following:
 
 Proving Facts about Algebraic Structures
 ----------------------------------------
+
+.. index:: order relation, partial order
 
 In Section :numref:`proving_identities_in_algebraic_structures`,
 we saw that many common identities governing the real numbers hold
@@ -1736,6 +1787,8 @@ the symbol ``¬`` stands for "not," and
 In a later chapter, you will learn how to use
 these logical connectives to *prove* that ``<``
 has the properties indicated.
+
+.. index:: lattice
 
 A *lattice* is a structure that extends a partial
 order with operations ``⊓`` and ``⊔`` that are
@@ -1929,6 +1982,8 @@ enumerated in the last two examples:
 
     example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := sorry
     -- END
+
+.. index:: metric space
 
 Finally, here is one last example.
 A *metric space* consists of a set equipped with a notion of
