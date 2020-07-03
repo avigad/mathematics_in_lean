@@ -901,11 +901,12 @@ Look up the definition of ``left_inverse`` and ``right_inverse``
 by double-clicking or right-clicking on them in VS Code,
 or using the commands ``#print left_inverse`` and ``#print right_inverse``.
 Then try to prove the two theorems.
-It is tricky!
-It helps to have a careful pen-and-paper proof before
+They are tricky!
+It helps to do the proofs on paper before
 you start hacking through the details.
 You should be able to prove each of them with about a half-dozen
-short lines. If you are looking for an extra challenge,
+short lines.
+If you are looking for an extra challenge,
 try to condense each proof to a single-line proof term.
 
 .. code-block:: lean
