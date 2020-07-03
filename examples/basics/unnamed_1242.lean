@@ -1,13 +1,8 @@
-import import analysis.special_functions.exp_log
+import data.real.basic
 import tactic
 
-open real
-
-variables a b c : ℝ
-
--- BEGIN
-example (h : a ≤ b) : c - exp b ≤ c - exp a :=
+example (a : ℝ) : 0 ≤ a^2 :=
 begin
-  sorry
+  -- library_search,
+  exact pow_two_nonneg a
 end
--- END

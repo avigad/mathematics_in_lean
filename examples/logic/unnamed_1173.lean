@@ -1,13 +1,6 @@
-variables {α : Type*} (P : α → Prop)
+import data.real.basic
 
-example (h : ¬ ∃ x, P x) : ∀ x, ¬ P x :=
+-- BEGIN
+example (x : ℝ) (h : ∀ ε > 0, x ≤ ε) : x ≤ 0 :=
 sorry
-
-example (h : ∀ x, ¬ P x) : ¬ ∃ x, P x :=
-sorry
-
-example (h : ¬ ∀ x, P x) : ∃ x, ¬ P x :=
-sorry
-
-example (h : ∃ x, ¬ P x) : ¬ ∀ x, P x :=
-sorry
+-- END

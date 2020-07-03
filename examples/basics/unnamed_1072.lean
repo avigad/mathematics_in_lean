@@ -1,11 +1,9 @@
-import analysis.special_functions.exp_log
+import data.real.basic
 
-open real
-
-variables a b c : ℝ
+variables a b c d : ℝ
 
 -- BEGIN
-example (h : 1 ≤ a) (h' : b ≤ c) :
-  2 + a + exp b ≤ 3 * a + exp c :=
-by linarith [exp_le_exp.mpr h']
+example (h : 2 * a ≤ 3 * b) (h' : 1 ≤ a) (h'' : d = 2) :
+  d + a ≤ 5 * b :=
+by linarith
 -- END

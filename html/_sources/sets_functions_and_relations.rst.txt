@@ -552,14 +552,15 @@ at an appropriate point in the proof.
 ..   contradiction
 .. end
 
+.. TODO: bUnion and sUnion
 
 .. _functions:
 
 Functions
 ---------
 
-In Lean, a function ``f : α → β`` is a function between types.
-If ``p`` is a set of elements of type ``β``,
+If ``f : α → β`` is a function and  ``p`` is a set of
+elements of type ``β``,
 the library defines ``preimage f p``, written ``f ⁻¹' p``,
 to be ``{ x | f x ∈ p }``.
 The expression ``x ∈ f ⁻¹' p`` reduces to ``f x ∈ s``.
@@ -636,6 +637,33 @@ use a theorem specifically designed for that purpose.
 But knowing that the image is defined in terms
 of an existential quantifier is often convenient.
 
+The following equivalence is a good exercise:
+
+.. code-block:: lean
+
+    import data.set.function
+
+    variables {α β : Type*}
+    variable  f : α → β
+    variables (s : set α) (t : set β)
+
+    -- BEGIN
+    example : f '' s ⊆ t ↔ s ⊆ f ⁻¹' t :=
+    sorry
+    -- END
+
+It shows that ``image f`` and ``preimage f`` are
+an instance of what is known as a *Galois connection*
+between ``set α`` and ``set β``,
+each partially ordered by the subset relation.
+In the library, this equivalence is named
+``image_subset_iff``.
+In practice, the right-hand side is often the
+more useful representation,
+because ``y ∈ f ⁻¹' t`` unfolds to ``f y ∈ t``
+whereas working with ``x ∈ f '' s`` requires
+decomposing an existential quantifier.
+
 Here is a long list of set-theoretic identities for
 you to enjoy.
 You don't have to do all of them at once;
@@ -697,8 +725,9 @@ and set the rest aside for a rainy day.
     sorry
     -- END
 
-You might also enjoy looking up for making up some
-identities involving indexed unions and proving them.
+.. TODO: add a list of these.
+.. You might also enjoy looking up for making up some
+.. identities involving indexed unions and proving them.
 
 The fact that in type theory a function is always totally
 defined on its domain type
@@ -711,7 +740,7 @@ The strategy generally followed by the Lean library
 in these situations is to assign such functions somewhat arbitrary
 but convenient values outside their natural domain.
 For example, defining ``x / 0`` to be ``0`` means that the
-identity ``(x + y) / z = x / 2 + y / z`` holds
+identity ``(x + y) / z = x / z + y / z`` holds
 for every ``x``, ``y``, and ``z``.
 When you see a theorem in the library that uses the
 division symbol,
@@ -725,6 +754,15 @@ For example, if a theorem begins ``∀ x > 0, ...``,
 dividing by ``x`` in the body of the statement is not problematic.
 Limiting the scope of a quantifier in this way is known
 as *relativization*.
+
+.. TODO: comments from Patrick
+.. This discussion is very important and we should really get it right. The natural tendency of mathematicians here is to think Lean does bullshit and will let them prove false things. So we should focus on why there is no issue, not on apologies or difficulties.
+
+.. I think we could include a discussion of the fact that the meaning of f : α → β is actually more subtle that it seems. Saying f is a function from α to β is actually a slight oversimplification. The more nuanced meaning is that f is a function whose possible meaningful input values all have type α and whose output values have type β, but we should not assume that every term with type α is a meaningful input value.
+
+.. Then we of course need to point out that defining terms of type α → β required to assign a value to every term of type α, and this can be irritating but this is balanced by the convenience of having a couple of unconditional lemma like the (x+y)/z thing.
+
+.. Also, I feel it is very important to point out that real world math doesn't force you to (x+y)/⟨z, proof that z doesn't vanish⟩. So type theory is not different here.
 
 .. TODO: deleted because we haven't discussed subtypes yet.
 .. Be sure to do that eventually.
@@ -760,6 +798,13 @@ It also introduces the notation ``∃ x ∈ s, ...``.
 When this expression is used  with ``rintros``, ``use``,
 and anonymous constructors,
 it behaves roughly the same as ``∃ x, x ∈ s ∧ ...``.
+These are sometimes known as *bounded quantifiers*,
+because the construction serves to restrict their significance
+to the set ``s``.
+As a result, theorems in the library that make use of them
+often contain ``ball`` or ``bexists`` in the name.
+
+.. TODO: see if there is a natural place to introduce these in the previous chapter.
 
 The statement ``injective f`` is provably equivalent
 to ``inj_on f univ``.
@@ -842,7 +887,7 @@ no ``x`` satisfying ``f x = y``,
 we want to assign a default value in ``α``.
 Adding the annotation ``[inhabited α]`` as a variable
 is tantamount to assuming that ``α`` has a
-canonical element, which is denoted ``default α``.
+preferred element, which is denoted ``default α``.
 Second, in the case where there is more than one ``x``
 such that ``f x = y``,
 the inverse function needs to *choose* one of them.
@@ -861,7 +906,29 @@ operator, illustrated below.
 
     #check classical.some h
 
-    example : P (classical.some h) := classical.some_spec _
+    example : P (classical.some h) := classical.some_spec h
+
+.. TODO: comments from Patrick.
+.. This whole discussion may be a bit too implicit. We could spell out what classical.some and classical.some_spec do. It may be a good place to also introduce a discussion of the choose tactic, and explain why you chose (!) not to use it here.
+
+.. Typically, you can include:
+
+.. example {α β : Type*} {f : α → β} : surjective f ↔ ∃ g : β → α, ∀ b, f (g b) = b :=
+.. begin
+..   split,
+..   { intro h,
+..     dsimp [surjective] at h, -- this line is optional
+..     choose g hg using h,
+..     use g,
+..     exact hg },
+..   { rintro ⟨g, hg⟩,
+..     intros b,
+..     use g b,
+..     exact hg b },
+.. end
+.. Then contrast this to a situation where we really want a def outputting an element or a function, maybe with a less artificial example than your inverse.
+
+.. We should also tie this to the "function are global" discussion, and the whole thread of deferring proofs to lemmas instead of definitions. There is a lot going on here, and all of it is crucial for formalization.
 
 With these in hand, we can define the inverse function
 as follows:
