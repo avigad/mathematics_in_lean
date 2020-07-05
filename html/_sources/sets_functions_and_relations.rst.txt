@@ -733,31 +733,58 @@ and set the rest aside for a rainy day.
 .. You might also enjoy looking up for making up some
 .. identities involving indexed unions and proving them.
 
-The fact that in type theory a function is always totally
-defined on its domain type
-sometimes forces some difficult choices.
-For example, if we want to define ``x / y`` and ``log x``
-as functions on the reals,
-we have to assign a value to the first when ``y`` is ``0``,
-and a value to the second for ``x ≤ 0``.
-The strategy generally followed by the Lean library
-in these situations is to assign such functions somewhat arbitrary
-but convenient values outside their natural domain.
+In type theory, a function ``f : α → β`` can be applied to any
+element of the domain ``α``,
+but we sometimes want to represent functions that are
+meaningfully defined on only some of those elements.
+For example, as a function of type ``ℝ → ℝ → ℝ``,
+division is only meaningful when the second argument is nonzero.
+In mathematics, when we write an expression of the form ``s / t``,
+we should have implicitly or explicitly ruled out
+the case that ``t`` is zero.
+
+But since division has type ``ℝ → ℝ → ℝ`` in Lean,
+it also has to return a value when the second argument is zero.
+The strategy generally followed by the library is to assign such
+functions convenient values outside their natural domain.
 For example, defining ``x / 0`` to be ``0`` means that the
-identity ``(x + y) / z = x / z + y / z`` holds
-for every ``x``, ``y``, and ``z``.
-When you see a theorem in the library that uses the
-division symbol,
-you should be mindful that theorem depends on this
-nonstandard definition,
-but this generally does not cause problems in practice.
-When we need to,
-we can restrict the statement of a theorem so that
-it does not rely on such values.
-For example, if a theorem begins ``∀ x > 0, ...``,
-dividing by ``x`` in the body of the statement is not problematic.
-Limiting the scope of a quantifier in this way is known
-as *relativization*.
+identity ``(x + y) / z = x / z + y / z`` holds for every
+``x``, ``y``, and ``z``.
+
+As a result, when we read an expression ``s / t`` in Lean,
+we should not assume that ``t`` is a meaningful input value.
+When we need to, we can restrict the statement of a theorem to
+guarantee that it is.
+For example, theorem ``div_mul_cancel`` asserts ``x ≠ 0 → x / y * y = x`` for
+``x`` and ``y`` in suitable algebraic structures.
+
+.. TODO: previous text (delete eventually)
+
+.. The fact that in type theory a function is always totally
+.. defined on its domain type
+.. sometimes forces some difficult choices.
+.. For example, if we want to define ``x / y`` and ``log x``
+.. as functions on the reals,
+.. we have to assign a value to the first when ``y`` is ``0``,
+.. and a value to the second for ``x ≤ 0``.
+.. The strategy generally followed by the Lean library
+.. in these situations is to assign such functions somewhat arbitrary
+.. but convenient values outside their natural domain.
+.. For example, defining ``x / 0`` to be ``0`` means that the
+.. identity ``(x + y) / z = x / z + y / z`` holds
+.. for every ``x``, ``y``, and ``z``.
+.. When you see a theorem in the library that uses the
+.. division symbol,
+.. you should be mindful that theorem depends on this
+.. nonstandard definition,
+.. but this generally does not cause problems in practice.
+.. When we need to,
+.. we can restrict the statement of a theorem so that
+.. it does not rely on such values.
+.. For example, if a theorem begins ``∀ x > 0, ...``,
+.. dividing by ``x`` in the body of the statement is not problematic.
+.. Limiting the scope of a quantifier in this way is known
+.. as *relativization*.
 
 .. TODO: comments from Patrick
 .. This discussion is very important and we should really get it right. The natural tendency of mathematicians here is to think Lean does bullshit and will let them prove false things. So we should focus on why there is no issue, not on apologies or difficulties.
@@ -776,8 +803,7 @@ as *relativization*.
 .. but then we have to mediate between two different types,
 .. the reals and that subtype.
 
-For another example of relativization,
-the library defines a predicate ``inj_on f s`` to say that
+The library defines a predicate ``inj_on f s`` to say that
 ``f`` is injective on ``s``.
 It is defined as follows:
 
