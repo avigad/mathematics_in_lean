@@ -456,7 +456,7 @@ but that does not hold in general.
 If you have taken a course in linear algebra,
 you will recognize that, for every <span class="math notranslate nohighlight">\(n\)</span>,
 the <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n\)</span> matrices of real numbers
-form a ring in which commutativity fails. If we declare <code class="docutils literal notranslate"><span class="pre">R</span></code> to be a
+form a ring in which commutativity usually fails. If we declare <code class="docutils literal notranslate"><span class="pre">R</span></code> to be a
 <em>commutative</em> ring, in fact, all the theorems
 in the last section continue to hold when we replace
 <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> by <code class="docutils literal notranslate"><span class="pre">R</span></code>.</p>
@@ -539,8 +539,8 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 </div>
 </div><p>Prove the companion version:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.ring%0A%0Anamespace%20my_ring%0A%0Avariables%20%7BR%20%3A%20Type*%7D%20%5Bring%20R%5D%0A%0A--%20BEGIN%0Atheorem%20neg_add_cancel_right%20(a%20b%20%3A%20R)%20%3A%20(a%20%2B%20b)%20%2B%20-b%20%3D%20a%20%3A%3D%0Asorry%0A--%20END%0A%0Aend%20my_ring" target="_blank" tryitfile="../examples/basics/unnamed_638.lean">
-try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">neg_add_cancel_right</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20algebra.ring%0A%0Anamespace%20my_ring%0A%0Avariables%20%7BR%20%3A%20Type*%7D%20%5Bring%20R%5D%0A%0A--%20BEGIN%0Atheorem%20add_neg_cancel_right%20(a%20b%20%3A%20R)%20%3A%20(a%20%2B%20b)%20%2B%20-b%20%3D%20a%20%3A%3D%0Asorry%0A--%20END%0A%0Aend%20my_ring" target="_blank" tryitfile="../examples/basics/unnamed_638.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">add_neg_cancel_right</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
 <span class="n">sorry</span>
 </pre></div>
 </div>
