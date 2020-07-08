@@ -2,6 +2,7 @@ import tactic
 
 open set
 
+-- BEGIN
 variables α I : Type*
 variables A B : ℕ → set α
 variable  s : set α
@@ -33,3 +34,4 @@ begin
   { exact h1 i },
   exact h2 i
 end
+-- END

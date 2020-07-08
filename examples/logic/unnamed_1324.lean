@@ -16,7 +16,7 @@ end
 
 example (h : ¬ fn_has_ub f) : ∀ a, ∃ x, f x > a :=
 begin
-  dsimp only [fn_has_ub, fn_ub] at h,
+  simp only [fn_has_ub, fn_ub] at h,
   push_neg at h,
   exact h
 end

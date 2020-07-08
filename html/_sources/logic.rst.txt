@@ -1341,7 +1341,7 @@ The command ``push_neg at h`` restates the hypothesis ``h``.
 
     example (h : ¬ fn_has_ub f) : ∀ a, ∃ x, f x > a :=
     begin
-      dsimp only [fn_has_ub, fn_ub] at h,
+      simp only [fn_has_ub, fn_ub] at h,
       push_neg at h,
       exact h
     end
@@ -1349,7 +1349,7 @@ The command ``push_neg at h`` restates the hypothesis ``h``.
 
 In the second example, we use Lean's simplifier to
 expand the definitions of ``fn_has_ub`` and ``fn_ub``.
-(We need to use ``dsimp`` rather than ``rw``
+(We need to use ``simp`` rather than ``rw``
 to expand ``fn_ub``,
 because it appears in the scope of a quantifier.)
 You can verify that in the examples above
