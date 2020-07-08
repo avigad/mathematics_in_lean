@@ -465,6 +465,105 @@ We also recommend using the theorems
 ..   norm_num
 .. end
 
+.. index:: bounded quantifiers
+
+Lean introduces the notation ``∀ x ∈ s, ...``,
+"for every ``x`` in ``s`` ... ,"
+as an abbreviation for  ``∀ x, x ∈ s → ...``.
+It also introduces the notation ``∃ x ∈ s, ...,``
+"there exists an ``x`` in ``s`` such that ... ."
+These are sometimes known as *bounded quantifiers*,
+because the construction serves to restrict their significance
+to the set ``s``.
+As a result, theorems in the library that make use of them
+often contain ``ball`` or ``bex`` in the name.
+The theorem ``bex_def`` asserts that ``∃ x ∈ s, ...`` is equivalent
+to ``∃ x, x ∈ s ∧ ...,``
+but when they are used with ``rintros``, ``use``,
+and anonymous constructors,
+these two expressions behave roughly the same.
+As a result, we usually don't need to use ``bex_def``
+to transform them explicitly.
+Here is are some examples of how they are used:
+
+.. code-block:: lean
+
+    import data.nat.prime data.nat.parity
+
+    open nat
+
+    -- BEGIN
+    variable (s : set ℕ)
+
+    example (h₀ : ∀ x ∈ s, ¬ even x) (h₁ : ∀ x ∈ s, prime x) :
+      ∀ x ∈ s, ¬ even x ∧ prime x :=
+    begin
+      intros x xs,
+      split,
+      { apply h₀ x xs },
+      apply h₁ x xs
+    end
+
+    example (h : ∃ x ∈ s, ¬ even x ∧ prime x) :
+      ∃ x ∈ s, prime x :=
+    begin
+      rcases h with ⟨x, xs, _, prime_x⟩,
+      use [x, xs, prime_x]
+    end
+    -- END
+
+See if you can prove these slight variations:
+
+.. code-block:: lean
+
+    import data.nat.prime data.nat.parity
+
+    open nat
+
+    -- BEGIN
+    variables (s t : set ℕ) (ssubt : s ⊆ t)
+
+    include ssubt
+
+    example (h₀ : ∀ x ∈ t, ¬ even x) (h₁ : ∀ x ∈ t, prime x) :
+      ∀ x ∈ s, ¬ even x ∧ prime x :=
+    sorry
+
+    example (h : ∃ x ∈ s, ¬ even x ∧ prime x) :
+      ∃ x ∈ t, prime x :=
+    sorry
+    -- END
+
+.. solutions
+.. example (h₀ : ∀ x ∈ t, ¬ even x) (h₁ : ∀ x ∈ t, prime x) :
+..   ∀ x ∈ s, ¬ even x ∧ prime x :=
+.. begin
+..   intros x xs,
+..   split,
+..   { apply h₀ x (ssubt xs) },
+..   apply h₁ x (ssubt xs)
+.. end
+
+.. example (h : ∃ x ∈ s, ¬ even x ∧ prime x) :
+..   ∃ x ∈ t, prime x :=
+.. begin
+..   rcases h with ⟨x, xs, _, px⟩,
+..   use [x, ssubt xs, px]
+.. end
+
+.. index:: include, commands; include
+
+The ``include`` command is needed because ``ssubt`` does not
+appear in the statement of the theorem.
+Lean does not look inside tactic blocks when it decides
+what variables and hypotheses to include,
+so if you delete that line,
+you will not see the hypothesis within a ``begin ... end`` proof.
+If you are proving theorems in a library,
+you can delimit the scope of and ``include`` by putting it
+between ``section`` and ``end``,
+so that later theorems do not include it as an unnecessary hypothesis.
+
 Indexed unions and intersections are
 another important set-theoretic construction.
 We can model a sequence :math:`A_0, A_1, A_2, \ldots` of sets of
@@ -483,6 +582,7 @@ The following illustrates their use.
 
     open set
 
+    -- BEGIN
     variables α I : Type*
     variables A B : ℕ → set α
     variable  s : set α
@@ -514,6 +614,12 @@ The following illustrates their use.
       { exact h1 i },
       exact h2 i
     end
+    -- END
+
+Parentheses are often needed with an
+indexed union or intersection because,
+as with the quantifiers,
+the scope of the bound variable extends as far as it can.
 
 Try proving the following identity.
 One direction requires classical logic!
@@ -556,7 +662,101 @@ at an appropriate point in the proof.
 ..   contradiction
 .. end
 
-.. TODO: bUnion and sUnion
+Mathlib also has bounded unions and intersections,
+which are analogous to the bounded quantifiers.
+You can unpack their meaning with ``mem_bUnion_iff``
+and ``mem_bInter_iff``.
+As the following examples show,
+Lean's simplifier carries out these replacements as well.
+
+.. code-block:: lean
+
+    import data.set.lattice
+    import data.nat.prime
+
+    open set nat
+
+    -- BEGIN
+    def primes : set ℕ := {x | prime x}
+
+    example : (⋃ p ∈ primes, {x | p^2 ∣ x}) = {x | ∃ p ∈ primes, p^2 ∣ x} :=
+    by { ext, rw mem_bUnion_iff, refl }
+
+    example : (⋃ p ∈ primes, {x | p^2 ∣ x}) = {x | ∃ p ∈ primes, p^2 ∣ x} :=
+    by { ext, simp }
+
+    example : (⋂ p ∈ primes, {x | ¬ p ∣ x}) ⊆ {x | x < 2} :=
+    begin
+      intro x,
+      contrapose!,
+      simp,
+      apply exists_prime_and_dvd
+    end
+    -- END
+
+Try solving the following example, which is similar.
+If you start typing ``eq_univ``,
+tab completion will tell you that ``apply eq_univ_of_forall``
+is a good way to start the proof.
+We also recommend using the theorem ``exists_infinite_primes``.
+
+.. code-block:: lean
+
+    import data.set.lattice
+    import data.nat.prime
+
+    open set nat
+
+    def primes : set ℕ := {x | prime x}
+
+    -- BEGIN
+    example : (⋃ p ∈ primes, {x | x ≤ p}) = univ :=
+    sorry
+    -- END
+
+.. solution
+.. example : (⋃ p ∈ primes, {x | x ≤ p}) = univ :=
+.. begin
+..   apply eq_univ_of_forall,
+..   intro x,
+..   simp,
+..   rcases exists_infinite_primes x with ⟨p, primep, pge⟩,
+..   use [p, pge, primep]
+.. end
+
+Mathlib has yet another form of the union,
+``⋃₀ s``, called ``sUnion`` and defined to be equal to
+``{x | ∃ t ∈ s, x ∈ y}``.
+Similarly, the set intersection ``⋂₀ s`` is defined to be
+``{x | ∀ t ∈ s, x ∈ t}``.
+The following examples show the relationship to bounded union
+and intersection, respectively.
+In the library, they are called ``sUnion_eq_bUnion`` and ``sInter_eq_bInter``.
+
+.. code-block:: lean
+
+    import data.set.lattice
+
+    open set
+
+    -- BEGIN
+    variables {α : Type*} (s : set (set α))
+
+    example : ⋃₀ s = ⋃ t ∈ s, t :=
+    begin
+      ext x,
+      rw mem_bUnion_iff,
+      refl
+    end
+
+    example : ⋂₀ s = ⋂ t ∈ s, t :=
+    begin
+      ext x,
+      rw mem_bInter_iff,
+      refl
+    end
+    -- END
+
 
 .. _functions:
 
@@ -566,7 +766,7 @@ Functions
 If ``f : α → β`` is a function and  ``p`` is a set of
 elements of type ``β``,
 the library defines ``preimage f p``, written ``f ⁻¹' p``,
-to be ``{ x | f x ∈ p }``.
+to be ``{x | f x ∈ p}``.
 The expression ``x ∈ f ⁻¹' p`` reduces to ``f x ∈ s``.
 This is often convenient, as in the following example:
 
@@ -822,20 +1022,6 @@ It is defined as follows:
     iff.refl _
     -- END
 
-Lean introduces the notation ``∀ x ∈ s, ...``
-as an abbreviation for  ``∀ x, x ∈ s → ...``.
-It also introduces the notation ``∃ x ∈ s, ...``.
-When this expression is used  with ``rintros``, ``use``,
-and anonymous constructors,
-it behaves roughly the same as ``∃ x, x ∈ s ∧ ...``.
-These are sometimes known as *bounded quantifiers*,
-because the construction serves to restrict their significance
-to the set ``s``.
-As a result, theorems in the library that make use of them
-often contain ``ball`` or ``bexists`` in the name.
-
-.. TODO: see if there is a natural place to introduce these in the previous chapter.
-
 The statement ``injective f`` is provably equivalent
 to ``inj_on f univ``.
 Similarly, the library defines ``range f`` to be
@@ -938,27 +1124,10 @@ operator, illustrated below.
 
     example : P (classical.some h) := classical.some_spec h
 
-.. TODO: comments from Patrick.
-.. This whole discussion may be a bit too implicit. We could spell out what classical.some and classical.some_spec do. It may be a good place to also introduce a discussion of the choose tactic, and explain why you chose (!) not to use it here.
-
-.. Typically, you can include:
-
-.. example {α β : Type*} {f : α → β} : surjective f ↔ ∃ g : β → α, ∀ b, f (g b) = b :=
-.. begin
-..   split,
-..   { intro h,
-..     dsimp [surjective] at h, -- this line is optional
-..     choose g hg using h,
-..     use g,
-..     exact hg },
-..   { rintro ⟨g, hg⟩,
-..     intros b,
-..     use g b,
-..     exact hg b },
-.. end
-.. Then contrast this to a situation where we really want a def outputting an element or a function, maybe with a less artificial example than your inverse.
-
-.. We should also tie this to the "function are global" discussion, and the whole thread of deferring proofs to lemmas instead of definitions. There is a lot going on here, and all of it is crucial for formalization.
+Given ``h : ∃ x, P x``, the value of ``classical.some h``
+is some ``x`` satisfying ``P x``.
+The theorem ``classical.some_spec h`` says that ``classical.some h``
+meets this specification.
 
 With these in hand, we can define the inverse function
 as follows:
@@ -987,6 +1156,12 @@ are needed because we are using classical logic in an essential way.
 On input ``y``, the function ``inverse f``
 returns some value of ``x`` satisfying ``f x = y`` if there is one,
 and a default element of ``α`` otherwise.
+This is an instance of a *dependent if* construction,
+since in the positive case, the value returned,
+``classical.some h``, depends on the assumption ``h``.
+The identity ``dif_pos h`` rewrites ``if h : e then a else b``
+to ``a`` given ``h : e``,
+and, similarly, ``dif_neg h`` rewrites it to ``b`` given ``h : ¬ e``.
 The theorem ``inverse_spec`` says that ``inverse f``
 meets the first part of this specification.
 
@@ -1065,6 +1240,33 @@ try to condense each proof to a single-line proof term.
 
 .. example : surjective f ↔ right_inverse (inverse f) f :=
 .. ⟨λ h y, inverse_spec _ (h _), λ h y, ⟨inverse f y, h _⟩⟩
+
+.. TODO: These comments after this paragraph are from Patrick.
+.. We should decide whether we want to do this here.
+.. Another possibility is to wait until later.
+.. There may be good examples for the topology chapter,
+.. at which point, the reader will be more of an expert.
+
+.. This may be a good place to also introduce a discussion of the choose tactic, and explain why you choose (!) not to use it here.
+
+.. Typically, you can include:
+
+.. example {α β : Type*} {f : α → β} : surjective f ↔ ∃ g : β → α, ∀ b, f (g b) = b :=
+.. begin
+..   split,
+..   { intro h,
+..     dsimp [surjective] at h, -- this line is optional
+..     choose g hg using h,
+..     use g,
+..     exact hg },
+..   { rintro ⟨g, hg⟩,
+..     intros b,
+..     use g b,
+..     exact hg b },
+.. end
+.. Then contrast this to a situation where we really want a def outputting an element or a function, maybe with a less artificial example than your inverse.
+
+.. We should also tie this to the "function are global" discussion, and the whole thread of deferring proofs to lemmas instead of definitions. There is a lot going on here, and all of it is crucial for formalization.
 
 We close this section with a type-theoretic statement of Cantor's
 famous theorem that there is no surjective function from a set
