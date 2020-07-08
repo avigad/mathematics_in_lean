@@ -724,14 +724,14 @@ We also recommend using the theorem ``exists_infinite_primes``.
 ..   use [p, pge, primep]
 .. end
 
-Mathlib has yet another form of the union,
-``⋃₀ s``, called ``sUnion`` and defined to be equal to
-``{x | ∃ t ∈ s, x ∈ y}``.
-Similarly, the set intersection ``⋂₀ s`` is defined to be
+Give a collection of sets, ``s : set (set α)``,
+their union, ``⋃₀ s``, has type ``set α``
+and is defined as ``{x | ∃ t ∈ s, x ∈ t}``.
+Similarly, their intersection, ``⋂₀ s``, is defined as
 ``{x | ∀ t ∈ s, x ∈ t}``.
-The following examples show the relationship to bounded union
-and intersection, respectively.
-In the library, they are called ``sUnion_eq_bUnion`` and ``sInter_eq_bInter``.
+These operations are called ``sUnion`` and ``sInter``, respectively.
+The following examples show their relationship to bounded union
+and intersection.
 
 .. code-block:: lean
 
@@ -757,6 +757,8 @@ In the library, they are called ``sUnion_eq_bUnion`` and ``sInter_eq_bInter``.
     end
     -- END
 
+In the library, these identities are called
+``sUnion_eq_bUnion`` and ``sInter_eq_bInter``.
 
 .. _functions:
 
