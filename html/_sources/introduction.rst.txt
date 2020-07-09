@@ -302,7 +302,7 @@ Your life may never be the same.
 *Acknowledgments.* We are grateful to Gabriel Ebner for setting up the
 infrastructure for running this tutorial in VS Code.
 We are also grateful for help from
-Bryan Gin-ge Chen, Johan Commelin, and Guilherme Silva.
+Bryan Gin-ge Chen, Johan Commelin, Julian Külshammer, and Guilherme Silva.
 
 .. _`The Mechanization of Mathematics`: https://www.ams.org/journals/notices/201806/rnoti-p681.pdf
 .. _`The Future of Mathematics`: https://www.youtube.com/watch?v=Dp-mQ3HxgDE

@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="ascii" />
-    <title>4. Sets, Functions, and Relations &#8212; Mathematics in Lean 0.1 documentation</title>
+    <title>4. Sets and Functions &#8212; Mathematics in Lean 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -33,8 +33,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="sets-functions-and-relations">
-<span id="id1"></span><h1><span class="section-number">4. </span>Sets, Functions, and Relations<a class="headerlink" href="#sets-functions-and-relations" title="Permalink to this headline">&#182;</a></h1>
+  <div class="section" id="sets-and-functions">
+<span id="sets-functions-and-relations"></span><h1><span class="section-number">4. </span>Sets and Functions<a class="headerlink" href="#sets-and-functions" title="Permalink to this headline">&#182;</a></h1>
 <p>The vocabulary of sets, relations, and functions provides a uniform
 language for carrying out constructions in all the branches of
 mathematics.
@@ -67,7 +67,7 @@ from real numbers to real numbers.
 The distinction between types and set takes some getting used to,
 but this chapter will take you through the essentials.</p>
 <div class="section" id="sets">
-<span id="id2"></span><h2><span class="section-number">4.1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">&#182;</a></h2>
+<span id="id1"></span><h2><span class="section-number">4.1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">&#182;</a></h2>
 <p id="index-0">If <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is any type, the type <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">&#945;</span></code> consists of sets
 of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 This type supports the usual set-theoretic operations and relations.
@@ -85,7 +85,7 @@ the expression <code class="docutils literal notranslate"><span class="pre">x</s
 Theorems that mention set membership often include <code class="docutils literal notranslate"><span class="pre">mem</span></code>
 in their name.
 The expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8713;</span> <span class="pre">s</span></code> abbreviates <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code>.
-You can type <code class="docutils literal notranslate"><span class="pre">&#8712;</span></code> as <code class="docutils literal notranslate"><span class="pre">\in</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8713;</span></code> as <code class="docutils literal notranslate"><span class="pre">\notin</span></code>.</p>
+You can type <code class="docutils literal notranslate"><span class="pre">&#8712;</span></code> as <code class="docutils literal notranslate"><span class="pre">\in</span></code> or <code class="docutils literal notranslate"><span class="pre">\mem</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8713;</span></code> as <code class="docutils literal notranslate"><span class="pre">\notin</span></code>.</p>
 <p id="index-1">One way to prove things about sets is to use <code class="docutils literal notranslate"><span class="pre">rw</span></code>
 or the simplifier to expand the definitions.
 In the second example below, we use <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">only</span></code>
@@ -469,9 +469,9 @@ so <code class="docutils literal notranslate"><span class="pre">&#8469;</span></
 used to index the sets.
 The following illustrates their use.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0A%0Aopen%20set%0A%0A--%20BEGIN%0Avariables%20%CE%B1%20I%20%3A%20Type*%0Avariables%20A%20B%20%3A%20%E2%84%95%20%E2%86%92%20set%20%CE%B1%0Avariable%20%20s%20%3A%20set%20%CE%B1%0A%0Aexample%20%3A%20s%20%E2%88%A9%20(%E2%8B%83%20i%2C%20A%20i)%20%3D%20%E2%8B%83%20i%2C%20(A%20i%20%E2%88%A9%20s)%20%3A%3D%0Abegin%0A%20%20ext%20x%2C%0A%20%20simp%20only%20%5Bmem_inter_eq%2C%20mem_Union%5D%2C%0A%20%20split%2C%0A%20%20%7B%20rintros%20%E2%9F%A8xs%2C%20%E2%9F%A8i%2C%20xAi%E2%9F%A9%E2%9F%A9%2C%0A%20%20%20%20exact%20%E2%9F%A8i%2C%20xAi%2C%20xs%E2%9F%A9%20%7D%2C%0A%20%20rintros%20%E2%9F%A8i%2C%20xAi%2C%20xs%E2%9F%A9%2C%0A%20%20exact%20%E2%9F%A8xs%2C%20%E2%9F%A8i%2C%20xAi%E2%9F%A9%E2%9F%A9%0Aend%0A%0Aexample%20%3A%20(%E2%8B%82%20i%2C%20A%20i%20%E2%88%A9%20B%20i)%20%3D%20(%E2%8B%82%20i%2C%20A%20i)%20%E2%88%A9%20(%E2%8B%82%20i%2C%20B%20i)%20%3A%3D%0Abegin%0A%20%20ext%20x%2C%0A%20%20simp%20only%20%5Bmem_inter_eq%2C%20mem_Inter%5D%2C%0A%20%20split%2C%0A%20%20%7B%20intro%20h%2C%0A%20%20%20%20split%2C%0A%20%20%20%20%7B%20intro%20i%2C%0A%20%20%20%20%20%20exact%20(h%20i).1%20%7D%2C%0A%20%20%20%20intro%20i%2C%0A%20%20%20%20exact%20(h%20i).2%20%7D%2C%0A%20%20rintros%20%E2%9F%A8h1%2C%20h2%E2%9F%A9%20i%2C%0A%20%20split%2C%0A%20%20%7B%20exact%20h1%20i%20%7D%2C%0A%20%20exact%20h2%20i%0Aend%0A--%20END" target="_blank" tryitfile="../examples/sets_functions_and_relations/unnamed_611.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0A%0Aopen%20set%0A%0A--%20BEGIN%0Avariables%20%CE%B1%20I%20%3A%20Type*%0Avariables%20A%20B%20%3A%20I%20%E2%86%92%20set%20%CE%B1%0Avariable%20%20s%20%3A%20set%20%CE%B1%0A%0Aexample%20%3A%20s%20%E2%88%A9%20(%E2%8B%83%20i%2C%20A%20i)%20%3D%20%E2%8B%83%20i%2C%20(A%20i%20%E2%88%A9%20s)%20%3A%3D%0Abegin%0A%20%20ext%20x%2C%0A%20%20simp%20only%20%5Bmem_inter_eq%2C%20mem_Union%5D%2C%0A%20%20split%2C%0A%20%20%7B%20rintros%20%E2%9F%A8xs%2C%20%E2%9F%A8i%2C%20xAi%E2%9F%A9%E2%9F%A9%2C%0A%20%20%20%20exact%20%E2%9F%A8i%2C%20xAi%2C%20xs%E2%9F%A9%20%7D%2C%0A%20%20rintros%20%E2%9F%A8i%2C%20xAi%2C%20xs%E2%9F%A9%2C%0A%20%20exact%20%E2%9F%A8xs%2C%20%E2%9F%A8i%2C%20xAi%E2%9F%A9%E2%9F%A9%0Aend%0A%0Aexample%20%3A%20(%E2%8B%82%20i%2C%20A%20i%20%E2%88%A9%20B%20i)%20%3D%20(%E2%8B%82%20i%2C%20A%20i)%20%E2%88%A9%20(%E2%8B%82%20i%2C%20B%20i)%20%3A%3D%0Abegin%0A%20%20ext%20x%2C%0A%20%20simp%20only%20%5Bmem_inter_eq%2C%20mem_Inter%5D%2C%0A%20%20split%2C%0A%20%20%7B%20intro%20h%2C%0A%20%20%20%20split%2C%0A%20%20%20%20%7B%20intro%20i%2C%0A%20%20%20%20%20%20exact%20(h%20i).1%20%7D%2C%0A%20%20%20%20intro%20i%2C%0A%20%20%20%20exact%20(h%20i).2%20%7D%2C%0A%20%20rintros%20%E2%9F%A8h1%2C%20h2%E2%9F%A9%20i%2C%0A%20%20split%2C%0A%20%20%7B%20exact%20h1%20i%20%7D%2C%0A%20%20exact%20h2%20i%0Aend%0A--%20END" target="_blank" tryitfile="../examples/sets_functions_and_relations/unnamed_611.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">variables</span> <span class="n">&#945;</span> <span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span>
-<span class="kd">variables</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">set</span> <span class="n">&#945;</span>
+<span class="kd">variables</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">set</span> <span class="n">&#945;</span>
 <span class="kd">variable</span>  <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">&#945;</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="n">i</span> <span class="bp">&#8745;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
@@ -512,7 +512,7 @@ One direction requires classical logic!
 We recommend using <code class="docutils literal notranslate"><span class="pre">by_cases</span> <span class="pre">xs</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code>
 at an appropriate point in the proof.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0A%0Aopen%20set%0A%0Avariables%20%CE%B1%20I%20%3A%20Type*%0Avariable%20%20A%20%3A%20%E2%84%95%20%E2%86%92%20set%20%CE%B1%0Avariable%20%20s%20%3A%20set%20%CE%B1%0A%0A--%20BEGIN%0Aopen_locale%20classical%0A%0Aexample%20%3A%20s%20%E2%88%AA%20(%E2%8B%82%20i%2C%20A%20i)%20%3D%20%E2%8B%82%20i%2C%20(A%20i%20%E2%88%AA%20s)%20%3A%3D%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/sets_functions_and_relations/unnamed_661.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%0A%0Aopen%20set%0A%0Avariables%20%CE%B1%20I%20%3A%20Type*%0Avariable%20%20A%20%3A%20I%20%E2%86%92%20set%20%CE%B1%0Avariable%20%20s%20%3A%20set%20%CE%B1%0A%0A--%20BEGIN%0Aopen_locale%20classical%0A%0Aexample%20%3A%20s%20%E2%88%AA%20(%E2%8B%82%20i%2C%20A%20i)%20%3D%20%E2%8B%82%20i%2C%20(A%20i%20%E2%88%AA%20s)%20%3A%3D%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/sets_functions_and_relations/unnamed_661.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="n">open_locale</span> <span class="n">classical</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8746;</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="n">i</span> <span class="bp">&#8746;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
@@ -586,7 +586,7 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 <code class="docutils literal notranslate"><span class="pre">sUnion_eq_bUnion</span></code> and <code class="docutils literal notranslate"><span class="pre">sInter_eq_bInter</span></code>.</p>
 </div>
 <div class="section" id="functions">
-<span id="id3"></span><h2><span class="section-number">4.2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">&#182;</a></h2>
+<span id="id2"></span><h2><span class="section-number">4.2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">&#182;</a></h2>
 <p>If <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">&#946;</span></code> is a function and  <code class="docutils literal notranslate"><span class="pre">p</span></code> is a set of
 elements of type <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>,
 the library defines <code class="docutils literal notranslate"><span class="pre">preimage</span> <span class="pre">f</span> <span class="pre">p</span></code>, written <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">p</span></code>,
@@ -981,7 +981,7 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">2. Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logic.html">3. Logic</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Sets, Functions, and Relations</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Sets and Functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#sets">4.1. Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#functions">4.2. Functions</a></li>
 </ul>

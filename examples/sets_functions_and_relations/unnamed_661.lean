@@ -3,7 +3,7 @@ import tactic
 open set
 
 variables α I : Type*
-variable  A : ℕ → set α
+variable  A : I → set α
 variable  s : set α
 
 -- BEGIN

@@ -4,7 +4,7 @@ open set
 
 -- BEGIN
 variables α I : Type*
-variables A B : ℕ → set α
+variables A B : I → set α
 variable  s : set α
 
 example : s ∩ (⋃ i, A i) = ⋃ i, (A i ∩ s) :=
