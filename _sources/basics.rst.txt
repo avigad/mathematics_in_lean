@@ -52,24 +52,58 @@ Let's try out ``rw``.
       rw mul_assoc b a c
     end
 
-As you move your cursor past each step of the proof,
-you can see the goal of the proof change.
 The ``import`` line at the beginning of the example
 imports the theory of the real numbers from ``mathlib``.
 For the sake of brevity,
 we generally suppress information like this when it
 is repeated from example to example.
-Clicking the ``try it!`` button displays all the
+Clicking the ``try it!`` button displays the full
 example as it is meant to be processed and checked by Lean.
 
+You are welcome to make changes to see what happens.
 You can type the ``ℝ`` character as ``\R`` or ``\real``
-in the VS Code editor.
+in VS Code.
 The symbol doesn't appear until you hit space or the tab key.
 If you hover over a symbol when reading a Lean file,
 VS Code will show you the syntax that can be used to enter it.
 If your keyboard does not have an easily accessible backslash,
 you can change the leading character by changing the
-``lean.input.leader`` setting in VS Code.
+``lean.input.leader`` setting.
+
+.. index:: proof state, local context, goal
+
+When a cursor is in the middle of a tactic proof,
+Lean reports on the current *proof state* in the
+*Lean infoview* window.
+As you move your cursor past each step of the proof,
+you can see the state change.
+A typical proof state in Lean might look as follows:
+
+.. code-block::
+
+    1 goal
+    x y : ℕ,
+    h₁ : prime x,
+    h₂ : ¬even x,
+    h₃ : y > x
+    ⊢ y ≥ 4
+
+The lines before the one that begins with ``⊢`` denote the *context*:
+they are the objects and assumptions currently at play.
+In this example, these include two objects, ``x`` and ``y``,
+each a natural number.
+They also include three assumptions,
+labelled ``h₁``, ``h₂``, and ``h₃``.
+In Lean, everything in a context is labelled with an identifier.
+You can type these subscripted labels as ``h\1``, ``h\2``, and ``h\3``,
+but any legal identifiers would do:
+you can use ``h1``, ``h2``, ``h3`` instead,
+or ``foo``, ``bar``, and ``baz``.
+The last line represents the *goal*,
+that is, the fact to be proved.
+Sometimes people use *target* for the fact to be proved,
+and *goal* for the combination of the context and the target.
+In practice, the intended meaning is usually clear.
 
 Try proving these identities,
 in each case replacing ``sorry`` by a tactic proof.
@@ -133,39 +167,6 @@ and the second with only one argument.
       sorry
     end
     -- END
-
-.. index:: proof state, local context, goal
-
-In the Lean editor mode,
-when a cursor is in the middle of a tactic proof,
-Lean reports on the current *proof state*.
-A typical proof state in Lean might look as follows:
-
-.. code-block::
-
-    1 goal
-    x y : ℕ,
-    h₁ : prime x,
-    h₂ : ¬even x,
-    h₃ : y > x
-    ⊢ y ≥ 4
-
-The lines before the one that begins with ``⊢`` denote the *context*:
-they are the objects and assumptions currently at play.
-In this example, these include two objects, ``x`` and ``y``,
-each a natural number.
-They also include three assumptions,
-labelled ``h₁``, ``h₂``, and ``h₃``.
-In Lean, everything in a context is labelled with an identifier.
-You can type these subscripted labels as ``h\1``, ``h\2``, and ``h\3``,
-but any legal identifiers would do:
-you can use ``h1``, ``h2``, ``h3`` instead,
-or ``foo``, ``bar``, and ``baz``.
-The last line represents the *goal*,
-that is, the fact to be proved.
-Sometimes people use *target* for the fact to be proved,
-and *goal* for the combination of the context and the target.
-In practice, the intended meaning is usually clear.
 
 You an also use ``rw`` with facts from the local context.
 
@@ -577,9 +578,18 @@ Most of the facts we prove are already in ``mathlib``.
 We will give the versions we prove the same names
 to help you learn the contents of the library
 as well as the naming conventions.
+
+.. index:: namespace, open, command ; open
+
+Lean provides an organizational mechanism similar
+to those used in programming languages:
+when a definition or theorem ``foo`` is introduced in a *namespace*
+``bar``, its full name is ``bar.foo``.
+The command ``open bar`` later *opens* the namespace,
+which allows us to use the shorter name ``foo``.
 To avoid errors due to name clashes,
-we will put our versions in a new *namespace*
-called ``my_ring.``
+in the next example we put our versions of the library
+theorems in a new namespace called ``my_ring.``
 
 The next example shows that we do not need ``add_zero`` or ``add_right_neg``
 as ring axioms, because they follow from the other axioms.
@@ -738,7 +748,6 @@ having proved it, we are now free to use it.
 At this point, the goal is exactly the result of ``add_left_cancel h``.
 We could equally well have closed the proof with
 ``apply add_left_cancel h`` or ``exact add_left_cancel h``.
-We will discuss ``apply`` and ``exact`` in the next section.
 
 Remember that multiplication is not assumed to be commutative,
 so the following theorem also requires some work.
@@ -904,11 +913,13 @@ additive version (and also their abelian variants,
 
     import algebra.group
 
+    -- BEGIN
     variables (G : Type*) [group G]
 
     #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
     #check (one_mul : ∀ a : G, 1 * a = a)
     #check (mul_left_inv : ∀ a : G, a⁻¹ * a = 1)
+    -- END
 
 If you are feeling cocky, try proving the following facts about
 groups, using only these axioms.
@@ -919,6 +930,7 @@ The proofs we have carried out in this section provide some hints.
 
     import algebra.group
 
+    -- BEGIN
     variables {G : Type*} [group G]
 
     #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
@@ -937,6 +949,7 @@ The proofs we have carried out in this section provide some hints.
     sorry
 
     end my_group
+    -- END
 
 .. index:: group (tactic), tactics ; group, tactics ; noncomm_ring, tactics ; abel
 
@@ -1116,8 +1129,15 @@ The ``linarith`` tactic is designed to handle *linear arithmetic*.
 
 In addition to equations and inequalities in the context,
 ``linarith`` will use additional inequalities that you pass as arguments.
-In the next example, `exp_le_exp.mpr h'` is a proof of
-`exp b ≤ exp c`, as we will explain very soon.
+In the next example, ``exp_le_exp.mpr h'`` is a proof of
+``exp b ≤ exp c``, as we will explain in a moment.
+Notice that, in Lean, we write ``f x`` to denote the application
+of a function ``f`` to the argument ``x``,
+exactly the same we we write ``h x`` to denote the result of
+applying a fact or theorem ``h`` to the argument ``x``.
+Parentheses are only needed for compound arguments,
+as in ``f (x + y)``. Without the parentheses, ``f x + y``
+would be parsed as ``(f x) + y``.
 
 .. code-block:: lean
 
@@ -1414,6 +1434,24 @@ by the following three facts:
 
 Can you guess the names of the theorems that characterize
 ``max`` in a similar way?
+
+Notice that we have to apply ``min`` to a pair of arguments ``a`` and ``b``
+by writing ``min a b`` rather than ``min (a, b)``.
+Formally, ``min`` is a function of type ``ℝ → ℝ → ℝ``.
+When we write a type like this with multiple arrows,
+the convention is that the implicit parentheses associate
+to the right, so the type is interpreted as ``ℝ → (ℝ → ℝ)``.
+The net effect is that if ``a`` and ``b`` have type ``ℝ``
+then ``min a`` has type ``ℝ → ℝ`` and
+``min a b`` has type ``ℝ``, so ``min`` acts like a function
+of two arguments, as we expect. Handling multiple
+arguments in this way is known as *currying*,
+after the logician Haskell Curry.
+
+The order of operations in Lean can also take some getting used to.
+Function application binds tighter than infix operations, so the
+expression ``min a b + c`` is interpreted as ``(min a b) + c``.
+With time, these conventions will become second nature.
 
 Using the theorem ``le_antisymm``, we can show that two
 real numbers are equal if each is less than or equal to the other.

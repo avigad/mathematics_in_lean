@@ -200,8 +200,13 @@ on the values of ``f``.
     def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
     -- END
 
-In the next example, remember that ``λ x, f x + g x`` is the
+.. index:: lambda abstraction
+
+In the next example, ``λ x, f x + g x`` is a name for the
 function that maps ``x`` to ``f x + g x``.
+Computer scientists refer to this as "lambda abstraction,"
+whereas a mathematician might describe it as the function
+:math:`x \mapsto f(x) + g(x)`.
 
 .. code-block:: lean
 
@@ -353,8 +358,17 @@ as new subgoals.
 
 When a proof is this short, it is often convenient
 to give a proof term instead.
-The ``intros`` command corresponds to a lambda,
-and the remaining term consists of applications.
+To describe a proof that temporarily introduces objects
+``a`` and ``b`` and a hypothesis ``aleb``,
+Lean uses the notation ``λ a b aleb, ...``.
+This is analogous to the way that a lambda abstraction
+like ``λ x, x^2`` describes a function
+by temporarily naming an object, ``x``,
+and then using it to describe a value.
+So the ``intros`` command in the previous proof
+corresponds to the lambda abstraction in the next proof term.
+The ``apply`` commands then correspond to building
+the application of the theorem to its arguments.
 
 .. code-block:: lean
 
