@@ -1,9 +1,12 @@
-variables {α : Type*} [inhabited α]
+import data.set.function
 
-#check default α
+open set
 
-variables (P : α → Prop) (h : ∃ x, P x)
+variables {α β : Type*}
+variables (f : α → β) (s : set α)
 
-#check classical.some h
-
-example : P (classical.some h) := classical.some_spec h
+-- BEGIN
+example : inj_on f s ↔
+  ∀ {x₁ x₂}, x₁ ∈ s → x₂ ∈ s → f x₁ = f x₂ → x₁ = x₂ :=
+iff.refl _
+-- END

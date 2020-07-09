@@ -2,12 +2,12 @@ import data.set.function
 
 open set function
 
+-- BEGIN
 variables {α β : Type*}
 variable  f : α → β
 variables s t : set α
 variables u v : set β
 
--- BEGIN
 example (h : injective f) : f ⁻¹' (f '' s) ⊆ s :=
 sorry
 

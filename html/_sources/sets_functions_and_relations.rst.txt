@@ -57,6 +57,12 @@ and union can be typed with ``\un`` or ``\cup``.
 The library also defines the set ``univ``,
 which consists of all the elements of type ``α``,
 and the empty set, ``∅``, which can be typed as ``\empty``.
+Given ``x : α`` and ``s : set α``,
+the expression ``x ∈ s`` says that ``x`` is a member of ``s``.
+Theorems that mention set membership often include ``mem``
+in their name.
+The expression ``x ∉ s`` abbreviates ``¬ x ∈ s``.
+You can type ``∈`` as ``\in`` and ``∉`` as ``\notin``.
 
 .. index:: simp, tactics ; simp
 
@@ -436,6 +442,32 @@ You should step through this proof and make sure
 you understand what is going on.
 Try deleting the line ``rw [evens, odds]``
 and confirm that the proof still works.
+
+In fact, set-builder notation is used to define
+
+- ``s ∩ t`` as ``{x | x ∈ s ∧ x ∈ t}``,
+- ``s ∪ t`` as ``{x | x ∈ s ∨ x ∈ t}``,
+- ``∅`` as ``{x | false}``, and
+- ``univ`` as ``{x | true}``.
+
+We often need to indicate the type of ``∅`` and ``univ``
+explicitly,
+because Lean has trouble guessing which ones we mean.
+The following examples show how Lean unfolds the last
+two definitions when needed. In the second one,
+``trivial`` is the canonical proof of ``true`` in the library.
+
+.. code-block:: lean
+
+    open set
+
+    -- BEGIN
+    example (x : ℕ) (h : x ∈ (∅ : set ℕ)) : false :=
+    h
+
+    example (x : ℕ) : x ∈ (univ : set ℕ) :=
+    trivial
+    -- END
 
 As an exercise, prove the following inclusion.
 Use ``intro n`` to unfold the definition of subset,
@@ -882,12 +914,12 @@ and set the rest aside for a rainy day.
 
     open set function
 
+    -- BEGIN
     variables {α β : Type*}
     variable  f : α → β
     variables s t : set α
     variables u v : set β
 
-    -- BEGIN
     example (h : injective f) : f ⁻¹' (f '' s) ⊆ s :=
     sorry
 
@@ -931,9 +963,82 @@ and set the rest aside for a rainy day.
     sorry
     -- END
 
-.. TODO: add a list of these.
-.. You might also enjoy looking up for making up some
-.. identities involving indexed unions and proving them.
+You can also try your hand at the next group of exercises,
+which characterize the behavior of images and preimages
+with respect to indexed unions and intersections.
+In the third exercise, the argument ``i : I`` is needed
+to guarantee that the index set is nonempty.
+To prove any of these, we recommend using ``ext`` or ``intro``
+to unfold the meaning of an equation or inclusion between sets,
+and then calling ``simp`` to unpack the conditions for membership.
+
+.. code-block:: lean
+
+    import data.set.lattice
+
+    open set function
+
+    -- BEGIN
+    variables {α β I : Type*}
+    variable  f : α → β
+    variable  A : I → set α
+    variable  B : I → set β
+
+    example : f '' (⋃ i, A i) = ⋃ i, f '' A i :=
+    sorry
+
+    example : f '' (⋂ i, A i) ⊆ ⋂ i, f '' A i :=
+    sorry
+
+    example (i : I) (injf : injective f) :
+      (⋂ i, f '' A i) ⊆ f '' (⋂ i, A i) :=
+    sorry
+
+    example : f ⁻¹' (⋃ i, B i) = ⋃ i, f ⁻¹' (B i) :=
+    sorry
+
+    example : f ⁻¹' (⋂ i, B i) = ⋂ i, f ⁻¹' (B i) :=
+    sorry
+    -- END
+
+.. solutions:
+.. example : f '' (⋃ i, A i) = ⋃ i, f '' A i :=
+.. begin
+..   ext y, simp,
+..   split,
+..   { rintros ⟨x, ⟨i, xAi⟩, fxeq⟩,
+..     use [i, x, xAi, fxeq] },
+..   rintros ⟨i, x, xAi, fxeq⟩,
+..   exact ⟨x, ⟨i, xAi⟩, fxeq⟩
+.. end
+
+.. example : f '' (⋂ i, A i) ⊆ ⋂ i, f '' A i :=
+.. begin
+..   intro y, simp,
+..   intros x h fxeq i,
+..   use [x, h i, fxeq],
+.. end
+
+.. example (i : I) (injf : injective f) : (⋂ i, f '' A i) ⊆ f '' (⋂ i, A i) :=
+.. begin
+..   intro y, simp,
+..   intro h,
+..   rcases h i with ⟨x, xAi, fxeq⟩,
+..   use x, split,
+..   { intro i',
+..     rcases h i' with ⟨x', x'Ai, fx'eq⟩,
+..     have : f x = f x', by rw [fxeq, fx'eq],
+..     have : x = x', from injf this,
+..     rw this,
+..     exact x'Ai },
+..   exact fxeq
+.. end
+
+.. example : f ⁻¹' (⋃ i, B i) = ⋃ i, f ⁻¹' (B i) :=
+.. by { ext x, simp }
+
+.. example : f ⁻¹' (⋂ i, B i) = ⋂ i, f ⁻¹' (B i) :=
+.. by { ext x, simp }
 
 In type theory, a function ``f : α → β`` can be applied to any
 element of the domain ``α``,

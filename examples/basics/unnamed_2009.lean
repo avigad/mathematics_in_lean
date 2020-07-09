@@ -1,7 +1,12 @@
-import topology.metric_space.basic
+import algebra.ordered_ring
 
-variables {X : Type*} [metric_space X]
+variables {R : Type*} [ordered_ring R]
+variables a b c : R
 
 -- BEGIN
-example (x y : X) : 0 ≤ dist x y := sorry
+example : a ≤ b → 0 ≤ b - a := sorry
+
+example : 0 ≤ b - a → a ≤ b := sorry
+
+example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := sorry
 -- END

@@ -1,5 +1,6 @@
 import algebra.group
 
+-- BEGIN
 variables {G : Type*} [group G]
 
 #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
@@ -18,3 +19,4 @@ theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a ⁻¹ :=
 sorry
 
 end my_group
+-- END

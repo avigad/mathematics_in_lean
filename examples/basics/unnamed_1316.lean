@@ -1,18 +1,13 @@
-import data.real.basic tactic
+import import analysis.special_functions.exp_log
+import tactic
 
-variables a b : ℝ
+open real
+
+variables a b c : ℝ
 
 -- BEGIN
-example : 2*a*b ≤ a^2 + b^2 :=
+example (h : a ≤ b) : c - exp b ≤ c - exp a :=
 begin
-  have h : 0 ≤ a^2 - 2*a*b + b^2,
-  calc
-    a^2 - 2*a*b + b^2 = (a - b)^2     : by ring
-    ... ≥ 0                           : by apply pow_two_nonneg,
-  calc
-    2*a*b
-        = 2*a*b + 0                   : by ring
-    ... ≤ 2*a*b + (a^2 - 2*a*b + b^2) : add_le_add (le_refl _) h
-    ... = a^2 + b^2                   : by ring
+  sorry
 end
 -- END
