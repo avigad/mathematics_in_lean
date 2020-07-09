@@ -1133,7 +1133,7 @@ In the next example, ``exp_le_exp.mpr h'`` is a proof of
 ``exp b ≤ exp c``, as we will explain in a moment.
 Notice that, in Lean, we write ``f x`` to denote the application
 of a function ``f`` to the argument ``x``,
-exactly the same we we write ``h x`` to denote the result of
+exactly the same way we write ``h x`` to denote the result of
 applying a fact or theorem ``h`` to the argument ``x``.
 Parentheses are only needed for compound arguments,
 as in ``f (x + y)``. Without the parentheses, ``f x + y``
