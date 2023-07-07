@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5. Number Theory &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>5. Elementary Number Theory &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -46,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Number Theory</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Elementary Number Theory</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#irrational-roots">5.1. Irrational Roots</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#induction-and-recursion">5.2. Induction and Recursion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#infinitely-many-primes">5.3. Infinitely Many Primes</a></li>
@@ -76,9 +76,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">5. </span>Number Theory</li>
+      <li><span class="section-number">5. </span>Elementary Number Theory</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C05_Number_Theory.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C05_Elementary_Number_Theory.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -86,8 +86,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="number-theory">
-<span id="id1"></span><h1><span class="section-number">5. </span>Number Theory<a class="headerlink" href="#number-theory" title="Permalink to this heading">&#61633;</a></h1>
+  <section id="elementary-number-theory">
+<span id="number-theory"></span><h1><span class="section-number">5. </span>Elementary Number Theory<a class="headerlink" href="#elementary-number-theory" title="Permalink to this heading">&#61633;</a></h1>
 <p>In this chapter, we show you how to formalize some elementary
 results in number theory.
 As we deal with more substantive mathematical content,
@@ -147,7 +147,7 @@ to the natural numbers.</p>
 <p>We also need the notion of a prime number, <code class="docutils literal notranslate"><span class="pre">Nat.Prime</span></code>.
 The theorem <code class="docutils literal notranslate"><span class="pre">Nat.prime_def_lt</span></code> provides one familiar characterization,
 and <code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_one_or_self_of_dvd</span></code> provides another.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">@</span><span class="n">Nat.prime_def_lt</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Nat.prime_def_lt</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="n">p</span> <span class="bp">&#8743;</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="bp">&#8594;</span> <span class="n">m</span> <span class="bp">&#8739;</span> <span class="n">p</span> <span class="bp">&#8594;</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rwa</span> <span class="o">[</span><span class="n">Nat.prime_def_lt</span><span class="o">]</span> <span class="n">at</span> <span class="n">prime_p</span>
@@ -182,7 +182,7 @@ if the square of a number is even, then that number is even as well.
 Mathlib defines the predicate <code class="docutils literal notranslate"><span class="pre">Even</span></code> in <code class="docutils literal notranslate"><span class="pre">Data.Nat.Parity</span></code>,
 but for reasons that will become clear below,
 we will simply use <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&#8739;</span> <span class="pre">m</span></code> to express that <code class="docutils literal notranslate"><span class="pre">m</span></code> is even.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">@</span><span class="n">Nat.Prime.dvd_mul</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Nat.Prime.dvd_mul</span>
 <span class="k">#check</span> <span class="n">Nat.Prime.dvd_mul</span> <span class="n">Nat.prime_two</span>
 <span class="k">#check</span> <span class="n">Nat.prime_two.dvd_mul</span>
 
@@ -209,7 +209,7 @@ and if all else fails,
 don&#8217;t hesitate to ask on
 <a class="reference external" href="https://leanprover.zulipchat.com/">Zulip</a>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
-  <span class="c1">-- library_search suggests the following:</span>
+  <span class="c1">-- apply? suggests the following:</span>
   <span class="o">(</span><span class="n">mul_right_inj&#39;</span> <span class="n">h&#39;</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span>
 </pre></div>
 </div>
@@ -344,7 +344,7 @@ to finish it off.</p>
     <span class="n">k</span> <span class="bp">&#8739;</span> <span class="n">r.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">cases&#39;</span> <span class="n">r</span> <span class="k">with</span> <span class="n">r</span>
   <span class="bp">&#183;</span> <span class="n">simp</span>
-  <span class="k">have</span> <span class="n">npow_nz</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">npowz</span> <span class="bp">=&gt;</span> <span class="n">nnz</span> <span class="o">(</span><span class="n">pow_eq_zero</span> <span class="n">npowz</span><span class="o">)</span>
+  <span class="k">have</span> <span class="n">npow_nz</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">npowz</span> <span class="bp">&#8614;</span> <span class="n">nnz</span> <span class="o">(</span><span class="n">pow_eq_zero</span> <span class="n">npowz</span><span class="o">)</span>
   <span class="k">have</span> <span class="n">eq1</span> <span class="o">:</span> <span class="o">(</span><span class="n">m</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">m.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="n">eq2</span> <span class="o">:</span> <span class="o">(</span><span class="n">r.succ</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span>
@@ -474,7 +474,7 @@ that the simplifier uses by default.</p>
 about the natural numbers by proving that the statement holds of 0
 and that whenever it holds of a natural number <span class="math notranslate nohighlight">\(n\)</span>,
 it also holds of <span class="math notranslate nohighlight">\(n + 1\)</span>.
-The line <code class="docutils literal notranslate"><span class="pre">induction</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span> <span class="pre">ih</span></code> in the proof
+The line <code class="docutils literal notranslate"><span class="pre">induction'</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span> <span class="pre">ih</span></code> in the proof
 below therefore results in two goals:
 in the first we need to prove <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">fac</span> <span class="pre">0</span></code>,
 and in the second we have the added assumption <code class="docutils literal notranslate"><span class="pre">ih</span> <span class="pre">:</span> <span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">fac</span> <span class="pre">n</span></code>
@@ -1154,7 +1154,7 @@ feat of formalization.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, Jeremy Avigad, Kevin Buzzard, Robert Y. Lewis, Patrick Massot.</p>
+    <p>&#169; Copyright 2020, Jeremy Avigad, Patrick Massot.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
