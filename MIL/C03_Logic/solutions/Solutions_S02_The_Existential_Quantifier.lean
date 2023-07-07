@@ -23,14 +23,14 @@ section
 variable {f g : ℝ → ℝ}
 
 example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x ↦ f x + g x := by
-  cases' lbf with a lbfa
-  cases' lbg with b lbgb
+  rcases lbf with ⟨a, lbfa⟩
+  rcases lbg with ⟨b, lbgb⟩
   use a + b
   intro x
   exact add_le_add (lbfa x) (lbgb x)
 
 example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x ↦ c * f x := by
-  cases' ubf with a lbfa
+  rcases ubf with ⟨a, lbfa⟩
   use c * a
   intro x
   exact mul_le_mul_of_nonneg_left (lbfa x) h

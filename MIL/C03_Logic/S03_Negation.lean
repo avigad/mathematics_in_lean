@@ -26,8 +26,8 @@ variable (f : ℝ → ℝ)
 
 example (h : ∀ a, ∃ x, f x > a) : ¬FnHasUb f := by
   intro fnub
-  cases' fnub with a fnuba
-  cases' h a with x hx
+  rcases fnub with ⟨a, fnuba⟩
+  rcases h a with ⟨x, hx⟩
   have : f x ≤ a := fnuba x
   linarith
 
@@ -102,7 +102,7 @@ example (h : ¬∀ a, ∃ x, f x > a) : FnHasUb f := by
   exact h
 
 example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
-  simp only [FnHasUb, FnUb] at h
+  dsimp only [FnHasUb, FnUb] at h
   push_neg at h
   exact h
 
