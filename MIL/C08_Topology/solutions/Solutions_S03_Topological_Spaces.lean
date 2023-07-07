@@ -1,3 +1,4 @@
+import Mathlib.Tactic
 import Mathlib.Topology.Instances.Real
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 
@@ -55,7 +56,7 @@ example {α : Type _} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
     (H : ∀ a : α, ∀ p : α → Prop, (∀ᶠ x in n a, p x) → ∀ᶠ y in n a, ∀ᶠ x in n y, p x) :
     ∀ a, ∀ s ∈ n a, ∃ t ∈ n a, t ⊆ s ∧ ∀ a' ∈ t, s ∈ n a' := by
   intro a s s_in
-  refine' ⟨{ y | s ∈ n y }, H a (fun x => x ∈ s) s_in, _, by tauto⟩
+  refine' ⟨{ y | s ∈ n y }, H a (fun x ↦ x ∈ s) s_in, _, by tauto⟩
   rintro y (hy : s ∈ n y)
   exact H₀ y hy
 
@@ -93,7 +94,7 @@ example {Z : Type _} (f : X → Y) (T_X : TopologicalSpace X) (T_Z : Topological
 
 example (ι : Type _) (X : ι → Type _) (T_X : ∀ i, TopologicalSpace <| X i) :
     (Pi.topologicalSpace : TopologicalSpace (∀ i, X i)) =
-      ⨅ i, TopologicalSpace.induced (fun x => x i) (T_X i) :=
+      ⨅ i, TopologicalSpace.induced (fun x ↦ x i) (T_X i) :=
   rfl
 
 example [TopologicalSpace X] [T2Space X] {u : ℕ → X} {a b : X} (ha : Tendsto u atTop (𝓝 a))
@@ -101,11 +102,11 @@ example [TopologicalSpace X] [T2Space X] {u : ℕ → X} {a b : X} (ha : Tendsto
   tendsto_nhds_unique ha hb
 
 example [TopologicalSpace X] [RegularSpace X] (a : X) :
-    (𝓝 a).HasBasis (fun s : Set X => s ∈ 𝓝 a ∧ IsClosed s) id :=
+    (𝓝 a).HasBasis (fun s : Set X ↦ s ∈ 𝓝 a ∧ IsClosed s) id :=
   closed_nhds_basis a
 
 example [TopologicalSpace X] {x : X} :
-    (𝓝 x).HasBasis (fun t : Set X => t ∈ 𝓝 x ∧ IsOpen t) id :=
+    (𝓝 x).HasBasis (fun t : Set X ↦ t ∈ 𝓝 x ∧ IsOpen t) id :=
   nhds_basis_opens' x
 
 theorem aux {X Y A : Type _} [TopologicalSpace X] {c : A → X}
@@ -126,7 +127,7 @@ example [TopologicalSpace X] [TopologicalSpace Y] [RegularSpace Y] {A : Set X}
     ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a :=
   sorry
 
-#check @HasBasis.tendsto_right_iff
+#check HasBasis.tendsto_right_iff
 
 example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X} (hA : ∀ x, x ∈ closure A)
     {f : A → Y} (f_cont : Continuous f)

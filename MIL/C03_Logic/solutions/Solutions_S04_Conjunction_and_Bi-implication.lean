@@ -1,6 +1,6 @@
+import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Prime
-import Mathlib.Tactic.NormNum
 
 namespace C03S04
 example {m n : ℕ} (h : m ∣ n ∧ m ≠ n) : m ∣ n ∧ ¬n ∣ m := by
@@ -45,7 +45,7 @@ theorem not_monotone_iff {f : ℝ → ℝ} : ¬Monotone f ↔ ∃ x y, x ≤ y �
   push_neg
   rfl
 
-example : ¬Monotone fun x : ℝ => -x := by
+example : ¬Monotone fun x : ℝ ↦ -x := by
   rw [not_monotone_iff]
   use 0, 1
   norm_num
@@ -91,4 +91,3 @@ example : a < b → b < c → a < c := by
   apply le_trans h2 h4
 
 end
-

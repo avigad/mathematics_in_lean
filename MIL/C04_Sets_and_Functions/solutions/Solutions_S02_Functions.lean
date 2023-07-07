@@ -1,3 +1,4 @@
+import Mathlib.Tactic
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Set.Function
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
@@ -79,7 +80,7 @@ example : f '' s \ f '' t ⊆ f '' (s \ t) := by
   . rfl
 
 example : f ⁻¹' u \ f ⁻¹' v ⊆ f ⁻¹' (u \ v) :=
-  fun x => id
+  fun x ↦ id
 
 example : f '' s ∩ v = f '' (s ∩ f ⁻¹' v) := by
   ext y; constructor
@@ -155,7 +156,7 @@ example : InjOn sqrt { x | x ≥ 0 } := by
     _ = y := by rw [sq_sqrt ynonneg]
 
 
-example : InjOn (fun x => x ^ 2) { x : ℝ | x ≥ 0 } := by
+example : InjOn (fun x ↦ x ^ 2) { x : ℝ | x ≥ 0 } := by
   intro x xnonneg y ynonneg
   intro e
   dsimp at *
@@ -177,7 +178,7 @@ example : sqrt '' { x | x ≥ 0 } = { y | y ≥ 0 } := by
   apply sqrt_sq
   assumption
 
-example : (range fun x => x ^ 2) = { y : ℝ | y ≥ 0 } := by
+example : (range fun x ↦ x ^ 2) = { y : ℝ | y ≥ 0 } := by
   ext y
   constructor
   · rintro ⟨x, rfl⟩
@@ -196,7 +197,7 @@ noncomputable section
 
 open Classical
 
-def inverse (f : α → β) : β → α := fun y : β =>
+def inverse (f : α → β) : β → α := fun y : β ↦
   if h : ∃ x, f x = y then Classical.choose h else default
 
 theorem inverse_spec {f : α → β} (y : β) (h : ∃ x, f x = y) : f (inverse f y) = y := by
@@ -217,7 +218,7 @@ example : Injective f ↔ LeftInverse (inverse f) f := by
   rw [← h x1, ← h x2, e]
 
 example : Injective f ↔ LeftInverse (inverse f) f :=
-  ⟨fun h y => h (inverse_spec _ ⟨y, rfl⟩), fun h x1 x2 e => by rw [← h x1, ← h x2, e]⟩
+  ⟨fun h y ↦ h (inverse_spec _ ⟨y, rfl⟩), fun h x1 x2 e ↦ by rw [← h x1, ← h x2, e]⟩
 
 example : Surjective f ↔ RightInverse (inverse f) f := by
   constructor
@@ -229,7 +230,7 @@ example : Surjective f ↔ RightInverse (inverse f) f := by
   apply h
 
 example : Surjective f ↔ RightInverse (inverse f) f :=
-  ⟨fun h y => inverse_spec _ (h _), fun h y => ⟨inverse f y, h _⟩⟩
+  ⟨fun h y ↦ inverse_spec _ (h _), fun h y ↦ ⟨inverse f y, h _⟩⟩
 
 end
 
