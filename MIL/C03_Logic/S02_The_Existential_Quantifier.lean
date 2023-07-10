@@ -2,6 +2,7 @@ import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C03S02
+
 example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
   use 5 / 2
   norm_num
@@ -111,8 +112,8 @@ section
 variable {a b c : ℕ}
 
 example (divab : a ∣ b) (divbc : b ∣ c) : a ∣ c := by
-  cases divab with ⟨d, beq⟩
-  cases divbc with ⟨e, ceq⟩
+  rcases divab with ⟨d, beq⟩
+  rcases divbc with ⟨e, ceq⟩
   rw [ceq, beq]
   use d * e; ring
 

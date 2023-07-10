@@ -3,6 +3,7 @@ import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Prime
 
 namespace C03S04
+
 example {x y : ℝ} (h₀ : x ≤ y) (h₁ : ¬y ≤ x) : x ≤ y ∧ x ≠ y := by
   constructor
   · assumption

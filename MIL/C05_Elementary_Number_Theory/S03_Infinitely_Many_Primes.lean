@@ -5,6 +5,7 @@ import Mathlib.Tactic
 open BigOperators
 
 namespace C05S03
+
 theorem two_le {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
   cases m; contradiction
   case succ m =>

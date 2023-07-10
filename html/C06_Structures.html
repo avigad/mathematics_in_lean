@@ -1233,7 +1233,7 @@ result of integer division of <span class="math notranslate nohighlight">\(a\)</
 to be the remainder. These functions are defined in Lean so that the
 satisfy the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">/</span> <span class="n">b</span><span class="o">)</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">%</span> <span class="n">b</span> <span class="o">:=</span>
-  <span class="n">Eq.symm</span> <span class="bp">&lt;|</span> <span class="n">Int.ediv_add_emod</span> <span class="n">a</span> <span class="n">b</span>
+  <span class="n">Eq.symm</span> <span class="o">(</span><span class="n">Int.ediv_add_emod</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">%</span> <span class="n">b</span> <span class="o">:=</span>
   <span class="n">Int.emod_nonneg</span> <span class="n">a</span>
