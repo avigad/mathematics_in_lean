@@ -734,8 +734,8 @@ you can find existential quantifiers hidden all over
 if you know how to spot them.
 For example, divisibility is implicitly an &#8220;exists&#8221; statement.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">divab</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8739;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">divbc</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8739;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8739;</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">cases</span> <span class="n">divab</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">d</span><span class="o">,</span> <span class="n">beq</span><span class="o">&#10217;</span>
-  <span class="n">cases</span> <span class="n">divbc</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">e</span><span class="o">,</span> <span class="n">ceq</span><span class="o">&#10217;</span>
+  <span class="n">rcases</span> <span class="n">divab</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">d</span><span class="o">,</span> <span class="n">beq</span><span class="o">&#10217;</span>
+  <span class="n">rcases</span> <span class="n">divbc</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">e</span><span class="o">,</span> <span class="n">ceq</span><span class="o">&#10217;</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">ceq</span><span class="o">,</span> <span class="n">beq</span><span class="o">]</span>
   <span class="n">use</span> <span class="n">d</span> <span class="bp">*</span> <span class="n">e</span><span class="bp">;</span> <span class="n">ring</span>
 </pre></div>
