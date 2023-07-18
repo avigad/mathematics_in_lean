@@ -115,7 +115,7 @@ In mathlib, the first notion is represented as follows.</p>
 </div>
 <p>We can also express that <code class="docutils literal notranslate"><span class="pre">f</span></code> is differentiable at a point without
 specifying its derivative there
-by writing <code class="docutils literal notranslate"><span class="pre">differentiable_at</span> <span class="pre">&#8477;</span></code>.
+by writing <code class="docutils literal notranslate"><span class="pre">DifferentiableAt</span> <span class="pre">&#8477;</span></code>.
 We specify <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> explicitly because in a slightly more general context,
 when talking about functions from <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code>,
 we want to be able to distinguish between being differentiable in the real sense
@@ -154,7 +154,7 @@ definition of <code class="docutils literal notranslate"><span class="pre">deriv
   <span class="n">h.deriv_eq_zero</span>
 </pre></div>
 </div>
-<p>We can eve state Rolle&#8217;s theorem without any differentiability assumptions, which
+<p>We can even state Rolle&#8217;s theorem without any differentiability assumptions, which
 seems even weirder.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Set</span>
 
@@ -208,7 +208,7 @@ Lean and mathlib know this.</p>
 </pre></div>
 </div>
 <p>In order to use the notion of a norm with concepts from linear algebra,
-we add the assumption <code class="docutils literal notranslate"><span class="pre">normed_space</span> <span class="pre">&#8477;</span> <span class="pre">E</span></code> on top of <code class="docutils literal notranslate"><span class="pre">normed_add_group</span> <span class="pre">E</span></code>.
+we add the assumption <code class="docutils literal notranslate"><span class="pre">NormedSpace</span> <span class="pre">&#8477;</span> <span class="pre">E</span></code> on top of <code class="docutils literal notranslate"><span class="pre">NormedAddGroup</span> <span class="pre">E</span></code>.
 This stipulates that <code class="docutils literal notranslate"><span class="pre">E</span></code> is a vector space over <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> and that
 scalar multiplication satisfies the following condition.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">[</span><span class="n">NormedSpace</span> <span class="n">&#8477;</span> <span class="n">E</span><span class="o">]</span>
@@ -224,7 +224,7 @@ Every finite-dimensional vector space is complete.</p>
 </div>
 <p>In all the previous examples, we used the real numbers as the base field.
 More generally, we can make sense of calculus with a vector space over any
-<em>non-discrete normed field</em>. These are fields that are equipped with a
+<em>nontrivially normed field</em>. These are fields that are equipped with a
 real-valued norm that is multiplicative and has the property that
 not every element has norm zero or one
 (equivalently, there is an element whose norm is bigger than one).</p>
@@ -235,7 +235,7 @@ not every element has norm zero or one
   <span class="n">NormedField.exists_one_lt_norm</span> <span class="bp">&#120156;</span>
 </pre></div>
 </div>
-<p>A finite-dimensional vector space over a nondiscrete normed field is
+<p>A finite-dimensional vector space over a nontrivially normed field is
 complete as long as the field itself is complete.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">[</span><span class="n">NontriviallyNormedField</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">[</span><span class="n">NormedAddCommGroup</span> <span class="n">E</span><span class="o">]</span>
     <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">CompleteSpace</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">[</span><span class="n">FiniteDimensional</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">:</span> <span class="n">CompleteSpace</span> <span class="n">E</span> <span class="o">:=</span>
@@ -292,9 +292,9 @@ The principle states that a family of continuous linear maps from a Banach space
 into a normed space is pointwise
 bounded, then the norms of these linear maps are uniformly bounded.
 The main ingredient is Baire&#8217;s theorem
-<code class="docutils literal notranslate"><span class="pre">nonempty_interior_of_Union_of_closed.</span></code> (You proved a version of this in the topology chapter.)
+<code class="docutils literal notranslate"><span class="pre">nonempty_interior_of_iUnion_of_closed</span></code>. (You proved a version of this in the topology chapter.)
 Minor ingredients include <code class="docutils literal notranslate"><span class="pre">continuous_linear_map.op_norm_le_of_shell</span></code>,
-<code class="docutils literal notranslate"><span class="pre">interior_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">interior_Inter_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">is_closed_le</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">interior_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">interior_iInter_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">is_closed_le</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">NontriviallyNormedField</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">NormedAddCommGroup</span> <span class="n">E</span><span class="o">]</span>
   <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">NormedAddCommGroup</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">F</span><span class="o">]</span>
 
@@ -376,10 +376,10 @@ Here the letter
 <p>We also have iterated derivatives that take values in the type of multilinear maps
 <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">[&#215;n]&#8594;L[&#120156;]</span> <span class="pre">F</span></code>,
 and we have continuously differential functions.
-The type <code class="docutils literal notranslate"><span class="pre">with_top</span> <span class="pre">&#8469;</span></code> is <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> with an additional element <code class="docutils literal notranslate"><span class="pre">&#8868;</span></code> that
+The type <code class="docutils literal notranslate"><span class="pre">WithTop</span> <span class="pre">&#8469;</span></code> is <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> with an additional element <code class="docutils literal notranslate"><span class="pre">&#8868;</span></code> that
 is bigger than every natural number.
 So <span class="math notranslate nohighlight">\(\mathcal{C}^\infty\)</span> functions are functions <code class="docutils literal notranslate"><span class="pre">f</span></code> that satisfy
-<code class="docutils literal notranslate"><span class="pre">cont_diff</span> <span class="pre">&#120156;</span> <span class="pre">&#8868;</span> <span class="pre">f</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">ContDiff</span> <span class="pre">&#120156;</span> <span class="pre">&#8868;</span> <span class="pre">f</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">[</span><span class="bp">&#215;</span><span class="n">n</span><span class="o">]</span><span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span> <span class="o">:=</span>
   <span class="n">iteratedFDeriv</span> <span class="bp">&#120156;</span> <span class="n">n</span> <span class="n">f</span>
 
