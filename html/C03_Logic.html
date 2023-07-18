@@ -48,7 +48,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#implication-and-the-universal-quantifier">3.1. Implication and the Universal Quantifier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-existential-quantifier">3.2. The Existential Quantifier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#negation">3.3. Negation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#conjunction-and-bi-implication">3.4. Conjunction and Bi-implication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conjunction-and-iff">3.4. Conjunction and Iff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disjunction">3.5. Disjunction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sequences-and-convergence">3.6. Sequences and Convergence</a></li>
 </ul>
@@ -656,7 +656,7 @@ languages:</p>
 <p>In the first example, if you put your cursor after <code class="docutils literal notranslate"><span class="pre">cases</span> <span class="pre">ubf</span></code>,
 you will see that the tactic produces a single goal, which Lean has tagged
 <code class="docutils literal notranslate"><span class="pre">intro</span></code>. (The particular name chosen comes from the internal name for
-the axiomatic primitive that bulids a proof of an existential statement.)
+the axiomatic primitive that builds a proof of an existential statement.)
 The <code class="docutils literal notranslate"><span class="pre">case</span></code> tactic then names the components. The second example is similar,
 except using <code class="docutils literal notranslate"><span class="pre">next</span></code> instead of <code class="docutils literal notranslate"><span class="pre">case</span></code> means that you can avoid mentioning
 <code class="docutils literal notranslate"><span class="pre">intro</span></code>. The word <code class="docutils literal notranslate"><span class="pre">match</span></code> in the last two examples highlights that
@@ -1064,8 +1064,8 @@ by finding a contradiction in the hypotheses,
 such as a pair of the form <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">h'</span> <span class="pre">:</span> <span class="pre">&#172;</span> <span class="pre">P</span></code>.
 Of course, in this example, <code class="docutils literal notranslate"><span class="pre">linarith</span></code> also works.</p>
 </section>
-<section id="conjunction-and-bi-implication">
-<span id="conjunction-and-biimplication"></span><h2><span class="section-number">3.4. </span>Conjunction and Bi-implication<a class="headerlink" href="#conjunction-and-bi-implication" title="Permalink to this heading">&#61633;</a></h2>
+<section id="conjunction-and-iff">
+<span id="conjunction-and-biimplication"></span><h2><span class="section-number">3.4. </span>Conjunction and Iff<a class="headerlink" href="#conjunction-and-iff" title="Permalink to this heading">&#61633;</a></h2>
 <p id="index-18">You have already seen that the conjunction symbol, <code class="docutils literal notranslate"><span class="pre">&#8743;</span></code>,
 is used to express &#8220;and.&#8221;
 The <code class="docutils literal notranslate"><span class="pre">constructor</span></code> tactic allows you to prove a statement of
@@ -1439,7 +1439,7 @@ or even a pattern-matching <code class="docutils literal notranslate"><span clas
 <p>In the case of the <code class="docutils literal notranslate"><span class="pre">match</span></code>, we need to use the full names
 <code class="docutils literal notranslate"><span class="pre">Or.inl</span></code> and <code class="docutils literal notranslate"><span class="pre">Or.inr</span></code> of the canonical ways to prove a disjunction.
 In this textbook, we will generally use <code class="docutils literal notranslate"><span class="pre">rcases</span></code> to split on the
-caess of a disjunction.</p>
+cases of a disjunction.</p>
 <p>Try proving the triangle inequality using the two
 first two theorems in the next snippet.
 They are given the same names they have in mathlib.</p>
