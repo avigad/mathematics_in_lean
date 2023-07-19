@@ -25,7 +25,7 @@ Do the following:
 
 2. Make sure you have [git](https://git-scm.com/) installed.
 
-3. Follow these [instructions](instructions <https://leanprover-community.github.io/install/project.html#working-on-an-existing-project)
+3. Follow these [instructions](https://leanprover-community.github.io/install/project.html#working-on-an-existing-project)
    to fetch the `mathematics_in_lean` repository and open it up in VS Code.
 
 4. Each section in the textbook has an associated Lean file with examples and exercises.
