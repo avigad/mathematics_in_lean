@@ -1,5 +1,7 @@
-import Mathlib.Tactic
+import MIL.Common
 import Mathlib.Topology.Instances.Real
+
+set_option autoImplicit true
 
 
 def isMonoidHom₁ [Monoid G] [Monoid H] (f : G → H) : Prop :=

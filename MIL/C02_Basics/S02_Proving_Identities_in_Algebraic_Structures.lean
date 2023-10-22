@@ -1,6 +1,6 @@
 import Mathlib.Algebra.Ring.Defs
 import Mathlib.Data.Real.Basic
-import Mathlib.Tactic
+import MIL.Common
 
 section
 variable (R : Type*) [Ring R]
@@ -102,13 +102,13 @@ example (a b : ℝ) : a - b = a + -b := by
 namespace MyRing
 variable {R : Type*} [Ring R]
 
-theorem self_sub (a : R) : a - a = 0 :=
+theorem self_sub (a : R) : a - a = 0 := by
   sorry
 
 theorem one_add_one_eq_two : 1 + 1 = (2 : R) := by
   norm_num
 
-theorem two_mul (a : R) : 2 * a = a + a :=
+theorem two_mul (a : R) : 2 * a = a + a := by
   sorry
 
 end MyRing

@@ -1,6 +1,7 @@
-import Mathlib.Tactic
+import MIL.Common
 import Mathlib.GroupTheory.QuotientGroup
 
+set_option autoImplicit true
 
 
 @[ext]
