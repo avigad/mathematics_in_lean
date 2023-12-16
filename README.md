@@ -57,7 +57,7 @@ which is why we suggested making a copy.)
 If you have trouble installing Lean, you can use Lean directly in your browser using Github codespaces.
 This requires a Github account. If you are signed in to Github, click here:
 
-<a href='https://codespaces.new/leanprover-community/mathematics_in_lean' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
+<a href='https://codespaces.new/avigad/mathematics_in_lean' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
 
 * Make sure the Machine type is `4-core`, and then press `Create codespace` (this might take a few minutes).
 
