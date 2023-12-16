@@ -689,39 +689,19 @@ and then calling <code class="docutils literal notranslate"><span class="pre">si
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#946;</span><span class="o">)</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">A</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">ext</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
-  <span class="n">constructor</span>
-  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
-    <span class="n">use</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span>
-  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">xAi</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
-  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+  <span class="gr">sorry</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">A</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">intro</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
-  <span class="n">intro</span> <span class="n">x</span> <span class="n">h</span> <span class="n">fxeq</span> <span class="n">i</span>
-  <span class="n">use</span> <span class="n">x</span>
-  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">i</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+  <span class="gr">sorry</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">)</span> <span class="o">(</span><span class="n">injf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">intro</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
-  <span class="n">intro</span> <span class="n">h</span>
-  <span class="n">rcases</span> <span class="n">h</span> <span class="n">i</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xAi</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
-  <span class="n">use</span> <span class="n">x</span><span class="bp">;</span> <span class="n">constructor</span>
-  <span class="bp">&#183;</span> <span class="n">intro</span> <span class="n">i&#39;</span>
-    <span class="n">rcases</span> <span class="n">h</span> <span class="n">i&#39;</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x&#39;</span><span class="o">,</span> <span class="n">x&#39;Ai</span><span class="o">,</span> <span class="n">fx&#39;eq</span><span class="o">&#10217;</span>
-    <span class="k">have</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x&#39;</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">fxeq</span><span class="o">,</span> <span class="n">fx&#39;eq</span><span class="o">]</span>
-    <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x&#39;</span> <span class="o">:=</span> <span class="n">injf</span> <span class="n">this</span>
-    <span class="n">rw</span> <span class="o">[</span><span class="n">this</span><span class="o">]</span>
-    <span class="n">exact</span> <span class="n">x&#39;Ai</span>
-  <span class="n">exact</span> <span class="n">fxeq</span>
+  <span class="gr">sorry</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">B</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">B</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">ext</span> <span class="n">x</span>
-  <span class="n">simp</span>
+  <span class="gr">sorry</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">B</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">B</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">ext</span> <span class="n">x</span>
-  <span class="n">simp</span>
+  <span class="gr">sorry</span>
 </pre></div>
 </div>
 <p>The library defines a predicate <code class="docutils literal notranslate"><span class="pre">InjOn</span> <span class="pre">f</span> <span class="pre">s</span></code> to say that
@@ -824,7 +804,7 @@ as follows:</p>
   <span class="n">exact</span> <span class="n">Classical.choose_spec</span> <span class="n">h</span>
 </pre></div>
 </div>
-<p>The lines <code class="docutils literal notranslate"><span class="pre">noncomputable</span> <span class="pre">theory</span></code> and <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">Classical</span></code>
+<p>The lines <code class="docutils literal notranslate"><span class="pre">noncomputable</span> <span class="pre">section</span></code> and <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">Classical</span></code>
 are needed because we are using classical logic in an essential way.
 On input <code class="docutils literal notranslate"><span class="pre">y</span></code>, the function <code class="docutils literal notranslate"><span class="pre">inverse</span> <span class="pre">f</span></code>
 returns some value of <code class="docutils literal notranslate"><span class="pre">x</span></code> satisfying <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code> if there is one,
@@ -1017,11 +997,11 @@ contained in <span class="math notranslate nohighlight">\(g(\beta)\)</span>.
 As a result, for every <span class="math notranslate nohighlight">\(x\)</span> in the complement of <span class="math notranslate nohighlight">\(A\)</span>,
 there is a <span class="math notranslate nohighlight">\(y\)</span> such that <span class="math notranslate nohighlight">\(g(y) = x\)</span>.
 (By the injectivity of <span class="math notranslate nohighlight">\(g\)</span>, this <span class="math notranslate nohighlight">\(y\)</span> is unique,
-but next theorem says only that <code class="docutils literal notranslate"><span class="pre">inv_fun</span> <span class="pre">g</span> <span class="pre">x</span></code> returns some <code class="docutils literal notranslate"><span class="pre">y</span></code>
+but next theorem says only that <code class="docutils literal notranslate"><span class="pre">invFun</span> <span class="pre">g</span> <span class="pre">x</span></code> returns some <code class="docutils literal notranslate"><span class="pre">y</span></code>
 such that <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code>.)</p>
 <p>Step through the proof below, make sure you understand what is going on,
 and fill in the remaining parts.
-You will need to use <code class="docutils literal notranslate"><span class="pre">inv_fun_eq</span></code> at the end.
+You will need to use <code class="docutils literal notranslate"><span class="pre">invFun_eq</span></code> at the end.
 Notice that rewriting with <code class="docutils literal notranslate"><span class="pre">sb_aux</span></code> here replaces <code class="docutils literal notranslate"><span class="pre">sb_aux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
 with the right-hand side of the corresponding defining equation.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_right_inv</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8713;</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="o">(</span><span class="n">invFun</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>

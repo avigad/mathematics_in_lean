@@ -320,9 +320,9 @@ everything for additive and multiplicative theories with the help of some code-g
 attribute. Structures and classes are defined in both additive and multiplicative notation
 with an attribute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> linking them. In case of multiple inheritance like for
 semi-groups, the auto-generated &#8220;symmetry-restoring&#8221; instances need also to be marked.
-This is a bit technical you don&#8217;t need to understand details. The important point is that
+This is a bit technical; you don&#8217;t need to understand details. The important point is that
 lemmas are then only stated in multiplicative notation and marked with the attribute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code>
-to generate the additive version as <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code> with it&#8217;s auto-generated additive
+to generate the additive version as <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code> with its auto-generated additive
 version <code class="docutils literal notranslate"><span class="pre">left_neg_eq_right_neg'</span></code>. In order to check the name of this additive version we
 used the <code class="docutils literal notranslate"><span class="pre">whatsnew</span> <span class="pre">in</span></code> command on top of <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddSemigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Add</span> <span class="n">&#945;</span> <span class="n">where</span>
@@ -385,7 +385,7 @@ groups, and then define rings.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> can be ask to tag a lemma with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and propagate that attribute
+<p>Note that <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> can be asked to tag a lemma with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and propagate that attribute
 to the additive version as follows.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[to_additive (attr := simp)]</span>
 <span class="kd">lemma</span> <span class="n">Group&#8323;.mul_inv</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8323;</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -408,7 +408,7 @@ to the additive version as follows.</p>
 <p>We are now ready for rings. For demonstration purposes we won&#8217;t assume that addition is
 commutative, and then immediately provide an instance of <code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span></code>. Mathlib does not
 play this game, first because in practice this does not make any ring instance easier and
-also because Mathlib&#8217;s algebraic hierarchy goes through semi-rings which are like rings but without
+also because Mathlib&#8217;s algebraic hierarchy goes through semirings which are like rings but without
 opposites so that the proof below does not work for them. What we gain here, besides a nice exercise
 if you have never seen it, is an example of building an instance using the syntax that allows
 to provide a parent structure and some extra fields.</p>

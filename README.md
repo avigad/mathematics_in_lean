@@ -9,7 +9,7 @@ or as a
 The book is designed to be read as you
 work through examples and exercises,
 using a copy of this repository on your computer.
-Alternatively, you can use Gitpod to run Lean and VS Code in the cloud.
+Alternatively, you can use Github Codespaces or Gitpod to run Lean and VS Code in the cloud.
 
 This version of *Mathematics in Lean* is designed for [Lean 4](https://leanprover.github.io/) and
 [Mathlib](https://github.com/leanprover-community/mathlib4).
@@ -40,7 +40,7 @@ At that point, you can open the textbook in a side panel in VS Code as follows:
 
 1. Type `ctrl-shift-P` (`command-shift-P` in macOS).
 
-2. Type `Lean 4: Open Documentation View` in the bar that appears, and then
+2. Type `Lean 4: Docview: Open Docview` in the bar that appears, and then
   press return. (You can press return to select it as soon as it is highlighted
   in the menu.)
 
@@ -52,9 +52,18 @@ followed by `lake exe cache get` inside the `mathematics_in_lean` folder.
 (This assumes that you have not changed the contents of the `MIL` folder,
 which is why we suggested making a copy.)
 
+## To use this repository with Github Codespaces
+
+If you have trouble installing Lean, you can use Lean directly in your browser using Github codespaces.
+This requires a Github account. If you are signed in to Github, click here:
+
+<a href='https://codespaces.new/leanprover-community/mathematics_in_lean' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
+
+* Make sure the Machine type is `4-core`, and then press `Create codespace` (this might take a few minutes).
 
 ## To use this repository with Gitpod
 
+Gitpod is an alternative to Github Codespaces, but is a little less convenient, since it requires you to verify your phone number.
 If you have a Gitpod account or are willing to sign up for one,
 just point your browser to [https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean](https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean).
 This creates a virtual machine in the cloud,
