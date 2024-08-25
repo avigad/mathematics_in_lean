@@ -1,6 +1,5 @@
 import Mathlib.Data.Set.Lattice
-import Mathlib.Data.Nat.Prime
-import Mathlib.Data.Nat.Parity
+import Mathlib.Data.Nat.Prime.Basic
 import MIL.Common
 
 section
@@ -11,7 +10,7 @@ open Set
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
   rintro x (⟨xs, xt⟩ | ⟨xs, xu⟩)
   · use xs; left; exact xt
-  . use xs; right; exact xu
+  · use xs; right; exact xu
 
 example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
   rintro x ⟨xs, xntu⟩
@@ -30,20 +29,20 @@ example : s ∩ (s ∪ t) = s := by
   ext x; constructor
   · rintro ⟨xs, _⟩
     exact xs
-  . intro xs
+  · intro xs
     use xs; left; exact xs
 
 example : s ∪ s ∩ t = s := by
   ext x; constructor
   · rintro (xs | ⟨xs, xt⟩) <;> exact xs
-  . intro xs; left; exact xs
+  · intro xs; left; exact xs
 
 example : s \ t ∪ t = s ∪ t := by
   ext x; constructor
   · rintro (⟨xs, nxt⟩ | xt)
     · left
       exact xs
-    . right
+    · right
       exact xt
   by_cases h : x ∈ t
   · intro
@@ -62,7 +61,7 @@ example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
       exact xs
       rintro ⟨_, xt⟩
       contradiction
-    . constructor
+    · constructor
       right
       exact xt
       rintro ⟨xs, _⟩
@@ -73,7 +72,7 @@ example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
     intro xt
     apply nxst
     constructor <;> assumption
-  . right; use xt; intro xs
+  · right; use xt; intro xs
     apply nxst
     constructor <;> assumption
 
@@ -146,8 +145,8 @@ example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
   apply eq_univ_of_forall
   intro x
   simp
-  rcases Nat.exists_infinite_primes x with ⟨p, primep, pge⟩
-  use p, pge
+  rcases Nat.exists_infinite_primes x with ⟨p, pge, primep⟩
+  use p, primep
 
 end
 

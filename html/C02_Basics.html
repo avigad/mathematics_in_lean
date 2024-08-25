@@ -54,12 +54,13 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -133,7 +134,7 @@ in VS Code.
 The symbol doesn&#8217;t appear until you hit space or the tab key.
 If you hover over a symbol when reading a Lean file,
 VS Code will show you the syntax that can be used to enter it.
-If you are curious to see all available abbreviations, you can hit Ctrl-Shift-p
+If you are curious to see all available abbreviations, you can hit Ctrl-Shift-P
 and then type abbreviations to get access to the <code class="docutils literal notranslate"><span class="pre">Lean</span> <span class="pre">4:</span> <span class="pre">Show</span> <span class="pre">all</span> <span class="pre">abbreviations</span></code> command.
 If your keyboard does not have an easily accessible backslash,
 you can change the leading character by changing the
@@ -205,7 +206,7 @@ and the second with only one argument.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p>You an also use <code class="docutils literal notranslate"><span class="pre">rw</span></code> with facts from the local context.</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">rw</span></code> with facts from the local context.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">h&#39;</span><span class="o">]</span>
   <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">mul_assoc</span><span class="o">]</span>
@@ -376,9 +377,9 @@ It can be imported explicitly with the command
 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">Mathlib.Tactic</span></code>.
 We will see there are similar tactics for other common kind of algebraic
 structures.</p>
-<p>There is a variation of <code class="docutils literal notranslate"><span class="pre">rw</span></code> called <code class="docutils literal notranslate"><span class="pre">nth_rewrite</span></code> that allows you to replace only particular instances of an expression in the goal.
+<p>There is a variation of <code class="docutils literal notranslate"><span class="pre">rw</span></code> called <code class="docutils literal notranslate"><span class="pre">nth_rw</span></code> that allows you to replace only particular instances of an expression in the goal.
 Possible matches are enumerated starting with 1,
-so in the following example, <code class="docutils literal notranslate"><span class="pre">nth_rewrite</span> <span class="pre">2</span> <span class="pre">h</span></code> replaces the second
+so in the following example, <code class="docutils literal notranslate"><span class="pre">nth_rw</span> <span class="pre">2</span> <span class="pre">[h]</span></code> replaces the second
 occurrence of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> with <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">nth_rw</span> <span class="mi">2</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
@@ -749,7 +750,7 @@ So, all of these work:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8321;</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">le_trans</span>
   <span class="bp">&#183;</span> <span class="n">apply</span> <span class="n">h&#8320;</span>
-  <span class="bp">.</span> <span class="n">apply</span> <span class="n">h&#8321;</span>
+  <span class="bp">&#183;</span> <span class="n">apply</span> <span class="n">h&#8321;</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8321;</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">le_trans</span> <span class="n">h&#8320;</span>
@@ -1077,7 +1078,7 @@ You can use either of the tricks just described to shorten the first.</p>
 the way that multiplication distributes over addition,
 and vice-versa.
 In other words, on the real numbers, we have the identity
-<code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">a</span> <span class="pre">(max</span> <span class="pre">b</span> <span class="pre">c)</span> <span class="pre">&#8804;</span> <span class="pre">max</span> <span class="pre">(min</span> <span class="pre">a</span> <span class="pre">b)</span> <span class="pre">(min</span> <span class="pre">a</span> <span class="pre">c)</span></code>
+<code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">a</span> <span class="pre">(max</span> <span class="pre">b</span> <span class="pre">c)</span> <span class="pre">=</span> <span class="pre">max</span> <span class="pre">(min</span> <span class="pre">a</span> <span class="pre">b)</span> <span class="pre">(min</span> <span class="pre">a</span> <span class="pre">c)</span></code>
 as well as the corresponding version with <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">min</span></code>
 switched.
 But in the next section we will see that this does <em>not</em> follow
@@ -1109,7 +1110,7 @@ in the library&#8217;s name for the triangle inequality:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">abs_add</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="bp">|</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">|</span> <span class="bp">&#8804;</span> <span class="bp">|</span><span class="n">a</span><span class="bp">|</span> <span class="bp">+</span> <span class="bp">|</span><span class="n">b</span><span class="bp">|</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>Use it to prove the following variant:</p>
+<p>Use it to prove the following variant, using also <code class="docutils literal notranslate"><span class="pre">add_sub_cancel_right</span></code>:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">|</span><span class="n">a</span><span class="bp">|</span> <span class="bp">-</span> <span class="bp">|</span><span class="n">b</span><span class="bp">|</span> <span class="bp">&#8804;</span> <span class="bp">|</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="bp">|</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
 <span class="kd">end</span>
@@ -1200,7 +1201,7 @@ letters like <code class="docutils literal notranslate"><span class="pre">&#945;
 (entered as <code class="docutils literal notranslate"><span class="pre">\a</span></code>, <code class="docutils literal notranslate"><span class="pre">\b</span></code>, and <code class="docutils literal notranslate"><span class="pre">\g</span></code>)
 for arbitrary types.
 The library often uses letters like <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">G</span></code>
-for the carries of algebraic structures like rings and groups,
+for the carriers of algebraic structures like rings and groups,
 respectively,
 but in general Greek letters are used for types,
 especially when there is little or no structure
@@ -1212,7 +1213,7 @@ Saying that <code class="docutils literal notranslate"><span class="pre">x</span
 is equivalent to saying that it is less-than-or-equal to <code class="docutils literal notranslate"><span class="pre">y</span></code>
 and not equal to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">lt_irrefl</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">&#172;</span><span class="n">x</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lt_irrefl</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">&#172;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">))</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">lt_trans</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">lt_of_le_of_lt</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
@@ -1278,6 +1279,23 @@ and the ordering is reverse inclusion</p></li>
 you can prove the commutativity and associativity of the infimum and supremum
 using only their characterizing axioms,
 together with <code class="docutils literal notranslate"><span class="pre">le_refl</span></code> and <code class="docutils literal notranslate"><span class="pre">le_trans</span></code>.</p>
+<p id="index-29">Using <code class="docutils literal notranslate"><span class="pre">apply</span> <span class="pre">le_trans</span></code> when seeing a goal <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8804;</span> <span class="pre">z</span></code> is not a great idea.
+Indeed Lean has no way to guess which intermediate element <code class="docutils literal notranslate"><span class="pre">y</span></code> we
+want to use.
+So <code class="docutils literal notranslate"><span class="pre">apply</span> <span class="pre">le_trans</span></code> produces three goals that look like <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8804;</span> <span class="pre">?a</span></code>, <code class="docutils literal notranslate"><span class="pre">?a</span> <span class="pre">&#8804;</span> <span class="pre">z</span></code>
+and <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> where <code class="docutils literal notranslate"><span class="pre">?a</span></code> (probably with a more complicated auto-generated name) stands
+for the mysterious <code class="docutils literal notranslate"><span class="pre">y</span></code>.
+The last goal, with type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, is to provide the value of <code class="docutils literal notranslate"><span class="pre">y</span></code>.
+It comes lasts because Lean hopes to automatically infer it from the proof of
+the first goal <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8804;</span> <span class="pre">?a</span></code>.
+In order to avoid this unappealing situation, you can use the <code class="docutils literal notranslate"><span class="pre">calc</span></code> tactic
+to explicitly provide <code class="docutils literal notranslate"><span class="pre">y</span></code>.
+Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">trans</span></code> tactic
+which takes <code class="docutils literal notranslate"><span class="pre">y</span></code> as an argument and produces the expected goals <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8804;</span> <span class="pre">y</span></code> and
+<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">&#8804;</span> <span class="pre">z</span></code>.
+Of course you can also avoid this issue by providing directly a full proof such as
+<code class="docutils literal notranslate"><span class="pre">exact</span> <span class="pre">le_trans</span> <span class="pre">inf_le_left</span> <span class="pre">inf_le_right</span></code>, but this requires a lot more
+planning.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
@@ -1310,10 +1328,10 @@ is called a <em>distributive lattice</em>. Lean knows about these too:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">DistribLattice</span> <span class="n">&#945;</span><span class="o">]</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span>
 
-<span class="k">#check</span> <span class="o">(</span><span class="n">inf_sup_left</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">inf_sup_right</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">&#8852;</span> <span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">sup_inf_left</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">))</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">sup_inf_right</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">))</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">inf_sup_left</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">inf_sup_right</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">&#8852;</span> <span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">sup_inf_left</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">))</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">sup_inf_right</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">))</span>
 </pre></div>
 </div>
 <p>The left and right versions are easily shown to be
@@ -1367,7 +1385,7 @@ enumerated in the last two examples:</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-29">Finally, here is one last example.
+<p id="index-30">Finally, here is one last example.
 A <em>metric space</em> consists of a set equipped with a notion of
 distance, <code class="docutils literal notranslate"><span class="pre">dist</span> <span class="pre">x</span> <span class="pre">y</span></code>,
 mapping any pair of elements to a real number.

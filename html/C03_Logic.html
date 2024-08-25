@@ -55,12 +55,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -679,7 +680,7 @@ what we are doing here is what computer scientists call &#8220;pattern matching.
 Notice that the third proof begins by <code class="docutils literal notranslate"><span class="pre">by</span></code>, after which the tactic version
 of <code class="docutils literal notranslate"><span class="pre">match</span></code> expects a tactic proof on the right side of the arrow.
 The last example is a proof term: there are no tactics in sight.</p>
-<p>For the rest of this book, we will stick to <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, <code class="docutils literal notranslate"><span class="pre">rintros</span></code>, and <code class="docutils literal notranslate"><span class="pre">obtain</span></code>,
+<p>For the rest of this book, we will stick to <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, <code class="docutils literal notranslate"><span class="pre">rintro</span></code>, and <code class="docutils literal notranslate"><span class="pre">obtain</span></code>,
 as the preferred ways of using an existential quantifier.
 But it can&#8217;t hurt to see the alternative syntax, especially if there is
 a chance you will find yourself in the company of computer scientists.</p>
@@ -725,7 +726,7 @@ then <span class="math notranslate nohighlight">\(xy\)</span> is the norm of <sp
 Our cryptic proof illustrates the fact that
 the proof that is easiest to formalize isn&#8217;t always
 the most perspicuous one.
-In <a class="reference internal" href="C06_Structures.html#section-building-the-gaussian-integers"><span class="std std-numref">Section 6.3</span></a>,
+In <a class="reference internal" href="C07_Structures.html#section-building-the-gaussian-integers"><span class="std std-numref">Section 7.3</span></a>,
 we will provide you with the means to define the Gaussian
 integers and use them to provide an alternative proof.</p>
 <p>The pattern of unpacking an equation inside an existential quantifier
@@ -778,7 +779,7 @@ why the next example makes use of both <code class="docutils literal notranslate
   <span class="n">dsimp</span><span class="bp">;</span> <span class="n">ring</span>
 </pre></div>
 </div>
-<p>Try this example yourself using the theorem <code class="docutils literal notranslate"><span class="pre">mul_div_cancel'</span></code>.:</p>
+<p>Try this example yourself using the theorem <code class="docutils literal notranslate"><span class="pre">mul_div_cancel&#8320;</span></code>.:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
@@ -864,7 +865,7 @@ which says that a function has an upper bound.</p>
 </div>
 <p>Remember that it is often convenient to use <code class="docutils literal notranslate"><span class="pre">linarith</span></code>
 when a goal follows from linear equations and
-inequalities that in the context.</p>
+inequalities that are in the context.</p>
 <p>See if you can prove these in a similar way:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#172;</span><span class="n">FnHasLb</span> <span class="n">f</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
@@ -1217,7 +1218,7 @@ You have already seen that you can write <code class="docutils literal notransla
 or <code class="docutils literal notranslate"><span class="pre">h.1</span></code> and <code class="docutils literal notranslate"><span class="pre">h.2</span></code> for the two directions of <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">A</span> <span class="pre">&#8596;</span> <span class="pre">B</span></code>.
 You can also use <code class="docutils literal notranslate"><span class="pre">cases</span></code> and friends.
 To prove an if-and-only-if statement,
-you can uses <code class="docutils literal notranslate"><span class="pre">constructor</span></code> or angle brackets,
+you can use <code class="docutils literal notranslate"><span class="pre">constructor</span></code> or angle brackets,
 just as you would if you were proving a conjunction.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#172;</span><span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">constructor</span>
@@ -1390,7 +1391,7 @@ to use the name <code class="docutils literal notranslate"><span class="pre">h</
   <span class="n">rcases</span> <span class="n">le_or_gt</span> <span class="mi">0</span> <span class="n">y</span> <span class="k">with</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">h</span>
   <span class="bp">&#183;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">abs_of_nonneg</span> <span class="n">h</span><span class="o">]</span>
     <span class="n">intro</span> <span class="n">h</span><span class="bp">;</span> <span class="n">left</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
-  <span class="bp">.</span> <span class="n">rw</span> <span class="o">[</span><span class="n">abs_of_neg</span> <span class="n">h</span><span class="o">]</span>
+  <span class="bp">&#183;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">abs_of_neg</span> <span class="n">h</span><span class="o">]</span>
     <span class="n">intro</span> <span class="n">h</span><span class="bp">;</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
 </pre></div>
 </div>
@@ -1423,7 +1424,7 @@ that is introduced closer to where it is used.</p>
 </pre></div>
 </div>
 <p>The names <code class="docutils literal notranslate"><span class="pre">inl</span></code> and <code class="docutils literal notranslate"><span class="pre">inr</span></code> are short for &#8220;intro left&#8221; and &#8220;intro right,&#8221;
-respectively. Using <code class="docutils literal notranslate"><span class="pre">case</span></code> has the advantage is that you can prove the
+respectively. Using <code class="docutils literal notranslate"><span class="pre">case</span></code> has the advantage that you can prove the
 cases in either order; Lean uses the tag to find the relevant goal.
 If you don&#8217;t care about that, you can use <code class="docutils literal notranslate"><span class="pre">next</span></code>, or <code class="docutils literal notranslate"><span class="pre">match</span></code>,
 or even a pattern-matching <code class="docutils literal notranslate"><span class="pre">have</span></code>.</p>
@@ -1436,7 +1437,6 @@ or even a pattern-matching <code class="docutils literal notranslate"><span clas
     <span class="n">rw</span> <span class="o">[</span><span class="n">abs_of_neg</span> <span class="n">h</span><span class="o">]</span>
     <span class="n">intro</span> <span class="n">h</span><span class="bp">;</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
 
-
 <span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="bp">|</span><span class="n">y</span><span class="bp">|</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8744;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="bp">-</span><span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="k">match</span> <span class="n">le_or_gt</span> <span class="mi">0</span> <span class="n">y</span> <span class="k">with</span>
     <span class="bp">|</span> <span class="n">Or.inl</span> <span class="n">h</span> <span class="bp">=&gt;</span>
@@ -1447,11 +1447,11 @@ or even a pattern-matching <code class="docutils literal notranslate"><span clas
       <span class="n">intro</span> <span class="n">h</span><span class="bp">;</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
 </pre></div>
 </div>
-<p>In the case of the <code class="docutils literal notranslate"><span class="pre">match</span></code>, we need to use the full names
+<p>In the case of <code class="docutils literal notranslate"><span class="pre">match</span></code>, we need to use the full names
 <code class="docutils literal notranslate"><span class="pre">Or.inl</span></code> and <code class="docutils literal notranslate"><span class="pre">Or.inr</span></code> of the canonical ways to prove a disjunction.
 In this textbook, we will generally use <code class="docutils literal notranslate"><span class="pre">rcases</span></code> to split on the
 cases of a disjunction.</p>
-<p>Try proving the triangle inequality using the two
+<p>Try proving the triangle inequality using the
 first two theorems in the next snippet.
 They are given the same names they have in Mathlib.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span> <span class="n">MyAbs</span>
@@ -1484,7 +1484,7 @@ the patterns for each new goal are separated by a vertical bar.</p>
   <span class="bp">&#183;</span> <span class="n">left</span>
     <span class="n">exact</span> <span class="n">xlt</span>
   <span class="bp">&#183;</span> <span class="n">contradiction</span>
-  <span class="bp">.</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xgt</span>
+  <span class="bp">&#183;</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xgt</span>
 </pre></div>
 </div>
 <p>You can still nest patterns and use the <code class="docutils literal notranslate"><span class="pre">rfl</span></code> keyword
@@ -1493,7 +1493,7 @@ to substitute equations:</p>
   <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">a</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;</span> <span class="bp">|</span> <span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;</span>
   <span class="bp">&#183;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span>
     <span class="n">apply</span> <span class="n">dvd_mul_right</span>
-  <span class="bp">.</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_comm</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]</span>
+  <span class="bp">&#183;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_comm</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]</span>
     <span class="n">apply</span> <span class="n">dvd_mul_right</span>
 </pre></div>
 </div>
@@ -1554,7 +1554,7 @@ The name <code class="docutils literal notranslate"><span class="pre">em</span><
   <span class="n">intro</span> <span class="n">h</span>
   <span class="n">cases</span> <span class="n">em</span> <span class="n">P</span>
   <span class="bp">&#183;</span> <span class="n">assumption</span>
-  <span class="bp">.</span> <span class="n">contradiction</span>
+  <span class="bp">&#183;</span> <span class="n">contradiction</span>
 </pre></div>
 </div>
 <p id="index-23">Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">by_cases</span></code> tactic.</p>
@@ -1810,7 +1810,7 @@ everywhere by any linear order <code class="docutils literal notranslate"><span 
   <span class="bp">&#8704;</span> <span class="n">&#949;</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">N</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">n</span> <span class="bp">&#8805;</span> <span class="n">N</span><span class="o">,</span> <span class="bp">|</span><span class="n">s</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">&#949;</span>
 </pre></div>
 </div>
-<p>In <a class="reference internal" href="C09_Topology.html#filters"><span class="std std-numref">Section 9.1</span></a>, we will see that Mathlib has mechanisms
+<p>In <a class="reference internal" href="C10_Topology.html#filters"><span class="std std-numref">Section 10.1</span></a>, we will see that Mathlib has mechanisms
 for dealing with convergence in vastly more general terms,
 not only abstracting away particular features of the domain
 and codomain,
