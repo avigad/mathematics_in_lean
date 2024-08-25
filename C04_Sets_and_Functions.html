@@ -52,12 +52,13 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -195,7 +196,7 @@ we can also use the <code class="docutils literal notranslate"><span class="pre"
   <span class="bp">&#183;</span> <span class="n">left</span>
     <span class="k">show</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span>
     <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
-  <span class="bp">.</span> <span class="n">right</span>
+  <span class="bp">&#183;</span> <span class="n">right</span>
     <span class="k">show</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span>
     <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
 </pre></div>
@@ -207,7 +208,7 @@ The following is a shorter proof of the same fact:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span> <span class="bp">|</span> <span class="n">xu</span><span class="o">&#10217;</span>
   <span class="bp">&#183;</span> <span class="n">left</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
-  <span class="bp">.</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="bp">&#183;</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>As an exercise, try proving the other inclusion:</p>
@@ -238,7 +239,7 @@ show how to avoid using them.</p>
   <span class="c1">-- x &#8712; t &#8744; x &#8712; u</span>
   <span class="n">rcases</span> <span class="n">xtu</span> <span class="k">with</span> <span class="n">xt</span> <span class="bp">|</span> <span class="n">xu</span>
   <span class="bp">&#183;</span> <span class="k">show</span> <span class="n">False</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xnt</span> <span class="n">xt</span>
-  <span class="bp">.</span> <span class="k">show</span> <span class="n">False</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xnu</span> <span class="n">xu</span>
+  <span class="bp">&#183;</span> <span class="k">show</span> <span class="n">False</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xnu</span> <span class="n">xu</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">s</span> <span class="bp">\</span> <span class="n">t</span><span class="o">)</span> <span class="bp">\</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">\</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xnt</span><span class="o">&#10217;,</span> <span class="n">xnu</span><span class="o">&#10217;</span>
@@ -262,7 +263,7 @@ the <code class="docutils literal notranslate"><span class="pre">ext</span></cod
   <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_inter_iff</span><span class="o">]</span>
   <span class="n">constructor</span>
   <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
-  <span class="bp">.</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>Once again, deleting the line <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">only</span> <span class="pre">[mem_inter_iff]</span></code>
@@ -285,7 +286,7 @@ between sets by proving <code class="docutils literal notranslate"><span class="
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">Subset.antisymm</span>
   <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
-  <span class="bp">.</span> <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>Try finishing this proof term:</p>
@@ -806,6 +807,8 @@ since in the positive case, the value returned,
 The identity <code class="docutils literal notranslate"><span class="pre">dif_pos</span> <span class="pre">h</span></code> rewrites <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">h</span> <span class="pre">:</span> <span class="pre">e</span> <span class="pre">then</span> <span class="pre">a</span> <span class="pre">else</span> <span class="pre">b</span></code>
 to <code class="docutils literal notranslate"><span class="pre">a</span></code> given <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">e</span></code>,
 and, similarly, <code class="docutils literal notranslate"><span class="pre">dif_neg</span> <span class="pre">h</span></code> rewrites it to <code class="docutils literal notranslate"><span class="pre">b</span></code> given <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">&#172;</span> <span class="pre">e</span></code>.
+There are also versions <code class="docutils literal notranslate"><span class="pre">if_pos</span></code> and <code class="docutils literal notranslate"><span class="pre">if_neg</span></code> that works for non-dependent
+if constructions and will be used in the next section.
 The theorem <code class="docutils literal notranslate"><span class="pre">inverse_spec</span></code> says that <code class="docutils literal notranslate"><span class="pre">inverse</span> <span class="pre">f</span></code>
 meets the first part of this specification.</p>
 <p>Don&#8217;t worry if you do not fully understand how these work.
@@ -1040,7 +1043,7 @@ See if you can finish off the proof using <code class="docutils literal notransl
     <span class="bp">&#183;</span> <span class="n">symm</span>
       <span class="n">apply</span> <span class="n">this</span> <span class="n">hxeq.symm</span> <span class="n">xA.symm</span> <span class="o">(</span><span class="n">xA.resolve_left</span> <span class="n">x&#8321;A</span><span class="o">)</span>
     <span class="k">have</span> <span class="n">x&#8322;A</span> <span class="o">:</span> <span class="n">x&#8322;</span> <span class="bp">&#8712;</span> <span class="n">A</span> <span class="o">:=</span> <span class="kd">by</span>
-      <span class="n">apply</span> <span class="n">not_imp_self.mp</span>
+      <span class="n">apply</span> <span class="n">_root_.not_imp_self.mp</span>
       <span class="n">intro</span> <span class="o">(</span><span class="n">x&#8322;nA</span> <span class="o">:</span> <span class="n">x&#8322;</span> <span class="bp">&#8713;</span> <span class="n">A</span><span class="o">)</span>
       <span class="n">rw</span> <span class="o">[</span><span class="n">if_pos</span> <span class="n">x&#8321;A</span><span class="o">,</span> <span class="n">if_neg</span> <span class="n">x&#8322;nA</span><span class="o">]</span> <span class="n">at</span> <span class="n">hxeq</span>
       <span class="n">rw</span> <span class="o">[</span><span class="n">A_def</span><span class="o">,</span> <span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span> <span class="n">at</span> <span class="n">x&#8321;A</span>
@@ -1083,11 +1086,11 @@ In the case where <span class="math notranslate nohighlight">\(g(y)\)</span> is 
 we immediately have <span class="math notranslate nohighlight">\(h(g(y))= y\)</span>, and we are done.</p>
 <p>Once again, we encourage you to step through the proof and fill in
 the missing parts.
-The tactic <code class="docutils literal notranslate"><span class="pre">cases</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span></code> splits on the cases <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sbAux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
-and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sbAux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">n.succ</span></code>.
+The tactic <code class="docutils literal notranslate"><span class="pre">rcases</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">_</span> <span class="pre">|</span> <span class="pre">n</span></code> splits on the cases <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sbAux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sbAux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>.
 In both cases, calling the simplifier with <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">[sbAux]</span></code>
 applies the corresponding defining equation of <code class="docutils literal notranslate"><span class="pre">sbAux</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_surjective</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="o">(</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_surjective</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="o">(</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">set</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">A_def</span>
   <span class="n">set</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">h_def</span>
   <span class="n">intro</span> <span class="n">y</span>
@@ -1112,7 +1115,7 @@ and the proof uses the fact that <code class="docutils literal notranslate"><spa
 <code class="docutils literal notranslate"><span class="pre">Injective</span> <span class="pre">h</span> <span class="pre">&#8743;</span> <span class="pre">Surjective</span> <span class="pre">h</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">schroeder_bernstein</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">}</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span>
     <span class="bp">&#8707;</span> <span class="n">h</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">,</span> <span class="n">Bijective</span> <span class="n">h</span> <span class="o">:=</span>
-  <span class="o">&#10216;</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">sb_injective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span><span class="o">,</span> <span class="n">sb_surjective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="o">&#10217;</span>
+  <span class="o">&#10216;</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">sb_injective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span><span class="o">,</span> <span class="n">sb_surjective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hg</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 </section>
