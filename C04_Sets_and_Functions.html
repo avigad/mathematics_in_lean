@@ -52,13 +52,12 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -333,12 +332,15 @@ So we can turn the property of being even into the set of even numbers:</p>
 <span class="kd">example</span> <span class="o">:</span> <span class="n">evens</span> <span class="bp">&#8746;</span> <span class="n">odds</span> <span class="bp">=</span> <span class="n">univ</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">evens</span><span class="o">,</span> <span class="n">odds</span><span class="o">]</span>
   <span class="n">ext</span> <span class="n">n</span>
-  <span class="n">simp</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="bp">-</span><span class="n">Nat.not_even_iff_odd</span><span class="o">]</span>
   <span class="n">apply</span> <span class="n">Classical.em</span>
 </pre></div>
 </div>
 <p>You should step through this proof and make sure
 you understand what is going on.
+Note we tell the simplifier to <em>not</em> use the lemma
+<code class="docutils literal notranslate"><span class="pre">Nat.not_even_iff</span></code> because we want to keep
+<code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">Even</span> <span class="pre">n</span></code> in our goal.
 Try deleting the line <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[evens,</span> <span class="pre">odds]</span></code>
 and confirm that the proof still works.</p>
 <p>In fact, set-builder notation is used to define</p>
@@ -366,7 +368,7 @@ Use <code class="docutils literal notranslate"><span class="pre">intro</span> <s
 and use the simplifier to reduce the
 set-theoretic constructions to logic.
 We also recommend using the theorems
-<code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_two_or_odd</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.even_iff</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_two_or_odd</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.odd_iff</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">Nat.Prime</span> <span class="n">n</span> <span class="o">}</span> <span class="bp">&#8745;</span> <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">2</span> <span class="o">}</span> <span class="bp">&#8838;</span> <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">n</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>

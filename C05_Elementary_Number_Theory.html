@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Discrete Mathematics" href="C06_Discrete_Mathematics.html" />
+    <link rel="next" title="6. Structures" href="C06_Structures.html" />
     <link rel="prev" title="4. Sets and Functions" href="C04_Sets_and_Functions.html" /> 
 </head>
 
@@ -52,13 +52,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#infinitely-many-primes">5.3. Infinitely Many Primes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -494,7 +493,7 @@ and you can choose whatever names you want for them.</p>
   <span class="n">exact</span> <span class="n">mul_pos</span> <span class="n">n.succ_pos</span> <span class="n">ih</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">induction'</span></code> tactic is smart enough to include hypotheses
+<p>The <code class="docutils literal notranslate"><span class="pre">induction</span></code> tactic is smart enough to include hypotheses
 that depend on the induction variable as part of the
 induction hypothesis.
 Step through the next example to see what is going on.</p>
@@ -528,7 +527,7 @@ Mathlib defines the expressions <code class="docutils literal notranslate"><span
 <code class="docutils literal notranslate"><span class="pre">f</span></code> is a function defined on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 The codomain of <code class="docutils literal notranslate"><span class="pre">f</span></code> can be any type that supports a commutative,
 associative addition operation with a zero element.
-If you import <code class="docutils literal notranslate"><span class="pre">Algebra.BigOperators.Ring</span></code> and issue the command
+If you import <code class="docutils literal notranslate"><span class="pre">Algebra.BigOperators.Basic</span></code> and issue the command
 <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">BigOperators</span></code>, you can use the more suggestive notation
 <code class="docutils literal notranslate"><span class="pre">&#8721;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">s,</span> <span class="pre">f</span> <span class="pre">x</span></code>. Of course, there is are an analogous operation and
 notation for finite products.</p>
@@ -712,7 +711,7 @@ One way to formulate this is as the statement that
 for every natural number
 <span class="math notranslate nohighlight">\(n\)</span>, there is a prime number greater than <span class="math notranslate nohighlight">\(n\)</span>.
 To prove this, let <span class="math notranslate nohighlight">\(p\)</span> be any prime factor of <span class="math notranslate nohighlight">\(n! + 1\)</span>.
-If <span class="math notranslate nohighlight">\(p\)</span> is less than <span class="math notranslate nohighlight">\(n\)</span>, it divides <span class="math notranslate nohighlight">\(n!\)</span>.
+If <span class="math notranslate nohighlight">\(p\)</span> is less than or equal to <span class="math notranslate nohighlight">\(n\)</span>, it divides <span class="math notranslate nohighlight">\(n!\)</span>.
 Since it also divides <span class="math notranslate nohighlight">\(n! + 1\)</span>, it divides 1, a contradiction.
 Hence <span class="math notranslate nohighlight">\(p\)</span> is greater than <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <p>To formalize that proof, we need to show that any number greater than or equal
@@ -1145,7 +1144,7 @@ feat of formalization.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="C04_Sets_and_Functions.html" class="btn btn-neutral float-left" title="4. Sets and Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C06_Discrete_Mathematics.html" class="btn btn-neutral float-right" title="6. Discrete Mathematics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C06_Structures.html" class="btn btn-neutral float-right" title="6. Structures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

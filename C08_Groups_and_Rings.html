@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>9. Groups and Rings &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>8. Groups and Rings &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="10. Topology" href="C10_Topology.html" />
-    <link rel="prev" title="8. Hierarchies" href="C08_Hierarchies.html" /> 
+    <link rel="next" title="9. Topology" href="C09_Topology.html" />
+    <link rel="prev" title="7. Hierarchies" href="C07_Hierarchies.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,30 +47,29 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Groups and Rings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#monoids-and-groups">9.1. Monoids and Groups</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#monoids-and-their-morphisms">9.1.1. Monoids and their morphisms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#groups-and-their-morphisms">9.1.2. Groups and their morphisms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#subgroups">9.1.3. Subgroups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#concrete-groups">9.1.4. Concrete groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#group-actions">9.1.5. Group actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#quotient-groups">9.1.6. Quotient groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Groups and Rings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#monoids-and-groups">8.1. Monoids and Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#monoids-and-their-morphisms">8.1.1. Monoids and their morphisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#groups-and-their-morphisms">8.1.2. Groups and their morphisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subgroups">8.1.3. Subgroups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concrete-groups">8.1.4. Concrete groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-actions">8.1.5. Group actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quotient-groups">8.1.6. Quotient groups</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#rings">9.2. Rings</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#rings-their-units-morphisms-and-subrings">9.2.1. Rings, their units, morphisms and subrings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ideals-and-quotients">9.2.2. Ideals and quotients</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#algebras-and-polynomials">9.2.3. Algebras and polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rings">8.2. Rings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rings-their-units-morphisms-and-subrings">8.2.1. Rings, their units, morphisms and subrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ideals-and-quotients">8.2.2. Ideals and quotients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#algebras-and-polynomials">8.2.3. Algebras and polynomials</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -90,9 +89,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">9. </span>Groups and Rings</li>
+      <li><span class="section-number">8. </span>Groups and Rings</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C09_Groups_and_Rings.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C08_Groups_and_Rings.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -101,24 +100,24 @@
            <div itemprop="articleBody">
              
   <section id="groups-and-rings">
-<span id="groups-and-ring"></span><h1><span class="section-number">9. </span>Groups and Rings<a class="headerlink" href="#groups-and-rings" title="Permalink to this heading">&#61633;</a></h1>
+<span id="groups-and-ring"></span><h1><span class="section-number">8. </span>Groups and Rings<a class="headerlink" href="#groups-and-rings" title="Permalink to this heading">&#61633;</a></h1>
 <p>We saw in <a class="reference internal" href="C02_Basics.html#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a> how to reason about
-operations in groups and rings. Later, in <a class="reference internal" href="C07_Structures.html#section-algebraic-structures"><span class="std std-numref">Section 7.2</span></a>, we saw how
+operations in groups and rings. Later, in <a class="reference internal" href="C06_Structures.html#section-algebraic-structures"><span class="std std-numref">Section 6.2</span></a>, we saw how
 to define abstract algebraic structures, such as group structures, as well as concrete instances
-such as the ring structure on the Gaussian integers. <a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 8</span></a> explained how
+such as the ring structure on the Gaussian integers. <a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 7</span></a> explained how
 hierarchies of abstract structures are handled in Mathlib.</p>
 <p>In this chapter we work with groups and rings in more detail. We won&#8217;t be able to
 cover every aspect of the treatment of these topics in Mathlib, especially since Mathlib is constantly growing.
 But we will provide entry points to the library and show how the essential concepts are used.
 There is some overlap with the discussion of
-<a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 8</span></a>, but here we will focus on how to use Mathlib instead of the design
+<a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 7</span></a>, but here we will focus on how to use Mathlib instead of the design
 decisions behind the way the topics are treated.
 So making sense of some of the examples may require reviewing the background from
-<a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 8</span></a>.</p>
+<a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 7</span></a>.</p>
 <section id="monoids-and-groups">
-<span id="groups"></span><h2><span class="section-number">9.1. </span>Monoids and Groups<a class="headerlink" href="#monoids-and-groups" title="Permalink to this heading">&#61633;</a></h2>
+<span id="groups"></span><h2><span class="section-number">8.1. </span>Monoids and Groups<a class="headerlink" href="#monoids-and-groups" title="Permalink to this heading">&#61633;</a></h2>
 <span class="target" id="index-0"></span><section id="monoids-and-their-morphisms">
-<span id="index-1"></span><h3><span class="section-number">9.1.1. </span>Monoids and their morphisms<a class="headerlink" href="#monoids-and-their-morphisms" title="Permalink to this heading">&#61633;</a></h3>
+<span id="index-1"></span><h3><span class="section-number">8.1.1. </span>Monoids and their morphisms<a class="headerlink" href="#monoids-and-their-morphisms" title="Permalink to this heading">&#61633;</a></h3>
 <p>Courses in abstract algebra often start with groups and
 then progress to rings, fields, and vector spaces. This involves some contortions when discussing
 multiplication on rings since the multiplication operation does not come from a group structure
@@ -159,7 +158,7 @@ we apply it to elements of <code class="docutils literal notranslate"><span clas
 </pre></div>
 </div>
 <p>These morphisms are bundled maps, i.e. they package together a map and some of its properties.
-Remember that <a class="reference internal" href="C08_Hierarchies.html#section-hierarchies-morphisms"><span class="std std-numref">Section 8.2</span></a> explains bundled maps;
+Remember that <a class="reference internal" href="C07_Hierarchies.html#section-hierarchies-morphisms"><span class="std std-numref">Section 7.2</span></a> explains bundled maps;
 here we simply note the slightly unfortunate consequence that we cannot use ordinary function
 composition to compose maps. Instead, we need to use <code class="docutils literal notranslate"><span class="pre">MonoidHom.comp</span></code> and <code class="docutils literal notranslate"><span class="pre">AddMonoidHom.comp</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">P</span><span class="o">]</span>
@@ -168,10 +167,10 @@ composition to compose maps. Instead, we need to use <code class="docutils liter
 </div>
 </section>
 <section id="groups-and-their-morphisms">
-<h3><span class="section-number">9.1.2. </span>Groups and their morphisms<a class="headerlink" href="#groups-and-their-morphisms" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.1.2. </span>Groups and their morphisms<a class="headerlink" href="#groups-and-their-morphisms" title="Permalink to this heading">&#61633;</a></h3>
 <p>We will have much more to say about groups, which are monoids with the extra
 property that every element has an inverse.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">mul_inv_self</span> <span class="n">x</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">mul_inv_cancel</span> <span class="n">x</span>
 </pre></div>
 </div>
 <p id="index-2">Similar to the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic that we saw earlier, there is a <code class="docutils literal notranslate"><span class="pre">group</span></code> tactic that proves
@@ -231,7 +230,7 @@ Doing so makes the inverse function noncomputable.</p>
 </div>
 </section>
 <section id="subgroups">
-<h3><span class="section-number">9.1.3. </span>Subgroups<a class="headerlink" href="#subgroups" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.1.3. </span>Subgroups<a class="headerlink" href="#subgroups" title="Permalink to this heading">&#61633;</a></h3>
 <p>Just as group morphisms are bundled, a subgroup of <code class="docutils literal notranslate"><span class="pre">G</span></code> is also a bundled structure consisting of
 a set in <code class="docutils literal notranslate"><span class="pre">G</span></code> with the relevant closure properties.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span>
@@ -246,7 +245,7 @@ a set in <code class="docutils literal notranslate"><span class="pre">G</span></
 <p>In the example above, it is important to understand that <code class="docutils literal notranslate"><span class="pre">Subgroup</span> <span class="pre">G</span></code> is the type of subgroups
 of <code class="docutils literal notranslate"><span class="pre">G</span></code>, rather than a predicate <code class="docutils literal notranslate"><span class="pre">IsSubgroup</span> <span class="pre">H</span></code> where <code class="docutils literal notranslate"><span class="pre">H</span></code> is an element of <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">G</span></code>.
 <code class="docutils literal notranslate"><span class="pre">Subgroup</span> <span class="pre">G</span></code> is endowed with a coercion to <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">G</span></code> and a membership predicate on <code class="docutils literal notranslate"><span class="pre">G</span></code>.
-See <a class="reference internal" href="C08_Hierarchies.html#section-hierarchies-subobjects"><span class="std std-numref">Section 8.3</span></a> for an explanation of how and why this is done.</p>
+See <a class="reference internal" href="C07_Hierarchies.html#section-hierarchies-subobjects"><span class="std std-numref">Section 7.3</span></a> for an explanation of how and why this is done.</p>
 <p>Of course, two subgroups are the same if and only if they have the same elements. This fact
 is registered for use with the <code class="docutils literal notranslate"><span class="pre">ext</span></code> tactic, which can be used to prove two subgroups are
 equal in the same way it is used to prove that two sets are equal.</p>
@@ -419,7 +418,7 @@ so do not use <code class="docutils literal notranslate"><span class="pre">exact
 </div>
 </section>
 <section id="concrete-groups">
-<h3><span class="section-number">9.1.4. </span>Concrete groups<a class="headerlink" href="#concrete-groups" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.1.4. </span>Concrete groups<a class="headerlink" href="#concrete-groups" title="Permalink to this heading">&#61633;</a></h3>
 <p>One can also manipulate concrete groups in Mathlib, although this is typically more complicated
 than working with the abstract theory.
 For instance, given any type <code class="docutils literal notranslate"><span class="pre">X</span></code>, the group of permutations of <code class="docutils literal notranslate"><span class="pre">X</span></code> is <code class="docutils literal notranslate"><span class="pre">Equiv.Perm</span> <span class="pre">X</span></code>.
@@ -471,7 +470,7 @@ from that group to <code class="docutils literal notranslate"><span class="pre">
 only element is denoted by <code class="docutils literal notranslate"><span class="pre">()</span></code>. The function <code class="docutils literal notranslate"><span class="pre">PresentedGroup</span></code> takes a set of relations,
 i.e. a set of elements of some free group, and returns a group that is this free group quotiented
 by a normal subgroup generated by relations. (We will see how to handle more general quotients
-in <a class="reference internal" href="#quotient-groups"><span class="std std-numref">Section 9.1.6</span></a>.) Since we somehow hide this behind a definition, we use <code class="docutils literal notranslate"><span class="pre">deriving</span> <span class="pre">Group</span></code> to force creation
+in <a class="reference internal" href="#quotient-groups"><span class="std std-numref">Section 8.1.6</span></a>.) Since we somehow hide this behind a definition, we use <code class="docutils literal notranslate"><span class="pre">deriving</span> <span class="pre">Group</span></code> to force creation
 of a group instance on <code class="docutils literal notranslate"><span class="pre">myGroup</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">myGroup</span> <span class="o">:=</span> <span class="n">PresentedGroup</span> <span class="o">{</span><span class="bp">.</span><span class="n">of</span> <span class="o">()</span> <span class="bp">^</span> <span class="mi">3</span><span class="o">}</span> <span class="n">deriving</span> <span class="n">Group</span>
 </pre></div>
@@ -496,7 +495,7 @@ to <code class="docutils literal notranslate"><span class="pre">PresentedGroup.t
 </div>
 </section>
 <section id="group-actions">
-<h3><span class="section-number">9.1.5. </span>Group actions<a class="headerlink" href="#group-actions" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.1.5. </span>Group actions<a class="headerlink" href="#group-actions" title="Permalink to this heading">&#61633;</a></h3>
 <p>One important way that group theory interacts with the rest of mathematics is through
 the use of group actions.
 An action of a group <code class="docutils literal notranslate"><span class="pre">G</span></code> on some type <code class="docutils literal notranslate"><span class="pre">X</span></code> is nothing more than a morphism from <code class="docutils literal notranslate"><span class="pre">G</span></code> to
@@ -594,7 +593,7 @@ conjugation, using our definition of <code class="docutils literal notranslate">
 </div>
 </section>
 <section id="quotient-groups">
-<span id="id1"></span><h3><span class="section-number">9.1.6. </span>Quotient groups<a class="headerlink" href="#quotient-groups" title="Permalink to this heading">&#61633;</a></h3>
+<span id="id1"></span><h3><span class="section-number">8.1.6. </span>Quotient groups<a class="headerlink" href="#quotient-groups" title="Permalink to this heading">&#61633;</a></h3>
 <p>In the above discussion of subgroups acting on groups, we saw the quotient <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">&#10744;</span> <span class="pre">H</span></code> appear.
 In general this is only a type. It can be endowed with a group structure such that the quotient
 map is a group morphism if and only if <code class="docutils literal notranslate"><span class="pre">H</span></code> is a normal subgroup (and this group structure is
@@ -630,7 +629,7 @@ the first isomorphism theorem.</p>
 with a quotient group projection <code class="docutils literal notranslate"><span class="pre">Quotient.mk'</span> <span class="pre">N'</span></code>,
 we can also aim for a morphism from <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">&#10744;</span> <span class="pre">N</span></code> to <code class="docutils literal notranslate"><span class="pre">G'</span> <span class="pre">&#10744;</span> <span class="pre">N'</span></code>.
 The condition required on <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> is usually formulated by saying &#8220;<code class="docutils literal notranslate"><span class="pre">&#966;</span></code> should send <code class="docutils literal notranslate"><span class="pre">N</span></code> inside
-<code class="docutils literal notranslate"><span class="pre">N'</span></code>.&#8221; But this is equivalent to asking that <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> should pull <code class="docutils literal notranslate"><span class="pre">N'</span></code> back inside
+<code class="docutils literal notranslate"><span class="pre">N'</span></code>.&#8221; But this is equivalent to asking that <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> should pull <code class="docutils literal notranslate"><span class="pre">N'</span></code> back over
 <code class="docutils literal notranslate"><span class="pre">N</span></code>, and the latter condition is nicer to work with since the definition of pullback does not
 involve an existential quantifier.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">G&#39;</span><span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G&#39;</span><span class="o">]</span>
@@ -699,9 +698,9 @@ morphisms from <code class="docutils literal notranslate"><span class="pre">G&#8
 </section>
 </section>
 <section id="rings">
-<span id="id2"></span><h2><span class="section-number">9.2. </span>Rings<a class="headerlink" href="#rings" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id2"></span><h2><span class="section-number">8.2. </span>Rings<a class="headerlink" href="#rings" title="Permalink to this heading">&#61633;</a></h2>
 <section id="rings-their-units-morphisms-and-subrings">
-<span id="index-4"></span><h3><span class="section-number">9.2.1. </span>Rings, their units, morphisms and subrings<a class="headerlink" href="#rings-their-units-morphisms-and-subrings" title="Permalink to this heading">&#61633;</a></h3>
+<span id="index-4"></span><h3><span class="section-number">8.2.1. </span>Rings, their units, morphisms and subrings<a class="headerlink" href="#rings-their-units-morphisms-and-subrings" title="Permalink to this heading">&#61633;</a></h3>
 <p>The type of ring structures on a type <code class="docutils literal notranslate"><span class="pre">R</span></code> is <code class="docutils literal notranslate"><span class="pre">Ring</span> <span class="pre">R</span></code>. The variant where multiplication is
 assumed to be commutative is <code class="docutils literal notranslate"><span class="pre">CommRing</span> <span class="pre">R</span></code>. We have already seen that the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic will
 prove any equality that follows from the axioms of a commutative ring.</p>
@@ -758,7 +757,7 @@ a subring.</p>
 <p>Also notice that <code class="docutils literal notranslate"><span class="pre">RingHom.range</span></code> produces a subring.</p>
 </section>
 <section id="ideals-and-quotients">
-<h3><span class="section-number">9.2.2. </span>Ideals and quotients<a class="headerlink" href="#ideals-and-quotients" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.2.2. </span>Ideals and quotients<a class="headerlink" href="#ideals-and-quotients" title="Permalink to this heading">&#61633;</a></h3>
 <p>For historical reasons, Mathlib only has a theory of ideals for commutative rings.
 (The ring library was originally developed to make quick progress toward the foundations of modern
 algebraic geometry.) So in this section we will work with commutative (semi)rings.
@@ -931,7 +930,7 @@ Remember that the <code class="docutils literal notranslate"><span class="pre">r
 </div>
 </section>
 <section id="algebras-and-polynomials">
-<h3><span class="section-number">9.2.3. </span>Algebras and polynomials<a class="headerlink" href="#algebras-and-polynomials" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.2.3. </span>Algebras and polynomials<a class="headerlink" href="#algebras-and-polynomials" title="Permalink to this heading">&#61633;</a></h3>
 <p>Given a commutative (semi)ring <code class="docutils literal notranslate"><span class="pre">R</span></code>, an <em>algebra over</em> <code class="docutils literal notranslate"><span class="pre">R</span></code> is a semiring <code class="docutils literal notranslate"><span class="pre">A</span></code> equipped
 with a ring morphism whose image commutes with every element of <code class="docutils literal notranslate"><span class="pre">A</span></code>. This is encoded as
 a type class <code class="docutils literal notranslate"><span class="pre">Algebra</span> <span class="pre">R</span> <span class="pre">A</span></code>.
@@ -1063,8 +1062,9 @@ for <code class="docutils literal notranslate"><span class="pre">roots</span></c
 <span class="kd">example</span> <span class="o">:</span> <span class="n">aroots</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="n">&#8450;</span> <span class="bp">=</span> <span class="o">{</span><span class="n">Complex.I</span><span class="o">,</span> <span class="bp">-</span><span class="n">I</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="k">suffices</span> <span class="n">roots</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8450;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="o">{</span><span class="n">I</span><span class="o">,</span> <span class="bp">-</span><span class="n">I</span><span class="o">}</span> <span class="kd">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">aroots_def</span><span class="o">]</span>
   <span class="k">have</span> <span class="n">factored</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8450;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">I</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="o">(</span><span class="bp">-</span><span class="n">I</span><span class="o">))</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="k">have</span> <span class="n">key</span> <span class="o">:</span> <span class="o">(</span><span class="n">C</span> <span class="n">I</span> <span class="bp">*</span> <span class="n">C</span> <span class="n">I</span> <span class="o">:</span> <span class="n">&#8450;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">C_mul</span><span class="o">]</span>
     <span class="n">rw</span> <span class="o">[</span><span class="n">C_neg</span><span class="o">]</span>
-    <span class="n">linear_combination</span> <span class="k">show</span> <span class="o">(</span><span class="n">C</span> <span class="n">I</span> <span class="bp">*</span> <span class="n">C</span> <span class="n">I</span> <span class="o">:</span> <span class="n">&#8450;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">C_mul</span><span class="o">]</span>
+    <span class="n">linear_combination</span> <span class="n">key</span>
   <span class="k">have</span> <span class="n">p_ne_zero</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">I</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="o">(</span><span class="bp">-</span><span class="n">I</span><span class="o">))</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="n">intro</span> <span class="n">H</span>
     <span class="n">apply_fun</span> <span class="n">eval</span> <span class="mi">0</span> <span class="n">at</span> <span class="n">H</span>
@@ -1113,8 +1113,8 @@ determined by the number of arguments and some type <code class="docutils litera
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C08_Hierarchies.html" class="btn btn-neutral float-left" title="8. Hierarchies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C10_Topology.html" class="btn btn-neutral float-right" title="10. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C07_Hierarchies.html" class="btn btn-neutral float-left" title="7. Hierarchies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C09_Topology.html" class="btn btn-neutral float-right" title="9. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
