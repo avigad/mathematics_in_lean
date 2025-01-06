@@ -58,9 +58,10 @@
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -167,7 +168,7 @@ mentioning the objects.</p>
 <p>At this stage, you also know that if you use
 the <code class="docutils literal notranslate"><span class="pre">apply</span></code> tactic to apply <code class="docutils literal notranslate"><span class="pre">my_lemma</span></code>
 to a goal of the form <code class="docutils literal notranslate"><span class="pre">|a</span> <span class="pre">*</span> <span class="pre">b|</span> <span class="pre">&lt;</span> <span class="pre">&#948;</span></code>,
-you are left with new goals that require you to  prove
+you are left with new goals that require you to prove
 each of the hypotheses.</p>
 <p id="index-0">To prove a statement like this, use the <code class="docutils literal notranslate"><span class="pre">intro</span></code> tactic.
 Take a look at what it does in this example:</p>
@@ -1809,7 +1810,7 @@ everywhere by any linear order <code class="docutils literal notranslate"><span 
   <span class="bp">&#8704;</span> <span class="n">&#949;</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">N</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">n</span> <span class="bp">&#8805;</span> <span class="n">N</span><span class="o">,</span> <span class="bp">|</span><span class="n">s</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">&#949;</span>
 </pre></div>
 </div>
-<p>In <a class="reference internal" href="C09_Topology.html#filters"><span class="std std-numref">Section 9.1</span></a>, we will see that Mathlib has mechanisms
+<p>In <a class="reference internal" href="C10_Topology.html#filters"><span class="std std-numref">Section 10.1</span></a>, we will see that Mathlib has mechanisms
 for dealing with convergence in vastly more general terms,
 not only abstracting away particular features of the domain
 and codomain,

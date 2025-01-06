@@ -53,9 +53,10 @@
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -116,7 +117,7 @@ if you haven&#8217;t already.
 You&#8217;ll find a lively and welcoming community of Lean enthusiasts there,
 happy to answer questions and offer moral support.</p>
 <p>Although you can read a pdf or html version of this book online,
-it designed to be read interactively,
+it is designed to be read interactively,
 running Lean from inside the VS Code editor.
 To get started:</p>
 <ol class="arabic simple">
@@ -252,11 +253,11 @@ if <code class="docutils literal notranslate"><span class="pre">n</span></code> 
 <p>The following is, instead, a <em>tactic-style</em> proof of the same theorem, where lines
 starting with <code class="docutils literal notranslate"><span class="pre">--</span></code> are comments, hence ignored by Lean:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">,</span> <span class="n">Even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="c1">-- Say m and n are natural numbers, and assume n=2*k.</span>
+  <span class="c1">-- Say `m` and `n` are natural numbers, and assume `n = 2 * k`.</span>
   <span class="n">rintro</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="o">&#10217;</span>
-  <span class="c1">-- We need to prove m*n is twice a natural number. Let&#39;s show it&#39;s twice m*k.</span>
+  <span class="c1">-- We need to prove `m * n` is twice a natural number. Let&#39;s show it&#39;s twice `m * k`.</span>
   <span class="n">use</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
-  <span class="c1">-- Substitute for n,</span>
+  <span class="c1">-- Substitute for `n`,</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">hk</span><span class="o">]</span>
   <span class="c1">-- and now it&#39;s obvious.</span>
   <span class="n">ring</span>
@@ -349,9 +350,9 @@ Marc Huisinga,
 Benjamin Jones,
 Julian K&#252;lshammer,
 Victor Liu, Jimmy Lu,
-Martin C. Martin, Giovanni Mascellani, John McDowell, Isaiah Mindich, Hunter Monroe,
-Pietro Monticone,
-Oliver Nash, Emanuelle Natale,
+Martin C. Martin, Giovanni Mascellani, John McDowell, Bhavik Mehta, Isaiah Mindich,
+Kabelo Moiloa, Hunter Monroe, Pietro Monticone,
+Oliver Nash, Emanuelle Natale, Filippo A. E. Nuccio,
 Pim Otte,
 Bartosz Piotrowski,
 Nicolas Rolland, Keith Rush,

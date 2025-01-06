@@ -57,9 +57,10 @@
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -773,7 +774,7 @@ within the block introduced by the dot, only one goal is visible,
 and it must be completed before the end of the block.
 Here we end the first block by starting a new one with another dot.
 We could just as well have decreased the indentation.
-In the fourth example and in the last example,
+In the third example and in the last example,
 we avoid going into tactic mode entirely:
 <code class="docutils literal notranslate"><span class="pre">le_trans</span> <span class="pre">h&#8320;</span> <span class="pre">h&#8321;</span></code> and <code class="docutils literal notranslate"><span class="pre">le_refl</span> <span class="pre">x</span></code> are the proof terms we need.</p>
 <p>Here are a few more library theorems:</p>
@@ -837,7 +838,7 @@ inequalities on the real numbers.</p>
 <p>Some of the theorems, <code class="docutils literal notranslate"><span class="pre">exp_le_exp</span></code>, <code class="docutils literal notranslate"><span class="pre">exp_lt_exp</span></code>
 use a <em>bi-implication</em>, which represents the
 phrase &#8220;if and only if.&#8221;
-(You can type it in VS Code with <code class="docutils literal notranslate"><span class="pre">\lr</span></code> of <code class="docutils literal notranslate"><span class="pre">\iff</span></code>).
+(You can type it in VS Code with <code class="docutils literal notranslate"><span class="pre">\lr</span></code> or <code class="docutils literal notranslate"><span class="pre">\iff</span></code>).
 We will discuss this connective in greater detail in the next chapter.
 Such a theorem can be used with <code class="docutils literal notranslate"><span class="pre">rw</span></code> to rewrite a goal to
 an equivalent one:</p>
@@ -923,16 +924,16 @@ next example:</p>
 <p>Using the same tricks, confirm that <code class="docutils literal notranslate"><span class="pre">linarith</span></code> instead of <code class="docutils literal notranslate"><span class="pre">apply?</span></code>
 can also finish the job.</p>
 <p>Here is another example of an inequality:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span>
   <span class="k">calc</span>
-    <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
+    <span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
     <span class="n">_</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">apply</span> <span class="n">pow_two_nonneg</span>
 
   <span class="k">calc</span>
-    <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
-    <span class="n">_</span> <span class="bp">&#8804;</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="o">(</span><span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">add_le_add</span> <span class="o">(</span><span class="n">le_refl</span> <span class="n">_</span><span class="o">)</span> <span class="n">h</span>
-    <span class="n">_</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
+    <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">=</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
+    <span class="n">_</span> <span class="bp">&#8804;</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="o">(</span><span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">add_le_add</span> <span class="o">(</span><span class="n">le_refl</span> <span class="n">_</span><span class="o">)</span> <span class="n">h</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
 </pre></div>
 </div>
 <p>Mathlib tends to put spaces around binary operations like <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">^</span></code>,
@@ -952,10 +953,10 @@ we can simply write the proof term <code class="docutils literal notranslate"><s
 out the hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code>.
 Once we have it, the second calculation involves only
 linear arithmetic, and <code class="docutils literal notranslate"><span class="pre">linarith</span></code> can handle it:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span>
   <span class="k">calc</span>
-    <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
+    <span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
     <span class="n">_</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">apply</span> <span class="n">pow_two_nonneg</span>
   <span class="n">linarith</span>
 </pre></div>
@@ -964,7 +965,7 @@ linear arithmetic, and <code class="docutils literal notranslate"><span class="p
 following theorem. You can use the theorem <code class="docutils literal notranslate"><span class="pre">abs_le'.mpr</span></code>.
 You will also need the <code class="docutils literal notranslate"><span class="pre">constructor</span></code> tactic to split a conjunction
 to two goals; see <a class="reference internal" href="C03_Logic.html#conjunction-and-biimplication"><span class="std std-numref">Section 3.4</span></a>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">|</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">|</span> <span class="bp">&#8804;</span> <span class="o">(</span><span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">|</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">|</span> <span class="bp">&#8804;</span> <span class="o">(</span><span class="n">a</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
 <span class="k">#check</span> <span class="n">abs_le&#39;.mpr</span>
@@ -1352,7 +1353,7 @@ either distributivity law implies the other:</p>
 </pre></div>
 </div>
 <p>It is possible to combine axiomatic structures into larger ones.
-For example, a <em>strict ordered ring</em> consists of a commutative ring together
+For example, a <em>strict ordered ring</em> consists of a ring together
 with a partial order on the carrier
 satisfying additional axioms that say that the ring operations
 are compatible with the order:</p>
@@ -1373,7 +1374,8 @@ used to reason about arithmetic and the ordering on the real
 numbers hold generically for any ordered ring.
 Here are a couple of examples you can try,
 using only properties of rings, partial orders, and the facts
-enumerated in the last two examples:</p>
+enumerated in the last two examples (beware that those rings are
+not assumed to be commutative, so the <cite>ring</cite> tactic is not available):</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 

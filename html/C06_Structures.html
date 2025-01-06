@@ -55,9 +55,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -227,7 +228,7 @@ same; the only difference is that we use anonymous constructor notation
 in the second.
 Although it is sometimes convenient to define functions this way, and structural eta-reduction makes
 this alternative definitionally equivalent, it can make things less convenient in later proofs.
-In particular, <cite>rw [addAlt]</cite> leaves us with a messier goal view containing a <cite>match</cite> statement.</p>
+In particular, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[addAlt]</span></code> leaves us with a messier goal view containing a <code class="docutils literal notranslate"><span class="pre">match</span></code> statement.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">addAlt</span> <span class="o">:</span> <span class="n">Point</span> <span class="bp">&#8594;</span> <span class="n">Point</span> <span class="bp">&#8594;</span> <span class="n">Point</span>
   <span class="bp">|</span> <span class="n">Point.mk</span> <span class="n">x&#8321;</span> <span class="n">y&#8321;</span> <span class="n">z&#8321;</span><span class="o">,</span> <span class="n">Point.mk</span> <span class="n">x&#8322;</span> <span class="n">y&#8322;</span> <span class="n">z&#8322;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span> <span class="bp">+</span> <span class="n">x&#8322;</span><span class="o">,</span> <span class="n">y&#8321;</span> <span class="bp">+</span> <span class="n">y&#8322;</span><span class="o">,</span> <span class="n">z&#8321;</span> <span class="bp">+</span> <span class="n">z&#8322;</span><span class="o">&#10217;</span>
 
@@ -370,8 +371,8 @@ how to sum over it.</p>
 <p>As an exercise, see if you can define the weighted average of
 two points in the standard <span class="math notranslate nohighlight">\(n\)</span>-simplex.
 You can use <code class="docutils literal notranslate"><span class="pre">Finset.sum_add_distrib</span></code>
-and <code class="docutils literal notranslate"><span class="pre">Finset.mul_sum</span></code> to manipulate the relevant sums.
-We have seen that structures can be used to bundle together data
+and <code class="docutils literal notranslate"><span class="pre">Finset.mul_sum</span></code> to manipulate the relevant sums.</p>
+<p>We have seen that structures can be used to bundle together data
 and properties.
 Interestingly, they can also be used to bundle together properties
 without the data.
@@ -597,7 +598,7 @@ as follows.</p>
   <span class="n">inv_mul_cancel</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="o">(</span><span class="n">inv</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">one</span>
 </pre></div>
 </div>
-<p>Notice that the type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is a <em>parameter</em> in the definition of <code class="docutils literal notranslate"><span class="pre">group&#8321;</span></code>.
+<p>Notice that the type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is a <em>parameter</em> in the definition of <code class="docutils literal notranslate"><span class="pre">Group&#8321;</span></code>.
 So you should think of an object <code class="docutils literal notranslate"><span class="pre">struc</span> <span class="pre">:</span> <span class="pre">Group&#8321;</span> <span class="pre">&#945;</span></code> as being
 a group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 We saw in <a class="reference internal" href="C02_Basics.html#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a>
@@ -712,7 +713,7 @@ independent of structure.
 For example, we can consider groups <span class="math notranslate nohighlight">\((G_1, \cdot, 1, \cdot^{-1})\)</span>,
 <span class="math notranslate nohighlight">\((G_2, \circ, e, i(\cdot))\)</span>, and <span class="math notranslate nohighlight">\((G_3, +, 0, -)\)</span>.
 In the first case, we write the binary operation as <span class="math notranslate nohighlight">\(\cdot\)</span>,
-the identity at <span class="math notranslate nohighlight">\(1\)</span>, and the inverse function as <span class="math notranslate nohighlight">\(x \mapsto x^{-1}\)</span>.
+the identity as <span class="math notranslate nohighlight">\(1\)</span>, and the inverse function as <span class="math notranslate nohighlight">\(x \mapsto x^{-1}\)</span>.
 In the second and third cases, we use the notational alternatives shown.
 When we formalize the notion of a group in Lean, however,
 the notation is more tightly linked to the structure.
@@ -1267,7 +1268,7 @@ we have <span class="math notranslate nohighlight">\(N(xy) = N(x)N(y)\)</span>.<
 <p>To see that this definition of the norm makes the Gaussian integers a Euclidean
 domain, only the first property is challenging. Suppose
 we want to write <span class="math notranslate nohighlight">\(a + bi = (c + di) q + r\)</span> for suitable <span class="math notranslate nohighlight">\(q\)</span>
-and <span class="math notranslate nohighlight">\(r\)</span>. Treating <span class="math notranslate nohighlight">\(a + bi\)</span> and <span class="math notranslate nohighlight">\(c + di\)</span> are complex
+and <span class="math notranslate nohighlight">\(r\)</span>. Treating <span class="math notranslate nohighlight">\(a + bi\)</span> and <span class="math notranslate nohighlight">\(c + di\)</span> as complex
 numbers, carry out the division</p>
 <div class="math notranslate nohighlight">
 \[\frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{(c + di)(c-di)} =
@@ -1298,9 +1299,9 @@ where the Gaussian integers themselves are constructed as a special case
 of a ring of <em>quadratic integers</em>.
 See the file <a class="reference external" href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/Zsqrtd/GaussianInt.lean">GaussianInt.lean</a>.</p>
 <p>Here we will instead carry out an argument that stays in the integers.
-This illustrates an choice one commonly faces when formalizing mathematics.
+This illustrates a choice one commonly faces when formalizing mathematics.
 Given an argument that requires concepts or machinery that is not already
-in the library, one has two choices: either formalizes the concepts or machinery
+in the library, one has two choices: either formalize the concepts or machinery
 needed, or adapt the argument to make use of concepts and machinery you
 already have.
 The first choice is generally a good investment of time when the results
@@ -1337,7 +1338,6 @@ from the remainder.</p>
   <span class="k">have</span> <span class="o">:=</span> <span class="n">Int.emod_lt_of_pos</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="n">h</span>
   <span class="k">have</span> <span class="o">:=</span> <span class="n">Int.ediv_add_emod</span> <span class="n">b</span> <span class="mi">2</span>
   <span class="k">have</span> <span class="o">:=</span> <span class="n">Int.emod_lt_of_pos</span> <span class="n">b</span> <span class="n">zero_lt_two</span>
-  <span class="n">revert</span> <span class="n">this</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">this</span> <span class="c1">-- FIXME, this should not be needed</span>
   <span class="n">linarith</span>
 </pre></div>
 </div>
@@ -1476,7 +1476,7 @@ The second one re-expresses the fact that the norm is decreasing.</p>
     <span class="o">(</span><span class="n">x</span> <span class="bp">%</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">norm.natAbs</span> <span class="bp">&lt;</span> <span class="n">y.norm.natAbs</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">Int.ofNat_lt.1</span>
   <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">Int.natCast_natAbs</span><span class="o">,</span> <span class="n">abs_of_nonneg</span><span class="o">,</span> <span class="n">norm_nonneg</span><span class="o">]</span>
-  <span class="n">apply</span> <span class="n">norm_mod_lt</span> <span class="n">x</span> <span class="n">hy</span>
+  <span class="n">exact</span> <span class="n">norm_mod_lt</span> <span class="n">x</span> <span class="n">hy</span>
 </pre></div>
 </div>
 <p>We also need to establish the second key property of the norm function

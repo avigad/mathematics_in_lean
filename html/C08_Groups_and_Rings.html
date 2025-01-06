@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. Topology" href="C09_Topology.html" />
+    <link rel="next" title="9. Linear algebra" href="C09_Linear_Algebra.html" />
     <link rel="prev" title="7. Hierarchies" href="C07_Hierarchies.html" /> 
 </head>
 
@@ -67,9 +67,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Integration_and_Measure_Theory.html">11. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -1080,9 +1081,9 @@ for <code class="docutils literal notranslate"><span class="pre">roots</span></c
 in <code class="docutils literal notranslate"><span class="pre">S</span></code> using <code class="docutils literal notranslate"><span class="pre">Polynomial.eval&#8322;</span></code>. This one produces an actual function from <code class="docutils literal notranslate"><span class="pre">R[X]</span></code> to <code class="docutils literal notranslate"><span class="pre">S</span></code>
 since it does not assume the existence of a <code class="docutils literal notranslate"><span class="pre">Algebra</span> <span class="pre">R</span> <span class="pre">S</span></code> instance, so dot notation works as
 you would expect.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">Complex.ofReal</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;+*</span> <span class="n">&#8450;</span><span class="o">)</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">Complex.ofRealHom</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;+*</span> <span class="n">&#8450;</span><span class="o">)</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span><span class="bp">.</span><span class="n">eval&#8322;</span> <span class="n">Complex.ofReal</span> <span class="n">Complex.I</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span><span class="bp">.</span><span class="n">eval&#8322;</span> <span class="n">Complex.ofRealHom</span> <span class="n">Complex.I</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
 <p>Let us end by mentioning multivariate polynomials briefly. Given a commutative semiring <code class="docutils literal notranslate"><span class="pre">R</span></code>,
@@ -1114,7 +1115,7 @@ determined by the number of arguments and some type <code class="docutils litera
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="C07_Hierarchies.html" class="btn btn-neutral float-left" title="7. Hierarchies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C09_Topology.html" class="btn btn-neutral float-right" title="9. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C09_Linear_Algebra.html" class="btn btn-neutral float-right" title="9. Linear algebra" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
