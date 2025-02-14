@@ -744,13 +744,13 @@ the <code class="docutils literal notranslate"><span class="pre">eval</span></co
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span> <span class="n">matrices</span>
 
 <span class="c1">-- Adding vectors</span>
-<span class="k">#eval</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">+</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">]</span>  <span class="c1">-- !![4, 6]</span>
+<span class="k">#eval</span> <span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">+</span> <span class="bp">!</span><span class="o">[</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">]</span>  <span class="c1">-- ![4, 6]</span>
 
 <span class="c1">-- Adding matrices</span>
 <span class="k">#eval</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="bp">;</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">]</span> <span class="bp">+</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="bp">;</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">]</span>  <span class="c1">-- !![4, 6; 8, 10]</span>
 
 <span class="c1">-- Multiplying matrices</span>
-<span class="k">#eval</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="bp">;</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">]</span> <span class="bp">*</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="bp">;</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">]</span>  <span class="c1">-- !![4, 6; 8, 10]</span>
+<span class="k">#eval</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="bp">;</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">]</span> <span class="bp">*</span> <span class="bp">!!</span><span class="o">[</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="bp">;</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">]</span>  <span class="c1">-- !![13, 16; 29, 36]</span>
 </pre></div>
 </div>
 <p>It is important to understand that this use of <code class="docutils literal notranslate"><span class="pre">#eval</span></code> is interesting only for
@@ -961,8 +961,9 @@ vanish expect for a single input value. More precisely the basis vector indexed 
 is <code class="docutils literal notranslate"><span class="pre">Finsupp.single</span> <span class="pre">i</span> <span class="pre">1</span></code> which is the finitely supported function taking value <code class="docutils literal notranslate"><span class="pre">1</span></code> at <code class="docutils literal notranslate"><span class="pre">i</span></code>
 and <code class="docutils literal notranslate"><span class="pre">0</span></code> everywhere else.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">[</span><span class="n">DecidableEq</span> <span class="n">&#953;</span><span class="o">]</span>
-
-<span class="kd">example</span> <span class="o">:</span> <span class="n">Finsupp.basisSingleOne.repr</span> <span class="bp">=</span> <span class="n">LinearEquiv.refl</span> <span class="n">K</span> <span class="o">(</span><span class="n">&#953;</span> <span class="bp">&#8594;&#8320;</span> <span class="n">K</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+</div>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">Finsupp.basisSingleOne.repr</span> <span class="bp">=</span> <span class="n">LinearEquiv.refl</span> <span class="n">K</span> <span class="o">(</span><span class="n">&#953;</span> <span class="bp">&#8594;&#8320;</span> <span class="n">K</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">&#953;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Finsupp.basisSingleOne</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">Finsupp.single</span> <span class="n">i</span> <span class="mi">1</span> <span class="o">:=</span>
