@@ -58,13 +58,14 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -286,7 +287,7 @@ but it is worth knowing that the natural numbers, integers, rationals,
 and real numbers are all instances.
 So if we prove the theorem <code class="docutils literal notranslate"><span class="pre">fnUb_add</span></code> at that level of generality,
 it will apply in all these instances.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">OrderedCancelAddCommMonoid</span> <span class="n">R</span><span class="o">]</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddCommMonoid</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">PartialOrder</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">IsOrderedCancelAddMonoid</span> <span class="n">R</span><span class="o">]</span>
 
 <span class="k">#check</span> <span class="n">add_le_add</span>
 
@@ -642,9 +643,7 @@ ways to do it. For example, the <code class="docutils literal notranslate"><span
 </div>
 <p>Think of the first <code class="docutils literal notranslate"><span class="pre">obtain</span></code> instruction as matching the &#8220;contents&#8221; of <code class="docutils literal notranslate"><span class="pre">ubf</span></code>
 with the given pattern and assigning the components to the named variables.
-<code class="docutils literal notranslate"><span class="pre">rcases</span></code> and <code class="docutils literal notranslate"><span class="pre">obtain</span></code> are said to <code class="docutils literal notranslate"><span class="pre">destruct</span></code> their arguments, though
-there is a small difference in that <code class="docutils literal notranslate"><span class="pre">rcases</span></code> clears <code class="docutils literal notranslate"><span class="pre">ubf</span></code> from the context
-when it is done, whereas it is still present after <code class="docutils literal notranslate"><span class="pre">obtain</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">rcases</span></code> and <code class="docutils literal notranslate"><span class="pre">obtain</span></code> are said to <code class="docutils literal notranslate"><span class="pre">destruct</span></code> their arguments.</p>
 <p>Lean also supports syntax that is similar to that used in other functional programming
 languages:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">ubf</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">ubg</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -729,7 +728,7 @@ then <span class="math notranslate nohighlight">\(xy\)</span> is the norm of <sp
 Our cryptic proof illustrates the fact that
 the proof that is easiest to formalize isn&#8217;t always
 the most perspicuous one.
-In <a class="reference internal" href="C06_Structures.html#section-building-the-gaussian-integers"><span class="std std-numref">Section 6.3</span></a>,
+In <a class="reference internal" href="C07_Structures.html#section-building-the-gaussian-integers"><span class="std std-numref">Section 7.3</span></a>,
 we will provide you with the means to define the Gaussian
 integers and use them to provide an alternative proof.</p>
 <p>The pattern of unpacking an equation inside an existential quantifier
@@ -1813,7 +1812,7 @@ everywhere by any linear order <code class="docutils literal notranslate"><span 
   <span class="bp">&#8704;</span> <span class="n">&#949;</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">N</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">n</span> <span class="bp">&#8805;</span> <span class="n">N</span><span class="o">,</span> <span class="bp">|</span><span class="n">s</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">&#949;</span>
 </pre></div>
 </div>
-<p>In <a class="reference internal" href="C10_Topology.html#filters"><span class="std std-numref">Section 10.1</span></a>, we will see that Mathlib has mechanisms
+<p>In <a class="reference internal" href="C11_Topology.html#filters"><span class="std std-numref">Section 11.1</span></a>, we will see that Mathlib has mechanisms
 for dealing with convergence in vastly more general terms,
 not only abstracting away particular features of the domain
 and codomain,

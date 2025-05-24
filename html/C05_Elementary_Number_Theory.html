@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Structures" href="C06_Structures.html" />
+    <link rel="next" title="6. Discrete Mathematics" href="C06_Discrete_Mathematics.html" />
     <link rel="prev" title="4. Sets and Functions" href="C04_Sets_and_Functions.html" /> 
 </head>
 
@@ -55,13 +55,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#infinitely-many-primes">5.3. Infinitely Many Primes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -497,7 +498,7 @@ and you can choose whatever names you want for them.</p>
   <span class="n">exact</span> <span class="n">mul_pos</span> <span class="n">n.succ_pos</span> <span class="n">ih</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">induction</span></code> tactic is smart enough to include hypotheses
+<p>The <code class="docutils literal notranslate"><span class="pre">induction'</span></code> tactic is smart enough to include hypotheses
 that depend on the induction variable as part of the
 induction hypothesis.
 Step through the next example to see what is going on.</p>
@@ -531,9 +532,9 @@ Mathlib defines the expressions <code class="docutils literal notranslate"><span
 <code class="docutils literal notranslate"><span class="pre">f</span></code> is a function defined on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 The codomain of <code class="docutils literal notranslate"><span class="pre">f</span></code> can be any type that supports a commutative,
 associative addition operation with a zero element.
-If you import <code class="docutils literal notranslate"><span class="pre">Algebra.BigOperators.Basic</span></code> and issue the command
+If you import <code class="docutils literal notranslate"><span class="pre">Algebra.BigOperators.Ring</span></code> and issue the command
 <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">BigOperators</span></code>, you can use the more suggestive notation
-<code class="docutils literal notranslate"><span class="pre">&#8721;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">s,</span> <span class="pre">f</span> <span class="pre">x</span></code>. Of course, there is an analogous operation and
+<code class="docutils literal notranslate"><span class="pre">&#8721;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s,</span> <span class="pre">f</span> <span class="pre">x</span></code>. Of course, there is an analogous operation and
 notation for finite products.</p>
 <p>We will talk about the <code class="docutils literal notranslate"><span class="pre">Finset</span></code> type and the operations
 it supports in the next section, and again in a later chapter.
@@ -548,39 +549,39 @@ less than <code class="docutils literal notranslate"><span class="pre">n</span><
 <span class="kn">open</span> <span class="n">BigOperators</span>
 <span class="kn">open</span> <span class="n">Finset</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="n">s.sum</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">s.sum</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="n">s.prod</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">s.prod</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
 </div>
 <p>The facts <code class="docutils literal notranslate"><span class="pre">Finset.sum_range_zero</span></code> and <code class="docutils literal notranslate"><span class="pre">Finset.sum_range_succ</span></code>
 provide a recursive description of summation up to <span class="math notranslate nohighlight">\(n\)</span>,
 and similarly for products.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="n">Finset.sum_range_zero</span> <span class="n">f</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n.succ</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n.succ</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
   <span class="n">Finset.sum_range_succ</span> <span class="n">f</span> <span class="n">n</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
   <span class="n">Finset.prod_range_zero</span> <span class="n">f</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n.succ</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">&#8719;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8719;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n.succ</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">&#8719;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
   <span class="n">Finset.prod_range_succ</span> <span class="n">f</span> <span class="n">n</span>
 </pre></div>
 </div>
 <p>The first identity in each pair holds definitionally, which is to say,
 you can replace the proofs by <code class="docutils literal notranslate"><span class="pre">rfl</span></code>.</p>
 <p>The following expresses the factorial function that we defined as a product.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">fac</span> <span class="n">n</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">fac</span> <span class="n">n</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">induction&#39;</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span>
   <span class="bp">&#183;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">fac</span><span class="o">,</span> <span class="n">prod_range_zero</span><span class="o">]</span>
   <span class="n">simp</span> <span class="o">[</span><span class="n">fac</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">prod_range_succ</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">]</span>
@@ -612,7 +613,7 @@ The first step of the proof clears the denominator.
 This is generally useful when formalizing identities,
 because calculations with division generally have side conditions.
 (It is similarly useful to avoid using subtraction on the natural numbers when possible.)</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sum_id</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sum_id</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">symm</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">Nat.div_eq_of_eq_mul_right</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">2</span><span class="o">)</span>
   <span class="n">induction&#39;</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span>
   <span class="bp">&#183;</span> <span class="n">simp</span>
@@ -622,7 +623,7 @@ because calculations with division generally have side conditions.
 </div>
 <p>We encourage you to prove the analogous identity for sums of squares,
 and other identities you can find on the web.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sum_sqr</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">6</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sum_sqr</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">i</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">6</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -809,14 +810,14 @@ You can use <code class="docutils literal notranslate"><span class="pre">Nat.fac
 and <code class="docutils literal notranslate"><span class="pre">Nat.dvd_sub'</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">primes_infinite</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="n">n</span><span class="o">,</span> <span class="n">Nat.Prime</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">intro</span> <span class="n">n</span>
-  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="n">Nat.factorial</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="n">Nat.factorial</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="n">rcases</span> <span class="n">exists_prime_factor</span> <span class="n">this</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">p</span><span class="o">,</span> <span class="n">pp</span><span class="o">,</span> <span class="n">pdvd</span><span class="o">&#10217;</span>
   <span class="n">refine</span> <span class="o">&#10216;</span><span class="n">p</span><span class="o">,</span> <span class="bp">?</span><span class="n">_</span><span class="o">,</span> <span class="n">pp</span><span class="o">&#10217;</span>
   <span class="k">show</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="n">n</span>
   <span class="n">by_contra</span> <span class="n">ple</span>
   <span class="n">push_neg</span> <span class="n">at</span> <span class="n">ple</span>
-  <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="n">Nat.factorial</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="n">Nat.factorial</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
@@ -891,8 +892,8 @@ these methods to prove the two examples below.</p>
 </div>
 <p>The theorem <code class="docutils literal notranslate"><span class="pre">Finset.dvd_prod_of_mem</span></code> tells us that if an
 <code class="docutils literal notranslate"><span class="pre">n</span></code> is an element of a finite set <code class="docutils literal notranslate"><span class="pre">s</span></code>, then <code class="docutils literal notranslate"><span class="pre">n</span></code> divides
-<code class="docutils literal notranslate"><span class="pre">&#8719;</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">s,</span> <span class="pre">i</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&#8739;</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">s</span><span class="o">,</span> <span class="n">i</span> <span class="o">:=</span>
+<code class="docutils literal notranslate"><span class="pre">&#8719;</span> <span class="pre">i</span> <span class="pre">&#8712;</span> <span class="pre">s,</span> <span class="pre">i</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&#8739;</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">i</span> <span class="o">:=</span>
   <span class="n">Finset.dvd_prod_of_mem</span> <span class="n">_</span> <span class="n">h</span>
 </pre></div>
 </div>
@@ -923,7 +924,7 @@ In the proof below, the first <code class="docutils literal notranslate"><span c
 Step through the beginning of the proof to see the induction unfold,
 and then finish it off.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">mem_of_dvd_prod_primes</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">p.Prime</span><span class="o">)</span> <span class="o">:</span>
-    <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">n</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">Nat.Prime</span> <span class="n">n</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&#8739;</span> <span class="bp">&#8719;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">s</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">n</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">Nat.Prime</span> <span class="n">n</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&#8739;</span> <span class="bp">&#8719;</span> <span class="n">n</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">intro</span> <span class="n">h&#8320;</span> <span class="n">h&#8321;</span>
   <span class="n">induction&#39;</span> <span class="n">s</span> <span class="n">using</span> <span class="n">Finset.induction_on</span> <span class="k">with</span> <span class="n">a</span> <span class="n">s</span> <span class="n">ans</span> <span class="n">ih</span>
   <span class="bp">&#183;</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h&#8321;</span>
@@ -963,13 +964,13 @@ You can use <code class="docutils literal notranslate"><span class="pre">Finset.
     <span class="n">intro</span> <span class="n">n</span>
     <span class="n">simp</span> <span class="o">[</span><span class="n">s&#39;_def</span><span class="o">]</span>
     <span class="n">apply</span> <span class="n">h</span>
-  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="o">(</span><span class="bp">&#8719;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">s&#39;</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="o">(</span><span class="bp">&#8719;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">s&#39;</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="n">rcases</span> <span class="n">exists_prime_factor</span> <span class="n">this</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">p</span><span class="o">,</span> <span class="n">pp</span><span class="o">,</span> <span class="n">pdvd</span><span class="o">&#10217;</span>
-  <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">s&#39;</span><span class="o">,</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">s&#39;</span><span class="o">,</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
-    <span class="n">convert</span> <span class="n">Nat.dvd_sub&#39;</span> <span class="n">pdvd</span> <span class="n">this</span>
+    <span class="n">convert</span> <span class="n">Nat.dvd_sub</span> <span class="n">pdvd</span> <span class="n">this</span>
     <span class="n">simp</span>
   <span class="k">show</span> <span class="n">False</span>
   <span class="gr">sorry</span>
@@ -1122,14 +1123,14 @@ along the way.</p>
     <span class="n">rcases</span> <span class="n">hn</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">p</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">pp</span><span class="o">,</span> <span class="n">p4</span><span class="o">&#10217;,</span> <span class="n">pltn</span><span class="o">&#10217;</span>
     <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">p</span><span class="o">,</span> <span class="n">pltn</span><span class="o">,</span> <span class="n">pp</span><span class="o">,</span> <span class="n">p4</span><span class="o">&#10217;</span>
   <span class="n">rcases</span> <span class="n">this</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">s</span><span class="o">,</span> <span class="n">hs</span><span class="o">&#10217;</span>
-  <span class="k">have</span> <span class="n">h&#8321;</span> <span class="o">:</span> <span class="o">((</span><span class="mi">4</span> <span class="bp">*</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">erase</span> <span class="n">s</span> <span class="mi">3</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="n">h&#8321;</span> <span class="o">:</span> <span class="o">((</span><span class="mi">4</span> <span class="bp">*</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">erase</span> <span class="n">s</span> <span class="mi">3</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="n">rcases</span> <span class="n">exists_prime_factor_mod_4_eq_3</span> <span class="n">h&#8321;</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">p</span><span class="o">,</span> <span class="n">pp</span><span class="o">,</span> <span class="n">pdvd</span><span class="o">,</span> <span class="n">p4eq</span><span class="o">&#10217;</span>
   <span class="k">have</span> <span class="n">ps</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="n">pne3</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8800;</span> <span class="mi">3</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
-  <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="mi">4</span> <span class="bp">*</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">erase</span> <span class="n">s</span> <span class="mi">3</span><span class="o">,</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="mi">4</span> <span class="bp">*</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">erase</span> <span class="n">s</span> <span class="mi">3</span><span class="o">,</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="mi">3</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
@@ -1148,7 +1149,7 @@ feat of formalization.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="C04_Sets_and_Functions.html" class="btn btn-neutral float-left" title="4. Sets and Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C06_Structures.html" class="btn btn-neutral float-right" title="6. Structures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C06_Discrete_Mathematics.html" class="btn btn-neutral float-right" title="6. Discrete Mathematics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
