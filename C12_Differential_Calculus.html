@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>11. Differential Calculus &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>12. Differential Calculus &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="12. Integration and Measure Theory" href="C12_Integration_and_Measure_Theory.html" />
-    <link rel="prev" title="10. Topology" href="C10_Topology.html" /> 
+    <link rel="next" title="13. Integration and Measure Theory" href="C13_Integration_and_Measure_Theory.html" />
+    <link rel="prev" title="11. Topology" href="C11_Topology.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,23 +50,24 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">11. Differential Calculus</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#elementary-differential-calculus">11.1. Elementary Differential Calculus</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#differential-calculus-in-normed-spaces">11.2. Differential Calculus in Normed Spaces</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">11.2.1. Normed spaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#continuous-linear-maps">11.2.2. Continuous linear maps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#asymptotic-comparisons">11.2.3. Asymptotic comparisons</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#differentiability">11.2.4. Differentiability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">12. Differential Calculus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#elementary-differential-calculus">12.1. Elementary Differential Calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differential-calculus-in-normed-spaces">12.2. Differential Calculus in Normed Spaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">12.2.1. Normed spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#continuous-linear-maps">12.2.2. Continuous linear maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asymptotic-comparisons">12.2.3. Asymptotic comparisons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#differentiability">12.2.4. Differentiability</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -86,9 +87,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">11. </span>Differential Calculus</li>
+      <li class="breadcrumb-item active"><span class="section-number">12. </span>Differential Calculus</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C11_Differential_Calculus.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C12_Differential_Calculus.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -97,17 +98,17 @@
            <div itemprop="articleBody">
              
   <section id="index-0">
-<span id="differential-calculus"></span><span id="id1"></span><h1><span class="section-number">11. </span>Differential Calculus<a class="headerlink" href="#index-0" title="Link to this heading">&#61633;</a></h1>
+<span id="differential-calculus"></span><span id="id1"></span><h1><span class="section-number">12. </span>Differential Calculus<a class="headerlink" href="#index-0" title="Link to this heading">&#61633;</a></h1>
 <p>We now consider the formalization of notions from <em>analysis</em>,
 starting with differentiation in this chapter
 and turning integration and measure theory in the next.
-In <a class="reference internal" href="#elementary-differential-calculus"><span class="std std-numref">Section 11.1</span></a>, we stick with the
+In <a class="reference internal" href="#elementary-differential-calculus"><span class="std std-numref">Section 12.1</span></a>, we stick with the
 setting of functions from the real numbers to the real numbers,
 which is familiar from any introductory calculus class.
-In <a class="reference internal" href="#normed-spaces"><span class="std std-numref">Section 11.2</span></a>, we then consider the notion of a derivative in
+In <a class="reference internal" href="#normed-spaces"><span class="std std-numref">Section 12.2</span></a>, we then consider the notion of a derivative in
 a much broader setting.</p>
 <section id="elementary-differential-calculus">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">11.1. </span>Elementary Differential Calculus<a class="headerlink" href="#elementary-differential-calculus" title="Link to this heading">&#61633;</a></h2>
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">12.1. </span>Elementary Differential Calculus<a class="headerlink" href="#elementary-differential-calculus" title="Link to this heading">&#61633;</a></h2>
 <p>Let <code class="docutils literal notranslate"><span class="pre">f</span></code> be a function from the reals to the reals. There is a difference
 between talking about the derivative of <code class="docutils literal notranslate"><span class="pre">f</span></code> at a single point and
 talking about the derivative function.
@@ -182,9 +183,9 @@ seems even weirder.</p>
 </div>
 </section>
 <section id="differential-calculus-in-normed-spaces">
-<span id="normed-spaces"></span><span id="index-2"></span><h2><span class="section-number">11.2. </span>Differential Calculus in Normed Spaces<a class="headerlink" href="#differential-calculus-in-normed-spaces" title="Link to this heading">&#61633;</a></h2>
+<span id="normed-spaces"></span><span id="index-2"></span><h2><span class="section-number">12.2. </span>Differential Calculus in Normed Spaces<a class="headerlink" href="#differential-calculus-in-normed-spaces" title="Link to this heading">&#61633;</a></h2>
 <section id="id3">
-<h3><span class="section-number">11.2.1. </span>Normed spaces<a class="headerlink" href="#id3" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">12.2.1. </span>Normed spaces<a class="headerlink" href="#id3" title="Link to this heading">&#61633;</a></h3>
 <p>Differentiation can be generalized beyond <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> using the notion of a
 <em>normed vector space</em>, which encapsulates both direction and distance.
 We start with the notion of a <em>normed group</em>, which is an additive commutative
@@ -249,7 +250,7 @@ complete as long as the field itself is complete.</p>
 </div>
 </section>
 <section id="continuous-linear-maps">
-<h3><span class="section-number">11.2.2. </span>Continuous linear maps<a class="headerlink" href="#continuous-linear-maps" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">12.2.2. </span>Continuous linear maps<a class="headerlink" href="#continuous-linear-maps" title="Link to this heading">&#61633;</a></h3>
 <p>We now turn to the morphisms in the category of normed spaces, namely,
 continuous linear maps.
 In Mathlib, the type of <code class="docutils literal notranslate"><span class="pre">&#120156;</span></code>-linear continuous maps between normed spaces
@@ -331,7 +332,7 @@ Minor ingredients include <code class="docutils literal notranslate"><span class
 </div>
 </section>
 <section id="asymptotic-comparisons">
-<h3><span class="section-number">11.2.3. </span>Asymptotic comparisons<a class="headerlink" href="#asymptotic-comparisons" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">12.2.3. </span>Asymptotic comparisons<a class="headerlink" href="#asymptotic-comparisons" title="Link to this heading">&#61633;</a></h3>
 <p>Defining differentiability also requires asymptotic comparisons.
 Mathlib has an extensive library covering the big O and little o relations,
 whose definitions are shown below.
@@ -359,7 +360,7 @@ Here we will only use little o to define differentiability.</p>
 </div>
 </section>
 <section id="differentiability">
-<h3><span class="section-number">11.2.4. </span>Differentiability<a class="headerlink" href="#differentiability" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">12.2.4. </span>Differentiability<a class="headerlink" href="#differentiability" title="Link to this heading">&#61633;</a></h3>
 <p>We are now ready to discuss differentiable functions between normed spaces.
 In analogy the elementary one-dimensional,
 Mathlib defines a predicate <code class="docutils literal notranslate"><span class="pre">HasFDerivAt</span></code> and a function <code class="docutils literal notranslate"><span class="pre">fderiv</span></code>.
@@ -452,8 +453,8 @@ see <code class="docutils literal notranslate"><span class="pre">HasFDerivWithin
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C10_Topology.html" class="btn btn-neutral float-left" title="10. Topology" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C12_Integration_and_Measure_Theory.html" class="btn btn-neutral float-right" title="12. Integration and Measure Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C11_Topology.html" class="btn btn-neutral float-left" title="11. Topology" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C13_Integration_and_Measure_Theory.html" class="btn btn-neutral float-right" title="13. Integration and Measure Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

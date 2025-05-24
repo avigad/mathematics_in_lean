@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>9. Linear algebra &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>10. Linear algebra &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="10. Topology" href="C10_Topology.html" />
-    <link rel="prev" title="8. Groups and Rings" href="C08_Groups_and_Rings.html" /> 
+    <link rel="next" title="11. Topology" href="C11_Topology.html" />
+    <link rel="prev" title="9. Groups and Rings" href="C09_Groups_and_Rings.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,36 +50,37 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Linear algebra</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vector-spaces-and-linear-maps">9.1. Vector spaces and linear maps</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#vector-spaces">9.1.1. Vector spaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#linear-maps">9.1.2. Linear maps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sums-and-products-of-vector-spaces">9.1.3. Sums and products of vector spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Linear algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vector-spaces-and-linear-maps">10.1. Vector spaces and linear maps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vector-spaces">10.1.1. Vector spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linear-maps">10.1.2. Linear maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sums-and-products-of-vector-spaces">10.1.3. Sums and products of vector spaces</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#subspaces-and-quotients">9.2. Subspaces and quotients</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#subspaces">9.2.1. Subspaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#complete-lattice-structure-and-internal-direct-sums">9.2.2. Complete lattice structure and internal direct sums</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#subspace-spanned-by-a-set">9.2.3. Subspace spanned by a set</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pushing-and-pulling-subspaces">9.2.4. Pushing and pulling subspaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#quotient-spaces">9.2.5. Quotient spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subspaces-and-quotients">10.2. Subspaces and quotients</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subspaces">10.2.1. Subspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complete-lattice-structure-and-internal-direct-sums">10.2.2. Complete lattice structure and internal direct sums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subspace-spanned-by-a-set">10.2.3. Subspace spanned by a set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pushing-and-pulling-subspaces">10.2.4. Pushing and pulling subspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quotient-spaces">10.2.5. Quotient spaces</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#endomorphisms">9.3. Endomorphisms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#matrices-bases-and-dimension">9.4. Matrices, bases and dimension</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#matrices">9.4.1. Matrices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bases">9.4.2. Bases</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dimension">9.4.3. Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#endomorphisms">10.3. Endomorphisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matrices-bases-and-dimension">10.4. Matrices, bases and dimension</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#matrices">10.4.1. Matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bases">10.4.2. Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dimension">10.4.3. Dimension</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -99,9 +100,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">9. </span>Linear algebra</li>
+      <li class="breadcrumb-item active"><span class="section-number">10. </span>Linear algebra</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C09_Linear_Algebra.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C10_Linear_Algebra.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -110,14 +111,14 @@
            <div itemprop="articleBody">
              
   <section id="linear-algebra">
-<span id="id1"></span><h1><span class="section-number">9. </span>Linear algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">10. </span>Linear algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading">&#61633;</a></h1>
 <section id="vector-spaces-and-linear-maps">
-<h2><span class="section-number">9.1. </span>Vector spaces and linear maps<a class="headerlink" href="#vector-spaces-and-linear-maps" title="Link to this heading">&#61633;</a></h2>
+<h2><span class="section-number">10.1. </span>Vector spaces and linear maps<a class="headerlink" href="#vector-spaces-and-linear-maps" title="Link to this heading">&#61633;</a></h2>
 <section id="vector-spaces">
-<h3><span class="section-number">9.1.1. </span>Vector spaces<a class="headerlink" href="#vector-spaces" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.1.1. </span>Vector spaces<a class="headerlink" href="#vector-spaces" title="Link to this heading">&#61633;</a></h3>
 <p id="index-0">We will start directly abstract linear algebra, taking place in a vector space over any field.
 However you can find information about matrices in
-<a class="reference internal" href="#matrices"><span class="std std-numref">Section 9.4.1</span></a> which does not logically depend on this abstract theory.
+<a class="reference internal" href="#matrices"><span class="std std-numref">Section 10.4.1</span></a> which does not logically depend on this abstract theory.
 Mathlib actually deals with a more general version of linear algebra involving the word module,
 but for now we will pretend this is only an eccentric spelling habit.</p>
 <p>The way to say &#8220;let <span class="math notranslate nohighlight">\(K\)</span> be a field and let <span class="math notranslate nohighlight">\(V\)</span> be a vector space over <span class="math notranslate nohighlight">\(K\)</span>&#8221;
@@ -125,7 +126,7 @@ but for now we will pretend this is only an eccentric spelling habit.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddCommGroup</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">Module</span> <span class="n">K</span> <span class="n">V</span><span class="o">]</span>
 </pre></div>
 </div>
-<p>We explained in <a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 7</span></a> why we need two separate
+<p>We explained in <a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 8</span></a> why we need two separate
 typeclasses <code class="docutils literal notranslate"><span class="pre">[AddCommGroup</span> <span class="pre">V]</span> <span class="pre">[Module</span> <span class="pre">K</span> <span class="pre">V]</span></code>.
 The short version is the following.
 Mathematically we want to say that having a <span class="math notranslate nohighlight">\(K\)</span>-vector space structure
@@ -166,11 +167,11 @@ a lot of algebraic rules about ideals acting on submodules:</p>
 </div>
 </section>
 <section id="linear-maps">
-<h3><span class="section-number">9.1.2. </span>Linear maps<a class="headerlink" href="#linear-maps" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.1.2. </span>Linear maps<a class="headerlink" href="#linear-maps" title="Link to this heading">&#61633;</a></h3>
 <p id="index-1">Next we need linear maps. Like group morphisms, linear maps in Mathlib are bundled maps, i.e. packages
 made of a map and proofs of its linearity properties.
 Those bundled maps are converted to ordinary functions when applied.
-See <a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 7</span></a> for more information about this design.</p>
+See <a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 8</span></a> for more information about this design.</p>
 <p>The type of linear maps between two <code class="docutils literal notranslate"><span class="pre">K</span></code>-vector spaces
 <code class="docutils literal notranslate"><span class="pre">V</span></code> and <code class="docutils literal notranslate"><span class="pre">W</span></code> is denoted by <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">&#8594;&#8343;[K]</span> <span class="pre">W</span></code>. The subscript <cite>l</cite> stands for linear.
 At first it may feel odd to specify <code class="docutils literal notranslate"><span class="pre">K</span></code> in this notation.
@@ -225,7 +226,7 @@ any (bundled) map preserving addition, such as additive group morphisms, linear 
 linear maps, <code class="docutils literal notranslate"><span class="pre">K</span></code>-algebra maps etc&#8230; This one is <code class="docutils literal notranslate"><span class="pre">map_add</span></code> (in the root namespace).
 The intermediate version, <code class="docutils literal notranslate"><span class="pre">LinearMap.map_add</span></code> is a bit redundant but allows to use dot notation, which
 can be nice sometimes. A similar story exists for <code class="docutils literal notranslate"><span class="pre">map_smul</span></code>, and the general framework
-is explained in <a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 7</span></a>.</p>
+is explained in <a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 8</span></a>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">&#966;.map_add&#39;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">,</span> <span class="n">&#966;.toFun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">&#966;.toFun</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">&#966;.toFun</span> <span class="n">y</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">&#966;.map_add</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">,</span> <span class="n">&#966;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">&#966;</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">&#966;</span> <span class="n">y</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">map_add</span> <span class="n">&#966;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">,</span> <span class="n">&#966;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">&#966;</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">&#966;</span> <span class="n">y</span><span class="o">)</span>
@@ -263,7 +264,7 @@ Doing so makes the inverse function noncomputable.</p>
 refers to <code class="docutils literal notranslate"><span class="pre">LinearEquiv.ofBijective</span></code> (without needing to open any namespace).</p>
 </section>
 <section id="sums-and-products-of-vector-spaces">
-<h3><span class="section-number">9.1.3. </span>Sums and products of vector spaces<a class="headerlink" href="#sums-and-products-of-vector-spaces" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.1.3. </span>Sums and products of vector spaces<a class="headerlink" href="#sums-and-products-of-vector-spaces" title="Link to this heading">&#61633;</a></h3>
 <p>We can build new vector spaces out of old ones using direct sums and direct
 products.
 Let us start with two vectors spaces. In this case there is no difference between sum and product,
@@ -367,9 +368,9 @@ indexing type (this is somehow an implementation accident).</p>
 </section>
 </section>
 <section id="subspaces-and-quotients">
-<span id="index-2"></span><h2><span class="section-number">9.2. </span>Subspaces and quotients<a class="headerlink" href="#subspaces-and-quotients" title="Link to this heading">&#61633;</a></h2>
+<span id="index-2"></span><h2><span class="section-number">10.2. </span>Subspaces and quotients<a class="headerlink" href="#subspaces-and-quotients" title="Link to this heading">&#61633;</a></h2>
 <section id="subspaces">
-<h3><span class="section-number">9.2.1. </span>Subspaces<a class="headerlink" href="#subspaces" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.2.1. </span>Subspaces<a class="headerlink" href="#subspaces" title="Link to this heading">&#61633;</a></h3>
 <p>Just as linear maps are bundled, a linear subspace of <code class="docutils literal notranslate"><span class="pre">V</span></code> is also a bundled structure consisting of
 a set in <code class="docutils literal notranslate"><span class="pre">V</span></code>, called the carrier of the subspace, with the relevant closure properties.
 Again the word module appears instead of vector space because of the more general context that
@@ -388,7 +389,7 @@ Mathlib actually uses for linear algebra.</p>
 <p>In the example above, it is important to understand that <code class="docutils literal notranslate"><span class="pre">Submodule</span> <span class="pre">K</span> <span class="pre">V</span></code> is the type of <code class="docutils literal notranslate"><span class="pre">K</span></code>-linear
 subspaces of <code class="docutils literal notranslate"><span class="pre">V</span></code>, rather than a predicate <code class="docutils literal notranslate"><span class="pre">IsSubmodule</span> <span class="pre">U</span></code> where <code class="docutils literal notranslate"><span class="pre">U</span></code> is an element of <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">V</span></code>.
 <code class="docutils literal notranslate"><span class="pre">Submodule</span> <span class="pre">K</span> <span class="pre">V</span></code> is endowed with a coercion to <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">V</span></code> and a membership predicate on <code class="docutils literal notranslate"><span class="pre">V</span></code>.
-See <a class="reference internal" href="C07_Hierarchies.html#section-hierarchies-subobjects"><span class="std std-numref">Section 7.3</span></a> for an explanation of how and why this is done.</p>
+See <a class="reference internal" href="C08_Hierarchies.html#section-hierarchies-subobjects"><span class="std std-numref">Section 8.3</span></a> for an explanation of how and why this is done.</p>
 <p>Of course, two subspaces are the same if and only if they have the same elements. This fact
 is registered for use with the <code class="docutils literal notranslate"><span class="pre">ext</span></code> tactic, which can be used to prove two subspaces are
 equal in the same way it is used to prove that two sets are equal.</p>
@@ -423,12 +424,10 @@ discussed above about <code class="docutils literal notranslate"><span class="pr
     <span class="n">Submodule</span> <span class="n">K</span> <span class="n">V</span> <span class="n">where</span>
   <span class="n">carrier</span> <span class="o">:=</span> <span class="n">&#966;</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">H</span>
   <span class="n">zero_mem&#39;</span> <span class="o">:=</span> <span class="kd">by</span>
-    <span class="n">dsimp</span>
     <span class="gr">sorry</span>
   <span class="n">add_mem&#39;</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="n">smul_mem&#39;</span> <span class="o">:=</span> <span class="kd">by</span>
-    <span class="n">dsimp</span>
     <span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -444,7 +443,7 @@ So the above example can be restated more explicitly as:</p>
 </div>
 </section>
 <section id="complete-lattice-structure-and-internal-direct-sums">
-<h3><span class="section-number">9.2.2. </span>Complete lattice structure and internal direct sums<a class="headerlink" href="#complete-lattice-structure-and-internal-direct-sums" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.2.2. </span>Complete lattice structure and internal direct sums<a class="headerlink" href="#complete-lattice-structure-and-internal-direct-sums" title="Link to this heading">&#61633;</a></h3>
 <p>An important benefit of having a type <code class="docutils literal notranslate"><span class="pre">Submodule</span> <span class="pre">K</span> <span class="pre">V</span></code> instead of a predicate
 <code class="docutils literal notranslate"><span class="pre">IsSubmodule</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">V</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code> is that one can easily endow <code class="docutils literal notranslate"><span class="pre">Submodule</span> <span class="pre">K</span> <span class="pre">V</span></code> with additional structure.
 Importantly, it has the structure of a complete lattice structure with respect to
@@ -503,7 +502,7 @@ In the case of general families of subspaces we use <code class="docutils litera
 <span class="c1">-- If subspaces are in direct sum then they pairwise intersect only at zero.</span>
 <span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">DecidableEq</span> <span class="n">&#953;</span><span class="o">]</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">Submodule</span> <span class="n">K</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">DirectSum.IsInternal</span> <span class="n">U</span><span class="o">)</span>
     <span class="o">{</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="n">&#953;</span><span class="o">}</span> <span class="o">(</span><span class="n">hij</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&#8800;</span> <span class="n">j</span><span class="o">)</span> <span class="o">:</span> <span class="n">U</span> <span class="n">i</span> <span class="bp">&#8851;</span> <span class="n">U</span> <span class="n">j</span> <span class="bp">=</span> <span class="bp">&#8869;</span> <span class="o">:=</span>
-  <span class="o">(</span><span class="n">h.submodule_independent.pairwiseDisjoint</span> <span class="n">hij</span><span class="o">)</span><span class="bp">.</span><span class="n">eq_bot</span>
+  <span class="o">(</span><span class="n">h.submodule_iSupIndep.pairwiseDisjoint</span> <span class="n">hij</span><span class="o">)</span><span class="bp">.</span><span class="n">eq_bot</span>
 
 <span class="c1">-- Those conditions characterize direct sums.</span>
 <span class="k">#check</span> <span class="n">DirectSum.isInternal_submodule_iff_independent_and_iSup_eq_top</span>
@@ -519,7 +518,7 @@ In the case of general families of subspaces we use <code class="docutils litera
 </div>
 </section>
 <section id="subspace-spanned-by-a-set">
-<h3><span class="section-number">9.2.3. </span>Subspace spanned by a set<a class="headerlink" href="#subspace-spanned-by-a-set" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.2.3. </span>Subspace spanned by a set<a class="headerlink" href="#subspace-spanned-by-a-set" title="Link to this heading">&#61633;</a></h3>
 <p>In addition to building subspaces out of existing subspaces, we can build them out
 of any set <code class="docutils literal notranslate"><span class="pre">s</span></code> using <code class="docutils literal notranslate"><span class="pre">Submodule.span</span> <span class="pre">K</span> <span class="pre">s</span></code> which builds the smallest subspace
 containing <code class="docutils literal notranslate"><span class="pre">s</span></code>.
@@ -557,7 +556,7 @@ the axioms relating the various algebraic operations on <code class="docutils li
 </div>
 </section>
 <section id="pushing-and-pulling-subspaces">
-<h3><span class="section-number">9.2.4. </span>Pushing and pulling subspaces<a class="headerlink" href="#pushing-and-pulling-subspaces" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.2.4. </span>Pushing and pulling subspaces<a class="headerlink" href="#pushing-and-pulling-subspaces" title="Link to this heading">&#61633;</a></h3>
 <p>As promised earlier, we now describe how to push and pull subspaces by linear maps.
 As usual in Mathlib, the first operation is called <code class="docutils literal notranslate"><span class="pre">map</span></code> and the second one is called
 <code class="docutils literal notranslate"><span class="pre">comap</span></code>.</p>
@@ -609,7 +608,7 @@ One can use the following lemmas but this is not required since they are true by
 </div>
 </section>
 <section id="quotient-spaces">
-<h3><span class="section-number">9.2.5. </span>Quotient spaces<a class="headerlink" href="#quotient-spaces" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.2.5. </span>Quotient spaces<a class="headerlink" href="#quotient-spaces" title="Link to this heading">&#61633;</a></h3>
 <p>Quotient vector spaces use the general quotient notation (typed with <code class="docutils literal notranslate"><span class="pre">\quot</span></code>, not the ordinary
 <code class="docutils literal notranslate"><span class="pre">/</span></code>).
 The projection onto a quotient space is <code class="docutils literal notranslate"><span class="pre">Submodule.mkQ</span></code> and the universal property is
@@ -648,7 +647,7 @@ Mathlib knows a slightly more precise version as <code class="docutils literal n
 </section>
 </section>
 <section id="endomorphisms">
-<h2><span class="section-number">9.3. </span>Endomorphisms<a class="headerlink" href="#endomorphisms" title="Link to this heading">&#61633;</a></h2>
+<h2><span class="section-number">10.3. </span>Endomorphisms<a class="headerlink" href="#endomorphisms" title="Link to this heading">&#61633;</a></h2>
 <p>An important special case of linear maps are endomorphisms: linear maps from a vector space to itself.
 They are interesting because they form a <code class="docutils literal notranslate"><span class="pre">K</span></code>-algebra. In particular we can evaluate polynomials
 with coefficients in <code class="docutils literal notranslate"><span class="pre">K</span></code> on them, and they can have eigenvalues and eigenvectors.</p>
@@ -659,10 +658,10 @@ using a lot of these (especially after opening the <code class="docutils literal
 <span class="kd">variable</span> <span class="o">{</span><span class="n">W</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddCommGroup</span> <span class="n">W</span><span class="o">]</span> <span class="o">[</span><span class="n">Module</span> <span class="n">K</span> <span class="n">W</span><span class="o">]</span>
 
 
-<span class="kn">open</span> <span class="n">Polynomial</span> <span class="n">Module</span> <span class="n">LinearMap</span>
+<span class="kn">open</span> <span class="n">Polynomial</span> <span class="n">Module</span> <span class="n">LinearMap</span> <span class="n">End</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">&#966;</span> <span class="n">&#968;</span> <span class="o">:</span> <span class="n">End</span> <span class="n">K</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#966;</span> <span class="bp">*</span> <span class="n">&#968;</span> <span class="bp">=</span> <span class="n">&#966;</span> <span class="bp">&#8728;&#8343;</span> <span class="n">&#968;</span> <span class="o">:=</span>
-  <span class="n">LinearMap.mul_eq_comp</span> <span class="n">&#966;</span> <span class="n">&#968;</span> <span class="c1">-- `rfl` would also work</span>
+  <span class="n">End.mul_eq_comp</span> <span class="n">&#966;</span> <span class="n">&#968;</span> <span class="c1">-- `rfl` would also work</span>
 
 <span class="c1">-- evaluating `P` on `&#966;`</span>
 <span class="kd">example</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">K</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">End</span> <span class="n">K</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">&#8594;&#8343;</span><span class="o">[</span><span class="n">K</span><span class="o">]</span> <span class="n">V</span> <span class="o">:=</span>
@@ -686,7 +685,7 @@ prime polynomials <span class="math notranslate nohighlight">\(P\)</span> and <s
 
 <span class="k">#check</span> <span class="n">Submodule.add_mem_sup</span>
 <span class="k">#check</span> <span class="n">map_mul</span>
-<span class="k">#check</span> <span class="n">LinearMap.mul_apply</span>
+<span class="k">#check</span> <span class="n">End.mul_apply</span>
 <span class="k">#check</span> <span class="n">LinearMap.ker_le_ker_comp</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="n">K</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">IsCoprime</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">End</span> <span class="n">K</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span>
@@ -730,9 +729,9 @@ predicate is <code class="docutils literal notranslate"><span class="pre">End.Ha
 </div>
 </section>
 <section id="matrices-bases-and-dimension">
-<span id="matrices-bases-dimension"></span><h2><span class="section-number">9.4. </span>Matrices, bases and dimension<a class="headerlink" href="#matrices-bases-and-dimension" title="Link to this heading">&#61633;</a></h2>
+<span id="matrices-bases-dimension"></span><h2><span class="section-number">10.4. </span>Matrices, bases and dimension<a class="headerlink" href="#matrices-bases-and-dimension" title="Link to this heading">&#61633;</a></h2>
 <section id="matrices">
-<span id="id2"></span><h3><span class="section-number">9.4.1. </span>Matrices<a class="headerlink" href="#matrices" title="Link to this heading">&#61633;</a></h3>
+<span id="id2"></span><h3><span class="section-number">10.4.1. </span>Matrices<a class="headerlink" href="#matrices" title="Link to this heading">&#61633;</a></h3>
 <p id="index-3">Before introducing bases for abstract vector spaces, we go back to the much more elementary setup
 of linear algebra in <span class="math notranslate nohighlight">\(K^n\)</span> for some field <span class="math notranslate nohighlight">\(K\)</span>.
 Here the main objects are vectors and matrices.
@@ -778,13 +777,13 @@ Those notations are scoped in the <code class="docutils literal notranslate"><sp
 </pre></div>
 </div>
 <p>In order to generate matrices with identical rows or columns specified by a vector, we
-use <code class="docutils literal notranslate"><span class="pre">Matrix.row</span></code> and <code class="docutils literal notranslate"><span class="pre">Matrix.column</span></code>, with arguments the type indexing the
+use <code class="docutils literal notranslate"><span class="pre">Matrix.replicateRow</span></code> and <code class="docutils literal notranslate"><span class="pre">Matrix.replicateCol</span></code>, with arguments the type indexing the
 rows or columns and the vector.
 For instance one can get single row or single column matrixes (more precisely matrices whose rows
 or columns are indexed by <code class="docutils literal notranslate"><span class="pre">Fin</span> <span class="pre">1</span></code>).</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#eval</span> <span class="n">row</span> <span class="o">(</span><span class="n">Fin</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="c1">-- !![1, 2]</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#eval</span> <span class="n">replicateRow</span> <span class="o">(</span><span class="n">Fin</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="c1">-- !![1, 2]</span>
 
-<span class="k">#eval</span> <span class="n">col</span> <span class="o">(</span><span class="n">Fin</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="c1">-- !![1; 2]</span>
+<span class="k">#eval</span> <span class="n">replicateCol</span> <span class="o">(</span><span class="n">Fin</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="c1">-- !![1; 2]</span>
 </pre></div>
 </div>
 <p>Other familiar operations include the vector dot product, matrix transpose, and,
@@ -895,7 +894,7 @@ and matrices.&#8239;This equivalence is secretly defined using <code class="docu
 </div>
 </section>
 <section id="bases">
-<h3><span class="section-number">9.4.2. </span>Bases<a class="headerlink" href="#bases" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.4.2. </span>Bases<a class="headerlink" href="#bases" title="Link to this heading">&#61633;</a></h3>
 <p>We now want to discuss bases of vector spaces. Informally there are many ways to define this notion.
 One can use a universal property.
 One can say a basis is a family of vectors that is linearly independent and spanning.
@@ -1014,11 +1013,6 @@ is interesting in itself. It is not a bare function from <code class="docutils l
 <span class="k">#check</span> <span class="o">(</span><span class="n">Finsupp.linearCombination</span> <span class="n">K</span> <span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">&#953;</span> <span class="bp">&#8594;&#8320;</span> <span class="n">K</span><span class="o">)</span> <span class="bp">&#8594;&#8343;</span><span class="o">[</span><span class="n">K</span><span class="o">]</span> <span class="n">V</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>The above subtlety also explains why dot notation cannot be used to write
-<code class="docutils literal notranslate"><span class="pre">c.linearCombination</span> <span class="pre">K</span> <span class="pre">f</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Finsupp.linearCombination</span> <span class="pre">K</span> <span class="pre">f</span> <span class="pre">c</span></code>.
-Indeed <code class="docutils literal notranslate"><span class="pre">Finsupp.linearCombination</span></code> does not take <code class="docutils literal notranslate"><span class="pre">c</span></code> as an argument,
-<code class="docutils literal notranslate"><span class="pre">Finsupp.linearCombination</span> <span class="pre">K</span> <span class="pre">f</span></code> is coerced to a function type and then this function
-takes <code class="docutils literal notranslate"><span class="pre">c</span></code> as an argument.</p>
 <p>Returning to the mathematical discussion, it is important to understand that the
 representation of vectors in a basis is less useful in formalized
 mathematics than you may think.
@@ -1102,7 +1096,7 @@ shouldn&#8217;t use it too soon, but rather use the provided lemmas.</p>
 </div>
 </section>
 <section id="dimension">
-<h3><span class="section-number">9.4.3. </span>Dimension<a class="headerlink" href="#dimension" title="Link to this heading">&#61633;</a></h3>
+<h3><span class="section-number">10.4.3. </span>Dimension<a class="headerlink" href="#dimension" title="Link to this heading">&#61633;</a></h3>
 <p>Returning to the case of a single vector space, bases are also useful to define the concept of
 dimension.
 Here again, there is the elementary case of finite-dimensional vector spaces.
@@ -1248,8 +1242,8 @@ from natural numbers to finite cardinals (or more precisely the finite cardinals
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C08_Groups_and_Rings.html" class="btn btn-neutral float-left" title="8. Groups and Rings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C10_Topology.html" class="btn btn-neutral float-right" title="10. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C09_Groups_and_Rings.html" class="btn btn-neutral float-left" title="9. Groups and Rings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C11_Topology.html" class="btn btn-neutral float-right" title="11. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

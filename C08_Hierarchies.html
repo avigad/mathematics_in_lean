@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7. Hierarchies &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>8. Hierarchies &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8. Groups and Rings" href="C08_Groups_and_Rings.html" />
-    <link rel="prev" title="6. Structures" href="C06_Structures.html" /> 
+    <link rel="next" title="9. Groups and Rings" href="C09_Groups_and_Rings.html" />
+    <link rel="prev" title="7. Structures" href="C07_Structures.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,18 +49,19 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Hierarchies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#basics">7.1. Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#morphisms">7.2. Morphisms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sub-objects">7.3. Sub-objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Hierarchies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basics">8.1. Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#morphisms">8.2. Morphisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sub-objects">8.3. Sub-objects</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -80,9 +81,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">7. </span>Hierarchies</li>
+      <li class="breadcrumb-item active"><span class="section-number">8. </span>Hierarchies</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C07_Hierarchies.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C08_Hierarchies.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,8 +92,8 @@
            <div itemprop="articleBody">
              
   <section id="hierarchies">
-<span id="id1"></span><h1><span class="section-number">7. </span>Hierarchies<a class="headerlink" href="#hierarchies" title="Link to this heading">&#61633;</a></h1>
-<p>We have seen in <a class="reference internal" href="C06_Structures.html#structures"><span class="std std-numref">Chapter 6</span></a> how to define the class
+<span id="id1"></span><h1><span class="section-number">8. </span>Hierarchies<a class="headerlink" href="#hierarchies" title="Link to this heading">&#61633;</a></h1>
+<p>We have seen in <a class="reference internal" href="C07_Structures.html#structures"><span class="std std-numref">Chapter 7</span></a> how to define the class
 of groups and build instances of this class, and then how to build an instance
 of the commutative ring class. But of course there is a hierarchy here: a
 commutative ring is in particular an additive group. In this chapter we
@@ -108,7 +109,7 @@ so we will used indices to distinguish our version. For instance we will have <c
 as our version of <code class="docutils literal notranslate"><span class="pre">Ring</span></code>. Since we will gradually explain more powerful ways of formalizing
 structures, those indices will sometimes grow beyond one.</p>
 <section id="basics">
-<span id="section-hierarchies-basics"></span><h2><span class="section-number">7.1. </span>Basics<a class="headerlink" href="#basics" title="Link to this heading">&#61633;</a></h2>
+<span id="section-hierarchies-basics"></span><h2><span class="section-number">8.1. </span>Basics<a class="headerlink" href="#basics" title="Link to this heading">&#61633;</a></h2>
 <p>At the very bottom of all hierarchies in Lean, we find data-carrying
 classes. The following class records that the given type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is endowed with
 a distinguished element called <code class="docutils literal notranslate"><span class="pre">one</span></code>. At this stage, it has no property at all.</p>
@@ -182,7 +183,7 @@ between addition and multiplication for now so we&#8217;ll use diamond.</p>
 now define the class of semigroup structures where the operation is denoted by <code class="docutils literal notranslate"><span class="pre">&#8900;</span></code>.
 For now, we define it by hand as a structure with two fields, a <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span></code> instance and some
 <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued field <code class="docutils literal notranslate"><span class="pre">dia_assoc</span></code> asserting associativity of <code class="docutils literal notranslate"><span class="pre">&#8900;</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Semigroup&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Semigroup&#8320;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
   <span class="n">toDia&#8321;</span> <span class="o">:</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span>
   <span class="sd">/-- Diamond is associative -/</span>
   <span class="n">dia_assoc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span><span class="o">)</span>
@@ -194,25 +195,33 @@ of <cite>a &#8900; b</cite>. However this <cite>toDia&#8321;</cite> field does n
 Hence doing <code class="docutils literal notranslate"><span class="pre">example</span> <span class="pre">{&#945;</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">[Semigroup&#8321;</span> <span class="pre">&#945;]</span> <span class="pre">(a</span> <span class="pre">b</span> <span class="pre">:</span> <span class="pre">&#945;)</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">:=</span> <span class="pre">a</span> <span class="pre">&#8900;</span> <span class="pre">b</span></code> would fail with
 error message <code class="docutils literal notranslate"><span class="pre">failed</span> <span class="pre">to</span> <span class="pre">synthesize</span> <span class="pre">instance</span> <span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code>.</p>
 <p>We can fix this by adding the <code class="docutils literal notranslate"><span class="pre">instance</span></code> attribute later.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span> <span class="o">[</span><span class="kd">instance</span><span class="o">]</span> <span class="n">Semigroup&#8321;.toDia&#8321;</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span> <span class="o">[</span><span class="kd">instance</span><span class="o">]</span> <span class="n">Semigroup&#8320;.toDia&#8321;</span>
 
-<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Semigroup&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Semigroup&#8320;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span>
 </pre></div>
 </div>
-<p>Before building up, we need a more convenient way to extend structures than explicitly
-writing fields like <cite>toDia&#8321;</cite> and adding the instance attribute by hand. The <code class="docutils literal notranslate"><span class="pre">class</span></code>
-supports this using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> syntax as in:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Semigroup&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span> <span class="n">where</span>
+<p>Before building up, we need to use a different syntax to add this <cite>toDia&#8321;</cite> field,
+to tell Lean that <cite>Dia&#8321; &#945;</cite> should be treated as if its fields were fields of <cite>Semigroup&#8321;</cite> itself.
+This also conveniently adds the <cite>toDia&#8321;</cite> instance automatically.
+The <code class="docutils literal notranslate"><span class="pre">class</span></code> command supports this using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> syntax as in:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Semigroup&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">toDia&#8321;</span> <span class="o">:</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span> <span class="n">where</span>
   <span class="sd">/-- Diamond is associative -/</span>
   <span class="n">dia_assoc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span><span class="o">)</span>
 
-<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Semigroup&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Semigroup&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span>
 </pre></div>
 </div>
 <p>Note this syntax is also available in the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command, although it that
 case it fixes only the hurdle of writing fields such as <cite>toDia&#8321;</cite> since there
 is no instance to define in that case.</p>
-<p>Let us now try to combine a diamond operation and a distinguished one with axioms saying
+<p>The field name <cite>toDia&#8321;</cite> is optional in the <cite>extends</cite> syntax.
+By default it takes the name of the class being extended and prefixes it with &#8220;to&#8221;.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Semigroup&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span> <span class="n">where</span>
+  <span class="sd">/-- Diamond is associative -/</span>
+  <span class="n">dia_assoc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Let us now try to combine a diamond operation and a distinguished one element with axioms saying
 this element is neutral on both sides.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">DiaOneClass&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">One&#8321;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span> <span class="n">where</span>
   <span class="sd">/-- One is a left neutral element for diamond. -/</span>
@@ -330,12 +339,12 @@ to generate the additive version as <code class="docutils literal notranslate"><
 version <code class="docutils literal notranslate"><span class="pre">left_neg_eq_right_neg'</span></code>. In order to check the name of this additive version we
 used the <code class="docutils literal notranslate"><span class="pre">whatsnew</span> <span class="pre">in</span></code> command on top of <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddSemigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Add</span> <span class="n">&#945;</span> <span class="n">where</span>
-<span class="sd">/-- Addition is associative -/</span>
+  <span class="sd">/-- Addition is associative -/</span>
   <span class="n">add_assoc&#8323;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span>
 
 <span class="kd">@[</span><span class="n">to_additive</span> <span class="n">AddSemigroup&#8323;</span><span class="kd">]</span>
 <span class="kd">class</span> <span class="n">Semigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Mul</span> <span class="n">&#945;</span> <span class="n">where</span>
-<span class="sd">/-- Multiplication is associative -/</span>
+  <span class="sd">/-- Multiplication is associative -/</span>
   <span class="n">mul_assoc&#8323;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span>
 
 <span class="kd">class</span> <span class="n">AddMonoid&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddSemigroup&#8323;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">AddZeroClass</span> <span class="n">&#945;</span>
@@ -413,7 +422,8 @@ play this game, first because in practice this does not make any ring instance e
 also because Mathlib&#8217;s algebraic hierarchy goes through semirings which are like rings but without
 opposites so that the proof below does not work for them. What we gain here, besides a nice exercise
 if you have never seen it, is an example of building an instance using the syntax that allows
-to provide a parent structure and some extra fields.</p>
+to provide a parent structure as an instance parameter and then supply the extra fields.
+Here the <cite>Ring&#8323; R</cite> argument supplies anything <cite>AddCommGroup&#8323; R</cite> wants except for <cite>add_comm</cite>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Ring&#8323;</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddGroup&#8323;</span> <span class="n">R</span><span class="o">,</span> <span class="n">Monoid&#8323;</span> <span class="n">R</span><span class="o">,</span> <span class="n">MulZeroClass</span> <span class="n">R</span> <span class="n">where</span>
   <span class="sd">/-- Multiplication is left distributive over addition -/</span>
   <span class="n">left_distrib</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span>
@@ -421,8 +431,7 @@ to provide a parent structure and some extra fields.</p>
   <span class="n">right_distrib</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span>
 
 <span class="kd">instance</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Ring&#8323;</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="n">AddCommGroup&#8323;</span> <span class="n">R</span> <span class="o">:=</span>
-<span class="o">{</span> <span class="n">Ring&#8323;.toAddGroup&#8323;</span> <span class="k">with</span>
-  <span class="n">add_comm</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="o">{</span> <span class="n">add_comm</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span> <span class="o">}</span>
 </pre></div>
 </div>
@@ -526,7 +535,7 @@ generalize the theory of vector spaces by allowing non-invertible scalars). Firs
 scalar multiplication by a natural number for any type equipped with a zero and an addition:
 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&#8226;</span> <span class="pre">a</span></code> is defined as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">&#8943;</span> <span class="pre">+</span> <span class="pre">a</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> appears <code class="docutils literal notranslate"><span class="pre">n</span></code> times. Then this is extended
 to scalar multiplication by an integer by ensuring <code class="docutils literal notranslate"><span class="pre">(-1)</span> <span class="pre">&#8226;</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">-a</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">nsmul&#8321;</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Add</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">nsmul&#8321;</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Add</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span>
   <span class="bp">|</span> <span class="mi">0</span><span class="o">,</span> <span class="n">_</span> <span class="bp">=&gt;</span> <span class="mi">0</span>
   <span class="bp">|</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=&gt;</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">nsmul&#8321;</span> <span class="n">n</span> <span class="n">a</span>
 
@@ -632,7 +641,7 @@ that every preorder comes with a <code class="docutils literal notranslate"><spa
 <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued field asserting the natural relation between those two comparison operators.</p>
 </section>
 <section id="morphisms">
-<span id="section-hierarchies-morphisms"></span><h2><span class="section-number">7.2. </span>Morphisms<a class="headerlink" href="#morphisms" title="Link to this heading">&#61633;</a></h2>
+<span id="section-hierarchies-morphisms"></span><h2><span class="section-number">8.2. </span>Morphisms<a class="headerlink" href="#morphisms" title="Link to this heading">&#61633;</a></h2>
 <p>So far in this chapter, we discussed how to create a hierarchy of mathematical structures.
 But defining structures is not really completed until we have morphisms. There are two
 main approaches here. The most obvious one is to define a predicate on functions.</p>
@@ -837,7 +846,7 @@ definitions below.</p>
 </div>
 </section>
 <section id="sub-objects">
-<span id="section-hierarchies-subobjects"></span><h2><span class="section-number">7.3. </span>Sub-objects<a class="headerlink" href="#sub-objects" title="Link to this heading">&#61633;</a></h2>
+<span id="section-hierarchies-subobjects"></span><h2><span class="section-number">8.3. </span>Sub-objects<a class="headerlink" href="#sub-objects" title="Link to this heading">&#61633;</a></h2>
 <p>After defining some algebraic structure and its morphisms, the next step is to consider sets
 that inherit this algebraic structure, for instance subgroups or subrings.
 This largely overlaps with our previous topic. Indeed a set in <code class="docutils literal notranslate"><span class="pre">X</span></code> is implemented as a function from
@@ -961,7 +970,7 @@ the <code class="docutils literal notranslate"><span class="pre">&#64;</span></c
 <span class="kd">def</span> <span class="n">QuotientMonoid.mk</span> <span class="o">[</span><span class="n">CommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#10744;</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">Quotient.mk</span> <span class="n">N.Setoid</span>
 
 <span class="kd">instance</span> <span class="o">[</span><span class="n">CommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">Monoid</span> <span class="o">(</span><span class="n">M</span> <span class="bp">&#10744;</span> <span class="n">N</span><span class="o">)</span> <span class="n">where</span>
-  <span class="n">mul</span> <span class="o">:=</span> <span class="n">Quotient.map&#8322;&#39;</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">*</span> <span class="bp">&#183;</span><span class="o">)</span> <span class="o">(</span><span class="kd">by</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="n">Quotient.map&#8322;</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">*</span> <span class="bp">&#183;</span><span class="o">)</span> <span class="o">(</span><span class="kd">by</span>
       <span class="gr">sorry</span>
         <span class="o">)</span>
   <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -980,8 +989,8 @@ the <code class="docutils literal notranslate"><span class="pre">&#64;</span></c
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C06_Structures.html" class="btn btn-neutral float-left" title="6. Structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C08_Groups_and_Rings.html" class="btn btn-neutral float-right" title="8. Groups and Rings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C07_Structures.html" class="btn btn-neutral float-left" title="7. Structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C09_Groups_and_Rings.html" class="btn btn-neutral float-right" title="9. Groups and Rings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

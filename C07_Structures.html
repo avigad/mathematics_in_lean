@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>6. Structures &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>7. Structures &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="7. Hierarchies" href="C07_Hierarchies.html" />
-    <link rel="prev" title="5. Elementary Number Theory" href="C05_Elementary_Number_Theory.html" /> 
+    <link rel="next" title="8. Hierarchies" href="C08_Hierarchies.html" />
+    <link rel="prev" title="6. Discrete Mathematics" href="C06_Discrete_Mathematics.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,18 +50,19 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Structures</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#defining-structures">6.1. Defining structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#algebraic-structures">6.2. Algebraic Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-the-gaussian-integers">6.3. Building the Gaussian Integers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#defining-structures">7.1. Defining structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algebraic-structures">7.2. Algebraic Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-gaussian-integers">7.3. Building the Gaussian Integers</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -81,9 +82,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">6. </span>Structures</li>
+      <li class="breadcrumb-item active"><span class="section-number">7. </span>Structures</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C06_Structures.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C07_Structures.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -92,7 +93,7 @@
            <div itemprop="articleBody">
              
   <section id="structures">
-<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">7. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading">&#61633;</a></h1>
 <p>Modern mathematics makes essential use of algebraic
 structures,
 which encapsulate patterns that can be instantiated in
@@ -112,7 +113,7 @@ algebraic structures on your own.</p>
 <p>For more technical detail, you can consult <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>,
 and a paper by Anne Baanen, <a class="reference external" href="https://arxiv.org/abs/2202.01629">Use and abuse of instance parameters in the Lean mathematical library</a>.</p>
 <section id="defining-structures">
-<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Link to this heading">&#61633;</a></h2>
+<span id="section-structures"></span><h2><span class="section-number">7.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Link to this heading">&#61633;</a></h2>
 <p>In the broadest sense of the term, a <em>structure</em> is a specification
 of a collection of data, possibly with constraints that the
 data is required to satisfy.
@@ -473,7 +474,7 @@ weaving structures together into a rich, interconnected hierarchy,
 and for managing the interactions between them.</p>
 </section>
 <section id="algebraic-structures">
-<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Link to this heading">&#61633;</a></h2>
+<span id="section-algebraic-structures"></span><h2><span class="section-number">7.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Link to this heading">&#61633;</a></h2>
 <p>To clarify what we mean by the phrase <em>algebraic structure</em>,
 it will help to consider some examples.</p>
 <ol class="arabic simple">
@@ -584,9 +585,9 @@ The goal of this section is to explain these mechanisms and show you
 how to use them.</p>
 <p>The first ingredient is almost too obvious to mention:
 formally speaking, algebraic structures are structures in the sense
-of <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>.
+of <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 7.1</span></a>.
 An algebraic structure is a specification of a bundle of data satisfying
-some axiomatic hypotheses, and we saw in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a> that
+some axiomatic hypotheses, and we saw in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 7.1</span></a> that
 this is exactly what the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command is designed to accommodate.
 It&#8217;s a marriage made in heaven!</p>
 <p>Given a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, we can define the group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
@@ -625,14 +626,14 @@ Rest assured that our simplified version <code class="docutils literal notransla
 morally the same as the definition of a group that Mathlib uses.</p>
 <p>It is sometimes useful to bundle
 the type together with the structure, and Mathlib also
-contains a definition of a <code class="docutils literal notranslate"><span class="pre">GroupCat</span></code> structure that is equivalent to
+contains a definition of a <code class="docutils literal notranslate"><span class="pre">Grp</span></code> structure that is equivalent to
 the following:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">Group&#8321;Cat</span> <span class="n">where</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">Grp&#8321;</span> <span class="n">where</span>
   <span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span>
   <span class="n">str</span> <span class="o">:</span> <span class="n">Group&#8321;</span> <span class="n">&#945;</span>
 </pre></div>
 </div>
-<p>The Mathlib version is found in <code class="docutils literal notranslate"><span class="pre">Mathlib.Algebra.Category.GroupCat.Basic</span></code>,
+<p>The Mathlib version is found in <code class="docutils literal notranslate"><span class="pre">Mathlib.Algebra.Category.Grp.Basic</span></code>,
 and you can <code class="docutils literal notranslate"><span class="pre">#check</span></code> it if you add this to the imports at the
 beginning of the examples file.</p>
 <p>For reasons that will become clearer below, it is more often
@@ -706,7 +707,7 @@ composition of the bijections. Here we define this group:</p>
 </pre></div>
 </div>
 <p>In fact, Mathlib defines exactly this <code class="docutils literal notranslate"><span class="pre">Group</span></code> structure on <code class="docutils literal notranslate"><span class="pre">Equiv.Perm</span> <span class="pre">&#945;</span></code>
-in the file <code class="docutils literal notranslate"><span class="pre">GroupTheory.Perm.Basic</span></code>.
+in the file <code class="docutils literal notranslate"><span class="pre">Algebra.Group.End</span></code>.
 As always, you can hover over the theorems used in the definition of
 <code class="docutils literal notranslate"><span class="pre">permGroup</span></code> to see their statements,
 and you can jump to their definitions in the original file to learn
@@ -727,7 +728,7 @@ set up to refer to them.
 If we want to use additive notation, we instead use an isomorphic structure
 <code class="docutils literal notranslate"><span class="pre">AddGroup</span></code> (the structure underlying additive groups). Its components are named <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">zero</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">neg</span></code>, and the associated notation is what you would expect it to be.</p>
-<p>Recall the type <code class="docutils literal notranslate"><span class="pre">Point</span></code> that we defined in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>,
+<p>Recall the type <code class="docutils literal notranslate"><span class="pre">Point</span></code> that we defined in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 7.1</span></a>,
 and the addition function that we defined there.
 These definitions are reproduced in the examples file that accompanies
 this section.
@@ -952,13 +953,13 @@ When we define a new instance of a ring in Lean,
 we don&#8217;t have to define <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">*</span></code> for that instance,
 because Lean knows that these are defined for every ring.
 We can use this method to specify notation for our <code class="docutils literal notranslate"><span class="pre">Group&#8322;</span></code> class:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">hasMulGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Mul</span> <span class="n">&#945;</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Mul</span> <span class="n">&#945;</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">Group&#8322;.mul</span><span class="o">&#10217;</span>
 
-<span class="kd">instance</span> <span class="n">hasOneGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">One</span> <span class="n">&#945;</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">One</span> <span class="n">&#945;</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">Group&#8322;.one</span><span class="o">&#10217;</span>
 
-<span class="kd">instance</span> <span class="n">hasInvGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Inv</span> <span class="n">&#945;</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Inv</span> <span class="n">&#945;</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">Group&#8322;.inv</span><span class="o">&#10217;</span>
 
 <span class="kn">section</span>
@@ -972,9 +973,7 @@ We can use this method to specify notation for our <code class="docutils literal
 <span class="kd">end</span>
 </pre></div>
 </div>
-<p>In this case, we have to supply names for the instances, because
-Lean has a hard time coming up with good defaults.
-What makes this approach work is that Lean carries out a recursive search.
+<p>What makes this approach work is that Lean carries out a recursive search.
 According to the instances we have declared, Lean can find an instance of
 <code class="docutils literal notranslate"><span class="pre">Mul</span> <span class="pre">(Equiv.Perm</span> <span class="pre">&#945;)</span></code> by finding an
 instance of <code class="docutils literal notranslate"><span class="pre">Group&#8322;</span> <span class="pre">(Equiv.Perm</span> <span class="pre">&#945;)</span></code>, and it can find an instance of
@@ -990,7 +989,7 @@ Also, there is another way to tell Lean that one structure is an
 instance of another, using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword.
 This is how Mathlib specifies that, for example,
 every commutative ring is a ring.
-You can find more information in <a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Section 7</span></a> and in a
+You can find more information in <a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Section 8</span></a> and in a
 <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean4/type_classes.html#managing-type-class-inference">section on class inference</a> in <em>Theorem Proving in Lean</em>.</p>
 <p>In general, it is a bad idea to specify a value of
 <code class="docutils literal notranslate"><span class="pre">*</span></code> for an instance of an algebraic structure that already has
@@ -1022,7 +1021,7 @@ When used wisely, however, class inference is a powerful tool.
 It is what makes algebraic reasoning possible in Lean.</p>
 </section>
 <section id="building-the-gaussian-integers">
-<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">6.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Link to this heading">&#61633;</a></h2>
+<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">7.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Link to this heading">&#61633;</a></h2>
 <p>We will now illustrate the use of the algebraic hierarchy in Lean by
 building an important mathematical object, the <em>Gaussian integers</em>,
 and showing that it is a Euclidean domain. In other words, according to
@@ -1065,7 +1064,7 @@ be a square root of <span class="math notranslate nohighlight">\(-1\)</span>. Th
   <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">,</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span><span class="o">&#10217;&#10217;</span>
 </pre></div>
 </div>
-<p>As noted in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>, it is a good idea to put all the definitions
+<p>As noted in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 7.1</span></a>, it is a good idea to put all the definitions
 related to a data type in a namespace with the same name. Thus in the Lean
 files associated with this chapter, these definitions are made in the
 <code class="docutils literal notranslate"><span class="pre">GaussInt</span></code> namespace.</p>
@@ -1073,7 +1072,7 @@ files associated with this chapter, these definitions are made in the
 <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, and <code class="docutils literal notranslate"><span class="pre">*</span></code> directly, rather than naming them
 <code class="docutils literal notranslate"><span class="pre">GaussInt.zero</span></code> and the like and assigning the notation to those.
 It is often useful to have an explicit name for the definitions, for example,
-to use with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rewrite</span></code>.</p>
+to use with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rw</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">zero_def</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
@@ -1236,7 +1235,7 @@ satisfy the following:</p>
   <span class="n">Int.emod_nonneg</span> <span class="n">a</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="bp">&#8594;</span> <span class="n">a</span> <span class="bp">%</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="bp">|</span><span class="n">b</span><span class="bp">|</span> <span class="o">:=</span>
-  <span class="n">Int.emod_lt</span> <span class="n">a</span>
+  <span class="n">Int.emod_lt_abs</span> <span class="n">a</span>
 </pre></div>
 </div>
 <p>In an arbitrary ring, an element <span class="math notranslate nohighlight">\(a\)</span> is said to be a <em>unit</em> if it divides
@@ -1352,8 +1351,8 @@ from the remainder.</p>
 <p>We will use the fact that <span class="math notranslate nohighlight">\(x^2 + y^2\)</span> is equal to zero if and only if
 <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are both zero. As an exercise, we ask you to prove
 that this holds in any ordered ring.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sq_add_sq_eq_zero</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">LinearOrderedRing</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span>
-    <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8743;</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sq_add_sq_eq_zero</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Ring</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">LinearOrder</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">IsStrictOrderedRing</span> <span class="n">&#945;</span><span class="o">]</span>
+    <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8743;</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -1408,7 +1407,7 @@ of <span class="math notranslate nohighlight">\(c + di\)</span>.</p>
 <p>Having defined <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></code>, We define <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></code> to be the remainder,
 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">(x</span> <span class="pre">/</span> <span class="pre">y)</span> <span class="pre">*</span> <span class="pre">y</span></code>. As above, we record the definitions in the
 theorems <code class="docutils literal notranslate"><span class="pre">div_def</span></code> and
-<code class="docutils literal notranslate"><span class="pre">mod_def</span></code> so that we can use them with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rewrite</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">mod_def</span></code> so that we can use them with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rw</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Mod</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)&#10217;</span>
 
@@ -1509,7 +1508,7 @@ and in that case, the required properties are the theorems
     <span class="n">quotient</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">/</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">remainder</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">%</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">quotient_mul_add_remainder_eq</span> <span class="o">:=</span>
-      <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mod_def</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span> <span class="bp">;</span> <span class="n">ring</span>
+      <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mod_def</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span> <span class="bp">;</span> <span class="n">ring</span>
     <span class="n">quotient_zero</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="kd">by</span>
       <span class="n">simp</span> <span class="o">[</span><span class="n">div_def</span><span class="o">,</span> <span class="n">norm</span><span class="o">,</span> <span class="n">Int.div&#39;</span><span class="o">]</span>
       <span class="n">rfl</span>
@@ -1532,8 +1531,8 @@ the notions of being prime and being irreducible coincide.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C05_Elementary_Number_Theory.html" class="btn btn-neutral float-left" title="5. Elementary Number Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C07_Hierarchies.html" class="btn btn-neutral float-right" title="7. Hierarchies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C06_Discrete_Mathematics.html" class="btn btn-neutral float-left" title="6. Discrete Mathematics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C08_Hierarchies.html" class="btn btn-neutral float-right" title="8. Hierarchies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
