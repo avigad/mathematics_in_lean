@@ -6,10 +6,12 @@ open Finset
 
 variable {α β : Type*} [DecidableEq α] [DecidableEq β] (s t : Finset α) (f : α → β)
 
+example : #(s ×ˢ t) = #s * #t := by rw [card_product]
 example : #(s ×ˢ t) = #s * #t := by simp
 
-example : #(s ∪ t) = #s + #t - #(s ∩ t) := card_union _ _
+example : #(s ∪ t) = #s + #t - #(s ∩ t) := by rw [card_union]
 
+example (h : Disjoint s t) : #(s ∪ t) = #s + #t := by rw [card_union_of_disjoint h]
 example (h : Disjoint s t) : #(s ∪ t) = #s + #t := by simp [h]
 
 example (h : Function.Injective f) : #(s.image f) = #s := by rw [card_image_of_injective _ h]
@@ -110,14 +112,14 @@ theorem doubleCounting {α β : Type*} (s : Finset α) (t : Finset β)
     (h_left : ∀ a ∈ s, 3 ≤ #{b ∈ t | r a b})
     (h_right : ∀ b ∈ t, #{a ∈ s | r a b} ≤ 1) :
     3 * #(s) ≤ #(t) := by
-  calc
-    3 * #(s) = ∑ a ∈ s, 3 := by simp [sum_const_nat, mul_comm]
-    _ ≤ ∑ a ∈ s, #({b ∈ t | r a b}) := sum_le_sum h_left
+  calc 3 * #(s)
+      = ∑ a ∈ s, 3                               := by simp [sum_const_nat, mul_comm]
+    _ ≤ ∑ a ∈ s, #({b ∈ t | r a b})              := sum_le_sum h_left
     _ = ∑ a ∈ s, ∑ b ∈ t, if r a b then 1 else 0 := by simp
     _ = ∑ b ∈ t, ∑ a ∈ s, if r a b then 1 else 0 := sum_comm
-    _ = ∑ b ∈ t, #({a ∈ s | r a b}) := by simp
-    _ ≤ ∑ b ∈ t, 1 := sum_le_sum h_right
-    _ ≤ #(t) := by simp
+    _ = ∑ b ∈ t, #({a ∈ s | r a b})              := by simp
+    _ ≤ ∑ b ∈ t, 1                               := sum_le_sum h_right
+    _ ≤ #(t)                                     := by simp
 
 example (m k : ℕ) (h : m ≠ k) (h' : m / 2 = k / 2) : m = k + 1 ∨ k = m + 1 := by omega
 

@@ -26,16 +26,16 @@ end MyListSpace3
 
 inductive BinTree where
   | empty : BinTree
-  | node : BinTree → BinTree → BinTree
+  | node  : BinTree → BinTree → BinTree
 
 namespace BinTree
 
 def size : BinTree → ℕ
-  | empty => 0
+  | empty    => 0
   | node l r => size l + size r + 1
 
 def depth : BinTree → ℕ
-  | empty => 0
+  | empty    => 0
   | node l r => max (depth l) (depth r) + 1
 
 theorem depth_le_size : ∀ t : BinTree, depth t ≤ size t

@@ -62,11 +62,9 @@ theorem phi'_sq : phi'^2 = phi' + 1 := by
   field_simp [phi', sub_sq]; ring
 
 theorem fib_eq : ∀ n, fib n = (phi^n - phi'^n) / √5
-  | 0 => by simp
-  | 1 => by field_simp [phi, phi']
-  | n+2 => by
-    field_simp [fib_eq, pow_add, phi_sq, phi'_sq]
-    ring
+  | 0   => by simp
+  | 1   => by field_simp [phi, phi']
+  | n+2 => by field_simp [fib_eq, pow_add, phi_sq, phi'_sq]; ring
 
 end
 
@@ -83,7 +81,7 @@ theorem fib_coprime_fib_succ (n : ℕ) : Nat.Coprime (fib n) (fib (n + 1)) := by
 def fib' (n : Nat) : Nat :=
   aux n 0 1
 where aux
-  | 0, x, _ => x
+  | 0,   x, _ => x
   | n+1, x, y => aux n y (x + y)
 
 theorem fib'.aux_eq (m n : ℕ) : fib'.aux n (fib m) (fib (m + 1)) = fib (n + m) := by
@@ -114,7 +112,9 @@ theorem fib_add' : ∀ m n, fib (m + n + 1) = fib m * fib n + fib (m + 1) * fib 
     simp only [fib_add_two, Nat.succ_eq_add_one, this]
     ring
 
-example (n : ℕ): (fib n)^2 + (fib (n + 1))^2 = fib (2 * n + 1) := by sorry
+example (n : ℕ): (fib n) ^ 2 + (fib (n + 1)) ^ 2 = fib (2 * n + 1) := by sorry
+example (n : ℕ): (fib n) ^ 2 + (fib (n + 1)) ^ 2 = fib (2 * n + 1) := by
+  rw [two_mul, fib_add, pow_two, pow_two]
 
 #check (@Nat.not_prime_iff_exists_dvd_lt :
   ∀ {n : ℕ}, 2 ≤ n → (¬Nat.Prime n ↔ ∃ m, m ∣ n ∧ 2 ≤ m ∧ m < n))
@@ -136,7 +136,7 @@ theorem ne_one_iff_exists_prime_dvd : ∀ {n}, n ≠ 1 ↔ ∃ p : ℕ, p.Prime 
       use p, primep
       exact pdvdm.trans mdvdn
 
-theorem zero_lt_of_mul_eq_one (m n : ℕ) : n*m = 1 → 0 < n ∧ 0 < m := by
+theorem zero_lt_of_mul_eq_one (m n : ℕ) : n * m = 1 → 0 < n ∧ 0 < m := by
   cases n <;> cases m <;> simp
 
 example (m n : ℕ) : n*m = 1 → 0 < n ∧ 0 < m := by

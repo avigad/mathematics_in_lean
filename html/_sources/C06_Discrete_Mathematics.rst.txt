@@ -11,7 +11,6 @@ certain generating functions, we can define functions by structural recursion,
 and prove theorems by structural induction.
 This chapters describes parts of Mathlib that support these activities.
 
-.. include:: C06_Discrete_Mathematics/S01_More_Induction.inc
-.. include:: C06_Discrete_Mathematics/S02_Finsets_and_Fintypes.inc
-.. include:: C06_Discrete_Mathematics/S03_Counting_Arguments.inc
-.. include:: C06_Discrete_Mathematics/S04_Inductive_Structures.inc
+.. include:: C06_Discrete_Mathematics/S01_Finsets_and_Fintypes.inc
+.. include:: C06_Discrete_Mathematics/S02_Counting_Arguments.inc
+.. include:: C06_Discrete_Mathematics/S03_Inductive_Structures.inc

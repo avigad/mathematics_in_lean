@@ -93,12 +93,12 @@ example {α : Type*} [DecidableEq α] (f : α → ℕ)  (s : Finset α) (h : ∀
   induction s using Finset.induction_on with
   | empty => simp
   | @insert a s anins ih =>
-      rw [prod_insert anins]
-      apply mul_ne_zero
-      · apply h; apply mem_insert_self
-      apply ih
-      intros x xs
-      exact h x (mem_insert_of_mem xs)
+    rw [prod_insert anins]
+    apply mul_ne_zero
+    · apply h; apply mem_insert_self
+    apply ih
+    intros x xs
+    exact h x (mem_insert_of_mem xs)
 
 noncomputable example (s : Finset ℕ) (h : s.Nonempty) : ℕ := Classical.choose h
 
